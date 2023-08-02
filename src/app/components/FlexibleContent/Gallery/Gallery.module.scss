@@ -1,0 +1,27 @@
+.galleryWrap {
+    &:hover {
+        .filesWrap  {
+            opacity: 1;
+            visibility: visible;
+        }
+    }
+    .filesWrap  {
+        transition: all .3s ease;
+        opacity: 0;
+        visibility: hidden;
+    }
+    .galleryImageWrap {
+        margin-bottom: 25px;
+        width: 100%;
+        height: 185px;
+        background-size: cover;
+        background-position: center center;
+        background-repeat: no-repeat;
+    }
+
+    .assetsBtn {
+        text-transform: uppercase;
+        letter-spacing: 2px;
+        font-weight: 700;
+    }
+}

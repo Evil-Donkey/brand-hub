@@ -1,0 +1,19 @@
+.componentTitleWrap {
+    position: relative;
+    &:before {
+        content: "";
+        position: absolute;
+        left: .75rem;
+        top: 0;
+        width: calc(100% - 1.5rem);
+        height: 1px;
+        background-color: var(--colour-white-00);
+    }
+}
+
+.componentTitle {
+    font-weight: 700;
+    font-size: 15px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+}

@@ -1,0 +1,26 @@
+.colourPreview {
+    width: 100%;
+    height: 177px;
+}
+
+.colourInfo {
+    color: var(--colour-black-02);
+    h5 {
+        text-transform: uppercase;
+        letter-spacing: 2px;
+        font-size: 13px;
+    }
+    div {
+        text-transform: uppercase;
+        font-size: 13px;
+        letter-spacing: 2px;
+    }
+
+    .copyBtn {
+        font-size: 10px;
+        svg {
+            transform: scale(.8);
+            cursor: pointer;
+        }
+    }
+}

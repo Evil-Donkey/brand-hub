@@ -1,0 +1,62 @@
+.tabsNav {
+    li {
+        padding: 10px 20px;
+        border: 1px solid var(--colour-grey-00);
+        background-color: var(--colour-black-01);
+        color: var(--colour-white-00);
+        cursor: pointer;
+        &:hover,
+        &.tabNavActive {
+            background-color: var(--colour-orange-00);
+        }
+        &:hover:not(.tabNavActive) {
+            background-color: rgba(249, 89, 44, .1);
+        }
+    }
+}
+
+.assetImageWrap {
+    margin-bottom: 25px;
+    width: 100%;
+    text-align: right;
+    img {
+        max-width: 100%;
+        height: auto;
+    }
+}
+
+.assetsBtn {
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    font-weight: 700;
+}
+
+.filesWrap {
+    ul {
+        li {
+            &:hover {
+                span {
+                    text-decoration: underline;
+                }
+            }
+        }
+    }
+}
+
+.iframeWrapper {
+    position: relative; 
+    padding-bottom: 56.25%;
+    overflow: hidden;
+    max-width: 100%;
+    width: 100%;
+    height: auto;
+    iframe,
+    object,
+    embed { 
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+    }
+}

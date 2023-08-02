@@ -1,0 +1,27 @@
+.assetImageWrap {
+    margin-bottom: 25px;
+    width: 100%;
+    img {
+        width: 100%;
+        height: auto;
+    }
+}
+
+.filesWrap {
+    .assetsBtn {
+        text-transform: uppercase;
+        letter-spacing: 2px;
+        font-weight: 700;
+        cursor: pointer;
+    }
+
+    ul {
+        li {
+            &:hover {
+                span {
+                    text-decoration: underline;
+                }
+            }
+        }
+    }
+}

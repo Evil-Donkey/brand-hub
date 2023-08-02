@@ -1,0 +1,31 @@
+.stationeryImageWrap {
+    width: 100%;
+    img {
+        width: 100%;
+        height: auto;
+    }
+}
+
+.filesWrap {
+    background-color: var(--colour-white-01);
+    .assetsBtn {
+        text-transform: uppercase;
+        letter-spacing: 2px;
+        font-weight: 700;
+        color: var(--colour-black-00);
+    }
+
+    ul {
+        li {
+            &:hover {
+                span {
+                    text-decoration: underline;
+                }
+            }
+            span {
+                color: var(--colour-black-00);
+                font-size: 13px;
+            }
+        }
+    }
+}
