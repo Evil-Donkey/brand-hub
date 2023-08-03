@@ -6,6 +6,8 @@ import FlexibleContent from '../../../components/FlexibleContent/FlexibleContent
 
 export default async function BrandPage({ params: { slug } }) {
 
+// brand(id: ${slug}, idType: SLUG) {
+
   const data = await fetchAPI(`
     query getBrand {
       brandBy(slug: "${slug}") {
@@ -115,7 +117,6 @@ export default async function BrandPage({ params: { slug } }) {
                 }
               }
               sectionTitle
-              templateCode
             }
             ... on Brand_Brandoptions_FlexibleContent_Stationery {
               fieldGroupName

@@ -1,6 +1,7 @@
 import fetchAPI from '../../lib/api'
 
 export async function generateStaticParams({ params: { agency } }) {
+
   const brands = await fetchAPI(`
     query getBrandsByAgency {
       agencies(where: {slug: "${agency}"}) {
@@ -31,6 +32,8 @@ export async function generateStaticParams({ params: { agency } }) {
 }
 
 export default async function AgencyPage({ params }) {
+
+  console.log(params)
 
   const { agency } = params
  

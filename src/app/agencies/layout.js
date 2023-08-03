@@ -17,12 +17,12 @@ export async function generateStaticParams() {
   const agenciesList = agencies?.agencies?.nodes;
  
   return agenciesList.map((agency) => ({
-    agency: agency.slug,
+    slug: agency.slug,
   }))
 }
 
 export default function BrandsLayout({
-  children,
+  children
 }) {
   return (
     <section>

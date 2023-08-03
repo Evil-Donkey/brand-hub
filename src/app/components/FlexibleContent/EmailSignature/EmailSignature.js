@@ -11,9 +11,9 @@ const EmailSignature = ({ data }) => {
         jobTitle: "Job Title",
         mobile: "Mobile Phone Number",
         phone: "Office Phone Number",
-        instagram: "",
-        linkedin: "",
-        x: ""
+        instagramUrl: "",
+        linkedinUrl: "",
+        xUrl: ""
     })
     const copy = data?.copy;
     const logo = data?.logo;
@@ -72,21 +72,21 @@ const EmailSignature = ({ data }) => {
                             type="text"
                             name="instagram"
                             placeholder="Instagram URL"
-                            value={signature.instagram}
+                            value={signature.instagramUrl}
                             onChange={handleChange}
                         />
                         <input
                             type="text"
                             name="linkedin"
                             placeholder="LinkedIn URL"
-                            value={signature.linkedin}
+                            value={signature.linkedinUrl}
                             onChange={handleChange}
                         />
                         <input
                             type="text"
                             name="x"
                             placeholder="X URL"
-                            value={signature.x}
+                            value={signature.xUrl}
                             onChange={handleChange}
                         />
                     </form>
