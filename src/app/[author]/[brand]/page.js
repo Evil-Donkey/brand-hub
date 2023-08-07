@@ -1,16 +1,46 @@
-import fetchAPI from '../../../lib/api'
-import styles from './Brand.module.scss'
-import BrandIntro from '../../../components/BrandIntro/BrandIntro';
-import BrandFeaturedImage from '../../../components/BrandFeaturedImage/BrandFeaturedImage';
-import FlexibleContent from '../../../components/FlexibleContent/FlexibleContent';
+import fetchAPI from '../../lib/api'
+import BrandIntro from '../../components/BrandIntro/BrandIntro';
+import BrandFeaturedImage from '../../components/BrandFeaturedImage/BrandFeaturedImage';
+import FlexibleContent from '../../components/FlexibleContent/FlexibleContent';
 
-export default async function BrandPage({ params: { slug } }) {
+export const dynamicParams = false
+export const revalidate = 10
 
-// brand(id: ${slug}, idType: SLUG) {
+export async function generateStaticParams() {
+  const brands = await fetchAPI(`
+    query getBrands {
+      brands {
+        nodes {
+          id
+          slug
+          author {
+            node {
+              id
+              name
+              slug
+            }
+          }
+        }
+      }
+    }
+  `);
+
+  const brandsArray = brands?.brands?.nodes;
+
+  return brandsArray.map((brand) => ({
+    author: brand.author.node.name,
+    brand: brand.slug
+  }))
+}
+
+
+export default async function Page({ params: { brand, author } }) {
+
+  // brandBy(slug: "${brand}") {
 
   const data = await fetchAPI(`
-    query getBrand {
-      brandBy(slug: "${slug}") {
+    query getBrandsByAuthor {
+      brand(id: "${brand}", idType: SLUG) {
         id
         slug
         title(format: RENDERED)
@@ -171,25 +201,18 @@ export default async function BrandPage({ params: { slug } }) {
             }
           }
         }
-        agencies {
-          nodes {
-            name
-          }
-        }
       }
     }`
   );
 
-  const brandData = data?.brandBy;
+  const brandData = data?.brand;
   const flexibleContent = brandData?.brandOptions?.flexibleContent;
   const bgColour = brandData?.brandOptions?.backgroundColour;
   const textColour = brandData?.brandOptions?.textColour;
 
-  // console.log(flexibleContent);
- 
   return brandData ? (
     <div style={{ 'backgroundColor': bgColour, 'color': textColour }}>
-      <BrandIntro data={brandData} />
+      <BrandIntro data={brandData} author={author} />
       <BrandFeaturedImage data={brandData} />
       <FlexibleContent data={flexibleContent} />
     </div>
