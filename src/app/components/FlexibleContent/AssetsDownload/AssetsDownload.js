@@ -2,6 +2,7 @@
 
 import { useState } from 'react'
 import Image from 'next/image'
+import handleDownload from '../../../lib/handleDownload'
 import styles from './AssetsDownload.module.scss'
 
 const AssetsDownload = ({ data }) => {
@@ -52,12 +53,12 @@ const AssetsDownload = ({ data }) => {
                                             const fileName = file?.file?.mediaDetails?.file;
                                             return fileUrl && (
                                                 <li key={i.toString()}>
-                                                    <a className='d-flex gap-2 align-items-center' href={fileUrl} target="_blank">
+                                                    <div className='d-flex gap-2 align-items-center' onClick={() => handleDownload(fileUrl, fileName)}>
                                                         <svg width="13" height="16" viewBox="0 0 13 16" fill="none" xmlns="http://www.w3.org/2000/svg">
                                                             <path d="M7.28571 1.28723V4.43009C7.28571 5.29796 7.98927 6.00152 8.85714 6.00152H12M1 1.28723V15.4301H12V5.2158L8.07143 1.28723H1Z" stroke="#F8F8F8" strokeLinejoin="round"/>
                                                         </svg>
                                                         <span>{fileName && fileName}</span>
-                                                    </a>
+                                                    </div>
                                                 </li>
                                             )
                                         })} 

@@ -1,4 +1,7 @@
+'use client'
+
 import Image from 'next/image'
+import handleDownload from '../../../lib/handleDownload'
 import styles from './Stationery.module.scss'
 
 const Stationery = ({ data }) => {
@@ -35,12 +38,12 @@ const Stationery = ({ data }) => {
                                                     const fileName = file?.fileLabel;
                                                     return fileUrl && (
                                                         <li key={i.toString()}>
-                                                            <a className='d-flex gap-2 align-items-center' href={fileUrl} target="_blank">
+                                                            <div className='d-flex gap-2 align-items-center' onClick={() => handleDownload(fileUrl, fileName)}>
                                                             <svg width="12" height="16" viewBox="0 0 12 16" fill="none" xmlns="http://www.w3.org/2000/svg">
                                                                 <path d="M6.49462 1.28711V4.42997C6.49462 5.29784 7.14756 6.00139 7.95299 6.00139H10.8697M0.661133 1.28711V15.43H10.8697V5.21568L7.22381 1.28711H0.661133Z" stroke="#2B2B2B" strokeLinejoin="round"/>
                                                             </svg>
                                                                 <span>{fileName && fileName}</span>
-                                                            </a>
+                                                            </div>
                                                         </li>
                                                     )
                                                 })} 

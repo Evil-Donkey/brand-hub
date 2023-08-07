@@ -32,14 +32,8 @@
 }
 
 .filesWrap {
-    ul {
-        li {
-            &:hover {
-                span {
-                    text-decoration: underline;
-                }
-            }
-        }
+    h5 {
+        cursor: pointer;
     }
 }
 

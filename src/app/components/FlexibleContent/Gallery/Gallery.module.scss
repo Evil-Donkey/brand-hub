@@ -9,6 +9,9 @@
         transition: all .3s ease;
         opacity: 0;
         visibility: hidden;
+        h5 {
+            cursor: pointer;
+        }
     }
     .galleryImageWrap {
         margin-bottom: 25px;

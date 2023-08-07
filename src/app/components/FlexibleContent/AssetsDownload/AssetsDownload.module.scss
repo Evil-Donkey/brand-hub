@@ -17,6 +17,7 @@
 
     ul {
         li {
+            cursor: pointer;
             &:hover {
                 span {
                     text-decoration: underline;
