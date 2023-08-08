@@ -1,7 +1,7 @@
 import fetchAPI from '../../lib/api'
 import styles from './Brand.module.scss'
 import BrandIntro from '../../components/BrandIntro/BrandIntro';
-import BrandFeaturedImage from '../../components/BrandFeaturedImage/BrandFeaturedImage';
+import BrandHero from '../../components/BrandHero/BrandHero';
 import FlexibleContent from '../../components/FlexibleContent/FlexibleContent';
 
 export default async function BrandPage({ params: { slug } }) {
@@ -190,7 +190,7 @@ export default async function BrandPage({ params: { slug } }) {
   return brandData ? (
     <div style={{ 'backgroundColor': bgColour, 'color': textColour }}>
       <BrandIntro data={brandData} />
-      <BrandFeaturedImage data={brandData} />
+      <BrandHero data={brandData} />
       <FlexibleContent data={flexibleContent} />
     </div>
   ) : null

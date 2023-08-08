@@ -1,6 +1,6 @@
 import fetchAPI from '../../lib/api'
 import BrandIntro from '../../components/BrandIntro/BrandIntro';
-import BrandFeaturedImage from '../../components/BrandFeaturedImage/BrandFeaturedImage';
+import BrandHero from '../../components/BrandHero/BrandHero';
 import FlexibleContent from '../../components/FlexibleContent/FlexibleContent';
 
 export const dynamicParams = false
@@ -44,8 +44,16 @@ export default async function Page({ params: { brand, author } }) {
         id
         slug
         title(format: RENDERED)
-        featuredImage {
-          node {
+        brandOptions {
+          backgroundColour
+          containedFeaturedImage
+          textColour
+          heroYoutubeVideo
+          heroVideoMp4 {
+            mediaItemUrl
+          }
+          heroImage {
+            altText
             sourceUrl(size: LARGE)
             sizes(size: LARGE)
             mediaDetails {
@@ -53,11 +61,6 @@ export default async function Page({ params: { brand, author } }) {
               height
             }
           }
-        }
-        brandOptions {
-          backgroundColour
-          containedFeaturedImage
-          textColour
           flexibleContent {
             ... on Brand_Brandoptions_FlexibleContent_AssetDownload {
               fieldGroupName
@@ -87,12 +90,13 @@ export default async function Page({ params: { brand, author } }) {
               fieldGroupName
               sectionTitle
               withTabbedNav
+              tabActiveColour
               tabs {
                 copy
                 tabLabel
                 assets {
                   heading
-                  vimeoyoutubeVideo
+                  youtubeVideo
                   videoMp4 {
                     mediaItemUrl
                   }
@@ -207,13 +211,14 @@ export default async function Page({ params: { brand, author } }) {
 
   const brandData = data?.brand;
   const flexibleContent = brandData?.brandOptions?.flexibleContent;
+  const brandOptions = brandData?.brandOptions;
   const bgColour = brandData?.brandOptions?.backgroundColour;
   const textColour = brandData?.brandOptions?.textColour;
 
   return brandData ? (
     <div style={{ 'backgroundColor': bgColour, 'color': textColour }}>
       <BrandIntro data={brandData} author={author} />
-      <BrandFeaturedImage data={brandData} />
+      <BrandHero data={brandOptions} />
       <FlexibleContent data={flexibleContent} />
     </div>
   ) : null

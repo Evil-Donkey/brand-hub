@@ -5,12 +5,11 @@
         background-color: var(--colour-black-01);
         color: var(--colour-white-00);
         cursor: pointer;
-        &:hover,
         &.tabNavActive {
             background-color: var(--colour-orange-00);
         }
         &:hover:not(.tabNavActive) {
-            background-color: rgba(249, 89, 44, .1);
+            opacity: .9;
         }
     }
 }

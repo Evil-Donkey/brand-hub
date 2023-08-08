@@ -2,6 +2,7 @@
 
 import { useState } from 'react'
 import Image from 'next/image'
+import YouTube from 'react-youtube'
 import handleDownload from '../../../lib/handleDownload'
 import styles from './Tabs.module.scss'
 
@@ -10,6 +11,7 @@ const Tabs = ({ data }) => {
     const [isActive, setIsActive] = useState(0);
     const tabs = data?.tabs;
     const nav = data?.withTabbedNav;
+    const tabActiveColour = data?.tabActiveColour;
 
     const tabsHandle = (i) => {
         setIsActive(i);
@@ -24,7 +26,7 @@ const Tabs = ({ data }) => {
                         {tabs.map((tab, i) => {
                             const { tabLabel } = tab;
                             return (
-                                <li className={isActive == i ? styles.tabNavActive : ''} key={i.toString()} onClick={() => tabsHandle(i)}>{tabLabel}</li>
+                                <li style={{ backgroundColor: isActive == i ? tabActiveColour : '' }} className={isActive == i ? styles.tabNavActive : ''} key={i.toString()} onClick={() => tabsHandle(i)}>{tabLabel}</li>
                             )
                         })}
                     </ul>
@@ -45,17 +47,23 @@ const Tabs = ({ data }) => {
                             {assets && 
                                 <div className='col-md-8'>
                                     {assets.map((asset, i) => {
-                                        const { heading, file, image, vimeoyoutubeVideo, videoMp4 } = asset;
+                                        const { heading, file, image, youtubeVideo, videoMp4 } = asset;
                                         return (
                                             <div key={i.toString()} className='row mb-4 justify-content-end'>
-                                                {(image || vimeoyoutubeVideo || videoMp4) &&
+                                                {(image || youtubeVideo || videoMp4) &&
                                                     <div className='col d-flex flex-column align-items-end justify-content-end'>
                                                         {heading &&
                                                             <h5 className={styles.assetsBtn}>{heading}</h5>
                                                         }
-                                                        {vimeoyoutubeVideo && 
+                                                        {youtubeVideo && 
                                                             <div className={styles.iframeWrapper}>
-                                                                <div dangerouslySetInnerHTML={{ __html: vimeoyoutubeVideo }} />
+                                                                {/* <div dangerouslySetInnerHTML={{ __html: vimeoyoutubeVideo }} /> */}
+                                                                <YouTube videoId={youtubeVideo} />
+                                                            </div>
+                                                        }
+                                                        {videoMp4 &&
+                                                            <div className={styles.iframeWrapper}>
+                                                                <video src={videoMp4} controls />
                                                             </div>
                                                         }
                                                         {image && <div className={styles.assetImageWrap}>
