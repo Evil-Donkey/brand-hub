@@ -2,6 +2,7 @@
 
 import Image from 'next/image'
 import YouTube from 'react-youtube'
+import Spline from '@splinetool/react-spline'
 import styles from './BrandHero.module.scss'
 
 const BrandHero = ({ data }) => {
@@ -10,15 +11,20 @@ const BrandHero = ({ data }) => {
     const sourceUrl = data?.heroImage?.sourceUrl;
     const mediaDetails = data?.heroImage?.mediaDetails;
     const sizes = data?.heroImage?.sizes;
-    const containedFeaturedImage = data?.brandOptions?.containedFeaturedImage;
+    const containedHero = data?.brandOptions?.containedHero;
     const heroYoutubeVideo = data?.heroYoutubeVideo;
     const heroVideoMp4 = data?.heroVideoMp4?.mediaItemUrl;
+    const splineUrl = data?.splineUrl;
     
-    return (sourceUrl || heroYoutubeVideo || heroVideoMp4) ? (
-        <div className={`container${!containedFeaturedImage ? '-fluid g-0' : ''}`}>
+    return (sourceUrl || heroYoutubeVideo || heroVideoMp4 || splineUrl) ? (
+        <div className={`container${!containedHero ? '-fluid g-0' : ''}`}>
             <div className='row'>
                 <div className={`col ${styles.featuredImageWrap}`}>
-                    {heroYoutubeVideo ?
+                    {splineUrl ?
+                        <div className={styles.iframeWrapper}>
+                            <Spline scene={splineUrl} />
+                        </div>
+                    : heroYoutubeVideo ?
                         <div className={styles.iframeWrapper}>
                             <YouTube videoId={heroYoutubeVideo} />
                         </div>

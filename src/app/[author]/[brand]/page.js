@@ -46,9 +46,10 @@ export default async function Page({ params: { brand, author } }) {
         title(format: RENDERED)
         brandOptions {
           backgroundColour
-          containedFeaturedImage
+          containedHero
           textColour
           heroYoutubeVideo
+          splineUrl
           heroVideoMp4 {
             mediaItemUrl
           }
@@ -97,6 +98,7 @@ export default async function Page({ params: { brand, author } }) {
                 assets {
                   heading
                   youtubeVideo
+                  splineUrl
                   videoMp4 {
                     mediaItemUrl
                   }

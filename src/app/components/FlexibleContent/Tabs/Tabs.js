@@ -3,6 +3,7 @@
 import { useState } from 'react'
 import Image from 'next/image'
 import YouTube from 'react-youtube'
+import Spline from '@splinetool/react-spline'
 import handleDownload from '../../../lib/handleDownload'
 import styles from './Tabs.module.scss'
 
@@ -47,13 +48,18 @@ const Tabs = ({ data }) => {
                             {assets && 
                                 <div className='col-md-8'>
                                     {assets.map((asset, i) => {
-                                        const { heading, file, image, youtubeVideo, videoMp4 } = asset;
+                                        const { heading, file, image, youtubeVideo, videoMp4, splineUrl } = asset;
                                         return (
                                             <div key={i.toString()} className='row mb-4 justify-content-end'>
-                                                {(image || youtubeVideo || videoMp4) &&
+                                                {(image || youtubeVideo || videoMp4 || splineUrl) &&
                                                     <div className='col d-flex flex-column align-items-end justify-content-end'>
                                                         {heading &&
                                                             <h5 className={styles.assetsBtn}>{heading}</h5>
+                                                        }
+                                                        {splineUrl &&
+                                                            <div className={styles.iframeWrapper}>
+                                                                <Spline scene={splineUrl} />
+                                                            </div>
                                                         }
                                                         {youtubeVideo && 
                                                             <div className={styles.iframeWrapper}>
