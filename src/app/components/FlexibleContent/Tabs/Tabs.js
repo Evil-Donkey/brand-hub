@@ -49,6 +49,7 @@ const Tabs = ({ data }) => {
                                 <div className='col-md-8'>
                                     {assets.map((asset, i) => {
                                         const { heading, file, image, youtubeVideo, videoMp4, splineUrl } = asset;
+                                        console.log(image)
                                         return (
                                             <div key={i.toString()} className='row mb-4 justify-content-end'>
                                                 {(image || youtubeVideo || videoMp4 || splineUrl) &&
@@ -74,7 +75,7 @@ const Tabs = ({ data }) => {
                                                         }
                                                         {image && <div className={styles.assetImageWrap}>
                                                             <Image 
-                                                                src={image?.sourceUrl}
+                                                                src={image?.mediaItemUrl}
                                                                 sizes={image?.sizes}
                                                                 alt={image?.altText}
                                                                 width={image?.mediaDetails?.width / 2}

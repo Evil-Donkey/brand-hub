@@ -110,6 +110,7 @@ export default async function Page({ params: { brand, author } }) {
                     }
                     sizes(size: LARGE)
                     sourceUrl(size: LARGE)
+                    mediaItemUrl
                   }
                   file {
                     sourceUrl(size: LARGE)
