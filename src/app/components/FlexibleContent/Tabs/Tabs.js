@@ -38,12 +38,12 @@ const Tabs = ({ data }) => {
                     <div key={i.toString()} className='col-12'>
                         <div className={`row ${copy ? `justify-content-between` : 'justify-content-end'}`}>
                             {copy &&
-                                <div className='col-md-4'>
+                                <div className='col-md-3'>
                                     <div dangerouslySetInnerHTML={{ __html: copy }} />
                                 </div>
                             }
                             {assets && 
-                                <div className='col-md-7'>
+                                <div className='col-md-8'>
                                     {assets.map((asset, i) => {
                                         const { heading, file, image, vimeoyoutubeVideo, videoMp4 } = asset;
                                         return (
