@@ -30,7 +30,7 @@ const BrandHero = ({ data }) => {
                         </div>
                     : heroVideoMp4 ?
                         <div className={styles.iframeWrapper}>
-                            <video src={heroVideoMp4} controls />
+                            <video src={heroVideoMp4} loop muted autoPlay webkit-playsinline="true" playsInline />
                         </div>
                     : sourceUrl ?
                         <Image
