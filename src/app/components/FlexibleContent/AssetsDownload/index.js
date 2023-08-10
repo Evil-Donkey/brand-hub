@@ -22,19 +22,21 @@ const AssetsDownload = ({ data }) => {
     return assets && (
         <div className='row justify-content-end'>
             {assets.map((asset, i) => {
-                const { altText, sourceUrl, mediaDetails, sizes } = asset?.previewImage;
+                const { altText, mediaItemUrl, mediaDetails, sizes } = asset?.previewImage;
                 const files = asset?.files;
                 return asset && (
                     <div key={i.toString()} className='col-md-5'>
-                        <div className={styles.assetImageWrap}>
-                            <Image 
-                                src={sourceUrl}
-                                sizes={sizes}
-                                alt={altText}
-                                width={mediaDetails?.width}
-                                height={mediaDetails?.height}
-                            />
-                        </div>
+                        {mediaItemUrl &&
+                            <div className={styles.assetImageWrap}>
+                                <Image 
+                                    src={mediaItemUrl}
+                                    sizes={sizes}
+                                    alt={altText}
+                                    width={mediaDetails?.width}
+                                    height={mediaDetails?.height}
+                                />
+                            </div>
+                        }
                         {files && 
                             <div className={styles.filesWrap}>
                                 <h5 className={`${styles.assetsBtn} d-flex gap-2 align-items-center`} onClick={() => downloadClick(i)}>

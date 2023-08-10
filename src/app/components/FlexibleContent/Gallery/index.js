@@ -9,11 +9,11 @@ const Gallery = ({ data }) => {
     return gallery && (
         <div className='row justify-content-end'>
             {gallery.map((image, i) => {
-                const sourceUrl = image?.sourceUrl;
-                return sourceUrl && (
+                const mediaItemUrl = image?.mediaItemUrl;
+                return mediaItemUrl && (
                     <div key={image.id} className={`col-md-3 mb-4 ${styles.galleryWrap}`}>
-                        {sourceUrl && 
-                            <div className={styles.galleryImageWrap} style={{ 'backgroundImage': 'url(' + sourceUrl + ')' }} />
+                        {mediaItemUrl && 
+                            <div className={styles.galleryImageWrap} style={{ 'backgroundImage': 'url(' + mediaItemUrl + ')' }} />
                         }
                         <div className={styles.filesWrap}>
                             <h5 className={`${styles.assetsBtn} d-flex gap-2 align-items-center`}>

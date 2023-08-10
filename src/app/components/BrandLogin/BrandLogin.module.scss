@@ -1,0 +1,36 @@
+.brandLoginWrap {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    background-color: var(--colour-black-03);
+    color: var(--colour-white-00);
+    z-index: 100;
+    p {
+        font-size: 15px;
+        letter-spacing: 1.5px;
+    }
+}
+
+.brandLoginForm {
+    input[type="password"] {
+        padding: 10px;
+        border-radius: 0;
+        border: none;
+        outline: none !important;
+        background-color: var(--colour-white-01);
+        margin-right: 15px;
+        font-size: 15px;
+        letter-spacing: 1.5px;
+    }
+    input[type="submit"] {
+        border-radius: 5px;
+        background-color: var(--colour-orange-00);
+        padding: 10px 20px;
+        border: none;
+        color: var(--colour-white-00);
+        text-transform: uppercase;
+        font-size: 15px;
+        letter-spacing: 1.5px;
+    }
+}

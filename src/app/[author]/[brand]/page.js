@@ -1,7 +1,8 @@
 import fetchAPI from '../../lib/api'
-import BrandIntro from '../../components/BrandIntro/BrandIntro';
-import BrandHero from '../../components/BrandHero/BrandHero';
-import FlexibleContent from '../../components/FlexibleContent/FlexibleContent';
+import BrandLogin from '../../components/BrandLogin'
+import BrandIntro from '../../components/BrandIntro'
+import BrandHero from '../../components/BrandHero'
+import FlexibleContent from '../../components/FlexibleContent'
 
 export const dynamicParams = false
 export const revalidate = 10
@@ -44,6 +45,9 @@ export default async function Page({ params: { brand, author } }) {
         id
         slug
         title(format: RENDERED)
+        password {
+          password
+        }
         brandOptions {
           backgroundColour
           containedHero
@@ -55,7 +59,7 @@ export default async function Page({ params: { brand, author } }) {
           }
           heroImage {
             altText
-            sourceUrl(size: LARGE)
+            mediaItemUrl
             sizes(size: LARGE)
             mediaDetails {
               width
@@ -66,10 +70,11 @@ export default async function Page({ params: { brand, author } }) {
             ... on Brand_Brandoptions_FlexibleContent_AssetDownload {
               fieldGroupName
               sectionTitle
+              passwordProtected
               assets {
                 previewImage {
                   altText
-                  sourceUrl(size: LARGE)
+                  mediaItemUrl
                   mediaDetails {
                     height
                     width
@@ -82,7 +87,6 @@ export default async function Page({ params: { brand, author } }) {
                       file
                     }
                     mediaItemUrl
-                    sourceUrl(size: LARGE)
                   }
                 }
               }
@@ -109,11 +113,10 @@ export default async function Page({ params: { brand, author } }) {
                       width
                     }
                     sizes(size: LARGE)
-                    sourceUrl(size: LARGE)
                     mediaItemUrl
                   }
                   file {
-                    sourceUrl(size: LARGE)
+                    mediaItemUrl
                   }
                 }
               }
@@ -139,7 +142,7 @@ export default async function Page({ params: { brand, author } }) {
                     width
                   }
                   sizes
-                  sourceUrl(size: LARGE)
+                  mediaItemUrl
                 }
               }
             }
@@ -162,7 +165,7 @@ export default async function Page({ params: { brand, author } }) {
                 heading
                 previewImage {
                   altText
-                  sourceUrl(size: LARGE)
+                  mediaItemUrl
                   mediaDetails {
                     height
                     width
@@ -181,7 +184,7 @@ export default async function Page({ params: { brand, author } }) {
               fieldGroupName
               sectionTitle
               gallery {
-                sourceUrl(size: LARGE)
+                mediaItemUrl
                 id
               }
             }
@@ -217,9 +220,11 @@ export default async function Page({ params: { brand, author } }) {
   const brandOptions = brandData?.brandOptions;
   const bgColour = brandData?.brandOptions?.backgroundColour;
   const textColour = brandData?.brandOptions?.textColour;
+  const pwd = brandData?.password?.password;
 
   return brandData ? (
     <div style={{ 'backgroundColor': bgColour, 'color': textColour }}>
+      {pwd && <BrandLogin pwd={pwd} />}
       <BrandIntro data={brandData} author={author} />
       <BrandHero data={brandOptions} />
       <FlexibleContent data={flexibleContent} />

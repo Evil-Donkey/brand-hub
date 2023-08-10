@@ -1,8 +1,8 @@
 import fetchAPI from '../../lib/api'
 import styles from './Brand.module.scss'
-import BrandIntro from '../../components/BrandIntro/BrandIntro';
-import BrandHero from '../../components/BrandHero/BrandHero';
-import FlexibleContent from '../../components/FlexibleContent/FlexibleContent';
+import BrandIntro from '../../components/BrandIntro';
+import BrandHero from '../../components/BrandHero';
+import FlexibleContent from '../../components/FlexibleContent';
 
 export default async function BrandPage({ params: { slug } }) {
 

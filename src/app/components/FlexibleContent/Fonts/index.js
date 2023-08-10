@@ -7,17 +7,17 @@ const Fonts = ({ data }) => {
     return fonts && (
         <div className='row justify-content-end'>
             {fonts.map((font, i) => {
-                const { altText, sourceUrl, mediaDetails, sizes } = font?.previewImage;
+                const { altText, mediaItemUrl, mediaDetails, sizes } = font?.previewImage;
                 const { fontUrl, name } = font;
                 return font && (
                     <div key={i.toString()} className='col-md-6'>
                         {name &&
                             <h5 className={`${styles.assetsBtn} mb-3`}>{name}</h5>
                         }
-                        {sourceUrl && 
+                        {mediaItemUrl && 
                             <div className={styles.fontsImageWrap}>
                                 <Image 
-                                    src={sourceUrl}
+                                    src={mediaItemUrl}
                                     sizes={sizes}
                                     alt={altText}
                                     width={mediaDetails?.width}

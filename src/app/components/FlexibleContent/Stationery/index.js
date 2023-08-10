@@ -12,20 +12,22 @@ const Stationery = ({ data }) => {
             <div className='col-md-10'>
                 <div className='row justify-content-end'>
                     {assets.map((asset, i) => {
-                        const { altText, sourceUrl, mediaDetails, sizes } = asset?.previewImage;
+                        const { altText, mediaItemUrl, mediaDetails, sizes } = asset?.previewImage;
                         const files = asset?.files;
                         const heading = asset?.heading;
                         return asset && (
                             <div key={i.toString()} className='col-md-4 d-flex flex-column'>
-                                <div className={styles.stationeryImageWrap}>
-                                    <Image 
-                                        src={sourceUrl}
-                                        sizes={sizes}
-                                        alt={altText}
-                                        width={mediaDetails?.width}
-                                        height={mediaDetails?.height}
-                                    />
-                                </div>
+                                {mediaItemUrl &&
+                                    <div className={styles.stationeryImageWrap}>
+                                        <Image 
+                                            src={mediaItemUrl}
+                                            sizes={sizes}
+                                            alt={altText}
+                                            width={mediaDetails?.width}
+                                            height={mediaDetails?.height}
+                                        />
+                                    </div>
+                                }
                                 {(files || heading) && 
                                     <div className={`${styles.filesWrap} p-4 d-flex flex-column gap-2 flex-grow-1`}>
                                         {heading &&

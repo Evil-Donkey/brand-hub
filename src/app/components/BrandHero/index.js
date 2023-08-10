@@ -8,7 +8,7 @@ import styles from './BrandHero.module.scss'
 const BrandHero = ({ data }) => {
 
     const altText = data?.heroImage?.altText;
-    const sourceUrl = data?.heroImage?.sourceUrl;
+    const mediaItemUrl = data?.heroImage?.mediaItemUrl;
     const mediaDetails = data?.heroImage?.mediaDetails;
     const sizes = data?.heroImage?.sizes;
     const containedHero = data?.brandOptions?.containedHero;
@@ -16,7 +16,7 @@ const BrandHero = ({ data }) => {
     const heroVideoMp4 = data?.heroVideoMp4?.mediaItemUrl;
     const splineUrl = data?.splineUrl;
     
-    return (sourceUrl || heroYoutubeVideo || heroVideoMp4 || splineUrl) ? (
+    return (mediaItemUrl || heroYoutubeVideo || heroVideoMp4 || splineUrl) ? (
         <div className={`container${!containedHero ? '-fluid g-0' : ''}`}>
             <div className='row'>
                 <div className={`col ${styles.featuredImageWrap}`}>
@@ -32,9 +32,9 @@ const BrandHero = ({ data }) => {
                         <div className={styles.iframeWrapper}>
                             <video src={heroVideoMp4} loop muted autoPlay webkit-playsinline="true" playsInline />
                         </div>
-                    : sourceUrl ?
+                    : mediaItemUrl ?
                         <Image
-                            src={sourceUrl}
+                            src={mediaItemUrl}
                             width={mediaDetails?.width}
                             height={mediaDetails?.height}
                             sizes={sizes}
