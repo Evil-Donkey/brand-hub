@@ -16,7 +16,7 @@ const Stationery = ({ data }) => {
                         const files = asset?.files;
                         const heading = asset?.heading;
                         return asset && (
-                            <div key={i.toString()} className='col-md-4 d-flex flex-column'>
+                            <div key={i.toString()} className='col-md-4 mb-5 d-flex flex-column'>
                                 {mediaItemUrl &&
                                     <div className={styles.stationeryImageWrap}>
                                         <Image 

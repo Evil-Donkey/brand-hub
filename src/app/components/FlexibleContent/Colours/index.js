@@ -15,6 +15,12 @@ const Colours = ({ data }) => {
     }
     const colours = data?.colours;
 
+
+    let extraRow = null;
+        if (colours.length % 5 == 0) {
+            extraRow = '</div><div class="row justify-content-end">';
+        }
+
     return colours && (
         <div className='row justify-content-end'>
             <div className='col-md-10'>
@@ -31,7 +37,8 @@ const Colours = ({ data }) => {
                         const cmyk = `cmyb - C${cmykConvert.color.c} MC${cmykConvert.color.m} Y${cmykConvert.color.y} K${cmykConvert.color.k}`;
                         
                         return colour && (
-                            <div key={i.toString()} className='col-md-3'>
+                            // {extraRow && <div dangerouslySetInnerHTML={{ __html: extraRow }} />}
+                            <div key={i.toString()} className='col-md-3 mb-5'>
                                 <div className='d-flex flex-column'>
                                     <div className={styles.colourPreview} style={{ 'backgroundColor': col}} />
                                     <div className={`${styles.colourInfo} p-4 bg-white d-flex flex-column gap-2`}>

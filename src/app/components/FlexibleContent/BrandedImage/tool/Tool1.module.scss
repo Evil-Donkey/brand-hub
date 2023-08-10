@@ -51,6 +51,10 @@ $large: 841px;
     //     height: 0;
     //     padding-top: 100%;
     // }
+    &.toolWrapperLoaded {
+        background-color: transparent;
+        border: none;
+    }
 }
 
 .buttonsWrapper {
@@ -106,7 +110,7 @@ $large: 841px;
         svg {
             path {
                 stroke: var(--colour-white-00);
-                opacity: .1;
+                opacity: 1;
             }
         }
         &:before {
@@ -124,7 +128,7 @@ $large: 841px;
             background-color: var(--colour-white-00);
             svg {
                 path {
-                    stroke: var(--colour-grey-04);
+                    stroke: var(--colour-black-00);
                     opacity: 1;
                 }
             }
@@ -171,6 +175,15 @@ $large: 841px;
     }
     &:global.inactive {
         pointer-events: none;
+    }
+}
+
+.filesWrap {
+    .assetsBtn {
+        text-transform: uppercase;
+        letter-spacing: 2px;
+        font-weight: 700;
+        cursor: pointer;
     }
 }
 

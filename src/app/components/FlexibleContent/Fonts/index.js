@@ -10,7 +10,7 @@ const Fonts = ({ data }) => {
                 const { altText, mediaItemUrl, mediaDetails, sizes } = font?.previewImage;
                 const { fontUrl, name } = font;
                 return font && (
-                    <div key={i.toString()} className='col-md-6'>
+                    <div key={i.toString()} className='col-md-6 mb-5'>
                         {name &&
                             <h5 className={`${styles.assetsBtn} mb-3`}>{name}</h5>
                         }

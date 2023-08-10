@@ -22,7 +22,7 @@ const Tabs = ({ data }) => {
         <div className='row row-cols-1'>
             
             {nav &&
-                <div className='col mb-4'>
+                <div className='col mb-5'>
                     <ul className={`col m-0 p-0 list-unstyled d-flex ${styles.tabsNav}`}>
                         {tabs.map((tab, i) => {
                             const { tabLabel } = tab;

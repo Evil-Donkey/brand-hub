@@ -17,7 +17,7 @@ const Gallery = ({ data }) => {
                         }
                         <div className={styles.filesWrap}>
                             <h5 className={`${styles.assetsBtn} d-flex gap-2 align-items-center`}>
-                                <div className='d-flex gap-2 align-items-center' onClick={() => handleDownload(sourceUrl, 'gallery')}>
+                                <div className='d-flex gap-2 align-items-center' onClick={() => handleDownload(mediaItemUrl, 'gallery')}>
                                     <span>Download</span>
                                     <svg width="19" height="21" viewBox="0 0 19 21" fill="none" xmlns="http://www.w3.org/2000/svg">
                                         <path d="M9.67501 14.7716L9.67501 1.56396M9.67501 14.7716L5.27246 10.3691M9.67501 14.7716L14.0776 10.3691" stroke="#F8F8F8" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
