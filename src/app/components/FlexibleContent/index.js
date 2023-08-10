@@ -36,40 +36,40 @@ const FlexibleContent = ({ data }) => {
             restrictedComponents.push([<Tabs key={i.toString()} data={data} />, sectionTitle]);
         }
         if (fieldGroupName === "Brand_Brandoptions_FlexibleContent_Colours") {
-            allComponents.push([<Colours data={data} />, sectionTitle]);
+            allComponents.push([<Colours key={i.toString()} data={data} />, sectionTitle]);
         }
         if (fieldGroupName === "Brand_Brandoptions_FlexibleContent_Colours" && passwordProtected) {
-            restrictedComponents.push([<Colours data={data} />, sectionTitle]);
+            restrictedComponents.push([<Colours key={i.toString()} data={data} />, sectionTitle]);
         }
         if (fieldGroupName === "Brand_Brandoptions_FlexibleContent_Fonts") {
-            allComponents.push([<Fonts data={data} />, sectionTitle]);
+            allComponents.push([<Fonts key={i.toString()} data={data} />, sectionTitle]);
         }
         if (fieldGroupName === "Brand_Brandoptions_FlexibleContent_Fonts" && passwordProtected) {
-            restrictedComponents.push([<Fonts data={data} />, sectionTitle]);
+            restrictedComponents.push([<Fonts key={i.toString()} data={data} />, sectionTitle]);
         }
         if (fieldGroupName === "Brand_Brandoptions_FlexibleContent_EmailSignature") {
-            allComponents.push([<EmailSignature data={data} />, sectionTitle]);
+            allComponents.push([<EmailSignature key={i.toString()} data={data} />, sectionTitle]);
         }
         if (fieldGroupName === "Brand_Brandoptions_FlexibleContent_EmailSignature" && passwordProtected) {
-            restrictedComponents.push([<EmailSignature data={data} />, sectionTitle]);
+            restrictedComponents.push([<EmailSignature key={i.toString()} data={data} />, sectionTitle]);
         }
         if (fieldGroupName === "Brand_Brandoptions_FlexibleContent_Stationery") {
-            allComponents.push([<Stationery data={data} />, sectionTitle]);
+            allComponents.push([<Stationery key={i.toString()} data={data} />, sectionTitle]);
         }
         if (fieldGroupName === "Brand_Brandoptions_FlexibleContent_Stationery" && passwordProtected) {
-            restrictedComponents.push([<Stationery data={data} />, sectionTitle]);
+            restrictedComponents.push([<Stationery key={i.toString()} data={data} />, sectionTitle]);
         }
         if (fieldGroupName === "Brand_Brandoptions_FlexibleContent_BrandedImage") {
-            allComponents.push([<BrandedImage data={data} />, sectionTitle]);
+            allComponents.push([<BrandedImage key={i.toString()} data={data} />, sectionTitle]);
         }
         if (fieldGroupName === "Brand_Brandoptions_FlexibleContent_BrandedImage" && passwordProtected) {
-            restrictedComponents.push([<BrandedImage data={data} />, sectionTitle]);
+            restrictedComponents.push([<BrandedImage key={i.toString()} data={data} />, sectionTitle]);
         }
         if (fieldGroupName === "Brand_Brandoptions_FlexibleContent_Gallery") {
-            allComponents.push([<Gallery data={data} />, sectionTitle]);
+            allComponents.push([<Gallery key={i.toString()} data={data} />, sectionTitle]);
         }
         if (fieldGroupName === "Brand_Brandoptions_FlexibleContent_Gallery" && passwordProtected) {
-            restrictedComponents.push([<Gallery data={data} />, sectionTitle]);
+            restrictedComponents.push([<Gallery key={i.toString()} data={data} />, sectionTitle]);
         }
     })};
 
