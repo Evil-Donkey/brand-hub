@@ -12,7 +12,7 @@ const Stationery = ({ data }) => {
             <div className='col-md-10'>
                 <div className='row justify-content-end'>
                     {assets.map((asset, i) => {
-                        const { altText, mediaItemUrl, mediaDetails, sizes } = asset?.previewImage;
+                        const { altText, mediaItemUrl, mediaDetails } = asset?.previewImage;
                         const files = asset?.files;
                         const heading = asset?.heading;
                         return asset && (
@@ -21,7 +21,6 @@ const Stationery = ({ data }) => {
                                     <div className={styles.stationeryImageWrap}>
                                         <Image 
                                             src={mediaItemUrl}
-                                            sizes={sizes}
                                             alt={altText}
                                             width={mediaDetails?.width}
                                             height={mediaDetails?.height}

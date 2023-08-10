@@ -2,7 +2,7 @@
     li {
         padding: 10px 20px;
         border: 1px solid var(--colour-grey-00);
-        background-color: var(--colour-black-01);
+        background-color: transparent;
         color: var(--colour-white-00);
         cursor: pointer;
         &.tabNavActive {

@@ -75,7 +75,6 @@ const Tabs = ({ data }) => {
                                                         {image && <div className={styles.assetImageWrap}>
                                                             <Image 
                                                                 src={image?.mediaItemUrl}
-                                                                sizes={image?.sizes}
                                                                 alt={image?.altText}
                                                                 width={image?.mediaDetails?.width / 2}
                                                                 height={image?.mediaDetails?.height / 2}

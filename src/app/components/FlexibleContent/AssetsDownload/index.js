@@ -30,7 +30,6 @@ const AssetsDownload = ({ data }) => {
                             <div className={styles.assetImageWrap}>
                                 <Image 
                                     src={mediaItemUrl}
-                                    sizes={sizes}
                                     alt={altText}
                                     width={mediaDetails?.width}
                                     height={mediaDetails?.height}
@@ -52,7 +51,7 @@ const AssetsDownload = ({ data }) => {
                                     <ul className='m-0 p-0 list-unstyled'>
                                         {files.map((file, i) => {
                                             const fileUrl = file?.file?.mediaItemUrl;
-                                            const fileName = file?.file?.mediaDetails?.file;
+                                            const fileName = file?.file?.title;
                                             return fileUrl && (
                                                 <li key={i.toString()}>
                                                     <div className='d-flex gap-2 align-items-center' onClick={() => handleDownload(fileUrl, fileName)}>

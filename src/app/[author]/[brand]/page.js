@@ -7,6 +7,21 @@ import FlexibleContent from '../../components/FlexibleContent'
 export const dynamicParams = false
 export const revalidate = 10
 
+
+export async function generateMetadata({ params: {brand} }) {
+  const data = await fetchAPI(`
+    query getBrandsByAuthor {
+      brand(id: "${brand}", idType: SLUG) {
+        title(format: RENDERED)
+      }
+    }
+  `);
+ 
+  return {
+    title: data?.brand.title
+  }
+}
+
 export async function generateStaticParams() {
   const brands = await fetchAPI(`
     query getBrands {
@@ -83,9 +98,7 @@ export default async function Page({ params: { brand, author } }) {
                 }
                 files {
                   file {
-                    mediaDetails {
-                      file
-                    }
+                    title
                     mediaItemUrl
                   }
                 }

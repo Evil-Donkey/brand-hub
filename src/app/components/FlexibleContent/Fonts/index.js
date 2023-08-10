@@ -18,7 +18,6 @@ const Fonts = ({ data }) => {
                             <div className={styles.fontsImageWrap}>
                                 <Image 
                                     src={mediaItemUrl}
-                                    sizes={sizes}
                                     alt={altText}
                                     width={mediaDetails?.width}
                                     height={mediaDetails?.height}
