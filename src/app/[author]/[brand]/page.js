@@ -3,6 +3,8 @@ import BrandLogin from '../../components/BrandLogin'
 import BrandIntro from '../../components/BrandIntro'
 import BrandHero from '../../components/BrandHero'
 import FlexibleContent from '../../components/FlexibleContent'
+import Header from '../../components/Header'
+import Footer from '../../components/Footer'
 
 export const dynamicParams = false
 export const revalidate = 10
@@ -237,10 +239,12 @@ export default async function Page({ params: { brand, author } }) {
 
   return brandData ? (
     <div style={{ 'backgroundColor': bgColour, 'color': textColour }}>
+      <Header />
       {pwd && <BrandLogin pwd={pwd} />}
       <BrandIntro data={brandData} author={author} />
       <BrandHero data={brandOptions} />
       <FlexibleContent data={flexibleContent} />
+      <Footer />
     </div>
   ) : null
 }

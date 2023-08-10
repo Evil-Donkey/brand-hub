@@ -1,0 +1,10 @@
+.footerWrap {
+    background-color: var(--colour-black-03);
+    color: var(--colour-white-00);
+    font-size: 13px;
+    a {
+        &:hover {
+            text-decoration: underline;
+        }
+    }
+}

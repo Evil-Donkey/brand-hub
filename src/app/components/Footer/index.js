@@ -1,0 +1,22 @@
+import Image from 'next/image'
+import styles from './Footer.module.scss'
+
+const Footer = () => {
+    return (
+        <div className={`${styles.footerWrap} py-4`}>
+            <div className='container'>
+                <div className='row justify-content-between align-items-center'>
+                    <div className='col-auto d-flex flex-column flex-md-row gap-5'>
+                        <span>Contact us on: <a href="mailto:hello@brand-hub.co">hello@brand-hub.co</a></span>
+                        <a href="/">Privacy policy</a>
+                    </div>
+                    <div className='col-auto'>
+                        <Image src="/images/icon-bh-logo.svg" alt="" width="45" height="45" />
+                    </div>
+                </div>
+            </div>
+        </div>
+    );
+}
+
+export default Footer;
