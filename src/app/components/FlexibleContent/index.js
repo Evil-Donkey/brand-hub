@@ -20,7 +20,7 @@ const FlexibleContent = ({ data }) => {
     let restrictedComponents = [];
     let allComponents = [];
 
-    {data && data.map((data) => {
+    {data && data.forEach((data) => {
         const { fieldGroupName, sectionTitle, passwordProtected } = data;
 
         if (fieldGroupName === "Brand_Brandoptions_FlexibleContent_AssetDownload") {
