@@ -1,6 +1,6 @@
 'use client'
 
-import { useContext, useState, useEffect } from 'react'
+import { useContext } from 'react'
 import styles from './FlexibleContent.module.scss'
 import PasswordContext from '../../lib/passwordContext'
 import AssetsDownload from './AssetsDownload';
@@ -16,17 +16,11 @@ const FlexibleContent = ({ data }) => {
 
     const { match, storedPwd } = useContext(PasswordContext);
 
-    // const [pwdReady, setPwdReady] = useState(false);
-
-    // useEffect(() => {
-    //     setPwdReady(true);
-    // }, [storedPwd]);
-
     
     let restrictedComponents = [];
     let allComponents = [];
 
-    {data && data.map((data, i) => {
+    {data && data.map((data) => {
         const { fieldGroupName, sectionTitle, passwordProtected } = data;
 
         if (fieldGroupName === "Brand_Brandoptions_FlexibleContent_AssetDownload") {
@@ -80,7 +74,6 @@ const FlexibleContent = ({ data }) => {
     })};
 
     if (match || !storedPwd) {
-        console.log('all')
         return (
             <div className='container py-5'>
                 {allComponents.map((component, i) => {
@@ -112,8 +105,6 @@ const FlexibleContent = ({ data }) => {
     return restrictedComponents.length > 0 && (
         <div className='container py-5'>
             {restrictedComponents.map((component, i) => {
-
-                console.log('restricted')
 
                 const componentEl = component[0];
                 const sectionTitle = component[1] || null;
