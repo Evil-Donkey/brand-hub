@@ -20,20 +20,20 @@ const FlexibleContent = ({ data }) => {
     let restrictedComponents = [];
     let allComponents = [];
 
-    {data && data.forEach((data) => {
+    {data && data.forEach((data, i) => {
         const { fieldGroupName, sectionTitle, passwordProtected } = data;
 
         if (fieldGroupName === "Brand_Brandoptions_FlexibleContent_AssetDownload") {
-            allComponents.push([<AssetsDownload data={data} />, sectionTitle]);
+            allComponents.push([<AssetsDownload key={i.toString()} data={data} />, sectionTitle]);
         }
         if (fieldGroupName === "Brand_Brandoptions_FlexibleContent_AssetDownload" && passwordProtected) {
-            restrictedComponents.push([<AssetsDownload data={data} />, sectionTitle]);
+            restrictedComponents.push([<AssetsDownload key={i.toString()} data={data} />, sectionTitle]);
         }
         if (fieldGroupName === "Brand_Brandoptions_FlexibleContent_Tabs") {
-            allComponents.push([<Tabs data={data} />, sectionTitle]);
+            allComponents.push([<Tabs key={i.toString()} data={data} />, sectionTitle]);
         }
         if (fieldGroupName === "Brand_Brandoptions_FlexibleContent_Tabs" && passwordProtected) {
-            restrictedComponents.push([<Tabs data={data} />, sectionTitle]);
+            restrictedComponents.push([<Tabs key={i.toString()} data={data} />, sectionTitle]);
         }
         if (fieldGroupName === "Brand_Brandoptions_FlexibleContent_Colours") {
             allComponents.push([<Colours data={data} />, sectionTitle]);
