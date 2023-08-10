@@ -308,8 +308,16 @@ const Tool = ({ icons, tool }) => {
                                         </div>
                                     </div>
                                     
-                                    {isMobile ? <div className={`${styles.toolButton} d-flex align-items-center gap-2 align-self-center ${!loaded ? `inactive` : ``}`} onClick={downloadScreenshot}>
-                                        <span>Save or share your image</span>
+                                    {isMobile ? <div className={`${styles.filesWrap} d-flex align-items-center gap-2 align-self-center ${!loaded ? `inactive` : ``}`} onClick={downloadScreenshot}>
+                                        <h5 className={`${styles.assetsBtn} d-flex gap-2 align-items-center`}>
+                                            <div className='d-flex gap-2 align-items-center'>
+                                                <span>Save or share your image</span>
+                                                <svg width="19" height="21" viewBox="0 0 19 21" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                                    <path d="M9.67501 14.7716L9.67501 1.56396M9.67501 14.7716L5.27246 10.3691M9.67501 14.7716L14.0776 10.3691" stroke="#F8F8F8" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
+                                                    <line x1="1.51001" y1="19.9648" x2="17.8403" y2="19.9648" stroke="#F8F8F8" strokeWidth="1.5" strokeLinecap="round"/>
+                                                </svg>
+                                            </div>
+                                        </h5>
                                     </div> : 
                                     <div className={`${styles.filesWrap} d-flex align-items-center gap-2 align-self-center ${!loaded ? `inactive` : ``}`} onClick={downloadScreenshot}>
                                         <h5 className={`${styles.assetsBtn} d-flex gap-2 align-items-center`}>
