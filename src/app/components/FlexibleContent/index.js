@@ -12,7 +12,7 @@ import Stationery from './Stationery';
 import BrandedImage from './BrandedImage';
 import Gallery from './Gallery';
 
-const FlexibleContent = ({ data }) => {
+const FlexibleContent = ({ data, pwd }) => {
 
     const { match, storedPwd } = useContext(PasswordContext);
 
@@ -73,7 +73,10 @@ const FlexibleContent = ({ data }) => {
         }
     })};
 
-    if (match || !storedPwd) {
+    console.log(data)
+    console.log(restrictedComponents)
+
+    if (match || !pwd) {
         return (
             <div className='container py-5'>
                 {allComponents.map((component, i) => {

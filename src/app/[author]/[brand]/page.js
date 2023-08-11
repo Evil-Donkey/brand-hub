@@ -111,6 +111,7 @@ export default async function Page({ params: { brand, author } }) {
               sectionTitle
               withTabbedNav
               tabActiveColour
+              passwordProtected
               tabs {
                 copy
                 tabLabel
@@ -139,6 +140,7 @@ export default async function Page({ params: { brand, author } }) {
             ... on Brand_Brandoptions_FlexibleContent_Colours {
               fieldGroupName
               sectionTitle
+              passwordProtected
               colours {
                 colour
                 name
@@ -147,6 +149,7 @@ export default async function Page({ params: { brand, author } }) {
             ... on Brand_Brandoptions_FlexibleContent_Fonts {
               fieldGroupName
               sectionTitle
+              passwordProtected
               fonts {
                 fontUrl
                 name
@@ -164,6 +167,7 @@ export default async function Page({ params: { brand, author } }) {
             ... on Brand_Brandoptions_FlexibleContent_EmailSignature {
               copy
               fieldGroupName
+              passwordProtected
               logo {
                 mediaItemUrl
                 mediaDetails {
@@ -176,6 +180,7 @@ export default async function Page({ params: { brand, author } }) {
             ... on Brand_Brandoptions_FlexibleContent_Stationery {
               fieldGroupName
               sectionTitle
+              passwordProtected
               assets {
                 heading
                 previewImage {
@@ -198,6 +203,7 @@ export default async function Page({ params: { brand, author } }) {
             ... on Brand_Brandoptions_FlexibleContent_Gallery {
               fieldGroupName
               sectionTitle
+              passwordProtected
               gallery {
                 mediaItemUrl
                 id
@@ -207,6 +213,7 @@ export default async function Page({ params: { brand, author } }) {
               copy
               fieldGroupName
               sectionTitle
+              passwordProtected
               stickers {
                 sticker {
                   mediaDetails {
@@ -243,7 +250,7 @@ export default async function Page({ params: { brand, author } }) {
       {pwd && <BrandLogin pwd={pwd} />}
       <BrandIntro data={brandData} author={author} />
       <BrandHero data={brandOptions} />
-      <FlexibleContent data={flexibleContent} />
+      <FlexibleContent data={flexibleContent} pwd={pwd} />
       <Footer />
     </div>
   ) : null
