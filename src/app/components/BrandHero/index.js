@@ -10,11 +10,11 @@ const BrandHero = ({ data }) => {
     const altText = data?.heroImage?.altText;
     const mediaItemUrl = data?.heroImage?.mediaItemUrl;
     const mediaDetails = data?.heroImage?.mediaDetails;
-    const sizes = data?.heroImage?.sizes;
     const containedHero = data?.brandOptions?.containedHero;
     const heroYoutubeVideo = data?.heroYoutubeVideo;
     const heroVideoMp4 = data?.heroVideoMp4?.mediaItemUrl;
     const splineUrl = data?.splineUrl;
+    const heroOverlayLogo = data?.heroOverlayLogo;
     
     return (mediaItemUrl || heroYoutubeVideo || heroVideoMp4 || splineUrl) ? (
         <div className={`container${!containedHero ? '-fluid g-0' : ''}`}>
@@ -33,14 +33,25 @@ const BrandHero = ({ data }) => {
                             <video src={heroVideoMp4} loop muted autoPlay webkit-playsinline="true" playsInline />
                         </div>
                     : mediaItemUrl ?
-                        <Image
-                            src={mediaItemUrl}
-                            width={mediaDetails?.width}
-                            height={mediaDetails?.height}
-                            sizes={sizes}
-                            alt={altText}
-                        />
+                        <div className={styles.imageWrap}>
+                            <Image
+                                src={mediaItemUrl}
+                                width={mediaDetails?.width}
+                                height={mediaDetails?.height}
+                                alt={altText}
+                            />
+                        </div>
                     : null}
+                    {heroOverlayLogo &&
+                        <div className={styles.heroOverlayLogo}>
+                            <Image
+                                src={heroOverlayLogo.mediaItemUrl}
+                                width={heroOverlayLogo.mediaDetails?.width}
+                                height={heroOverlayLogo.mediaDetails?.height}
+                                alt={heroOverlayLogo.altText}
+                            />
+                        </div>
+                    }
                 </div>
             </div>
         </div>

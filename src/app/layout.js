@@ -7,7 +7,7 @@ export const metadata = {
   description: '',
 }
 
-export default function RootLayout({ children }) {
+export default function RootLayout({ children, params }) {
   return (
     <html lang="en">
       <body className={`${robotoSlab.variable} ${robotoFlex.className}`}>{children}</body>

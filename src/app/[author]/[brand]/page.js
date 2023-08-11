@@ -68,6 +68,14 @@ export default async function Page({ params: { brand, author } }) {
         brandOptions {
           backgroundColour
           containedHero
+          heroOverlayLogo {
+            altText
+            mediaItemUrl
+            mediaDetails {
+              height
+              width
+            }
+          }
           textColour
           heroYoutubeVideo
           splineUrl
@@ -77,7 +85,6 @@ export default async function Page({ params: { brand, author } }) {
           heroImage {
             altText
             mediaItemUrl
-            sizes(size: LARGE)
             mediaDetails {
               width
               height
@@ -247,10 +254,10 @@ export default async function Page({ params: { brand, author } }) {
   return brandData ? (
     <div style={{ 'backgroundColor': bgColour, 'color': textColour }}>
       <Header />
-      {pwd && <BrandLogin pwd={pwd} />}
+      {pwd && <BrandLogin pwd={pwd} bgColour={bgColour} />}
       <BrandIntro data={brandData} author={author} />
       <BrandHero data={brandOptions} />
-      <FlexibleContent data={flexibleContent} pwd={pwd} />
+      <FlexibleContent data={flexibleContent} pwd={pwd} bgColour={bgColour} />
       <Footer />
     </div>
   ) : null

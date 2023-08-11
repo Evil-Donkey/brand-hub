@@ -41,8 +41,8 @@ $large: 841px;
     width: 100%;
     height: 100%;
     min-height: 500px;
-    background-color: var(--colour-black-01);
-    border: 1px solid var(--colour-grey-00);
+    // background-color: var(--colour-black-01);
+    border: 1px solid var(--colour-white-00);
     // height: 586px;
     // &:before {
     //     content: "";
@@ -107,12 +107,6 @@ $large: 841px;
         // flex-grow: 1;
         max-width: 40px;
         position: relative;
-        svg {
-            path {
-                stroke: var(--colour-white-00);
-                opacity: 1;
-            }
-        }
         &:before {
             content: "";
             display: block;
@@ -126,10 +120,18 @@ $large: 841px;
         }
         &:global.active {            
             background-color: var(--colour-white-00);
+            // svg {
+            //     path {
+            //         stroke: var(--colour-black-00);
+            //         opacity: 1;
+            //     }
+            // }
+        }
+        &:global:not(.active) {
+            cursor: pointer;
             svg {
                 path {
-                    stroke: var(--colour-black-00);
-                    opacity: 1;
+                    stroke: var(--colour-white-00);
                 }
             }
         }

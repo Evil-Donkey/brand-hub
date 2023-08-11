@@ -3,7 +3,7 @@
     bottom: 0;
     left: 0;
     width: 100%;
-    background-color: var(--colour-black-03);
+    // background-color: var(--colour-black-03);
     color: var(--colour-white-00);
     z-index: 100;
     p {
@@ -25,12 +25,14 @@
     }
     input[type="submit"] {
         border-radius: 5px;
-        background-color: var(--colour-orange-00);
-        padding: 10px 20px;
+        background-color: var(--colour-white-00);
+        // border: 1px solid var(--colour-white-00);
         border: none;
-        color: var(--colour-white-00);
+        padding: 10px 20px;
+        // color: var(--colour-white-00);
         text-transform: uppercase;
         font-size: 15px;
+        font-weight: 700;
         letter-spacing: 1.5px;
     }
 }

@@ -4,8 +4,7 @@ import { useState } from 'react'
 import PasswordContext from '../../lib/passwordContext'
 
 export default function BrandLayout({
-  children,
-  params: { brand }
+  children
 }) {
   const [match, setMatch] = useState(false);
   const [storedPwd, setStoredPwd] = useState(null);

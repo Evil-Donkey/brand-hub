@@ -34,7 +34,7 @@ body {
 
 body {
   color: var(--colour-white-00);
-  background-color: var(--colour-black-00);
+  /* background-color: var(--colour-black-00); */
 }
 
 h1 {

@@ -1,6 +1,6 @@
 import Tool from './tool'
 
-const BrandedImage = ({ data }) => {
+const BrandedImage = ({ data, bgColour }) => {
     const copy = data?.copy;
 
     return (
@@ -11,7 +11,7 @@ const BrandedImage = ({ data }) => {
                 </div>
             }
             <div className='col-md-5'>
-                <Tool tool={data} />
+                <Tool tool={data} bgColour={bgColour} />
             </div> 
         </div>
     )

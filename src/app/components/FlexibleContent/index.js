@@ -12,7 +12,7 @@ import Stationery from './Stationery';
 import BrandedImage from './BrandedImage';
 import Gallery from './Gallery';
 
-const FlexibleContent = ({ data, pwd }) => {
+const FlexibleContent = ({ data, pwd, bgColour }) => {
 
     const { match, storedPwd } = useContext(PasswordContext);
 
@@ -26,55 +26,52 @@ const FlexibleContent = ({ data, pwd }) => {
         if (fieldGroupName === "Brand_Brandoptions_FlexibleContent_AssetDownload") {
             allComponents.push([<AssetsDownload key={i.toString()} data={data} />, sectionTitle]);
         }
-        if (fieldGroupName === "Brand_Brandoptions_FlexibleContent_AssetDownload" && passwordProtected) {
+        if (fieldGroupName === "Brand_Brandoptions_FlexibleContent_AssetDownload" && !passwordProtected) {
             restrictedComponents.push([<AssetsDownload key={i.toString()} data={data} />, sectionTitle]);
         }
         if (fieldGroupName === "Brand_Brandoptions_FlexibleContent_Tabs") {
             allComponents.push([<Tabs key={i.toString()} data={data} />, sectionTitle]);
         }
-        if (fieldGroupName === "Brand_Brandoptions_FlexibleContent_Tabs" && passwordProtected) {
+        if (fieldGroupName === "Brand_Brandoptions_FlexibleContent_Tabs" && !passwordProtected) {
             restrictedComponents.push([<Tabs key={i.toString()} data={data} />, sectionTitle]);
         }
         if (fieldGroupName === "Brand_Brandoptions_FlexibleContent_Colours") {
             allComponents.push([<Colours key={i.toString()} data={data} />, sectionTitle]);
         }
-        if (fieldGroupName === "Brand_Brandoptions_FlexibleContent_Colours" && passwordProtected) {
+        if (fieldGroupName === "Brand_Brandoptions_FlexibleContent_Colours" && !passwordProtected) {
             restrictedComponents.push([<Colours key={i.toString()} data={data} />, sectionTitle]);
         }
         if (fieldGroupName === "Brand_Brandoptions_FlexibleContent_Fonts") {
             allComponents.push([<Fonts key={i.toString()} data={data} />, sectionTitle]);
         }
-        if (fieldGroupName === "Brand_Brandoptions_FlexibleContent_Fonts" && passwordProtected) {
+        if (fieldGroupName === "Brand_Brandoptions_FlexibleContent_Fonts" && !passwordProtected) {
             restrictedComponents.push([<Fonts key={i.toString()} data={data} />, sectionTitle]);
         }
         if (fieldGroupName === "Brand_Brandoptions_FlexibleContent_EmailSignature") {
             allComponents.push([<EmailSignature key={i.toString()} data={data} />, sectionTitle]);
         }
-        if (fieldGroupName === "Brand_Brandoptions_FlexibleContent_EmailSignature" && passwordProtected) {
+        if (fieldGroupName === "Brand_Brandoptions_FlexibleContent_EmailSignature" && !passwordProtected) {
             restrictedComponents.push([<EmailSignature key={i.toString()} data={data} />, sectionTitle]);
         }
         if (fieldGroupName === "Brand_Brandoptions_FlexibleContent_Stationery") {
             allComponents.push([<Stationery key={i.toString()} data={data} />, sectionTitle]);
         }
-        if (fieldGroupName === "Brand_Brandoptions_FlexibleContent_Stationery" && passwordProtected) {
+        if (fieldGroupName === "Brand_Brandoptions_FlexibleContent_Stationery" && !passwordProtected) {
             restrictedComponents.push([<Stationery key={i.toString()} data={data} />, sectionTitle]);
         }
         if (fieldGroupName === "Brand_Brandoptions_FlexibleContent_BrandedImage") {
-            allComponents.push([<BrandedImage key={i.toString()} data={data} />, sectionTitle]);
+            allComponents.push([<BrandedImage key={i.toString()} data={data} bgColour={bgColour} />, sectionTitle]);
         }
-        if (fieldGroupName === "Brand_Brandoptions_FlexibleContent_BrandedImage" && passwordProtected) {
-            restrictedComponents.push([<BrandedImage key={i.toString()} data={data} />, sectionTitle]);
+        if (fieldGroupName === "Brand_Brandoptions_FlexibleContent_BrandedImage" && !passwordProtected) {
+            restrictedComponents.push([<BrandedImage key={i.toString()} data={data} bgColour={bgColour} />, sectionTitle]);
         }
         if (fieldGroupName === "Brand_Brandoptions_FlexibleContent_Gallery") {
             allComponents.push([<Gallery key={i.toString()} data={data} />, sectionTitle]);
         }
-        if (fieldGroupName === "Brand_Brandoptions_FlexibleContent_Gallery" && passwordProtected) {
+        if (fieldGroupName === "Brand_Brandoptions_FlexibleContent_Gallery" && !passwordProtected) {
             restrictedComponents.push([<Gallery key={i.toString()} data={data} />, sectionTitle]);
         }
     })};
-
-    console.log(data)
-    console.log(restrictedComponents)
 
     if (match || !pwd) {
         return (

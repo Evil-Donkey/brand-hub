@@ -10,7 +10,7 @@ import Image from "next/image"
 import styles from "./Tool1.module.scss"
 // import arrowSaveImg from '../../../../public/images/press-hold-white.svg'
 
-const Tool = ({ icons, tool }) => {
+const Tool = ({ bgColour, tool }) => {
 
     const itemRef = useRef(null);
     const exportRef = useRef(null);
@@ -53,7 +53,7 @@ const Tool = ({ icons, tool }) => {
                 return (
                     <div key={i.toString()} className={`note ${styles.mbMd0} ${loaded && stickerSelected === i ? "active" : !loaded ? "inactive" : ""}`} onClick={() => onNoteChange(sticker.sticker.sourceUrl, sticker.sticker.mediaDetails.width, sticker.sticker.mediaDetails.height, i)}>
                         <span><svg width="30" height="30" viewBox="0 0 30 30" fill="none" xmlns="http://www.w3.org/2000/svg">
-                        <path d="M28.3237 11.8697V1.86975L18.3237 1.86975M1.65701 18.5364L1.65701 28.5364H11.657M11.657 1.86969L1.65707 1.86969L1.65707 11.8697M18.3237 28.5364H28.3237V18.5364" stroke="#2b2b2b" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+                        <path d="M28.3237 11.8697V1.86975L18.3237 1.86975M1.65701 18.5364L1.65701 28.5364H11.657M11.657 1.86969L1.65707 1.86969L1.65707 11.8697M18.3237 28.5364H28.3237V18.5364" stroke={bgColour} strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
                         </svg></span>
                     </div>
                 )

@@ -5,7 +5,7 @@ import Image from 'next/image'
 import PasswordContext from '../../lib/passwordContext'
 import styles from './BrandLogin.module.scss'
 
-const BrandLogin = ({ pwd }) => {
+const BrandLogin = ({ pwd, bgColour }) => {
 
     const { match, setMatch, storedPwd, setStoredPwd } = useContext(PasswordContext);
     const [inputPwd, setInputPwd] = useState('');
@@ -31,7 +31,7 @@ const BrandLogin = ({ pwd }) => {
 
     if (!match) {
         return (
-            <div className={styles.brandLoginWrap}>
+            <div className={styles.brandLoginWrap} style={{ backgroundColor: bgColour }}>
                 <div className='container py-4'>
                     <div className='row'>
                         <div className='col d-flex align-items-center gap-3'>
@@ -45,7 +45,7 @@ const BrandLogin = ({ pwd }) => {
                                     value={inputPwd}
                                     onChange={e => handleOnChange(e)}
                                 />
-                                <input type='submit' value='Enter' />
+                                <input type='submit' value='Enter' style={{ color: bgColour }} />
                             </form>
                             {err && <p className='m-0'>Incorrect password. Please try again.</p>}
                         </div>

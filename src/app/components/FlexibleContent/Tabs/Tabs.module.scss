@@ -1,7 +1,7 @@
 .tabsNav {
     li {
         padding: 10px 20px;
-        border: 1px solid var(--colour-grey-00);
+        border: 1px solid rgba(255, 255, 255, .5);
         background-color: transparent;
         color: var(--colour-white-00);
         text-transform: uppercase;
@@ -9,11 +9,15 @@
         font-size: 13px;
         font-weight: 800;
         cursor: pointer;
+        margin-left: -1px;
         &.tabNavActive {
             background-color: var(--colour-orange-00);
         }
         &:hover:not(.tabNavActive) {
             opacity: .9;
+        }
+        &:first-child {
+            margin-left: 0;
         }
     }
 }
