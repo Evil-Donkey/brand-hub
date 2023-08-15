@@ -7,8 +7,10 @@
     }
     .filesWrap  {
         transition: all .3s ease;
-        opacity: 0;
-        visibility: hidden;
+        @media screen and (min-width: 768px) {
+            opacity: 0;
+            visibility: hidden;
+        }
         h5 {
             cursor: pointer;
         }

@@ -25,7 +25,7 @@ const AssetsDownload = ({ data }) => {
                 const { altText, mediaItemUrl, mediaDetails, sizes } = asset?.previewImage;
                 const files = asset?.files;
                 return asset && (
-                    <div key={i.toString()} className='col-md-5'>
+                    <div key={i.toString()} className='col-md-5 mb-5'>
                         {mediaItemUrl &&
                             <div className={styles.assetImageWrap}>
                                 <Image 

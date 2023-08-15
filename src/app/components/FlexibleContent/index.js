@@ -12,9 +12,9 @@ import Stationery from './Stationery';
 import BrandedImage from './BrandedImage';
 import Gallery from './Gallery';
 
-const FlexibleContent = ({ data, pwd, bgColour }) => {
+const FlexibleContent = ({ data, pwd, bgColour, brand }) => {
 
-    const { match, storedPwd } = useContext(PasswordContext);
+    const { match } = useContext(PasswordContext);
 
     
     let restrictedComponents = [];
@@ -60,10 +60,10 @@ const FlexibleContent = ({ data, pwd, bgColour }) => {
             restrictedComponents.push([<Stationery key={i.toString()} data={data} />, sectionTitle]);
         }
         if (fieldGroupName === "Brand_Brandoptions_FlexibleContent_BrandedImage") {
-            allComponents.push([<BrandedImage key={i.toString()} data={data} bgColour={bgColour} />, sectionTitle]);
+            allComponents.push([<BrandedImage key={i.toString()} data={data} bgColour={bgColour} brand={brand} />, sectionTitle]);
         }
         if (fieldGroupName === "Brand_Brandoptions_FlexibleContent_BrandedImage" && !passwordProtected) {
-            restrictedComponents.push([<BrandedImage key={i.toString()} data={data} bgColour={bgColour} />, sectionTitle]);
+            restrictedComponents.push([<BrandedImage key={i.toString()} data={data} bgColour={bgColour} brand={brand} />, sectionTitle]);
         }
         if (fieldGroupName === "Brand_Brandoptions_FlexibleContent_Gallery") {
             allComponents.push([<Gallery key={i.toString()} data={data} />, sectionTitle]);
@@ -91,7 +91,7 @@ const FlexibleContent = ({ data, pwd, bgColour }) => {
                                     <h4 className={styles.componentTitle}>{number && number + '.'} {sectionTitle}</h4>
                                 </div>
                             }
-                            <div className='col mb-5'>
+                            <div className='col mb-md-5'>
                                 {componentEl}
                             </div>
                         </div>

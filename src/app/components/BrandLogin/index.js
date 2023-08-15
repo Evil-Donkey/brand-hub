@@ -34,7 +34,7 @@ const BrandLogin = ({ pwd, bgColour }) => {
             <div className={styles.brandLoginWrap} style={{ backgroundColor: bgColour }}>
                 <div className='container py-4'>
                     <div className='row'>
-                        <div className='col d-flex align-items-center gap-3'>
+                        <div className='col d-flex flex-column flex-md-row align-items-center gap-3 text-center text-md-left'>
                             <Image src="/images/icon-lock.svg" alt="Password icon" width="17" height="22" />
                             <p className='m-0'>Enter password to gain full access to this page.</p>
                             <form className={styles.brandLoginForm} onSubmit={(e) => handleSubmit(e)}>

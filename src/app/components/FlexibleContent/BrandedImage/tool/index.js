@@ -10,7 +10,7 @@ import Image from "next/image"
 import styles from "./Tool1.module.scss"
 // import arrowSaveImg from '../../../../public/images/press-hold-white.svg'
 
-const Tool = ({ bgColour, tool }) => {
+const Tool = ({ brand, bgColour, tool }) => {
 
     const itemRef = useRef(null);
     const exportRef = useRef(null);
@@ -109,7 +109,7 @@ const Tool = ({ bgColour, tool }) => {
                                     toPng(exportRef.current, { cacheBust: true, skipFonts: true, includeQueryParams: true })
                                         .then((dataUrl) => {
                                             const link = document.createElement('a');
-                                            link.download = 'image-post-creator.png';
+                                            link.download = brand + '-image-post-creator.png';
                                             link.href = dataUrl;
                                             link.click();
                                             setDownloading(false);

@@ -257,7 +257,7 @@ export default async function Page({ params: { brand, author } }) {
       {pwd && <BrandLogin pwd={pwd} bgColour={bgColour} />}
       <BrandIntro data={brandData} author={author} />
       <BrandHero data={brandOptions} />
-      <FlexibleContent data={flexibleContent} pwd={pwd} bgColour={bgColour} />
+      <FlexibleContent data={flexibleContent} pwd={pwd} bgColour={bgColour} brand={brand} />
       <Footer />
     </div>
   ) : null

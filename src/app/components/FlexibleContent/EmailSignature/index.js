@@ -29,7 +29,7 @@ const EmailSignature = ({ data }) => {
     return (
         <div className={`row ${copy ? `justify-content-between` : 'justify-content-end'}`}>
             {copy &&
-                <div className='col-md-4'>
+                <div className='col-md-4 mb-4 mb-md-0'>
                     <div dangerouslySetInnerHTML={{ __html: copy }} />
 
                     <form className={styles.signatureForm}>
