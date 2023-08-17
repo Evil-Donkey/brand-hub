@@ -1,5 +1,9 @@
 .componentTitleWrap {
     position: relative;
+    margin-top: 76px;
+    &NoMargin {
+        margin-top: 0;
+    }
     &:before {
         content: "";
         position: absolute;
@@ -8,6 +12,14 @@
         width: calc(100% - 1.5rem);
         height: 1px;
         background-color: var(--colour-white-00);
+    }
+
+    h3 {
+        margin: 0;
+        font-size: 25px;
+        line-height: 1.56;
+        letter-spacing: 3px;
+        font-family: var(--roboto-slab);
     }
 }
 

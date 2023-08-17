@@ -91,9 +91,17 @@ export default async function Page({ params: { brand, author } }) {
             }
           }
           flexibleContent {
+            ... on Brand_Brandoptions_FlexibleContent_Text {
+              copy
+              fieldGroupName
+              passwordProtected
+              sectionTitle
+              title
+            }
             ... on Brand_Brandoptions_FlexibleContent_AssetDownload {
               fieldGroupName
               sectionTitle
+              title
               passwordProtected
               assets {
                 previewImage {
@@ -116,6 +124,7 @@ export default async function Page({ params: { brand, author } }) {
             ... on Brand_Brandoptions_FlexibleContent_Tabs {
               fieldGroupName
               sectionTitle
+              title
               withTabbedNav
               tabActiveColour
               passwordProtected
@@ -147,6 +156,7 @@ export default async function Page({ params: { brand, author } }) {
             ... on Brand_Brandoptions_FlexibleContent_Colours {
               fieldGroupName
               sectionTitle
+              title
               passwordProtected
               colours {
                 colour
@@ -156,6 +166,7 @@ export default async function Page({ params: { brand, author } }) {
             ... on Brand_Brandoptions_FlexibleContent_Fonts {
               fieldGroupName
               sectionTitle
+              title
               passwordProtected
               fonts {
                 fontUrl
@@ -183,10 +194,12 @@ export default async function Page({ params: { brand, author } }) {
                 }
               }
               sectionTitle
+              title
             }
             ... on Brand_Brandoptions_FlexibleContent_Stationery {
               fieldGroupName
               sectionTitle
+              title
               passwordProtected
               assets {
                 heading
@@ -210,6 +223,7 @@ export default async function Page({ params: { brand, author } }) {
             ... on Brand_Brandoptions_FlexibleContent_Gallery {
               fieldGroupName
               sectionTitle
+              title
               passwordProtected
               gallery {
                 mediaItemUrl
@@ -220,6 +234,7 @@ export default async function Page({ params: { brand, author } }) {
               copy
               fieldGroupName
               sectionTitle
+              title
               passwordProtected
               stickers {
                 sticker {
@@ -251,9 +266,15 @@ export default async function Page({ params: { brand, author } }) {
   const textColour = brandData?.brandOptions?.textColour;
   const pwd = brandData?.password?.password;
 
+  let nav = [];
+  for (let i = 0; i < flexibleContent.length; i++) {
+    const sectionTitle = flexibleContent[i].sectionTitle;
+    sectionTitle && nav.push(sectionTitle);
+  }
+
   return brandData ? (
     <div style={{ 'backgroundColor': bgColour, 'color': textColour }}>
-      <Header />
+      <Header nav={nav} bgColour={bgColour} />
       {pwd && <BrandLogin pwd={pwd} bgColour={bgColour} />}
       <BrandIntro data={brandData} author={author} />
       <BrandHero data={brandOptions} />

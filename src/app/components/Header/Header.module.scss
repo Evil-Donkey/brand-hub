@@ -10,3 +10,99 @@
         background-color: var(--colour-white-00);
     }   
 }
+
+.menuIcon {
+    cursor: pointer;
+    position: relative;
+    width: 40px;
+    height: 21px;
+    &:hover {
+        span {
+            &:after {
+                width: 100%;
+            }
+        }
+    }
+    span {
+        width: 100%;
+        height: 3px;
+        display: inline-block;
+        background-color: var(--colour-white-00);
+        vertical-align: text-bottom;
+        &:before,
+        &:after {
+            content: "";
+            position: absolute;
+            width: 100%;
+            height: 3px;
+            left: 0;
+            background-color: var(--colour-white-00);
+        }
+        &:before {
+            top: 9px;
+        }
+        &:after {
+            top: 0;
+            width: 70%;
+            transition: all .3s ease;
+        }
+    }
+}
+
+.closeMenuIcon {
+    cursor: pointer;
+    position: absolute;
+    top: 22px;
+    right: 25px;
+}
+
+.brandMenu {
+    padding: 76px 0;
+    position: fixed;
+    right: 0;
+    top: 0;
+    min-height: 100vh;
+    height: 100%;
+    overflow: scroll;
+    min-width: 400px;
+    max-width: 100%;
+    z-index: 100;
+    transform: translateX(100%);
+    transition: all .4s ease;
+    &Open {
+        transform: translateX(0);
+    }
+    ul {
+        border-top: 1px solid var(--colour-white-00);
+        li {
+            font-family: var(--roboto-slab);
+            font-size: 20px;
+            text-transform: uppercase;
+            padding: 20px 0;
+            letter-spacing: 3px;
+            border-bottom: 1px solid var(--colour-white-00);
+            color: var(--colour-white-00);
+            a {
+                padding: 0 20px;
+                transition: all .4s ease;
+                display: inline-block;
+                &.navItemActive {
+                    position: relative;
+                    &:after {
+                        content: "";
+                        width: 8px;
+                        height: 8px;
+                        position: absolute;
+                        right: 0;
+                        top: 12px;
+                        border-radius: 2px;
+                        background-color: var(--colour-white-00);
+                    }
+                }
+                &:hover {
+                    transform: translateX(3px);
+                }
+            }
+        }
+    }
+}
