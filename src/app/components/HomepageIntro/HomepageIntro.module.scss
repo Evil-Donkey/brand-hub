@@ -1,0 +1,17 @@
+.introContainer {
+    background-image: url('/images/header-bg.jpg');
+    background-size: cover;
+    background-position: center;
+    h1 {
+        font-size: 45px;
+        margin-bottom: 30px;
+        @media screen and (min-width: 768px) {
+            font-size: 65px;
+        }
+    }
+    p {
+        @media screen and (min-width: 768px) {
+            font-size: 18px;
+        }
+    }
+}

@@ -1,13 +1,16 @@
 'use client'
 
-import { useState } from 'react'
+import { useContext, useState } from 'react'
 import Image from 'next/image'
 import Link from 'next/link'
+import pSBC from '@/app/utils/colourShade'
+import PasswordContext from '../../lib/passwordContext'
 import stringToSlug from '../../lib/stringToSlug'
 import styles from './Header.module.scss'
 
-const Header = ({ bgColour, nav }) => {
+const Header = ({ bgColour, nav, pwd }) => {
 
+    const { match } = useContext(PasswordContext);
     const [isModalOpen, setIsModalOpen] = useState(false);
     const [clickedNavItem, setClickedNavItem] = useState(null);
 
@@ -24,29 +27,32 @@ const Header = ({ bgColour, nav }) => {
         // setIsModalOpen(false);
     }
 
+    const menuBgColour = pSBC ( 0.1, bgColour, false, true );
+    console.log(match);
+    console.log(pwd);
+
     return (
         <>
             <div className={`${styles.headerContainer} container py-3`}>
                 <div className={`row align-items-center justify-content-${nav ? 'between' : 'end'}`}>
                     <div className='col-auto'>
-                        <Image src="/images/icon-bh-logo.svg" alt="" width="45" height="45" />
+                        <Link href="/">
+                            <Image src="/images/icon-bh-logo.svg" alt="" width="45" height="45" />
+                        </Link>
                     </div>
-                    <div className='col-auto'>
-                        {/* <svg className={styles.menuIcon} width="40" height="25" viewBox="0 0 40 25" fill="none" xmlns="http://www.w3.org/2000/svg">
-                            <line y1="1.99023" x2="27.0879" y2="1.99023" stroke="white" strokeWidth="3"/>
-                            <line y1="12.7371" x2="39.0071" y2="12.7371" stroke="white" strokeWidth="3"/>
-                            <line y1="23.4839" x2="39.0071" y2="23.4839" stroke="white" strokeWidth="3"/>
-                        </svg> */}
-                        <div className={styles.menuIcon} onClick={openModal}>
-                            <span></span>
+                    {(match || !pwd) &&
+                        <div className='col-auto'>
+                            <div className={styles.menuIcon} onClick={openModal}>
+                                <span></span>
+                            </div>
                         </div>
-                    </div>
+                    }
                 </div>
             </div>
             {nav && 
-            <div className={`${styles.brandMenu} ${isModalOpen ? styles.brandMenuOpen : ''}`} style={{ backgroundColor: bgColour }}>
+            <div className={`${styles.brandMenu} ${isModalOpen ? styles.brandMenuOpen : ''}`} style={{ backgroundColor: menuBgColour }}>
                 <svg className={styles.closeMenuIcon} width="28" height="28" viewBox="0 0 28 28" fill="none" xmlns="http://www.w3.org/2000/svg" onClick={closeModal}>
-                    <g clip-path="url(#clip0_373_10732)">
+                    <g clipPath="url(#clip0_373_10732)">
                     <path d="M0.152344 0.88385L27.8479 27.5903" stroke="white" strokeWidth="3" strokeMiterlimit="10"/>
                     <path d="M27.8479 0.88385L0.152344 27.5903" stroke="white" strokeWidth="3" strokeMiterlimit="10"/>
                     </g>

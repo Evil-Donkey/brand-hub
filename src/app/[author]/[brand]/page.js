@@ -54,8 +54,6 @@ export async function generateStaticParams() {
 
 export default async function Page({ params: { brand, author } }) {
 
-  // brandBy(slug: "${brand}") {
-
   const data = await fetchAPI(`
     query getBrandsByAuthor {
       brand(id: "${brand}", idType: SLUG) {
@@ -274,7 +272,7 @@ export default async function Page({ params: { brand, author } }) {
 
   return brandData ? (
     <div style={{ 'backgroundColor': bgColour, 'color': textColour }}>
-      <Header nav={nav} bgColour={bgColour} />
+      <Header nav={nav} bgColour={bgColour} pwd={pwd} />
       {pwd && <BrandLogin pwd={pwd} bgColour={bgColour} />}
       <BrandIntro data={brandData} author={author} />
       <BrandHero data={brandOptions} />
