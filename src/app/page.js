@@ -37,8 +37,8 @@ export default async function Home() {
     <main className={styles.homepageMainWrap}>
       <Intro content={content} />
       <Blocks sections={sections} />
-      {/* <FormRequest /> */}
-      <Footer />
+      <FormRequest />
+      <Footer border={false} />
     </main>
   )
 }

@@ -1,4 +1,5 @@
 import Image from 'next/image'
+import Link from 'next/link'
 import styles from './HomepageIntro.module.scss'
 
 const Intro = ({ content }) => {
@@ -11,6 +12,7 @@ const Intro = ({ content }) => {
                     </div>
                     <div className='col-md-5'>
                         <div dangerouslySetInnerHTML={{ __html: content }} />
+                        <Link href="#form-request" className="cta__btn mt-3 mb-4">Register now</Link>
                     </div>
                 </div>
             </div>

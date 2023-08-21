@@ -2,15 +2,19 @@
     color: var(--colour-white-00);
     font-size: 13px;
     position: relative;
-    &:before {
-        content: "";
-        position: absolute;
-        top: 0;
-        left: .75rem;
-        height: 1px;
-        width: calc(100% - 1.5rem);
-        background-color: var(--colour-white-00);
-    }   
+    padding: 3rem;
+    &Border {
+        padding: 1.5rem;
+        &:before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: .75rem;
+            height: 1px;
+            width: calc(100% - 1.5rem);
+            background-color: var(--colour-white-00);
+        }
+    }
 
     a {
         &:hover {

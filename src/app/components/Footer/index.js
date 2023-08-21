@@ -1,9 +1,9 @@
 import Image from 'next/image'
 import styles from './Footer.module.scss'
 
-const Footer = () => {
+const Footer = ({ border }) => {
     return (
-        <div className={`${styles.footerContainer} container py-4`}>
+        <div className={`${styles.footerContainer} ${border ? styles.footerContainerBorder : ''} container`}>
             <div className='row justify-content-between align-items-center'>
                 <div className='col-auto d-flex flex-column flex-md-row gap-5'>
                     <span>Contact us on: <a href="mailto:hello@brand-hub.co">hello@brand-hub.co</a></span>

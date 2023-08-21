@@ -277,7 +277,7 @@ export default async function Page({ params: { brand, author } }) {
       <BrandIntro data={brandData} author={author} />
       <BrandHero data={brandOptions} />
       <FlexibleContent data={flexibleContent} pwd={pwd} bgColour={bgColour} brand={brand} />
-      <Footer />
+      <Footer border={true} />
     </div>
   ) : null
 }

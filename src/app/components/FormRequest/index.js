@@ -37,12 +37,12 @@ const FormRequest = () => {
         })
     }
 
-    const sendRequest = e => {
+    async function sendRequest (e) {
         e.preventDefault();
 
-        fetch('/lib/sendgrid', {
-            method: 'post',
-            body: JSON.stringify(formData),
+        await fetch('/api/contact', {
+            method: 'POST',
+            body: JSON.stringify(formData)
         })
         .then((response) => {
             response.json()
@@ -69,28 +69,28 @@ const FormRequest = () => {
             signInAnonymously(auth)
                 .then(() => {
                     addDoc(requests, {
-                        firstName: formData.firstName,
-                        lastName: formData.lastName,
-                        email: formData.email,
-                        company: formData.company,
-                        website: formData.website,
-                        message: formData.message,
-                        newsletter: newsletterChecked,
+                        firstName: formData.firstName || null,
+                        lastName: formData.lastName || null,
+                        email: formData.email || null,
+                        company: formData.company || null,
+                        website: formData.website || null,
+                        message: formData.message || null,
+                        newsletter: newsletterChecked || null,
                         time: new Date()
                     })
-                        .then(() => {
-                            setFormData({
-                                firstName: '',
-                                lastName: '',
-                                email: '',
-                                company: '',
-                                website: '',
-                                message: '',
-                                newsletter: false
-                            })
-                            getRequests()
+                    .then(() => {
+                        setFormData({
+                            firstName: '',
+                            lastName: '',
+                            email: '',
+                            company: '',
+                            website: '',
+                            message: '',
+                            newsletter: false
                         })
+                        getRequests()
                     })
+                })
                 .catch((error) => {
                     const errorCode = error.code;
                     const errorMessage = error.message;
@@ -114,12 +114,12 @@ const FormRequest = () => {
     }, [])
 
     return (
-        <div className={styles.request} id="stikii-request">
+        <div className={styles.request} id="form-request">
             <div className={`${styles.container} container`}>
                 <div className="row justify-content-center">
-                    <div className="col-11 col-md-10">
-                        <h2 className="mb-5 text-center">Ready to Dive In?</h2>
-                        <p>Register for Brand Hub Now!</p>
+                    <div className="col-11 col-md-9 col-lg-6">
+                        <h2 className="mb-3 text-center">Ready to Dive In?</h2>
+                        <p className="mb-5 text-center">Register for Brand Hub Now!</p>
                         <form onSubmit={sendRequest}>
                             <div className="row">
                                 <div className="col mb-2">
@@ -200,7 +200,7 @@ const FormRequest = () => {
 
                             <div className="row justify-content-center justify-content-md-between">
                                 <div className="col-auto d-flex flex-column">
-                                    <label htmlFor="confirm" className={`${styles.requestLabel} d-flex align-items-center mb-2`}>
+                                    <label htmlFor="confirm" className={`${styles.requestLabel} d-flex align-items-center mb-2 text-white`}>
                                         <input
                                             type="checkbox"
                                             id="confirm"
@@ -211,7 +211,7 @@ const FormRequest = () => {
                                             required
                                             /> <span>By submitting this form you agree to our <Link href="/privacy-policy">Privacy Policy</Link>.</span>
                                     </label>
-                                    <label htmlFor="newsletter" className={`${styles.requestLabel} d-flex align-items-center`}>
+                                    <label htmlFor="newsletter" className={`${styles.requestLabel} d-flex align-items-center text-white`}>
                                         <input
                                             type="checkbox"
                                             id="newsletter"
@@ -223,7 +223,7 @@ const FormRequest = () => {
                                     </label>
                                 </div>
                                 <div className="col-auto mt-5 mt-md-0">
-                                    <button type="submit" id="requestSubmit" className="mainButton">
+                                    <button type="submit" id="requestSubmit" className={styles.submitBtn}>
                                         Submit
                                     </button>
                                 </div>

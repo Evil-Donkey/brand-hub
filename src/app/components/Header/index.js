@@ -28,8 +28,6 @@ const Header = ({ bgColour, nav, pwd }) => {
     }
 
     const menuBgColour = pSBC ( 0.1, bgColour, false, true );
-    console.log(match);
-    console.log(pwd);
 
     return (
         <>

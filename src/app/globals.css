@@ -71,3 +71,23 @@ a {
 p {
   font-size: 15px;
 }
+
+.cta__btn {
+  color: var(--colour-white-00);
+    font-family: var(--roboto-flex);
+    background-color: var(--colour-orange-00);
+    border-radius: 5px;
+    text-transform: uppercase;
+    border: none;
+    padding: 10px 20px;
+    font-weight: 800;
+    font-size: 15px;
+    letter-spacing: 1px;
+    display: inline-block;
+    cursor: pointer;
+    transition: all .3s ease;
+}
+.cta__btn:hover {
+  background-color: var(--colour-white-00);
+  color: var(--colour-orange-00);
+}
