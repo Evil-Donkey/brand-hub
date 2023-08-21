@@ -18,7 +18,7 @@ export async function POST(request) {
     `;
 
     const data = {
-        to: 'jeff.ceriello@evildonkey.com',
+        to: 'hello@brand-hub.co',
         from: 'Brand Hub Contact Form',
         subject: `New message from Brand Hub Contact Form`,
         text: message,

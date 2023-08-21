@@ -1,8 +1,13 @@
+'use client'
+
+import { useEffect, useState } from 'react'
 import CopySignature from './CopySignature';
 import Image from 'next/image'
 import styles from '../EmailSignature.module.scss'
+import getBase64StringFromDataURL from '../../../../utils/base64'
 
 export const EmailSignature1 = ({logo, signature}) => {
+    
     return (
         <div className='signature'>
             <table width="600" border="0" cellSpacing="0" cellPadding="0">
@@ -58,8 +63,30 @@ export const EmailSignature1 = ({logo, signature}) => {
 
 export const SignatureTable1 = ({logo, signature}) => {
     
+    const [base64img, setBase64img] = useState(logo.mediaItemUrl);
+    
+    useEffect(() => {
+        // Get the remote image as a Blob with the fetch API
+        fetch(logo.mediaItemUrl)
+            .then((res) => res.blob())
+            .then((blob) => {
+                // Read the Blob as DataURL using the FileReader API
+                const reader = new FileReader();
+                reader.onloadend = () => {
+                    console.log(reader.result);
+                    // Logs data:image/jpeg;base64,wL2dvYWwgbW9yZ...
+                    setBase64img(reader.result);
 
-    let signatureLogo = logo ? `<img src="${logo.mediaItemUrl}" width="${logo.mediaDetails.width / 2}" height="${logo.mediaDetails.height / 2}"/>` : '';
+                    // Convert to Base64 string
+                    const base64 = getBase64StringFromDataURL(reader.result);
+                    console.log(base64);
+                    // Logs wL2dvYWwgbW9yZ...
+                };
+                reader.readAsDataURL(blob);
+            });
+    }, [logo]);
+
+    let signatureLogo = base64img ? `<img src="${base64img}" width="${logo.mediaDetails.width / 2}" height="${logo.mediaDetails.height / 2}"/>` : '';
     let signatureFullName = signature.fullName ? `<div><strong>${signature.fullName}</strong><br/></div>` : '';
     let signatureJobTitle = signature.jobTitle ? `<div>${signature.jobTitle}<br/></div>` : '';
     let signatureEmail = signature.email ? `<div>${signature.email}<br/></div>` : '';
