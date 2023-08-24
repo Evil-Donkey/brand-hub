@@ -1,5 +1,6 @@
 import 'bootstrap/dist/css/bootstrap.css'
 import './globals.css'
+import GoogleAnalytics from './components/GoogleAnalytics';
 import { robotoFlex, robotoSlab } from './utils/fonts';
 
 export const metadata = {
@@ -10,7 +11,10 @@ export const metadata = {
 export default function RootLayout({ children, params }) {
   return (
     <html lang="en">
-      <body className={`${robotoSlab.variable} ${robotoFlex.className}`}>{children}</body>
+      <GoogleAnalytics GA_TRACKING_ID={process.env.GA_TRACKING_ID} />
+      <body className={`${robotoSlab.variable} ${robotoFlex.className}`}>
+        {children}
+      </body>
     </html>
   )
 }
