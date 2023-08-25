@@ -2,8 +2,11 @@
     background-image: url('/images/header-bg.jpg');
     background-size: cover;
     background-position: center;
+    padding-top: 3rem;
+    padding-bottom: 3rem;
     h1 {
         font-size: 45px;
+        line-height: 1.1;
         margin-bottom: 30px;
         @media screen and (min-width: 768px) {
             font-size: 65px;

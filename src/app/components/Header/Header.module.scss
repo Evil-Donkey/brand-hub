@@ -75,7 +75,9 @@
     ul {
         border-top: 1px solid var(--colour-white-00);
         li {
-            font-family: var(--roboto-slab);
+            // font-family: var(--roboto-slab);
+            font-family: var(--open-sans);
+            font-weight: 400;
             font-size: 20px;
             text-transform: uppercase;
             padding: 20px 0;

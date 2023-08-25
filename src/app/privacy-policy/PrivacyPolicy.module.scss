@@ -1,0 +1,16 @@
+.pageWrap {
+    background-color: var(--colour-black-03);
+}
+
+.headerContainer {
+    position: relative;
+    &:before {
+        content: "";
+        position: absolute;
+        bottom: 0;
+        left: .75rem;
+        height: 1px;
+        width: calc(100% - 1.5rem);
+        background-color: var(--colour-white-00);
+    }   
+}

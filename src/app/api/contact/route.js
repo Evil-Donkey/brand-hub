@@ -13,7 +13,6 @@ export async function POST(request) {
         Email: ${body.email}\r\n
         Company: ${body.company}\r\n
         Website: ${body.website}\r\n
-        Message: ${body.message}\r\n
         Newsletter: ${body.newsletter}
     `;
 

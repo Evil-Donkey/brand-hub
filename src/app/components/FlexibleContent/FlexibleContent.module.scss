@@ -19,12 +19,14 @@
         font-size: 25px;
         line-height: 1.56;
         letter-spacing: 3px;
-        font-family: var(--roboto-slab);
+        // font-family: var(--roboto-slab);
+        font-family: var(--open-sans);
+        // font-weight: 400;
     }
 }
 
 .componentTitle {
-    font-weight: 700;
+    // font-weight: 700;
     font-size: 15px;
     line-height: 1.5;
     letter-spacing: 2px;

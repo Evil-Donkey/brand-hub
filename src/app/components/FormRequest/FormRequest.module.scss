@@ -19,12 +19,12 @@
 
 .requestLabel {
     color: var(--colour-black-00);
-    :global input {
+    input {
         margin-right: 5px;
     }
-    :global a {
+    a {
         &:hover {
-            color: var(--colour-black-00);
+            text-decoration: underline;
         }
     }
 }
@@ -35,13 +35,15 @@
 
 .submitBtn {
     color: var(--colour-white-00);
-    font-family: var(--roboto-flex);
+    // font-family: var(--roboto-flex);
+    font-family: var(--open-sans);
+    font-weight: 400;
     background-color: var(--colour-orange-00);
     border-radius: 5px;
     text-transform: uppercase;
     border: none;
     padding: 10px 20px;
-    font-weight: 800;
+    // font-weight: 800;
     font-size: 15px;
     letter-spacing: 1px;
     display: inline-block;

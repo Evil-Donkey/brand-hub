@@ -74,7 +74,6 @@ const FormRequest = () => {
                         email: formData.email || null,
                         company: formData.company || null,
                         website: formData.website || null,
-                        message: formData.message || null,
                         newsletter: newsletterChecked || null,
                         time: new Date()
                     })
@@ -85,7 +84,6 @@ const FormRequest = () => {
                             email: '',
                             company: '',
                             website: '',
-                            message: '',
                             newsletter: false
                         })
                         getRequests()
@@ -185,18 +183,7 @@ const FormRequest = () => {
                                     />
                                 </div>
                             </div>
-                            <div className="row">
-                                <div className="col mb-2">
-                                    <textarea
-                                        placeholder="How will you use the free Stikii"
-                                        name="message"
-                                        rows="8"
-                                        className={styles.input}
-                                        value={formData.message || ''}
-                                        onChange={updateInput}
-                                    />
-                                </div>
-                            </div>
+                            
 
                             <div className="row justify-content-center justify-content-md-between">
                                 <div className="col-auto d-flex flex-column">

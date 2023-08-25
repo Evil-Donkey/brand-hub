@@ -63,7 +63,7 @@ $large: 841px;
         text-transform: uppercase;
         font-family: var(--font-primary-00);
         color: var(--colour-grey-02);
-        font-weight: 800;
+        // font-weight: 800;
         letter-spacing: 1px;
         font-size: 15px;
         :global a {
@@ -79,7 +79,7 @@ $large: 841px;
     :global .powered-by-span {
         text-transform: none;
         letter-spacing: 0;
-        font-weight: 500;
+        // font-weight: 500;
         // color: var(--colour-grey-03);
         a {
             text-decoration: underline;
@@ -157,7 +157,7 @@ $large: 841px;
     :global span {
         text-transform: uppercase;
         font-family: var(--font-primary-00);
-        font-weight: 800;
+        // font-weight: 800;
         letter-spacing: 1px;
         font-size: 15px;
         color: var(--colour-white-00);
@@ -184,7 +184,7 @@ $large: 841px;
     .assetsBtn {
         text-transform: uppercase;
         letter-spacing: 2px;
-        font-weight: 700;
+        // font-weight: 700;
         cursor: pointer;
     }
 }
@@ -198,7 +198,7 @@ $large: 841px;
     align-items: center;
     text-transform: uppercase;
     font-family: var(--font-primary-00);
-    font-weight: 800;
+    // font-weight: 800;
     letter-spacing: 1px;
     font-size: 40px;
     color: var(--colour-grey-00);
