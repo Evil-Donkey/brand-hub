@@ -18,7 +18,7 @@ export async function POST(request) {
 
     const data = {
         to: 'hello@brand-hub.co',
-        from: 'Brand Hub Contact Form',
+        from: 'hello@brand-hub.co',
         subject: `New message from Brand Hub Contact Form`,
         text: message,
         html: message.replace(/\r\n/g, '<br />'),
