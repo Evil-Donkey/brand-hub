@@ -41,6 +41,7 @@ export default async function Why() {
       page(id: "5", idType: DATABASE_ID) {
         homepage {
           telephone
+          email
         }
       }
     }
@@ -49,11 +50,12 @@ export default async function Why() {
   const title = data?.page?.title;
   const sections = data?.page?.why?.sections;
   const telephone = dataHomepage?.page?.homepage?.telephone;
+  const email = dataHomepage?.page?.homepage?.email;
 
   return (
     <main className={styles.homepageMainWrap}>
       <Header fullMenu={true} />
-      <Intro title={title} telephone={telephone} />
+      <Intro title={title} telephone={telephone} email={email} />
       <Blocks sections={sections} />
       <FormRequest />
       <Footer border={false} />

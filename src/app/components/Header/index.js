@@ -6,6 +6,7 @@ import Link from 'next/link'
 import pSBC from '@/app/utils/colourShade'
 import PasswordContext from '../../lib/passwordContext'
 import stringToSlug from '../../lib/stringToSlug'
+import Navigation from '../Navigation'
 import styles from './Header.module.scss'
 
 const Header = ({ bgColour, fullMenu, nav, pwd }) => {
@@ -43,6 +44,11 @@ const Header = ({ bgColour, fullMenu, nav, pwd }) => {
                             <div className={styles.menuIcon} onClick={openModal}>
                                 <span></span>
                             </div>
+                        </div>
+                    }
+                    {fullMenu &&
+                        <div className='col-auto align-self-end'>
+                            <Navigation />
                         </div>
                     }
                 </div>

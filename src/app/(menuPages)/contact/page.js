@@ -25,6 +25,7 @@ export default async function Contact() {
       page(id: "5", idType: DATABASE_ID) {
         homepage {
           telephone
+          email
         }
       }
     }
@@ -32,11 +33,12 @@ export default async function Contact() {
 
   const title = data?.page?.title;
   const telephone = dataHomepage?.page?.homepage?.telephone;
+  const email = dataHomepage?.page?.homepage?.email;
 
   return (
     <main className={styles.homepageMainWrap}>
       <Header fullMenu={true} />
-      <Intro title={title} telephone={telephone} />
+      <Intro title={title} telephone={telephone} email={email} />
       <FormRequest />
       <Footer border={false} />
     </main>

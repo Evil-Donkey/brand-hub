@@ -117,7 +117,7 @@ const FormRequest = () => {
                 <div className="row justify-content-center">
                     <div className="col-11 col-md-9 col-lg-6">
                         <h2 className="mb-3 text-center">Ready to Dive In?</h2>
-                        <p className="mb-5 text-center">Register for Brand Hub Now!</p>
+                        <p className="mb-5 text-center">Request a demo</p>
                         <form onSubmit={sendRequest}>
                             <div className="row">
                                 <div className="col mb-2">

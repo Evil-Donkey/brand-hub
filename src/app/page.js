@@ -22,6 +22,7 @@ export default async function Home() {
         title(format: RENDERED)
         homepage {
           telephone
+          email
           keyList {
             keyItem
           }
@@ -70,6 +71,7 @@ export default async function Home() {
   const title = data?.page?.title;
   const content = data?.page?.content;
   const telephone = data?.page?.homepage?.telephone;
+  const email = data?.page?.homepage?.email;
   const keyList = data?.page?.homepage?.keyList;
   const sections = data?.page?.homepage?.sections;
   const brandSpotlight = data?.page?.homepage?.brandSpotlight;
@@ -78,7 +80,7 @@ export default async function Home() {
   return (
     <main className={styles.homepageMainWrap}>
       <Header fullMenu={true} />
-      <Intro title={title} content={content} telephone={telephone} />
+      <Intro title={title} content={content} telephone={telephone} email={email} />
       <KeyList keyList={keyList} />
       <Blocks sections={sections} />
       <Spotlight brandSpotlight={brandSpotlight} brandSpotlightCopy={brandSpotlightCopy} />
