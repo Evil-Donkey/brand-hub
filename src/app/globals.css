@@ -56,7 +56,7 @@ h5 {
 }
 h2 {
   font-size: 30px;
-  margin-bottom: 30px;
+  margin-bottom: 20px;
   line-height: 40px;
 }
 h3 {
@@ -78,25 +78,30 @@ a {
 }
 
 p {
-  font-size: 15px;
+  font-size: 18px;
 }
 
 .cta__btn {
   color: var(--colour-white-00);
-    font-family: var(--roboto-flex);
-    background-color: var(--colour-orange-00);
-    border-radius: 5px;
-    text-transform: uppercase;
-    border: none;
-    padding: 10px 20px;
-    font-weight: 100;
-    font-size: 15px;
-    letter-spacing: 2px;
-    display: inline-block;
-    cursor: pointer;
-    transition: all .3s ease;
+  font-family: var(--roboto-flex);
+  background-color: var(--colour-orange-00);
+  border-radius: 5px;
+  text-transform: uppercase;
+  border: none;
+  padding: 10px 20px;
+  font-weight: 400;
+  font-size: 13px;
+  letter-spacing: 2px;
+  display: inline-block;
+  cursor: pointer;
+  transition: all .3s ease;
 }
 .cta__btn:hover {
   background-color: var(--colour-white-00);
   color: var(--colour-orange-00);
+}
+
+.cta__btn--transparent {
+  background-color: transparent;
+  border: 1px solid var(--colour-white-00);
 }
