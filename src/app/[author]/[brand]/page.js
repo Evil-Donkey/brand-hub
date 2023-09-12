@@ -6,7 +6,7 @@ import FlexibleContent from '../../components/FlexibleContent'
 import Header from '../../components/Header'
 import Footer from '../../components/Footer'
 
-export const dynamicParams = false
+export const dynamicParams = true
 export const revalidate = 10
 
 
@@ -53,6 +53,8 @@ export async function generateStaticParams() {
 
 
 export default async function Page({ params: { brand, author } }) {
+
+  console.log(brand)
 
   const data = await fetchAPI(`
     query getBrandsByAuthor {
