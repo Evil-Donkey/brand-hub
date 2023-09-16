@@ -2,7 +2,7 @@
     overflow: scroll;
     li {
         padding: 10px 20px;
-        border: 1px solid rgba(255, 255, 255, .5);
+        border: 1px solid var(--theme-color-00);
         background-color: transparent;
         color: var(--colour-white-00);
         text-transform: uppercase;

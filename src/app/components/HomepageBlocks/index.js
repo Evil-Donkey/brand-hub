@@ -1,8 +1,12 @@
+'use client'
+
 import Image from 'next/image'
 import Link from 'next/link'
+import { usePathname } from 'next/navigation'
 import styles from './HomepageBlocks.module.scss'
 
 const Blocks = ({ sections }) => {
+    const pathname = usePathname();
     return sections && (
         <>
             {sections.map((section, i) => {

@@ -6,7 +6,7 @@ import FlexibleContent from '../../components/FlexibleContent'
 import Header from '../../components/Header'
 import Footer from '../../components/Footer'
 
-export const dynamicParams = true
+export const dynamicParams = false
 export const revalidate = 10
 
 
@@ -20,7 +20,7 @@ export async function generateMetadata({ params: {brand} }) {
   `);
  
   return {
-    title: data?.brand.title
+    title: data?.brand?.title
   }
 }
 
@@ -34,8 +34,10 @@ export async function generateStaticParams() {
           author {
             node {
               id
-              name
-              slug
+              authorCustomFields {
+                authorNiceName
+                urlSlug
+              }
             }
           }
         }
@@ -46,15 +48,13 @@ export async function generateStaticParams() {
   const brandsArray = brands?.brands?.nodes;
 
   return brandsArray.map((brand) => ({
-    author: brand.author.node.name,
+    author: brand.author.node.authorCustomFields.urlSlug,
     brand: brand.slug
   }))
 }
 
 
 export default async function Page({ params: { brand, author } }) {
-
-  console.log(brand)
 
   const data = await fetchAPI(`
     query getBrandsByAuthor {
@@ -64,6 +64,13 @@ export default async function Page({ params: { brand, author } }) {
         title(format: RENDERED)
         password {
           password
+        }
+        author {
+          node {
+            authorCustomFields {
+              authorNiceName
+            }
+          }
         }
         brandOptions {
           backgroundColour
@@ -93,10 +100,44 @@ export default async function Page({ params: { brand, author } }) {
           flexibleContent {
             ... on Brand_Brandoptions_FlexibleContent_Text {
               copy
+              copy2
               fieldGroupName
               passwordProtected
               sectionTitle
               title
+            }
+            ... on Brand_Brandoptions_FlexibleContent_TwoColumns {
+              fieldGroupName
+              passwordProtected
+              sectionTitle
+              title
+              blocks {
+                copy
+                image {
+                  altText
+                  mediaDetails {
+                    height
+                    width
+                  }
+                  mediaItemUrl
+                  sizes(size: LARGE)
+                }
+              }
+            }
+            ... on Brand_Brandoptions_FlexibleContent_LargeImage {
+              fieldGroupName
+              passwordProtected
+              sectionTitle
+              title
+              image {
+                altText
+                mediaDetails {
+                  height
+                  width
+                }
+                mediaItemUrl
+                sizes(size: LARGE)
+              }
             }
             ... on Brand_Brandoptions_FlexibleContent_AssetDownload {
               fieldGroupName
@@ -265,6 +306,7 @@ export default async function Page({ params: { brand, author } }) {
   const bgColour = brandData?.brandOptions?.backgroundColour;
   const textColour = brandData?.brandOptions?.textColour;
   const pwd = brandData?.password?.password;
+  const authorNiceName = brandData?.author.node.authorCustomFields.authorNiceName
 
   let nav = [];
   for (let i = 0; i < flexibleContent.length; i++) {
@@ -274,12 +316,12 @@ export default async function Page({ params: { brand, author } }) {
 
   return brandData ? (
     <div style={{ 'backgroundColor': bgColour, 'color': textColour }}>
-      <Header nav={nav} bgColour={bgColour} pwd={pwd} />
+      <Header nav={nav} bgColour={bgColour} color={textColour} pwd={pwd} />
       {pwd && <BrandLogin pwd={pwd} bgColour={bgColour} />}
-      <BrandIntro data={brandData} author={author} />
+      <BrandIntro data={brandData} author={authorNiceName} />
       <BrandHero data={brandOptions} />
-      <FlexibleContent data={flexibleContent} pwd={pwd} bgColour={bgColour} brand={brand} />
-      <Footer border={true} />
+      <FlexibleContent data={flexibleContent} pwd={pwd} bgColour={bgColour} colour={textColour} brand={brand} />
+      <Footer border={true} color={textColour} />
     </div>
   ) : null
 }

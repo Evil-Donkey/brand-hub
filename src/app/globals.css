@@ -1,6 +1,7 @@
 :root {
   --text-colour:      #ffffff;
   --background-colour:#313131;
+  --theme-color-00:   #ffffff;
 
   --colour-black-00:   #313131;
   --colour-black-01:   #393939;
@@ -78,7 +79,7 @@ a {
 }
 
 p {
-  font-size: 18px;
+  font-size: 16px;
 }
 
 .cta__btn {

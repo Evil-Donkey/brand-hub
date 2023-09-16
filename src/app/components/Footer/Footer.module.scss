@@ -1,5 +1,5 @@
 .footerContainer {
-    color: var(--colour-white-00);
+    color: var(--theme-color-00);
     font-size: 13px;
     position: relative;
     padding: 3rem;
@@ -12,7 +12,7 @@
             left: .75rem;
             height: 1px;
             width: calc(100% - 1.5rem);
-            background-color: var(--colour-white-00);
+            background-color: var(--theme-color-00);
         }
     }
 

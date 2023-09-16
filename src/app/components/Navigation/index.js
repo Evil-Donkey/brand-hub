@@ -1,5 +1,6 @@
 'use client'
  
+import { useEffect } from 'react'
 import { usePathname } from 'next/navigation'
 import Link from 'next/link'
 import styles from './Navigation.module.scss'
@@ -7,11 +8,15 @@ import styles from './Navigation.module.scss'
 const Navigation = () => {
   const pathname = usePathname();
 
+    useEffect(() => {
+        document.documentElement.style.setProperty("--theme-color-00", '#ffffff');
+    }, []);
+
   const navigationMenu = [
     {
         label: ' Home',
         href: '/',
-        activeSegment: null
+        activeSegment: ''
     },
     {
         label: ' Why',
@@ -33,7 +38,7 @@ const Navigation = () => {
     return (
         <ul className={`${styles.navigationWrap} list-unstyled m-0 p-0 d-flex gap-3 gap-md-4`}>
             {navigationMenu.map((link) => {
-                const isActive = pathname.startsWith(link.href);
+                const isActive = pathname === link.href;
     
                 return (
                     <li key={link.label} className={isActive ? styles.navigationItemActive : ''}>

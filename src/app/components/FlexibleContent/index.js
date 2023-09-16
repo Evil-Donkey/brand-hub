@@ -1,10 +1,12 @@
 'use client'
 
-import { useContext } from 'react'
+import { useContext, useEffect } from 'react'
 import styles from './FlexibleContent.module.scss'
 import PasswordContext from '../../lib/passwordContext'
 import stringToSlug from '../../lib/stringToSlug'
 import Text from './Text'
+import TwoColumns from './TwoColumns'
+import LargeImage from './LargeImage'
 import AssetsDownload from './AssetsDownload'
 import Tabs from './Tabs'
 import Colours from './Colours'
@@ -14,12 +16,16 @@ import Stationery from './Stationery'
 import BrandedImage from './BrandedImage'
 import Gallery from './Gallery'
 
-const FlexibleContent = ({ data, pwd, bgColour, brand }) => {
+const FlexibleContent = ({ data, pwd, bgColour, brand, colour }) => {
 
     const { match } = useContext(PasswordContext);
     
     let restrictedComponents = [];
     let allComponents = [];
+
+    useEffect(() => {
+        document.documentElement.style.setProperty("--theme-color-00", colour);
+    }, []);
 
     {data && data.forEach((data, i) => {
         const { fieldGroupName, sectionTitle, title, passwordProtected } = data;
@@ -29,6 +35,18 @@ const FlexibleContent = ({ data, pwd, bgColour, brand }) => {
         }
         if (fieldGroupName === "Brand_Brandoptions_FlexibleContent_Text" && !passwordProtected) {
             restrictedComponents.push([<Text key={i.toString()} data={data} />, title, sectionTitle]);
+        }
+        if (fieldGroupName === "Brand_Brandoptions_FlexibleContent_TwoColumns") {
+            allComponents.push([<TwoColumns key={i.toString()} data={data} />, title, sectionTitle]);
+        }
+        if (fieldGroupName === "Brand_Brandoptions_FlexibleContent_TwoColumns" && !passwordProtected) {
+            restrictedComponents.push([<TwoColumns key={i.toString()} data={data} />, title, sectionTitle]);
+        }
+        if (fieldGroupName === "Brand_Brandoptions_FlexibleContent_LargeImage") {
+            allComponents.push([<LargeImage key={i.toString()} data={data} />, title, sectionTitle]);
+        }
+        if (fieldGroupName === "Brand_Brandoptions_FlexibleContent_LargeImage" && !passwordProtected) {
+            restrictedComponents.push([<LargeImage key={i.toString()} data={data} />, title, sectionTitle]);
         }
         if (fieldGroupName === "Brand_Brandoptions_FlexibleContent_AssetDownload") {
             allComponents.push([<AssetsDownload key={i.toString()} data={data} />, title, sectionTitle]);

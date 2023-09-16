@@ -17,12 +17,13 @@ const Spotlight = ({ brandSpotlightCopy, brandSpotlight }) => {
                 <div className="row justify-content-center">
                     {brandSpotlight.map((item, i) => {
                         const { id, author, title, brandOptions, slug } = item;
-                        const authorName = author.node.name;
-                        const altText = brandOptions?.heroImage?.altText;
-                        const mediaDetails = brandOptions?.heroImage?.mediaDetails;
-                        const sizes = brandOptions?.heroImage?.sizes;
-                        const sourceUrl = brandOptions?.heroImage?.sourceUrl;
-                        const url = authorName + '/' + slug;
+                        const authorName = author.node.authorCustomFields.authorNiceName;
+                        const authorSlug = author.node.authorCustomFields.urlSlug;
+                        const altText = brandOptions?.spotlightFeaturedImage?.altText;
+                        const mediaDetails = brandOptions?.spotlightFeaturedImage?.mediaDetails;
+                        const sizes = brandOptions?.spotlightFeaturedImage?.sizes;
+                        const sourceUrl = brandOptions?.spotlightFeaturedImage?.sourceUrl;
+                        const url = authorSlug + '/' + slug;
                         return (        
                             <Link href={url} className={`${styles.spotlightItem} col-md-4 mb-4 d-flex gap-3 flex-column`} key={id}>
                                 {sourceUrl && <Image src={sourceUrl} width={mediaDetails.width} height={mediaDetails.height} sizes={sizes} alt={altText} />}

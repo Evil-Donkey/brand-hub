@@ -45,13 +45,16 @@ export default async function Home() {
               id
               author {
                 node {
-                  name
+                  authorCustomFields {
+                    authorNiceName
+                    urlSlug
+                  }
                 }
               }
               title(format: RENDERED)
               slug
               brandOptions {
-                heroImage {
+                spotlightFeaturedImage {
                   altText
                   mediaDetails {
                     height
