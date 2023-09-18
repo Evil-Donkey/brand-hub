@@ -45,10 +45,32 @@ export default async function Contact() {
     }
   `);
 
+  const dataContact = await fetchAPI(`
+    query getHomepage {
+      page(id: "231", idType: DATABASE_ID) {
+        contactUs {
+          sections {
+            copy
+            ctaLabel
+            ctaUrl
+            image {
+              mediaItemUrl
+              mediaDetails {
+                height
+                width
+              }
+              altText
+            }
+          }
+        }
+      }
+    }
+  `);
+
   const title = data?.page?.title;
   const telephone = dataHomepage?.page?.homepage?.telephone;
   const email = dataHomepage?.page?.homepage?.email;
-  const sections = dataHomepage?.page?.homepage?.sections;
+  const sections = dataContact?.page?.contactUs?.sections;
 
   return (
     <main className={styles.homepageMainWrap}>

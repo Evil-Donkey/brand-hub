@@ -72,6 +72,9 @@ export default async function Page({ params: { brand, author } }) {
             }
           }
         }
+        seo {
+          title
+        }
         brandOptions {
           backgroundColour
           containedHero
