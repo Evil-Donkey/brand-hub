@@ -19,6 +19,9 @@
 
 .requestLabel {
     color: var(--colour-black-00);
+    @media screen and (max-width: 767px) {
+        font-size: 14px;
+    }
     input {
         margin-right: 5px;
     }
@@ -37,7 +40,7 @@
     color: var(--colour-white-00);
     // font-family: var(--roboto-flex);
     font-family: var(--open-sans);
-    font-weight: 400;
+    font-weight: 500;
     background-color: var(--colour-orange-00);
     border-radius: 5px;
     text-transform: uppercase;
@@ -49,6 +52,9 @@
     display: inline-block;
     cursor: pointer;
     transition: all .3s ease;
+    @media screen and (max-width: 767px) {
+        width: 100%;
+    }
     &:hover {
         background-color: var(--colour-white-00);
         color: var(--colour-orange-00);

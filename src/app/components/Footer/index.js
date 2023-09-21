@@ -6,7 +6,7 @@ const Footer = ({ border, color, email, telephone }) => {
     return (
         <div className={`${styles.footerContainer} ${border ? styles.footerContainerBorder : ''} container`}>
             <div className='row justify-content-between align-items-center'>
-                <div className='col-auto d-flex flex-column flex-md-row gap-5'>
+                <div className='col-auto d-flex flex-column flex-md-row gap-2 gap-md-5'>
                     {email && <span>Email: <a href={`mailto:${email}`}>{email}</a></span>}
                     {telephone && <span>Telephone: <a href={`tel:${telephone}`}>{telephone}</a></span>}
                     <a href="/privacy-policy">Privacy policy</a>

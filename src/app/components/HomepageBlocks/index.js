@@ -2,11 +2,10 @@
 
 import Image from 'next/image'
 import Link from 'next/link'
-import { usePathname } from 'next/navigation'
 import styles from './HomepageBlocks.module.scss'
 
 const Blocks = ({ sections }) => {
-    const pathname = usePathname();
+    
     return sections && (
         <>
             {sections.map((section, i) => {
@@ -22,7 +21,7 @@ const Blocks = ({ sections }) => {
                         />
                         <div className='container py-5'>
                             <div className={`row align-items-center ${i % 2 != 0 ? 'justify-content-end' : ''}`}>
-                                <div className='col-md-5'>
+                                <div className='col-md-5 text-center text-md-start'>
                                     <div dangerouslySetInnerHTML={{ __html: copy }} />
                                     {ctaUrl && <Link href={ctaUrl} className="cta__btn mt-3 mb-4">{ctaLabel}</Link>}
                                 </div>

@@ -101,7 +101,16 @@ b, strong {
   display: inline-block;
   cursor: pointer;
   transition: all .3s ease;
+  text-align: center;
 }
+@media screen and (max-width: 991px) {
+  .cta__btn {
+    width: 100%;
+    font-weight: 500;
+    font-size: 16px;
+  }
+}
+
 .cta__btn:hover {
   background-color: var(--colour-white-00);
   color: var(--colour-orange-00);

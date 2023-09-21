@@ -1,3 +1,5 @@
+import parse from "html-react-parser"
+import Head from "next/head"
 import fetchAPI from '../../lib/api'
 import BrandLogin from '../../components/BrandLogin'
 import BrandIntro from '../../components/BrandIntro'
@@ -73,7 +75,9 @@ export default async function Page({ params: { brand, author } }) {
           }
         }
         seo {
+          metaDesc
           title
+          fullHead
         }
         brandOptions {
           backgroundColour
@@ -325,6 +329,10 @@ export default async function Page({ params: { brand, author } }) {
   const pwd = brandData?.password?.password;
   const authorNiceName = brandData?.author.node.authorCustomFields.authorNiceName;
 
+  const fullHead = parse(brandData?.seo.fullHead);
+  console.log(brandData?.seo);
+  const seoTitle = brandData?.seo?.title;
+
   let nav = [];
   for (let i = 0; i < flexibleContent.length; i++) {
     const sectionTitle = flexibleContent[i].sectionTitle;
@@ -333,6 +341,9 @@ export default async function Page({ params: { brand, author } }) {
 
   return brandData ? (
     <div style={{ 'backgroundColor': bgColour, 'color': textColour }}>
+      <Head>
+        <title>{seoTitle}</title>
+      </Head>
       <Header nav={nav} bgColour={bgColour} color={textColour} pwd={pwd} />
       {pwd && <BrandLogin pwd={pwd} bgColour={bgColour} />}
       <BrandIntro data={brandData} author={authorNiceName} />

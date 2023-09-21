@@ -2,6 +2,7 @@
  
 import { useEffect } from 'react'
 import { usePathname } from 'next/navigation'
+import {isMobile} from 'react-device-detect'
 import Link from 'next/link'
 import styles from './Navigation.module.scss'
  
@@ -13,27 +14,27 @@ const Navigation = () => {
     }, []);
 
   const navigationMenu = [
-    {
-        label: ' Home',
-        href: '/',
-        activeSegment: ''
-    },
-    {
-        label: ' Why',
-        href: '/why',
-        activeSegment: 'about'
-    },
-    {
-        label: ' Pricing',
-        href: '/pricing',
-        activeSegment: 'pricing'
-    },
-    {
-        label: ' Contact',
-        href: '/contact',
-        activeSegment: 'contact'
-    },
-  ]
+        {
+            label: ' Home',
+            href: '/',
+            activeSegment: ''
+        },
+        {
+            label: ' Why',
+            href: '/why',
+            activeSegment: 'about'
+        },
+        {
+            label: ' Pricing',
+            href: '/pricing',
+            activeSegment: 'pricing'
+        },
+        {
+            label: ' Contact',
+            href: '/contact',
+            activeSegment: 'contact'
+        },
+    ];
  
     return (
         <ul className={`${styles.navigationWrap} list-unstyled m-0 p-0 d-flex gap-3 gap-md-4`}>

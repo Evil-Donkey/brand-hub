@@ -113,14 +113,14 @@ const FormRequest = () => {
 
     return (
         <div className={styles.request} id="form-request">
-            <div className={`${styles.container} container`}>
+            <div className={`container`}>
                 <div className="row justify-content-center">
-                    <div className="col-11 col-md-9 col-lg-6">
+                    <div className="col-md-9 col-lg-6">
                         <h2 className="mb-3 text-center">Ready to Dive In?</h2>
                         <p className="mb-5 text-center">Request a demo</p>
                         <form onSubmit={sendRequest}>
                             <div className="row">
-                                <div className="col mb-2">
+                                <div className="col-md-6 mb-2">
                                     <input
                                         type="text"
                                         name="firstName"
@@ -132,7 +132,7 @@ const FormRequest = () => {
                                         onChange={updateInput}
                                     />
                                 </div>
-                                <div className="col mb-2">
+                                <div className="col-md-6 mb-2">
                                     <input
                                         type="text"
                                         name="lastName"
@@ -209,7 +209,7 @@ const FormRequest = () => {
                                             /> Yes, please keep me updated on everything Brand Hub.
                                     </label>
                                 </div>
-                                <div className="col-auto mt-5 mt-md-0">
+                                <div className="col-md-auto mt-5 mt-md-0">
                                     <button type="submit" id="requestSubmit" className={styles.submitBtn}>
                                         Submit
                                     </button>

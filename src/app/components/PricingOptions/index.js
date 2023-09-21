@@ -41,7 +41,7 @@ const PricingOptions = ({ pricingOptions }) => {
                         
                         return (        
                             <div className='col-lg-4 mb-5' key={i.toString()}>
-                                <div className={`p-4 p-sm-5 px-lg-4 py-lg-5 rounded-3 ${styles.pricingOption} ${textColor == 'dark' ? styles.pricingOptionDark : ''}`} style={{ backgroundColor: backgroundColor, color: textColor == 'dark' ? '#393939' : '#ffffff' }}>
+                                <div className={`p-5 rounded-3 ${styles.pricingOption} ${textColor == 'dark' ? styles.pricingOptionDark : ''}`} style={{ backgroundColor: backgroundColor, color: textColor == 'dark' ? '#393939' : '#ffffff' }}>
                                     <h2 className='text-center'>{name}</h2>
                                     <div className={`${styles.pricingImage} d-flex align-items-center justify-content-center`}>
                                         <figure>
@@ -49,7 +49,7 @@ const PricingOptions = ({ pricingOptions }) => {
                                         </figure>
                                     </div>
                                     {included &&
-                                        <div className='mt-5'>
+                                        <div className='mt-3 mt-md-5'>
                                             <p>Included:</p>
                                             <div dangerouslySetInnerHTML={{ __html: included }} />
                                         </div>
