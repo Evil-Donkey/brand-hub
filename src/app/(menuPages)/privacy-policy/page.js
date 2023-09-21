@@ -1,7 +1,8 @@
-import fetchAPI from '../lib/api'
+import fetchAPI from '../../lib/api'
 import Link from 'next/link'
 import Image from 'next/image'
-import Footer from '../components/Footer'
+import Header from '@/app/components/Header'
+import Footer from '../../components/Footer'
 import styles from './PrivacyPolicy.module.scss'
 
 export default async function PrivacyPolicy() {
@@ -20,15 +21,7 @@ export default async function PrivacyPolicy() {
   
   return (
     <main className={styles.pageWrap}>
-      <div className={`${styles.headerContainer} container py-3`}>
-          <div className={`row`}>
-              <div className='col-auto'>
-                  <Link href="/">
-                      <Image src="/images/icon-bh-logo.svg" alt="" width="45" height="45" />
-                  </Link>
-              </div>
-          </div>
-      </div>
+      <Header fullMenu={true} />
       <div className='container py-5'>
         <div className='row row-cols-1'>
           <div className='col mb-5'>

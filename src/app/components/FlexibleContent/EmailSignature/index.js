@@ -24,6 +24,7 @@ const EmailSignature = ({ data }) => {
           ...signature,
           [evt.target.name]: value
         });
+        console.log(signature)
     }
 
     return (
@@ -70,21 +71,21 @@ const EmailSignature = ({ data }) => {
                         />
                         <input
                             type="text"
-                            name="instagram"
+                            name="instagramUrl"
                             placeholder="Instagram URL"
                             value={signature.instagramUrl}
                             onChange={handleChange}
                         />
                         <input
                             type="text"
-                            name="linkedin"
+                            name="linkedinUrl"
                             placeholder="LinkedIn URL"
                             value={signature.linkedinUrl}
                             onChange={handleChange}
                         />
                         <input
                             type="text"
-                            name="x"
+                            name="xUrl"
                             placeholder="X URL"
                             value={signature.xUrl}
                             onChange={handleChange}

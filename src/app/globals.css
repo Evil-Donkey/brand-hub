@@ -12,6 +12,7 @@
   --colour-grey-00:    #888888;
   --colour-grey-01:    #D9D9D9;
   --colour-grey-02:    #4d4D4D;
+  --colour-grey-03:    #494949;
   --colour-orange-00:  #F9592C;
 }
 
@@ -80,6 +81,10 @@ a {
 
 p {
   font-size: 16px;
+}
+
+b, strong {
+  font-weight: bold;
 }
 
 .cta__btn {

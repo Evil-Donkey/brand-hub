@@ -31,6 +31,14 @@ export default async function Pricing() {
               }
               mediaItemUrl
             }
+            imageMonthly {
+              altText
+              mediaDetails {
+                height
+                width
+              }
+              mediaItemUrl
+            }
           }
         }
       }
