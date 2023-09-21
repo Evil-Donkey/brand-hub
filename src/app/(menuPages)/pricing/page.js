@@ -67,7 +67,7 @@ export default async function Pricing() {
       <Intro title={title} telephone={telephone} email={email} />
       <PricingOptions pricingOptions={pricingOptions} />
       <FormRequest />
-      <Footer border={false} />
+      <Footer border={false} telephone={telephone} email={email} />
     </main>
   )
 }

@@ -9,7 +9,7 @@ import './globals.css'
 
 export default function RootLayout({ children, params }) {
   const [match, setMatch] = useState(false);
-  const [storedPwd, setStoredPwd] = useState(null);  
+  const [storedPwd, setStoredPwd] = useState(null);
 
   return (
     <html lang="en">

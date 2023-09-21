@@ -15,7 +15,7 @@ const Intro = ({ content, email, telephone, title }) => {
                         {content && <div dangerouslySetInnerHTML={{ __html: content }} />}
                         <div className={`d-flex gap-3 align-items-center ${!content ? 'justify-content-end' : ''}`}>
                             <Link href="#form-request" className="cta__btn mt-3 mb-4">Request demo</Link>
-                            {telephone && <a href={`tel:${telephone}`} className="cta__btn cta__btn--transparent mt-3 mb-4">{telephone}</a>}
+                            {telephone && <a href={`tel:${telephone}`} className="cta__btn cta__btn--transparent mt-3 mb-4">Call us</a>}
                             {email && <a href={`mailto:${email}`} className="cta__btn cta__btn--transparent mt-3 mb-4">Email us</a>}
                         </div>
                     </div>

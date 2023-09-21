@@ -49,16 +49,16 @@ const FlexibleContent = ({ data, pwd, bgColour, brand, colour }) => {
             restrictedComponents.push([<LargeImage key={i.toString()} data={data} />, title, sectionTitle]);
         }
         if (fieldGroupName === "Brand_Brandoptions_FlexibleContent_AssetDownload") {
-            allComponents.push([<AssetsDownload key={i.toString()} data={data} />, title, sectionTitle]);
+            allComponents.push([<AssetsDownload key={i.toString()} data={data} colour={colour} />, title, sectionTitle]);
         }
         if (fieldGroupName === "Brand_Brandoptions_FlexibleContent_AssetDownload" && !passwordProtected) {
-            restrictedComponents.push([<AssetsDownload key={i.toString()} data={data} />, title, sectionTitle]);
+            restrictedComponents.push([<AssetsDownload key={i.toString()} data={data} colour={colour} />, title, sectionTitle]);
         }
         if (fieldGroupName === "Brand_Brandoptions_FlexibleContent_Tabs") {
-            allComponents.push([<Tabs key={i.toString()} data={data} />, title, sectionTitle]);
+            allComponents.push([<Tabs key={i.toString()} data={data} bgColour={bgColour} />, title, sectionTitle]);
         }
         if (fieldGroupName === "Brand_Brandoptions_FlexibleContent_Tabs" && !passwordProtected) {
-            restrictedComponents.push([<Tabs key={i.toString()} data={data} />, title, sectionTitle]);
+            restrictedComponents.push([<Tabs key={i.toString()} data={data} bgColour={bgColour} />, title, sectionTitle]);
         }
         if (fieldGroupName === "Brand_Brandoptions_FlexibleContent_Colours") {
             allComponents.push([<Colours key={i.toString()} data={data} />, title, sectionTitle]);

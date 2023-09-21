@@ -16,8 +16,21 @@ export default async function PrivacyPolicy() {
     }
   `);
 
+  const dataHomepage = await fetchAPI(`
+    query getHomepage {
+      page(id: "5", idType: DATABASE_ID) {
+        homepage {
+          telephone
+          email
+        }
+      }
+    }
+  `);
+
   const title = data?.page?.title;
   const content = data?.page?.content;
+  const telephone = dataHomepage?.page?.homepage?.telephone;
+  const email = dataHomepage?.page?.homepage?.email;
   
   return (
     <main className={styles.pageWrap}>
@@ -32,7 +45,7 @@ export default async function PrivacyPolicy() {
           </div>
         </div>
       </div>
-      <Footer border={true} />
+      <Footer border={true} telephone={telephone} email={email} />
     </main>
   )
 }

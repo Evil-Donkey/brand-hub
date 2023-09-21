@@ -88,7 +88,7 @@ export default async function Home() {
       <Blocks sections={sections} />
       <Spotlight brandSpotlight={brandSpotlight} brandSpotlightCopy={brandSpotlightCopy} />
       <FormRequest />
-      <Footer border={false} />
+      <Footer border={false} telephone={telephone} email={email} />
     </main>
   )
 }

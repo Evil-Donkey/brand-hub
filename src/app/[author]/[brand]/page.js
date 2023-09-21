@@ -139,7 +139,7 @@ export default async function Page({ params: { brand, author } }) {
                   width
                 }
                 mediaItemUrl
-                sizes(size: LARGE)
+                sizes(size: _2048X2048)
               }
             }
             ... on Brand_Brandoptions_FlexibleContent_AssetDownload {
@@ -303,13 +303,27 @@ export default async function Page({ params: { brand, author } }) {
     }`
   );
 
+  const dataHomepage = await fetchAPI(`
+    query getHomepage {
+      page(id: "5", idType: DATABASE_ID) {
+        homepage {
+          telephone
+          email
+        }
+      }
+    }
+  `);
+
+  const telephone = dataHomepage?.page?.homepage?.telephone;
+  const email = dataHomepage?.page?.homepage?.email;
+
   const brandData = data?.brand;
   const flexibleContent = brandData?.brandOptions?.flexibleContent;
   const brandOptions = brandData?.brandOptions;
   const bgColour = brandData?.brandOptions?.backgroundColour;
   const textColour = brandData?.brandOptions?.textColour;
   const pwd = brandData?.password?.password;
-  const authorNiceName = brandData?.author.node.authorCustomFields.authorNiceName
+  const authorNiceName = brandData?.author.node.authorCustomFields.authorNiceName;
 
   let nav = [];
   for (let i = 0; i < flexibleContent.length; i++) {
@@ -324,7 +338,7 @@ export default async function Page({ params: { brand, author } }) {
       <BrandIntro data={brandData} author={authorNiceName} />
       <BrandHero data={brandOptions} />
       <FlexibleContent data={flexibleContent} pwd={pwd} bgColour={bgColour} colour={textColour} brand={brand} />
-      <Footer border={true} color={textColour} />
+      <Footer border={true} color={textColour} telephone={telephone} email={email} />
     </div>
   ) : null
 }

@@ -7,7 +7,7 @@ import Spline from '@splinetool/react-spline'
 import handleDownload from '../../../lib/handleDownload'
 import styles from './Tabs.module.scss'
 
-const Tabs = ({ data }) => {
+const Tabs = ({ data, bgColour }) => {
     
     const [isActive, setIsActive] = useState(0);
     const tabs = data?.tabs;
@@ -27,7 +27,7 @@ const Tabs = ({ data }) => {
                         {tabs.map((tab, i) => {
                             const { tabLabel } = tab;
                             return (
-                                <li style={{ backgroundColor: isActive == i ? tabActiveColour : '' }} className={isActive == i ? styles.tabNavActive : ''} key={i.toString()} onClick={() => tabsHandle(i)}>{tabLabel}</li>
+                                <li style={{ color: isActive == i ? bgColour : tabActiveColour, backgroundColor: isActive == i ? tabActiveColour : '' }} className={isActive == i ? styles.tabNavActive : ''} key={i.toString()} onClick={() => tabsHandle(i)}>{tabLabel}</li>
                             )
                         })}
                     </ul>

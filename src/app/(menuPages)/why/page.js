@@ -58,7 +58,7 @@ export default async function Why() {
       <Intro title={title} telephone={telephone} email={email} />
       <Blocks sections={sections} />
       <FormRequest />
-      <Footer border={false} />
+      <Footer border={false} telephone={telephone} email={email} />
     </main>
   )
 };
