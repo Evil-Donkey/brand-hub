@@ -1,9 +1,53 @@
 import fetchAPI from '../../lib/api'
-import Link from 'next/link'
-import Image from 'next/image'
 import Header from '@/app/components/Header'
 import Footer from '../../components/Footer'
 import styles from './PrivacyPolicy.module.scss'
+
+export async function generateMetadata() {
+
+  const data = await fetchAPI(`
+    query getContactPage {
+      page(id: "3", idType: DATABASE_ID) {
+        seo {
+          metaDesc
+          opengraphUrl
+          opengraphTitle
+          opengraphDescription
+          opengraphType
+          opengraphSiteName
+          opengraphImage {
+            mediaItemUrl
+            mediaDetails {
+              height
+              width
+            }
+          }
+        }
+      }
+    }
+  `);
+
+  const seo = data?.page?.seo;
+ 
+  return {
+    title: 'Privacy Policy',
+    description: seo.metaDesc,
+    openGraph: {
+      title: seo.openGraphTitle,
+      description: seo.openGraphTitle,
+      url: seo.openGraphTitle,
+      siteName: seo.openGraphTitle,
+      images: [
+        {
+          url: seo.opengraphImage?.mediaItemUrl,
+          width: seo.opengraphImage?.mediaDetails.width,
+          height: seo.opengraphImage?.mediaDetails.height,
+        }
+      ],
+      type: seo.opengraphType,
+    },
+  }
+}
 
 export default async function PrivacyPolicy() {
 

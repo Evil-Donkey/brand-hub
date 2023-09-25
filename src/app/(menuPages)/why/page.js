@@ -6,9 +6,50 @@ import FormRequest from '@/app/components/FormRequest'
 import Footer from '@/app/components/Footer'
 import styles from '@/app/Homepage.module.scss'
 
-export const metadata = {
-  title: 'Why - Brand Hub',
-  description: '',
+export async function generateMetadata() {
+
+  const data = await fetchAPI(`
+    query getContactPage {
+      page(id: "236", idType: DATABASE_ID) {
+        seo {
+          metaDesc
+          opengraphUrl
+          opengraphTitle
+          opengraphDescription
+          opengraphType
+          opengraphSiteName
+          opengraphImage {
+            mediaItemUrl
+            mediaDetails {
+              height
+              width
+            }
+          }
+        }
+      }
+    }
+  `);
+
+  const seo = data?.page?.seo;
+ 
+  return {
+    title: 'Why',
+    description: seo.metaDesc,
+    openGraph: {
+      title: seo.openGraphTitle,
+      description: seo.openGraphTitle,
+      url: seo.openGraphTitle,
+      siteName: seo.openGraphTitle,
+      images: [
+        {
+          url: seo.opengraphImage?.mediaItemUrl,
+          width: seo.opengraphImage?.mediaDetails.width,
+          height: seo.opengraphImage?.mediaDetails.height,
+        }
+      ],
+      type: seo.opengraphType,
+    },
+  }
 }
 
 export default async function Why() {

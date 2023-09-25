@@ -6,9 +6,54 @@ import FormRequest from '@/app/components/FormRequest'
 import Footer from '@/app/components/Footer'
 import styles from '@/app/Homepage.module.scss'
 
-export const metadata = {
-  title: 'Contact - Brand Hub',
-  description: '',
+export async function generateMetadata() {
+
+  const data = await fetchAPI(`
+    query getContactPage {
+      page(id: "231", idType: DATABASE_ID) {
+        seo {
+          metaDesc
+          schema {
+            raw
+          }
+          title
+          opengraphUrl
+          opengraphTitle
+          opengraphDescription
+          opengraphType
+          opengraphSiteName
+          opengraphImage {
+            mediaItemUrl
+            mediaDetails {
+              height
+              width
+            }
+          }
+        }
+      }
+    }
+  `);
+
+  const seo = data?.page?.seo;
+ 
+  return {
+    title: 'Contact us',
+    description: seo.metaDesc,
+    openGraph: {
+      title: seo.openGraphTitle,
+      description: seo.openGraphTitle,
+      url: seo.openGraphTitle,
+      siteName: seo.openGraphTitle,
+      images: [
+        {
+          url: seo.opengraphImage?.mediaItemUrl,
+          width: seo.opengraphImage?.mediaDetails.width,
+          height: seo.opengraphImage?.mediaDetails.height,
+        }
+      ],
+      type: seo.opengraphType,
+    },
+  }
 }
 
 export default async function Contact() {

@@ -5,24 +5,55 @@ import BrandLogin from '../../components/BrandLogin'
 import BrandIntro from '../../components/BrandIntro'
 import BrandHero from '../../components/BrandHero'
 import FlexibleContent from '../../components/FlexibleContent'
-import Header from '../../components/Header'
+import HeaderBrand from '../../components/HeaderBrand'
 import Footer from '../../components/Footer'
 
 export const dynamicParams = false
 export const revalidate = 10
-
 
 export async function generateMetadata({ params: {brand} }) {
   const data = await fetchAPI(`
     query getBrandsByAuthor {
       brand(id: "${brand}", idType: SLUG) {
         title(format: RENDERED)
+        seo {
+          metaDesc
+          opengraphUrl
+          opengraphTitle
+          opengraphDescription
+          opengraphType
+          opengraphSiteName
+          opengraphImage {
+            mediaItemUrl
+            mediaDetails {
+              height
+              width
+            }
+          }
+        }
       }
     }
   `);
+
+  const seo = data?.brand?.seo;
  
   return {
-    title: data?.brand?.title
+    title: data?.brand?.title,
+    description: seo.metaDesc,
+    openGraph: {
+      title: seo.openGraphTitle,
+      description: seo.openGraphTitle,
+      url: seo.openGraphTitle,
+      siteName: seo.openGraphTitle,
+      images: [
+        {
+          url: seo.opengraphImage?.mediaItemUrl,
+          width: seo.opengraphImage?.mediaDetails.width,
+          height: seo.opengraphImage?.mediaDetails.height,
+        }
+      ],
+      type: seo.opengraphType,
+    }
   }
 }
 
@@ -329,10 +360,6 @@ export default async function Page({ params: { brand, author } }) {
   const pwd = brandData?.password?.password;
   const authorNiceName = brandData?.author.node.authorCustomFields.authorNiceName;
 
-  const fullHead = parse(brandData?.seo.fullHead);
-  console.log(brandData?.seo);
-  const seoTitle = brandData?.seo?.title;
-
   let nav = [];
   for (let i = 0; i < flexibleContent.length; i++) {
     const sectionTitle = flexibleContent[i].sectionTitle;
@@ -341,10 +368,7 @@ export default async function Page({ params: { brand, author } }) {
 
   return brandData ? (
     <div style={{ 'backgroundColor': bgColour, 'color': textColour }}>
-      <Head>
-        <title>{seoTitle}</title>
-      </Head>
-      <Header nav={nav} bgColour={bgColour} color={textColour} pwd={pwd} />
+      <HeaderBrand nav={nav} bgColour={bgColour} color={textColour} pwd={pwd} />
       {pwd && <BrandLogin pwd={pwd} bgColour={bgColour} />}
       <BrandIntro data={brandData} author={authorNiceName} />
       <BrandHero data={brandOptions} />
