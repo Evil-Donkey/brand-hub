@@ -22,3 +22,8 @@ const GoogleAnalytics = ({ GA_TRACKING_ID }) => {
 };
 
 export default GoogleAnalytics;
+
+export const trackEvent = (params) => {
+  window.dataLayer = window.dataLayer || [];
+  window.dataLayer.push(params);
+};
