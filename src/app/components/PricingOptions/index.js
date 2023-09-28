@@ -40,8 +40,8 @@ const PricingOptions = ({ pricingOptions }) => {
                         const altText = activeNav == 0 && imageMonthly ? imageMonthly.altText : image.altText;
                         
                         return (        
-                            <div className='col-lg-4 mb-5' key={i.toString()}>
-                                <div className={`p-5 rounded-3 ${styles.pricingOption} ${textColor == 'dark' ? styles.pricingOptionDark : ''}`} style={{ backgroundColor: backgroundColor, color: textColor == 'dark' ? '#393939' : '#ffffff' }}>
+                            <div className='col-lg-3 mb-5' key={i.toString()}>
+                                <div className={`p-5 px-md-4 rounded-3 ${styles.pricingOption} ${textColor == 'dark' ? styles.pricingOptionDark : ''}`} style={{ backgroundColor: backgroundColor, color: textColor == 'dark' ? '#393939' : '#ffffff' }}>
                                     <h2 className='text-center'>{name}</h2>
                                     <div className={`${styles.pricingImage} d-flex align-items-center justify-content-center`}>
                                         <figure>
