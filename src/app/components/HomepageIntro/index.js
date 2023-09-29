@@ -2,7 +2,7 @@
 
 import Link from 'next/link'
 import styles from './HomepageIntro.module.scss'
-import { trackEvent } from '../GoogleTagManager';
+// import { trackEvent } from '../GoogleTagManager'
 
 const Intro = ({ content, email, telephone, title }) => {
 
@@ -21,7 +21,7 @@ const Intro = ({ content, email, telephone, title }) => {
     //       event: 'emailClick'
     //     });
     // };
-    
+
     return (
         <div className={styles.introContainer}>
             <div className={`${styles.introContainer} container`}>
