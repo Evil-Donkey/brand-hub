@@ -1,5 +1,5 @@
 const Logo = (color) => {
-    const logoColor = color.color ? color.color : '#ffffff';
+    const logoColor = color.color ? color.color : '#313131';
     return (
         <svg width={45} height={45} xmlns="http://www.w3.org/2000/svg" xmlnsXlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
             viewBox="0 0 312.8 312.8" style={{enableBackground: 'new 0 0 312.8 312.8'}} xmlSpace="preserve">

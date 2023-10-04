@@ -1,5 +1,6 @@
 .pricingTabNav {
-    background-color: var(--colour-grey-03);
+    background-color: var(--colour-white-00);
+    border: 1px solid var(--colour-grey-01);
     border-radius: 40px;
     li {
         cursor: pointer;
@@ -11,6 +12,7 @@
         font-size: 13px;
         &.active {
             background-color: var(--colour-orange-00);
+            color: var(--colour-white-00);
         }
     }
 }

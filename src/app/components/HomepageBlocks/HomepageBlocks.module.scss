@@ -4,9 +4,10 @@
     position: relative;
     overflow: hidden;
     min-height: 500px;
-    background-color: var(--colour-grey-02);
+    background-color: var(--colour-white-01);
     &Light {
-        background-color: var(--colour-black-00);
+        background-color: var(--colour-black-03);
+        color: var(--colour-white-00);
     }
 }
 

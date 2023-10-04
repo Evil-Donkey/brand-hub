@@ -187,7 +187,7 @@ const FormRequest = () => {
 
                             <div className="row justify-content-center justify-content-md-between">
                                 <div className="col-auto d-flex flex-column">
-                                    <label htmlFor="confirm" className={`${styles.requestLabel} d-flex align-items-center mb-2 text-white`}>
+                                    <label htmlFor="confirm" className={`${styles.requestLabel} d-flex align-items-center mb-2`}>
                                         <input
                                             type="checkbox"
                                             id="confirm"
@@ -198,7 +198,7 @@ const FormRequest = () => {
                                             required
                                             /> <span>By submitting this form you agree to our <Link href="/privacy-policy">Privacy Policy</Link>.</span>
                                     </label>
-                                    <label htmlFor="newsletter" className={`${styles.requestLabel} d-flex align-items-center text-white`}>
+                                    <label htmlFor="newsletter" className={`${styles.requestLabel} d-flex align-items-center`}>
                                         <input
                                             type="checkbox"
                                             id="newsletter"

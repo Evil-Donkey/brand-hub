@@ -1,8 +1,12 @@
 .request {
     padding: 5rem 0;
-    background-image: url('/images/form-bg.jpg');
-    background-size: cover;
-    background-position: center;
+    // background-image: url('/images/form-bg.jpg');
+    // background-size: cover;
+    // background-position: center;
+    border-top: 1px solid var(--colour-black-03);
+    border-bottom: 1px solid var(--colour-black-03);
+    background-color: var(--colour-white-00);
+    color: var(--colour-black-03);
     h2 {
         @media screen and (min-width: 768px) {
             font-size: 45px;   
@@ -14,11 +18,12 @@
     width: 100%;
     padding: 10px 15px;
     margin-bottom: 5px;
-    color: var(--colour-black-00);
+    color: var(--colour-black-03);
+    font-weight: 300;
 }
 
 .requestLabel {
-    color: var(--colour-black-00);
+    color: var(--colour-black-03);
     @media screen and (max-width: 767px) {
         font-size: 14px;
     }
@@ -33,14 +38,14 @@
 }
 
 .formMessages {
-    color: var(--colour-white-00);
+    color: var(--colour-black-03);
 }
 
 .submitBtn {
     color: var(--colour-white-00);
     // font-family: var(--roboto-flex);
     font-family: var(--open-sans);
-    font-weight: 500;
+    font-weight: 300;
     background-color: var(--colour-orange-00);
     border-radius: 5px;
     text-transform: uppercase;
@@ -52,11 +57,13 @@
     display: inline-block;
     cursor: pointer;
     transition: all .3s ease;
+    border: 1px solid var(--colour-orange-00);
     @media screen and (max-width: 767px) {
         width: 100%;
     }
     &:hover {
         background-color: var(--colour-white-00);
-        color: var(--colour-orange-00);
+        color: var(--colour-black-03);
+        border-color: var(--colour-black-03);
     }
 }

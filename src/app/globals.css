@@ -43,7 +43,7 @@ body {
 }
 
 body {
-  color: var(--colour-white-00);
+  color: var(--colour-black-03);
   /* background-color: var(--colour-black-00); */
 }
 
@@ -102,6 +102,7 @@ b, strong {
   cursor: pointer;
   transition: all .3s ease;
   text-align: center;
+  border: 1px solid var(--colour-orange-00);
 }
 @media screen and (max-width: 991px) {
   .cta__btn {
@@ -113,10 +114,18 @@ b, strong {
 
 .cta__btn:hover {
   background-color: var(--colour-white-00);
-  color: var(--colour-orange-00);
+  color: var(--colour-black-03);
+  border: 1px solid var(--colour-black-03);
+  /* transform: translateY(-2px); */
 }
 
 .cta__btn--transparent {
   background-color: transparent;
-  border: 1px solid var(--colour-white-00);
+  border: 1px solid var(--colour-black-03);
+  color: var(--colour-black-03);
+}
+.cta__btn--transparent:hover {
+  background-color: var(--colour-orange-00);
+  color: var(--colour-white-00);
+  border-color: var(--colour-orange-00);
 }
