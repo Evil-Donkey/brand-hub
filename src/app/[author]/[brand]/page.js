@@ -8,7 +8,7 @@ import FlexibleContent from '../../components/FlexibleContent'
 import HeaderBrand from '../../components/HeaderBrand'
 import Footer from '../../components/Footer'
 
-export const dynamicParams = false
+export const dynamicParams = true
 export const revalidate = 10
 
 export async function generateMetadata({ params: {brand} }) {
