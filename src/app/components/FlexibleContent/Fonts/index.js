@@ -1,7 +1,7 @@
 import Image from 'next/image'
 import styles from './Fonts.module.scss'
 
-const Fonts = ({ data }) => {
+const Fonts = ({ colour, data }) => {
     const fonts = data?.fonts;
 
     return fonts && (
@@ -30,7 +30,7 @@ const Fonts = ({ data }) => {
                                     <a className='d-flex gap-2 align-items-center' href={fontUrl} target="_blank">
                                         <span>Download</span>
                                         <svg width="18" height="17" viewBox="0 0 18 17" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                            <path d="M16.4307 1.09742L7.03743 10.4907M16.4307 1.09742L16.4308 6.73339M16.4307 1.09742L10.7948 1.09741M7.03746 1.09742H1.40149V16.1267H16.4307V10.4907" stroke="white" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
+                                            <path d="M16.4307 1.09742L7.03743 10.4907M16.4307 1.09742L16.4308 6.73339M16.4307 1.09742L10.7948 1.09741M7.03746 1.09742H1.40149V16.1267H16.4307V10.4907" stroke={colour ? colour : white} strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
                                         </svg>
                                     </a>
                                 </h5>

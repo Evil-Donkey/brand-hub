@@ -4,7 +4,7 @@ import { useState } from "react"
 import styles from './EmailSignature.module.scss'
 import { EmailSignature1, SignatureTable1 } from './templates/EmailSignature1'
 
-const EmailSignature = ({ data }) => {
+const EmailSignature = ({ colour, bgColour, data }) => {
     const [signature, setSignature] = useState({
         fullName: "Full Name",
         email: "Email",
@@ -17,6 +17,8 @@ const EmailSignature = ({ data }) => {
     })
     const copy = data?.copy;
     const logo = data?.logo;
+    const copyColour = data?.signatureCopyColour;
+    const fontSize = data?.signatureCopyFontSize;
 
     const handleChange = (evt) => {
         const value = evt.target.value;
@@ -24,7 +26,6 @@ const EmailSignature = ({ data }) => {
           ...signature,
           [evt.target.name]: value
         });
-        console.log(signature)
     }
 
     return (
@@ -32,7 +33,13 @@ const EmailSignature = ({ data }) => {
             {copy &&
                 <div className='col-md-4 mb-4 mb-md-0'>
                     <div dangerouslySetInnerHTML={{ __html: copy }} />
-
+                    <style jsx> 
+                        {` 
+                            input::placeholder {
+                                color: ${colour}; 
+                            }` 
+                        } 
+                    </style>
                     <form className={styles.signatureForm}>
                         <input
                             type="text"
@@ -40,6 +47,7 @@ const EmailSignature = ({ data }) => {
                             placeholder="Full Name"
                             value={signature.fullName}
                             onChange={handleChange}
+                            style={{ color: colour, borderColor: colour }}
                         />
                         <input
                             type="text"
@@ -47,6 +55,7 @@ const EmailSignature = ({ data }) => {
                             placeholder="Job Title"
                             value={signature.jobTitle}
                             onChange={handleChange}
+                            style={{ color: colour, borderColor: colour }}
                         />
                         <input
                             type="email"
@@ -54,6 +63,7 @@ const EmailSignature = ({ data }) => {
                             placeholder="Email"
                             value={signature.email}
                             onChange={handleChange}
+                            style={{ color: colour, borderColor: colour }}
                         />
                         <input
                             type="text"
@@ -61,6 +71,7 @@ const EmailSignature = ({ data }) => {
                             placeholder="Mobile Phone Number"
                             value={signature.mobile}
                             onChange={handleChange}
+                            style={{ color: colour, borderColor: colour }}
                         />
                         <input
                             type="text"
@@ -68,6 +79,7 @@ const EmailSignature = ({ data }) => {
                             placeholder="Office Phone Number"
                             value={signature.phone}
                             onChange={handleChange}
+                            style={{ color: colour, borderColor: colour }}
                         />
                         <input
                             type="text"
@@ -75,6 +87,7 @@ const EmailSignature = ({ data }) => {
                             placeholder="Instagram URL"
                             value={signature.instagramUrl}
                             onChange={handleChange}
+                            style={{ color: colour, borderColor: colour }}
                         />
                         <input
                             type="text"
@@ -82,6 +95,7 @@ const EmailSignature = ({ data }) => {
                             placeholder="LinkedIn URL"
                             value={signature.linkedinUrl}
                             onChange={handleChange}
+                            style={{ color: colour, borderColor: colour }}
                         />
                         <input
                             type="text"
@@ -89,6 +103,7 @@ const EmailSignature = ({ data }) => {
                             placeholder="X URL"
                             value={signature.xUrl}
                             onChange={handleChange}
+                            style={{ color: colour, borderColor: colour }}
                         />
                     </form>
                 </div>
@@ -98,11 +113,15 @@ const EmailSignature = ({ data }) => {
                     <EmailSignature1
                         logo={logo}
                         signature={signature}
+                        copyColour={copyColour}
+                        fontSize={fontSize}
                     />
                 </div>
                 <SignatureTable1
                     logo={logo}
                     signature={signature}
+                    copyColour={copyColour}
+                    fontSize={fontSize}
                 />
             </div>
         </div>

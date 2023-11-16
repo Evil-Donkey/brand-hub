@@ -10,7 +10,7 @@ const BrandHero = ({ data }) => {
     const altText = data?.heroImage?.altText;
     const mediaItemUrl = data?.heroImage?.mediaItemUrl;
     const mediaDetails = data?.heroImage?.mediaDetails;
-    const containedHero = data?.brandOptions?.containedHero;
+    const containedHero = data?.containedHero;
     const heroYoutubeVideo = data?.heroYoutubeVideo;
     const heroVideoMp4 = data?.heroVideoMp4?.mediaItemUrl;
     const splineUrl = data?.splineUrl;
@@ -39,6 +39,7 @@ const BrandHero = ({ data }) => {
                                 width={mediaDetails?.width}
                                 height={mediaDetails?.height}
                                 alt={altText}
+                                priority
                             />
                         </div>
                     : null}

@@ -9,15 +9,16 @@
     }
     &Border {
         padding: 1.5rem;
-        &:before {
-            content: "";
-            position: absolute;
-            top: 0;
-            left: .75rem;
-            height: 1px;
-            width: calc(100% - 1.5rem);
-            background-color: var(--colour-black-03);
-        }
+        border-top: 1px solid var(--colour-black-03);
+        // &:before {
+        //     content: "";
+        //     position: absolute;
+        //     top: 0;
+        //     left: .75rem;
+        //     height: 1px;
+        //     width: calc(100% - 1.5rem);
+        //     background-color: var(--colour-black-03);
+        // }
     }
 
     a {

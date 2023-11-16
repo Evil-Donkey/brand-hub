@@ -273,6 +273,8 @@ export default async function Page({ params: { brand, author } }) {
                 }
               }
               sectionTitle
+              signatureCopyColour
+              signatureCopyFontSize
               title
             }
             ... on Brand_Brandoptions_FlexibleContent_Stationery {
@@ -369,7 +371,7 @@ export default async function Page({ params: { brand, author } }) {
   return brandData ? (
     <div style={{ 'backgroundColor': bgColour, 'color': textColour }}>
       <HeaderBrand nav={nav} bgColour={bgColour} color={textColour} pwd={pwd} />
-      {pwd && <BrandLogin pwd={pwd} bgColour={bgColour} />}
+      {pwd && <BrandLogin pwd={pwd} bgColour={bgColour} color={textColour} />}
       <BrandIntro data={brandData} author={authorNiceName} />
       <BrandHero data={brandOptions} />
       <FlexibleContent data={flexibleContent} pwd={pwd} bgColour={bgColour} colour={textColour} brand={brand} />

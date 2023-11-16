@@ -38,7 +38,7 @@ const Header = ({ bgColour, color, nav, pwd }) => {
                             <Logo color={color} />
                         </Link>
                     </div>
-                    {(match || !pwd) && nav &&
+                    {(match || !pwd) && (nav.length > 0) &&
                         <div className='col-auto'>
                             <div className={styles.menuIcon} onClick={openModal}>
                                 <span></span>

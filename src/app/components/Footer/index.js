@@ -3,7 +3,7 @@ import Logo from '../Logo'
 
 const Footer = ({ border, color, email, telephone }) => {
     return (
-        <div className={`${styles.footerContainer} ${border ? styles.footerContainerBorder : ''} container`}>
+        <div className={`${styles.footerContainer} ${border ? styles.footerContainerBorder : ''} container`} style={{ borderColor: color }}>
             <div className='row justify-content-between align-items-center'>
                 <div className='col-auto d-flex flex-column flex-md-row gap-2 gap-md-5' style={{color: color}}>
                     {email && <span>Email: <a href={`mailto:${email}`}>{email}</a></span>}
