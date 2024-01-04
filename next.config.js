@@ -3,6 +3,9 @@ const nextConfig = {
     images: {
         domains: ['account.brand-hub.co', 'brandhub.local'],
     },
+    headers: {
+        'Access-Control-Allow-Origin': ['https://account.brand-hub.co'],
+    },
 }
 
 module.exports = nextConfig
