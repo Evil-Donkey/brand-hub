@@ -4,7 +4,7 @@ const nextConfig = {
         domains: ['account.brand-hub.co', 'brandhub.local'],
     },
     headers: {
-        'Access-Control-Allow-Origin': ['https://account.brand-hub.co'],
+        'Access-Control-Allow-Origin': ['https://account.brand-hub.co', 'https://brand-hub.co'],
     },
 }
 
