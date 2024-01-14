@@ -1,0 +1,38 @@
+.branderContent {
+    background-color: var(--colour-white-00);
+    color: var(--colour-black-04);
+
+    h2 {
+        font-family: var(--open-sans);
+        font-style: italic;
+        letter-spacing: 1.2px;
+        font-size: 30px;
+        line-height: 40px;
+        @media screen and (min-width: 992px) {
+            font-size: 60px;
+            line-height: 70px;
+            
+        }
+    }
+
+    h4 {
+        font-weight: 700;
+        text-transform: uppercase;
+        font-size: 14px;
+    }
+
+    h3 {
+        font-weight: 600;
+        font-size: 20px;
+        line-height: 30px;
+        @media screen and (min-width: 992px) {
+            font-size: 30px;
+            line-height: 40px;
+            
+        }
+    }
+
+    img {
+        transform: translateY(-100px);
+    }
+}

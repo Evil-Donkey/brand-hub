@@ -6,11 +6,16 @@ import {isMobile} from 'react-device-detect'
 import Link from 'next/link'
 import styles from './Navigation.module.scss'
  
-const Navigation = () => {
+const Navigation = ({ color }) => {
   const pathname = usePathname();
 
     useEffect(() => {
         document.documentElement.style.setProperty("--theme-color-00", '#ffffff');
+        if (pathname == "/branders") {
+            document.documentElement.style.setProperty("--theme-nav-00", '#ffffff');
+        } else {
+            document.documentElement.style.setProperty("--theme-nav-00", '#231F20');
+        }
     }, []);
 
   const navigationMenu = [
@@ -24,6 +29,11 @@ const Navigation = () => {
             href: '/why',
             activeSegment: 'about'
         },
+        // {
+        //     label: ' Branders',
+        //     href: '/branders',
+        //     activeSegment: 'branders'
+        // },
         {
             label: ' Pricing',
             href: '/pricing',
@@ -42,7 +52,7 @@ const Navigation = () => {
                 const isActive = pathname === link.href;
     
                 return (
-                    <li key={link.label} className={isActive ? styles.navigationItemActive : ''}>
+                    <li key={link.label} className={isActive ? styles.navigationItemActive : ''} style={{ color: color }}>
                         <Link href={link.href}>
                             {link.label}
                         </Link>

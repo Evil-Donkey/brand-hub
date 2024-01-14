@@ -3,7 +3,7 @@ import Logo from '../Logo'
 import Navigation from '../Navigation'
 import styles from './Header.module.scss'
 
-const Header = ({ fullMenu }) => {
+const Header = ({ color, fullMenu }) => {
 
     return (
         <>
@@ -11,12 +11,12 @@ const Header = ({ fullMenu }) => {
                 <div className="row align-items-center justify-content-between">
                     <div className='col-auto'>
                         <Link href="/">
-                            <Logo />
+                            <Logo color={color} />
                         </Link>
                     </div>
                     {fullMenu &&
                         <div className='col-auto align-self-end'>
-                            <Navigation />
+                            <Navigation color={color} />
                         </div>
                     }
                 </div>

@@ -1,0 +1,31 @@
+.pageWrap {
+    background-color: var(--colour-black-04);
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    color: var(--colour-white-00);
+    h1 {
+        font-size: 38px;
+        line-height: 1.1;
+        margin-bottom: 0;
+        @media screen and (min-width: 768px) {
+            font-size: 60px;
+            margin-bottom: 15px;
+        }
+        @media screen and (min-width: 1200px) {
+            font-size: 80px;
+        }
+        @media screen and (min-width: 1400px) {
+            font-size: 98px;
+        }
+    }
+    p {
+        @media screen and (min-width: 768px) {
+            font-size: 19px;
+        }
+    }
+    img {
+        max-width: 100%;
+        height: auto;
+    }
+}
