@@ -4,7 +4,6 @@ import styles from './BranderContent.module.scss'
 const BranderContent = ({ content }) => {
 
     const { branderName, branderQuote, branderPhoto, copyColumns } = content;
-    const { altText, mediaItemUrl, mediaDetails } = branderPhoto;
     
     return (content) ? (
         <div className={styles.branderContent}>
@@ -13,10 +12,10 @@ const BranderContent = ({ content }) => {
                     {branderPhoto &&
                         <div className="col-md-6">
                             <Image
-                                src={mediaItemUrl}
-                                width={mediaDetails?.width}
-                                height={mediaDetails?.height}
-                                alt={altText}
+                                src={branderPhoto?.mediaItemUrl}
+                                width={branderPhoto?.mediaDetails?.width}
+                                height={branderPhoto?.mediaDetails?.height}
+                                alt={branderPhoto?.altText}
                             />
                         </div>
                     }
