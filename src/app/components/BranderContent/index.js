@@ -20,7 +20,7 @@ const BranderContent = ({ content }) => {
                         </div>
                     }
                     {branderQuote &&
-                        <div className="col-md-6 ps-md-5">
+                        <div className="col-md-6 ps-md-5 mb-5">
                             <h2>{branderQuote}</h2>
                             <h4>Brander</h4>
                             <h3>{branderName}</h3>
