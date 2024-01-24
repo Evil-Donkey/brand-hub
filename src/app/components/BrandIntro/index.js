@@ -1,6 +1,6 @@
 import styles from './BrandIntro.module.scss'
 
-const BrandIntro = ({ data, author }) => {
+const BrandIntro = ({ data, author, hideAuthor }) => {
     const title = data?.title;
     // const agencyName = data?.agencies.nodes[0].name;
     
@@ -11,7 +11,7 @@ const BrandIntro = ({ data, author }) => {
             && <div className="col">
                 <h1 className={styles.title}>{title}</h1>
             </div>}
-            {author
+            {author && !hideAuthor
             && <div className="col">
                 <h3 className={styles.subtitle}>Agency: <span>{author}</span></h3>
             </div>}

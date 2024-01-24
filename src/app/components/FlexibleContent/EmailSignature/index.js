@@ -2,10 +2,15 @@
 
 import { useState } from "react"
 import styles from './EmailSignature.module.scss'
+import toCamelCase from '../../../lib/camelCase'
 import { EmailSignature1, SignatureTable1 } from './templates/EmailSignature1'
 
 const EmailSignature = ({ colour, bgColour, data }) => {
-    const [signature, setSignature] = useState({
+
+    const social = data?.socials;
+
+    // new //////////////////
+    const defaultSignature = {
         fullName: "Full Name",
         email: "Email",
         jobTitle: "Job Title",
@@ -14,7 +19,27 @@ const EmailSignature = ({ colour, bgColour, data }) => {
         instagramUrl: "",
         linkedinUrl: "",
         xUrl: ""
-    })
+    };
+
+    const signatureFields = data.fields?? null;
+    if (signatureFields && social) {
+        signatureFields.push({'name': 'Instagram'});
+        signatureFields.push({'name': 'Linkedin'});
+        signatureFields.push({'name': 'X'});
+    }
+    const signatureObj = signatureFields.reduce((obj, item) => {
+        const key = toCamelCase(item.name);
+        obj[key] = item.name;
+        return obj;
+    }, {});
+
+    const fields = signatureObj ?? defaultSignature;
+    const fieldsArray = Object.entries(fields);
+    // new //////////////////
+
+    const [signature, setSignature] = useState(fields);
+
+    
     const copy = data?.copy;
     const logo = data?.logo;
     const copyColour = data?.signatureCopyColour;
@@ -41,70 +66,19 @@ const EmailSignature = ({ colour, bgColour, data }) => {
                         } 
                     </style>
                     <form className={styles.signatureForm}>
-                        <input
-                            type="text"
-                            name="fullName"
-                            placeholder="Full Name"
-                            value={signature.fullName}
-                            onChange={handleChange}
-                            style={{ color: colour, borderColor: colour }}
-                        />
-                        <input
-                            type="text"
-                            name="jobTitle"
-                            placeholder="Job Title"
-                            value={signature.jobTitle}
-                            onChange={handleChange}
-                            style={{ color: colour, borderColor: colour }}
-                        />
-                        <input
-                            type="email"
-                            name="email"
-                            placeholder="Email"
-                            value={signature.email}
-                            onChange={handleChange}
-                            style={{ color: colour, borderColor: colour }}
-                        />
-                        <input
-                            type="text"
-                            name="mobile"
-                            placeholder="Mobile Phone Number"
-                            value={signature.mobile}
-                            onChange={handleChange}
-                            style={{ color: colour, borderColor: colour }}
-                        />
-                        <input
-                            type="text"
-                            name="phone"
-                            placeholder="Office Phone Number"
-                            value={signature.phone}
-                            onChange={handleChange}
-                            style={{ color: colour, borderColor: colour }}
-                        />
-                        <input
-                            type="text"
-                            name="instagramUrl"
-                            placeholder="Instagram URL"
-                            value={signature.instagramUrl}
-                            onChange={handleChange}
-                            style={{ color: colour, borderColor: colour }}
-                        />
-                        <input
-                            type="text"
-                            name="linkedinUrl"
-                            placeholder="LinkedIn URL"
-                            value={signature.linkedinUrl}
-                            onChange={handleChange}
-                            style={{ color: colour, borderColor: colour }}
-                        />
-                        <input
-                            type="text"
-                            name="xUrl"
-                            placeholder="X URL"
-                            value={signature.xUrl}
-                            onChange={handleChange}
-                            style={{ color: colour, borderColor: colour }}
-                        />
+                        {fieldsArray && fieldsArray.map(([key, value], i) => {
+                            return (
+                                <input
+                                    key={i.toString()}
+                                    type="text"
+                                    name={key}
+                                    placeholder={value}
+                                    value={signature[key]}
+                                    onChange={handleChange}
+                                    style={{ color: colour, borderColor: colour }}
+                                />
+                            );
+                        })}
                     </form>
                 </div>
             }
@@ -115,6 +89,7 @@ const EmailSignature = ({ colour, bgColour, data }) => {
                         signature={signature}
                         copyColour={copyColour}
                         fontSize={fontSize}
+                        social={social}
                     />
                 </div>
                 <SignatureTable1
@@ -122,6 +97,7 @@ const EmailSignature = ({ colour, bgColour, data }) => {
                     signature={signature}
                     copyColour={copyColour}
                     fontSize={fontSize}
+                    social={social}
                 />
             </div>
         </div>

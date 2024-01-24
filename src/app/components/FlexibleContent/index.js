@@ -85,10 +85,10 @@ const FlexibleContent = ({ data, pwd, bgColour, brand, colour }) => {
             restrictedComponents.push([<Stationery key={i.toString()} data={data} />, title, sectionTitle]);
         }
         if (fieldGroupName === "Brand_Brandoptions_FlexibleContent_BrandedImage") {
-            allComponents.push([<BrandedImage key={i.toString()} data={data} bgColour={bgColour} brand={brand} />, title, sectionTitle]);
+            allComponents.push([<BrandedImage key={i.toString()} data={data} bgColour={bgColour} colour={colour} brand={brand} />, title, sectionTitle]);
         }
         if (fieldGroupName === "Brand_Brandoptions_FlexibleContent_BrandedImage" && !passwordProtected) {
-            restrictedComponents.push([<BrandedImage key={i.toString()} data={data} bgColour={bgColour} brand={brand} />, title, sectionTitle]);
+            restrictedComponents.push([<BrandedImage key={i.toString()} data={data} bgColour={bgColour} colour={colour} brand={brand} />, title, sectionTitle]);
         }
         if (fieldGroupName === "Brand_Brandoptions_FlexibleContent_Gallery") {
             allComponents.push([<Gallery key={i.toString()} data={data} />, title, sectionTitle]);

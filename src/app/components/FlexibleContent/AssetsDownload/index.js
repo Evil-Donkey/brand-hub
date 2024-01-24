@@ -52,8 +52,11 @@ const AssetsDownload = ({ data, colour }) => {
                                 {(activeTool === i) && isActive && 
                                     <ul className='m-0 p-0 list-unstyled'>
                                         {files.map((file, i) => {
+                                            console.log(file)
                                             const fileUrl = file?.file?.mediaItemUrl;
-                                            const fileName = file?.file?.title;
+                                            // const fileName = file?.file?.title;
+                                            const fileName = file?.file?.mediaDetails?.file;
+
                                             return fileUrl && (
                                                 <li key={i.toString()}>
                                                     <div className='d-flex gap-2 align-items-center' onClick={() => handleDownload(fileUrl, fileName)}>

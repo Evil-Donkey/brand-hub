@@ -113,6 +113,7 @@ export default async function Page({ params: { brand, author } }) {
         brandOptions {
           backgroundColour
           containedHero
+          hideAuthor
           heroOverlayLogo {
             altText
             mediaItemUrl
@@ -196,6 +197,9 @@ export default async function Page({ params: { brand, author } }) {
                   file {
                     title
                     mediaItemUrl
+                    mediaDetails {
+                      file
+                    }
                   }
                 }
               }
@@ -275,7 +279,11 @@ export default async function Page({ params: { brand, author } }) {
               sectionTitle
               signatureCopyColour
               signatureCopyFontSize
+              socials
               title
+              fields {
+                name
+              }
             }
             ... on Brand_Brandoptions_FlexibleContent_Stationery {
               fieldGroupName
@@ -322,6 +330,10 @@ export default async function Page({ params: { brand, author } }) {
                   mediaDetails {
                     height
                     width
+                    sizes {
+                      height
+                      width
+                    }
                   }
                   sourceUrl(size: LARGE)
                 }
@@ -361,6 +373,7 @@ export default async function Page({ params: { brand, author } }) {
   const textColour = brandData?.brandOptions?.textColour;
   const pwd = brandData?.password?.password;
   const authorNiceName = brandData?.author.node.authorCustomFields.authorNiceName;
+  const hideAuthor = brandData?.brandOptions?.hideAuthor;
 
   let nav = [];
   for (let i = 0; i < flexibleContent.length; i++) {
@@ -372,7 +385,7 @@ export default async function Page({ params: { brand, author } }) {
     <div style={{ 'backgroundColor': bgColour, 'color': textColour }}>
       <HeaderBrand nav={nav} bgColour={bgColour} color={textColour} pwd={pwd} />
       {pwd && <BrandLogin pwd={pwd} bgColour={bgColour} color={textColour} />}
-      <BrandIntro data={brandData} author={authorNiceName} />
+      <BrandIntro data={brandData} author={authorNiceName} hideAuthor={hideAuthor} />
       <BrandHero data={brandOptions} />
       <FlexibleContent data={flexibleContent} pwd={pwd} bgColour={bgColour} colour={textColour} brand={brand} />
       <Footer border={true} color={textColour} telephone={telephone} email={email} />
