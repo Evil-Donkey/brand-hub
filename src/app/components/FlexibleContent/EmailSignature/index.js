@@ -16,9 +16,9 @@ const EmailSignature = ({ colour, bgColour, data }) => {
         jobTitle: "Job Title",
         mobile: "Mobile Phone Number",
         phone: "Office Phone Number",
-        instagramUrl: "",
-        linkedinUrl: "",
-        xUrl: ""
+        instagramUrl: "https://instagram.com",
+        linkedinUrl: "https://linkedin.com",
+        xUrl: "https://x.com"
     };
 
     const signatureFields = data.fields?? null;
@@ -27,14 +27,15 @@ const EmailSignature = ({ colour, bgColour, data }) => {
         signatureFields.push({'name': 'Linkedin'});
         signatureFields.push({'name': 'X'});
     }
-    const signatureObj = signatureFields.reduce((obj, item) => {
+    const signatureObj = signatureFields ? signatureFields.reduce((obj, item) => {
         const key = toCamelCase(item.name);
         obj[key] = item.name;
         return obj;
-    }, {});
+    }, {}) : null;
 
-    const fields = signatureObj ?? defaultSignature;
-    const fieldsArray = Object.entries(fields);
+    // const fields = signatureObj ?? defaultSignature;
+    const fields = signatureObj ?? null;
+    const fieldsArray = fields ? Object.entries(fields) : null;
     // new //////////////////
 
     const [signature, setSignature] = useState(fields);

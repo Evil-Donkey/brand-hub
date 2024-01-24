@@ -8,7 +8,7 @@ import getBase64StringFromDataURL from '../../../../utils/base64'
 
 export const EmailSignature1 = ({logo, signature, social, fontSize, copyColour}) => {
 
-    const signatureArray = Object.entries(signature);
+    const signatureArray = signature ? Object.entries(signature) : null;
     
     return (
         <div className='signature'>
@@ -74,9 +74,11 @@ export const EmailSignature1 = ({logo, signature, social, fontSize, copyColour})
 
 export const SignatureTable1 = ({logo, signature, social, fontSize, copyColour}) => {
 
-    const signatureArray = Object.entries(signature);
+    const signatureArray = signature ? Object.entries(signature) : null;
 
-    const { instagramUrl, linkedinUrl, xUrl } = signature;
+    const instagramUrl = signature?.instagramUrl ?? null;
+    const linkedinUrl = signature?.linkedinUrl ?? null;
+    const xUrl = signature?.xUrl ?? null;
     
     const [base64img, setBase64img] = useState(logo.mediaItemUrl);
     const [base64imgIg, setBase64imgIg] = useState(instagramUrl);
