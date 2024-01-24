@@ -35,20 +35,21 @@ export async function generateMetadata({ params: {brander} }) {
   `);
 
   const seo = data?.brander?.seo;
+  console.log(seo)
  
   return {
-    title: data?.brander?.title,
-    description: seo.metaDesc,
+    title: data?.brander?.title ?? null,
+    description: seo?.metaDesc ?? null,
     openGraph: {
-      title: seo.openGraphTitle,
-      description: seo.openGraphTitle,
-      url: seo.openGraphTitle,
-      siteName: seo.openGraphTitle,
+      title: seo?.openGraphTitle ?? null,
+      description: seo?.openGraphTitle ?? null,
+      url: seo?.openGraphTitle ?? null,
+      siteName: seo?.openGraphTitle ?? null,
       images: [
         {
-          url: seo.opengraphImage?.mediaItemUrl,
-          width: seo.opengraphImage?.mediaDetails.width,
-          height: seo.opengraphImage?.mediaDetails.height,
+          url: seo.opengraphImage?.mediaItemUrl ?? null,
+          width: seo.opengraphImage?.mediaDetails.width ?? null,
+          height: seo.opengraphImage?.mediaDetails.height ?? null,
         }
       ],
       type: seo.opengraphType,
@@ -130,14 +131,14 @@ export default async function Page({ params: { brander } }) {
     }
   `);
 
-  const telephone = dataHomepage?.page?.homepage?.telephone;
-  const email = dataHomepage?.page?.homepage?.email;
+  const telephone = dataHomepage?.page?.homepage?.telephone ?? null;
+  const email = dataHomepage?.page?.homepage?.email ?? null;
 
-  const branderData = data?.brander;
-  const title = branderData.title;
-  const content = branderData.content;
-  const featuredImage = branderData.featuredImage?.node;
-  const branderContent = branderData.branderOptions;
+  const branderData = data?.brander ?? null;
+  const title = branderData.title ?? null;
+  const content = branderData.content ?? null;
+  const featuredImage = branderData.featuredImage?.node ?? null;
+  const branderContent = branderData.branderOptions ?? null;
 
   return branderData ? (
     <main className={styles.pageWrap}>
