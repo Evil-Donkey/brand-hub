@@ -35,8 +35,9 @@ export async function generateMetadata({ params: {brander} }) {
   `);
 
   const seo = data?.brander?.seo;
+  console.log(seo)
  
-  return {
+  return seo && {
     title: data?.brand?.title,
     description: seo?.metaDesc,
     openGraph: {
@@ -134,10 +135,10 @@ export default async function Page({ params: { brander } }) {
   const email = dataHomepage?.page?.homepage?.email ?? null;
 
   const branderData = data?.brander ?? null;
-  const title = branderData.title ?? null;
-  const content = branderData.content ?? null;
-  const featuredImage = branderData.featuredImage?.node ?? null;
-  const branderContent = branderData.branderOptions ?? null;
+  const title = branderData?.title ?? null;
+  const content = branderData?.content ?? null;
+  const featuredImage = branderData?.featuredImage?.node ?? null;
+  const branderContent = branderData?.branderOptions ?? null;
 
   return branderData ? (
     <main className={styles.pageWrap}>
