@@ -35,24 +35,23 @@ export async function generateMetadata({ params: {brander} }) {
   `);
 
   const seo = data?.brander?.seo;
-  console.log(seo)
  
   return {
-    title: data?.brander?.title ?? null,
-    description: seo?.metaDesc ?? null,
+    title: data?.brand?.title,
+    description: seo?.metaDesc,
     openGraph: {
-      title: seo?.openGraphTitle ?? null,
-      description: seo?.openGraphTitle ?? null,
-      url: seo?.openGraphTitle ?? null,
-      siteName: seo?.openGraphTitle ?? null,
+      title: seo?.openGraphTitle,
+      description: seo?.openGraphTitle,
+      url: seo?.openGraphTitle,
+      siteName: seo?.openGraphTitle,
       images: [
         {
-          url: seo.opengraphImage?.mediaItemUrl ?? null,
-          width: seo.opengraphImage?.mediaDetails.width ?? null,
-          height: seo.opengraphImage?.mediaDetails.height ?? null,
+          url: seo?.opengraphImage?.mediaItemUrl,
+          width: seo?.opengraphImage?.mediaDetails.width,
+          height: seo?.opengraphImage?.mediaDetails.height,
         }
       ],
-      type: seo.opengraphType,
+      type: seo?.opengraphType,
     }
   }
 }
