@@ -7,7 +7,7 @@ import BranderContent from "@/app/components/BranderContent"
 import Footer from '@/app/components/Footer'
 import styles from './Brander.module.scss'
 
-export const dynamicParams = true
+export const dynamicParams = false
 export const revalidate = 10
 
 export async function generateMetadata({ params: {brander} }) {
