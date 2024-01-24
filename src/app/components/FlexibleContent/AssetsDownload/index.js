@@ -5,6 +5,10 @@ import Image from 'next/image'
 import handleDownload from '../../../lib/handleDownload'
 import styles from './AssetsDownload.module.scss'
 
+function getLastPath(url) {
+    return url.split('/').pop();
+}
+
 const AssetsDownload = ({ data, colour }) => {
     const [isActive, setIsActive] = useState(false);
     const [activeTool, setActiveTool] = useState(null);
@@ -52,10 +56,11 @@ const AssetsDownload = ({ data, colour }) => {
                                 {(activeTool === i) && isActive && 
                                     <ul className='m-0 p-0 list-unstyled'>
                                         {files.map((file, i) => {
-                                            console.log(file)
+                                            
                                             const fileUrl = file?.file?.mediaItemUrl;
                                             // const fileName = file?.file?.title;
-                                            const fileName = file?.file?.mediaDetails?.file;
+                                            // const fileName = file?.file?.mediaDetails?.file;
+                                            const fileName = getLastPath(fileUrl);
 
                                             return fileUrl && (
                                                 <li key={i.toString()}>

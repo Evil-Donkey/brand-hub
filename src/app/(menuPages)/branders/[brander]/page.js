@@ -35,7 +35,6 @@ export async function generateMetadata({ params: {brander} }) {
   `);
 
   const seo = data?.brander?.seo;
-  console.log(seo)
  
   return seo && {
     title: data?.brand?.title,

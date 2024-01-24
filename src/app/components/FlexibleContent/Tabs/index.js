@@ -49,7 +49,6 @@ const Tabs = ({ colour, data, bgColour }) => {
                                 <div className='col-md-8'>
                                     {assets.map((asset, i) => {
                                         const { heading, file, image, youtubeVideo, videoMp4, splineUrl } = asset;
-                                        console.log(videoMp4)
                                         return (
                                             <div key={i.toString()} className='row mb-4 justify-content-end'>
                                                 {(image || youtubeVideo || videoMp4 || splineUrl) &&
