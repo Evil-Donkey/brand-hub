@@ -281,8 +281,10 @@ export default async function Page({ params: { brand, author } }) {
               signatureCopyFontSize
               socials
               title
+              disclaimer
               fields {
                 name
+                bottomMargin
               }
             }
             ... on Brand_Brandoptions_FlexibleContent_Stationery {

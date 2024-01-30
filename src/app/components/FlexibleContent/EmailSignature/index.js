@@ -8,6 +8,7 @@ import { EmailSignature1, SignatureTable1 } from './templates/EmailSignature1'
 const EmailSignature = ({ colour, bgColour, data }) => {
 
     const social = data?.socials;
+    const disclaimer = data?.disclaimer ?? null;
 
     // new //////////////////
     const defaultSignature = {
@@ -32,6 +33,8 @@ const EmailSignature = ({ colour, bgColour, data }) => {
         obj[key] = item.name;
         return obj;
     }, {}) : null;
+
+    const signatureMargin = signatureFields ? signatureFields.map(item => item.bottomMargin) : null;
 
     // const fields = signatureObj ?? defaultSignature;
     const fields = signatureObj ?? null;
@@ -88,6 +91,8 @@ const EmailSignature = ({ colour, bgColour, data }) => {
                     <EmailSignature1
                         logo={logo}
                         signature={signature}
+                        margin={signatureMargin}
+                        disclaimer={disclaimer}
                         copyColour={copyColour}
                         fontSize={fontSize}
                         social={social}
@@ -96,6 +101,8 @@ const EmailSignature = ({ colour, bgColour, data }) => {
                 <SignatureTable1
                     logo={logo}
                     signature={signature}
+                    margin={signatureMargin}
+                    disclaimer={disclaimer}
                     copyColour={copyColour}
                     fontSize={fontSize}
                     social={social}

@@ -6,9 +6,11 @@ import Image from 'next/image'
 import styles from '../EmailSignature.module.scss'
 import getBase64StringFromDataURL from '../../../../utils/base64'
 
-export const EmailSignature1 = ({logo, signature, social, fontSize, copyColour}) => {
+export const EmailSignature1 = ({logo, signature, social, fontSize, copyColour, margin, disclaimer}) => {
 
     const signatureArray = signature ? Object.entries(signature) : null;
+
+    console.log(disclaimer)
     
     return (
         <div className='signature'>
@@ -23,11 +25,11 @@ export const EmailSignature1 = ({logo, signature, social, fontSize, copyColour})
                                 const social = value.startsWith("https://instagram.com") || value.startsWith("https://linkedin.com") || value.startsWith("https://x.com") || value.startsWith("https://twitter.com");
                                 if (i < 1 && !social) {
                                     return (
-                                        <div key={i.toString()}><strong>{value}</strong><br/></div>
+                                        <div key={i.toString()} style={{'marginBottom': margin[i] ? '10px' : ''}}><strong>{value}</strong><br/></div>
                                     );
                                 } else if (i >= 1 && !social) {
                                     return (
-                                        <div key={i.toString()}>{value}<br/></div>
+                                        <div key={i.toString()} style={{'marginBottom': margin[i] ? '10px' : ''}}>{value}<br/></div>
                                     );
                                 }
                             })}
@@ -66,13 +68,20 @@ export const EmailSignature1 = ({logo, signature, social, fontSize, copyColour})
                             }
                         </td>
                     </tr>
+                    {disclaimer &&
+                        <tr>
+                            <td style={{paddingTop: '20px', fontSize: '13px'}}>
+                                <div dangerouslySetInnerHTML={{ __html: disclaimer }} />
+                            </td>
+                        </tr>
+                    }
                 </tbody>
             </table>
         </div>
     );
 }
 
-export const SignatureTable1 = ({logo, signature, social, fontSize, copyColour}) => {
+export const SignatureTable1 = ({logo, signature, social, fontSize, copyColour, margin, disclaimer}) => {
 
     const signatureArray = signature ? Object.entries(signature) : null;
 
@@ -150,9 +159,9 @@ export const SignatureTable1 = ({logo, signature, social, fontSize, copyColour})
 
         if (!social) {
             if (i === 0) {
-                emailString += `<div><strong>${value}</strong><br/></div>`;
+                emailString += `<div style="margin-bottom: ${margin[i] ? `10px` : ``}"><strong>${value}</strong><br/></div>`;
             } else {
-                emailString += `<div>${value}<br/></div>`;
+                emailString += `<div style="margin-bottom: ${margin[i] ? `10px` : ``}">${value}<br/></div>`;
             }
         }
 
@@ -167,8 +176,13 @@ export const SignatureTable1 = ({logo, signature, social, fontSize, copyColour})
         }
     })}
 
-    let signatureTable = `<table width="600" border="0" cellSpacing="0" cellPadding="0"><tbody><tr><td width="179" align="left" valign="top" style="border-right-style: solid; border-right-color: ${copyColour ? copyColour : '#252525'}; border-right-width: 1px; padding-left: 20px;">${signatureLogo}</td><td width="421" align="left" valign="top" style="padding-left: 30px; font-family: Arial, Helvetica, 'sans-serif'; font-size: ${fontSize ? fontSize : '15px'}; line-height: 1.6; color:${copyColour ? copyColour : ''};">${emailString}</td></tr></tbody></table>
-        ${(signatureIg || signatureLn || signatureX) && `<table border="0" cell-spacing="0" cell-padding="0" style="margin-top: 10px;"><tbody><tr>${signatureIg}${signatureLn}${signatureX}</tr></tbody></table>`}`;
+    const disclaimerCopy = disclaimer ? `
+        <table border="0" cell-spacing="0" cell-padding="0" style="margin-top: 10px;">
+            <tr><td>${disclaimer}</td></tr>
+        </table>`
+    : ``;
+
+    let signatureTable = `<table width="600" border="0" cellSpacing="0" cellPadding="0"><tbody><tr><td width="179" align="left" valign="top" style="border-right-style: solid; border-right-color: ${copyColour ? copyColour : '#252525'}; border-right-width: 1px; padding-left: 20px;">${signatureLogo}</td><td width="421" align="left" valign="top" style="padding-left: 30px; font-family: Arial, Helvetica, 'sans-serif'; font-size: ${fontSize ? fontSize : '15px'}; line-height: 1.6; color:${copyColour ? copyColour : ''};">${emailString}</td></tr></tbody></table>${(signatureIg || signatureLn || signatureX) ? `<table border="0" cell-spacing="0" cell-padding="0" style="margin-top: 10px;"><tbody><tr>${signatureIg}${signatureLn}${signatureX}</tr></tbody></table>` : ``}${disclaimerCopy}`;
 
     return (
         <>
