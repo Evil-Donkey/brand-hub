@@ -35,6 +35,7 @@ const EmailSignature = ({ colour, bgColour, data }) => {
     }, {}) : null;
 
     const signatureMargin = signatureFields ? signatureFields.map(item => item.bottomMargin) : null;
+    const signatureLink = signatureFields ? signatureFields.map(item => item.link) : null;
 
     // const fields = signatureObj ?? defaultSignature;
     const fields = signatureObj ?? null;
@@ -92,6 +93,7 @@ const EmailSignature = ({ colour, bgColour, data }) => {
                         logo={logo}
                         signature={signature}
                         margin={signatureMargin}
+                        link={signatureLink}
                         disclaimer={disclaimer}
                         copyColour={copyColour}
                         fontSize={fontSize}
@@ -102,6 +104,7 @@ const EmailSignature = ({ colour, bgColour, data }) => {
                     logo={logo}
                     signature={signature}
                     margin={signatureMargin}
+                    link={signatureLink}
                     disclaimer={disclaimer}
                     copyColour={copyColour}
                     fontSize={fontSize}

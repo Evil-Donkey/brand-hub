@@ -285,6 +285,7 @@ export default async function Page({ params: { brand, author } }) {
               fields {
                 name
                 bottomMargin
+                link
               }
             }
             ... on Brand_Brandoptions_FlexibleContent_Stationery {
