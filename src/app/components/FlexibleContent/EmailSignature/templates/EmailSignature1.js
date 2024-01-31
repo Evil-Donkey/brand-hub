@@ -20,88 +20,90 @@ export const EmailSignature1 = ({logo, signature, social, fontSize, copyColour, 
                             <img src={logo.mediaItemUrl} width={logo.mediaDetails.width / 2} height={logo.mediaDetails.height / 2} />
                         </td>
                         <td width="421" align="left" valign="top" style={{paddingLeft: '30px', fontFamily: 'Arial, Helvetica, sans-serif', fontSize: fontSize ? fontSize : '15px', lineHeight: '1.6', color: copyColour ? copyColour : ''}}>
-                            {signatureArray && signatureArray.map(([key, value], i) => {
-                                const social = value.startsWith("https://instagram.com") || value.startsWith("https://linkedin.com") || value.startsWith("https://x.com") || value.startsWith("https://twitter.com");
+                            <table width="421" border="0" cellSpacing="0" cellPadding="0">
+                                <tbody>
+                                    {signatureArray && signatureArray.map(([key, value], i) => {
+                                        const social = value.startsWith("https://instagram.com") || value.startsWith("https://linkedin.com") || value.startsWith("https://x.com") || value.startsWith("https://twitter.com");
 
-
-
-                                if (i < 1 && !social) {
-                                    return (
-                                        <tr key={i.toString()}>
-                                            <td style={{lineHeight: '1.6', paddingBottom: margin[i] ? '10px' : ''}}>
-                                                <strong>{value}</strong><br/>
-                                            </td>
-                                        </tr>
-                                    );
-                                } else if (i >= 1 && !social) {
-                                    if (link[i]) {
-                                        const linkType = analyzeString(value);
-                                        const isEmail = linkType.isEmail;
-                                        const isHttpOrHttps = linkType.isHttpOrHttps;
-                                        return isEmail ?
-                                            <tr key={i.toString()}>
-                                                <td style={{lineHeight: '1.6', paddingBottom: margin[i] ? '10px' : ''}}>
-                                                    <a style={{color: copyColour, textDecoration: 'none'}} href={`mailto:${value}`}>{value}<br/></a>
-                                                </td>
-                                            </tr>
-                                            
-                                        : isHttpOrHttps ? 
-                                            <tr key={i.toString()}>
-                                                <td style={{lineHeight: '1.6', paddingBottom: margin[i] ? '10px' : ''}}>
-                                                    <a style={{color: copyColour, textDecoration: 'none'}} href={value}>{value}<br/></a>
-                                                </td>
-                                            </tr>
-                                            
-                                        : 
-                                            <tr key={i.toString()}>
-                                                <td style={{lineHeight: '1.6', paddingBottom: margin[i] ? '10px' : ''}}>
-                                                    <a style={{color: copyColour, textDecoration: 'none'}} href={`https://${value}`}>{value}<br/></a>
-                                                </td>
-                                            </tr>;
-                                    } else {
-                                        return (
-                                            <tr key={i.toString()}>
-                                                <td style={{lineHeight: '1.6', paddingBottom: margin[i] ? '10px' : ''}}>
-                                                    {value}<br/>
-                                                </td>
-                                            </tr>
-                                        );
-                                    }
-                                }
-                            })}
-                            {social && 
-                                <table border="0" cellSpacing="0" cellPadding="0" style={{marginTop: '10px'}}>
-                                    <tbody>
-                                        <tr>
-                                            {signatureArray && signatureArray.map(([key, value], i) => {
-                                                const social = value.startsWith("https://instagram.com") || value.startsWith("https://linkedin.com") || value.startsWith("https://x.com") || value.startsWith("https://twitter.com");
-                                                const ig = value.startsWith("https://instagram.com") ? value : null;
-                                                const li = value.startsWith("https://linkedin.com") ? value : null;
-                                                const x = (value.startsWith("https://x.com") || value.startsWith("https://twitter.com")) ? value : null;
-                                                return social && (
-                                                    <td style={{ paddingRight: '5px' }} key={i.toString()}>
-                                                        {ig && 
-                                                            <a href={ig}>
-                                                                <Image src="/images/icon-instagram.svg" alt="" width="30" height="30" />
-                                                            </a>
-                                                        }
-                                                        {li && 
-                                                            <a href={li}>
-                                                                <Image src="/images/icon-linkedin.svg" alt="" width="30" height="30" />
-                                                            </a>
-                                                        }
-                                                        {x && 
-                                                            <a href={x}>
-                                                                <Image src="/images/icon-x.svg" alt="" width="30" height="30" />
-                                                            </a>
-                                                        }
+                                        if (i < 1 && !social) {
+                                            return (
+                                                <tr key={i.toString()}>
+                                                    <td style={{lineHeight: '1.6', paddingBottom: margin[i] ? '10px' : ''}}>
+                                                        <strong>{value}</strong><br/>
                                                     </td>
-                                                )
-                                            })}
-                                        </tr>
-                                    </tbody>
-                                </table>
-                            }
+                                                </tr>
+                                            );
+                                        } else if (i >= 1 && !social) {
+                                            if (link[i]) {
+                                                const linkType = analyzeString(value);
+                                                const isEmail = linkType.isEmail;
+                                                const isHttpOrHttps = linkType.isHttpOrHttps;
+                                                return isEmail ?
+                                                    <tr key={i.toString()}>
+                                                        <td style={{lineHeight: '1.6', paddingBottom: margin[i] ? '10px' : ''}}>
+                                                            <a style={{color: copyColour, textDecoration: 'none'}} href={`mailto:${value}`}>{value}<br/></a>
+                                                        </td>
+                                                    </tr>
+                                                    
+                                                : isHttpOrHttps ? 
+                                                    <tr key={i.toString()}>
+                                                        <td style={{lineHeight: '1.6', paddingBottom: margin[i] ? '10px' : ''}}>
+                                                            <a style={{color: copyColour, textDecoration: 'none'}} href={value}>{value}<br/></a>
+                                                        </td>
+                                                    </tr>
+                                                    
+                                                : 
+                                                    <tr key={i.toString()}>
+                                                        <td style={{lineHeight: '1.6', paddingBottom: margin[i] ? '10px' : ''}}>
+                                                            <a style={{color: copyColour, textDecoration: 'none'}} href={`https://${value}`}>{value}<br/></a>
+                                                        </td>
+                                                    </tr>;
+                                            } else {
+                                                return (
+                                                    <tr key={i.toString()}>
+                                                        <td style={{lineHeight: '1.6', paddingBottom: margin[i] ? '10px' : ''}}>
+                                                            {value}<br/>
+                                                        </td>
+                                                    </tr>
+                                                );
+                                            }
+                                        }
+                                    })}
+                                    {social && 
+                                        <table border="0" cellSpacing="0" cellPadding="0" style={{marginTop: '10px'}}>
+                                            <tbody>
+                                                <tr>
+                                                    {signatureArray && signatureArray.map(([key, value], i) => {
+                                                        const social = value.startsWith("https://instagram.com") || value.startsWith("https://linkedin.com") || value.startsWith("https://x.com") || value.startsWith("https://twitter.com");
+                                                        const ig = value.startsWith("https://instagram.com") ? value : null;
+                                                        const li = value.startsWith("https://linkedin.com") ? value : null;
+                                                        const x = (value.startsWith("https://x.com") || value.startsWith("https://twitter.com")) ? value : null;
+                                                        return social && (
+                                                            <td style={{ paddingRight: '5px' }} key={i.toString()}>
+                                                                {ig && 
+                                                                    <a href={ig}>
+                                                                        <Image src="/images/icon-instagram.svg" alt="" width="30" height="30" />
+                                                                    </a>
+                                                                }
+                                                                {li && 
+                                                                    <a href={li}>
+                                                                        <Image src="/images/icon-linkedin.svg" alt="" width="30" height="30" />
+                                                                    </a>
+                                                                }
+                                                                {x && 
+                                                                    <a href={x}>
+                                                                        <Image src="/images/icon-x.svg" alt="" width="30" height="30" />
+                                                                    </a>
+                                                                }
+                                                            </td>
+                                                        )
+                                                    })}
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    }
+                                </tbody>
+                            </table>
                         </td>
                     </tr>
                 </tbody>
