@@ -27,7 +27,11 @@ export const EmailSignature1 = ({logo, signature, social, fontSize, copyColour, 
 
                                 if (i < 1 && !social) {
                                     return (
-                                        <div key={i.toString()} style={{lineHeight: '1.6', paddingBottom: margin[i] ? '10px' : ''}}><strong>{value}</strong><br/></div>
+                                        <tr key={i.toString()}>
+                                            <td style={{lineHeight: '1.6', paddingBottom: margin[i] ? '10px' : ''}}>
+                                                <strong>{value}</strong><br/>
+                                            </td>
+                                        </tr>
                                     );
                                 } else if (i >= 1 && !social) {
                                     if (link[i]) {
@@ -35,19 +39,33 @@ export const EmailSignature1 = ({logo, signature, social, fontSize, copyColour, 
                                         const isEmail = linkType.isEmail;
                                         const isHttpOrHttps = linkType.isHttpOrHttps;
                                         return isEmail ?
-                                            <div key={i.toString()} style={{lineHeight: '1.6', paddingBottom: margin[i] ? '10px' : ''}}>
-                                                <a style={{color: copyColour, textDecoration: 'none'}} href={`mailto:${value}`}>{value}<br/></a>
-                                            </div>
+                                            <tr key={i.toString()}>
+                                                <td style={{lineHeight: '1.6', paddingBottom: margin[i] ? '10px' : ''}}>
+                                                    <a style={{color: copyColour, textDecoration: 'none'}} href={`mailto:${value}`}>{value}<br/></a>
+                                                </td>
+                                            </tr>
+                                            
                                         : isHttpOrHttps ? 
-                                            <div key={i.toString()} style={{lineHeight: '1.6', paddingBottom: margin[i] ? '10px' : ''}}>
-                                                <a style={{color: copyColour, textDecoration: 'none'}} href={value}>{value}<br/></a>
-                                            </div>
+                                            <tr key={i.toString()}>
+                                                <td style={{lineHeight: '1.6', paddingBottom: margin[i] ? '10px' : ''}}>
+                                                    <a style={{color: copyColour, textDecoration: 'none'}} href={value}>{value}<br/></a>
+                                                </td>
+                                            </tr>
+                                            
                                         : 
-                                            <div key={i.toString()} style={{lineHeight: '1.6', paddingBottom: margin[i] ? '10px' : ''}}>
-                                                <a style={{color: copyColour, textDecoration: 'none'}} href={`https://${value}`}>{value}<br/></a>
-                                            </div>;
+                                            <tr key={i.toString()}>
+                                                <td style={{lineHeight: '1.6', paddingBottom: margin[i] ? '10px' : ''}}>
+                                                    <a style={{color: copyColour, textDecoration: 'none'}} href={`https://${value}`}>{value}<br/></a>
+                                                </td>
+                                            </tr>;
                                     } else {
-                                        return <div key={i.toString()} style={{lineHeight: '1.6', paddingBottom: margin[i] ? '10px' : ''}}>{value}<br/></div>;
+                                        return (
+                                            <tr key={i.toString()}>
+                                                <td style={{lineHeight: '1.6', paddingBottom: margin[i] ? '10px' : ''}}>
+                                                    {value}<br/>
+                                                </td>
+                                            </tr>
+                                        );
                                     }
                                 }
                             })}
@@ -179,20 +197,20 @@ export const SignatureTable1 = ({logo, signature, link, fontSize, copyColour, ma
 
         if (!social) {
             if (i === 0) {
-                emailString += `<div style="line-height: 1.6; padding-bottom: ${margin[i] ? `10px` : ``}"><strong>${value}</strong><br/></div>`;
+                emailString += `<tr><td style="line-height: 1.6; padding-bottom: ${margin[i] ? `10px` : ``}"><strong>${value}</strong><br/></td></tr>`;
             } else {
                 if (link[i]) {
                     const linkType = analyzeString(value);
                     const isEmail = linkType.isEmail;
                     const isHttpOrHttps = linkType.isHttpOrHttps;
                     isEmail ? 
-                    emailString += `<div style="line-height: 1.6; padding-bottom: ${margin[i] ? `10px` : ``}"><a style="color: ${copyColour}; text-decoration: none;" href="mailto:${value}">${value}<br/></a></div>` 
+                    emailString += `<tr><td style="line-height: 1.6; padding-bottom: ${margin[i] ? `10px` : ``}"><a style="color: ${copyColour}; text-decoration: none;" href="mailto:${value}">${value}<br/></a></td></tr>` 
                         : isHttpOrHttps ? 
-                    emailString += `<div style="line-height: 1.6; padding-bottom: ${margin[i] ? `10px` : ``}"><a style="color: ${copyColour}; text-decoration: none;" href="${value}">${value}<br/></a></div>`
+                    emailString += `<tr><td style="line-height: 1.6; padding-bottom: ${margin[i] ? `10px` : ``}"><a style="color: ${copyColour}; text-decoration: none;" href="${value}">${value}<br/></a></td></tr>`
                         : 
-                    emailString += `<div style="line-height: 1.6; padding-bottom: ${margin[i] ? `10px` : ``}"><a style="color: ${copyColour}; text-decoration: none;" href="https://${value}">${value}<br/></a></div>`;
+                    emailString += `<tr><td style="line-height: 1.6; padding-bottom: ${margin[i] ? `10px` : ``}"><a style="color: ${copyColour}; text-decoration: none;" href="https://${value}">${value}<br/></a></td></tr>`;
                 } else {
-                    emailString += `<div style="line-height: 1.6; padding-bottom: ${margin[i] ? `10px` : ``}">${value}<br/></div>`;
+                    emailString += `<tr><td style="line-height: 1.6; padding-bottom: ${margin[i] ? `10px` : ``}">${value}<br/></td></tr>`;
                 }
             }
         }
