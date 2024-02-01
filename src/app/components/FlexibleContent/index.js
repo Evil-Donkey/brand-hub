@@ -73,10 +73,10 @@ const FlexibleContent = ({ data, pwd, bgColour, brand, colour }) => {
             restrictedComponents.push([<Fonts key={i.toString()} data={data} colour={colour} />, title, sectionTitle]);
         }
         if (fieldGroupName === "Brand_Brandoptions_FlexibleContent_EmailSignature") {
-            allComponents.push([<EmailSignature key={i.toString()} data={data} colour={colour} bgColour={bgColour} />, title, sectionTitle]);
+            allComponents.push([<EmailSignature key={i.toString()} data={data} colour={colour} bgColour={bgColour} index={i.toString()} />, title, sectionTitle]);
         }
         if (fieldGroupName === "Brand_Brandoptions_FlexibleContent_EmailSignature" && !passwordProtected) {
-            restrictedComponents.push([<EmailSignature key={i.toString()} data={data} colour={colour} bgColour={bgColour} />, title, sectionTitle]);
+            restrictedComponents.push([<EmailSignature key={i.toString()} data={data} colour={colour} bgColour={bgColour} index={i.toString()} />, title, sectionTitle]);
         }
         if (fieldGroupName === "Brand_Brandoptions_FlexibleContent_Stationery") {
             allComponents.push([<Stationery key={i.toString()} data={data} />, title, sectionTitle]);

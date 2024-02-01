@@ -7,12 +7,12 @@ import styles from '../EmailSignature.module.scss'
 import analyzeString from '../../../../lib/analyzeString'
 import getBase64StringFromDataURL from '../../../../utils/base64'
 
-export const EmailSignature1 = ({logo, signature, social, fontSize, copyColour, margin, link, disclaimer}) => {
+export const EmailSignature1 = ({logo, signature, social, fontSize, copyColour, margin, link, disclaimer, index}) => {
 
     const signatureArray = signature ? Object.entries(signature) : null;
     
     return (
-        <div className='signature'>
+        <div id={`emailSignature-${index}`} className='signature'>
             <table width="600" border="0" cellSpacing="0" cellPadding="0">
                 <tbody>
                     <tr>
@@ -110,7 +110,7 @@ export const EmailSignature1 = ({logo, signature, social, fontSize, copyColour, 
                 {disclaimer &&
                     <tfoot>
                         <tr>
-                            <td colspan="2" style={{paddingTop: '20px', fontSize: '13px'}}>
+                            <td colSpan="2" style={{paddingTop: '20px', fontSize: '13px'}}>
                                 <div dangerouslySetInnerHTML={{ __html: disclaimer }} />
                             </td>
                         </tr>
@@ -121,7 +121,7 @@ export const EmailSignature1 = ({logo, signature, social, fontSize, copyColour, 
     );
 }
 
-export const SignatureTable1 = ({logo, signature, link, fontSize, copyColour, margin, disclaimer}) => {
+export const SignatureTable1 = ({logo, signature, link, fontSize, copyColour, margin, disclaimer, index}) => {
 
     const signatureArray = signature ? Object.entries(signature) : null;
 
@@ -234,14 +234,14 @@ export const SignatureTable1 = ({logo, signature, link, fontSize, copyColour, ma
         </tfoot>`
     : ``;
 
-    let signatureTable = `<table width="600" border="0" cellSpacing="0" cellPadding="0"><tbody><tr><td width="179" align="left" valign="top" style="border-right-style: solid; border-right-color: ${copyColour ? copyColour : '#252525'}; border-right-width: 1px; padding-left: 20px;">${signatureLogo}</td><td width="421" align="left" valign="top" style="padding-left: 30px; font-family: Arial, Helvetica, 'sans-serif'; font-size: ${fontSize ? fontSize : '15px'}; line-height: 1.6; color:${copyColour ? copyColour : ''};">${emailString}</td>${(signatureIg || signatureLn || signatureX) ? `<table border="0" cell-spacing="0" cell-padding="0" style="margin-top: 10px;"><tbody><tr>${signatureIg}${signatureLn}${signatureX}</tr></tbody>${disclaimerCopy}</table>` : ``}</tr></tbody></table>`;
+    let signatureTable = `<table width="600" border="0" cellSpacing="0" cellPadding="0"><tbody><tr><td width="179" align="left" valign="top" style="border-right-style: solid; border-right-color: ${copyColour ? copyColour : '#252525'}; border-right-width: 1px; padding-left: 20px;">${signatureLogo}</td><td width="421" align="left" valign="top" style="padding-left: 30px; font-family: Arial, Helvetica, 'sans-serif'; font-size: ${fontSize ? fontSize : '15px'}; line-height: 1.6; color:${copyColour ? copyColour : ''};"><table width="421" border="0" cellSpacing="0" cellPadding="0"><tbody>${emailString}</tbody></table></td>${(signatureIg || signatureLn || signatureX) ? `<table border="0" cell-spacing="0" cell-padding="0" style="margin-top: 10px;"><tbody><tr>${signatureIg}${signatureLn}${signatureX}</tr></tbody>${disclaimerCopy}</table>` : ``}</tr></tbody></table>`;
 
     return (
         <>
             <div className={`${styles.copySignatureWrap} p-4`}>
                 <code>{signatureTable}</code>
             </div>
-            <CopySignature signatureTable={signatureTable} />
+            <CopySignature signatureTable={signatureTable} index={index} />
         </>
     );
 }

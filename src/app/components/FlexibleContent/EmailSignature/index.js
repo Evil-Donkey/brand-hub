@@ -5,7 +5,7 @@ import styles from './EmailSignature.module.scss'
 import toCamelCase from '../../../lib/camelCase'
 import { EmailSignature1, SignatureTable1 } from './templates/EmailSignature1'
 
-const EmailSignature = ({ colour, bgColour, data }) => {
+const EmailSignature = ({ colour, bgColour, data, index }) => {
 
     const social = data?.socials;
     const disclaimer = data?.disclaimer ?? null;
@@ -92,6 +92,7 @@ const EmailSignature = ({ colour, bgColour, data }) => {
                     <EmailSignature1
                         logo={logo}
                         signature={signature}
+                        index={index}
                         margin={signatureMargin}
                         link={signatureLink}
                         disclaimer={disclaimer}
@@ -103,6 +104,7 @@ const EmailSignature = ({ colour, bgColour, data }) => {
                 <SignatureTable1
                     logo={logo}
                     signature={signature}
+                    index={index}
                     margin={signatureMargin}
                     link={signatureLink}
                     disclaimer={disclaimer}
