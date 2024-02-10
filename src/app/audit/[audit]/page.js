@@ -1,18 +1,18 @@
-import fetchAPI from '@/app/lib/api'
-import BrandLogin from '@/app/components/BrandLogin'
-import BrandIntro from '@/app/components/BrandIntro'
-import BrandHero from '@/app/components/BrandHero'
-import FlexibleContent from '@/app/components/FlexibleContent'
-import HeaderBrand from '@/app/components/HeaderBrand'
+import fetchAPI from "@/app/lib/api"
+import BrandLogin from "@/app/components/BrandLogin"
+import BrandIntro from "@/app/components/BrandIntro"
+import BrandHero from "@/app/components/BrandHero"
+import FlexibleContent from "@/app/components/FlexibleContent"
+import HeaderBrand from "@/app/components/HeaderBrand"
 import Footer from "@/app/components/Footer"
 
 export const dynamicParams = true
 export const revalidate = 10
 
-export async function generateMetadata({ params: {brand} }) {
+export async function generateMetadata({ params: {audit} }) {
   const data = await fetchAPI(`
-    query getBrandsByAuthor {
-      brand(id: "${brand}", idType: SLUG) {
+    query getAuditByAuthor {
+      audit(id: "${audit}", idType: SLUG) {
         title(format: RENDERED)
         seo {
           metaDesc
@@ -33,10 +33,10 @@ export async function generateMetadata({ params: {brand} }) {
     }
   `);
 
-  const seo = data?.brand?.seo;
+  const seo = data?.audit?.seo;
  
   return {
-    title: data?.brand?.title,
+    title: data?.audit?.title,
     description: seo.metaDesc,
     openGraph: {
       title: seo.openGraphTitle,
@@ -56,9 +56,9 @@ export async function generateMetadata({ params: {brand} }) {
 }
 
 export async function generateStaticParams() {
-  const brands = await fetchAPI(`
-    query getBrands {
-      brands {
+  const audits = await fetchAPI(`
+    query getAudits {
+      audits {
         nodes {
           id
           slug
@@ -76,20 +76,19 @@ export async function generateStaticParams() {
     }
   `);
 
-  const brandsArray = brands?.brands?.nodes;
+  const auditsArray = audits?.audits?.nodes;
 
-  return brandsArray.map((brand) => ({
-    author: brand.author.node.authorCustomFields.urlSlug,
-    brand: brand.slug
+  return auditsArray.map((audit) => ({
+    audit: audit.slug
   }))
 }
 
 
-export default async function Page({ params: { brand, author } }) {
+export default async function Page({ params: { audit } }) {
 
   const data = await fetchAPI(`
-    query getBrandsByAuthor {
-      brand(id: "${brand}", idType: SLUG) {
+    query getAuditsByAuthor {
+      audit(id: "${audit}", idType: SLUG) {
         id
         slug
         title(format: RENDERED)
@@ -135,7 +134,7 @@ export default async function Page({ params: { brand, author } }) {
             }
           }
           flexibleContent {
-            ... on Brand_Brandoptions_FlexibleContent_Text {
+            ... on Audit_Brandoptions_FlexibleContent_Text {
               copy
               copy2
               fieldGroupName
@@ -143,7 +142,7 @@ export default async function Page({ params: { brand, author } }) {
               sectionTitle
               title
             }
-            ... on Brand_Brandoptions_FlexibleContent_TwoColumns {
+            ... on Audit_Brandoptions_FlexibleContent_TwoColumns {
               fieldGroupName
               passwordProtected
               sectionTitle
@@ -161,7 +160,7 @@ export default async function Page({ params: { brand, author } }) {
                 }
               }
             }
-            ... on Brand_Brandoptions_FlexibleContent_LargeImage {
+            ... on Audit_Brandoptions_FlexibleContent_LargeImage {
               fieldGroupName
               passwordProtected
               sectionTitle
@@ -176,7 +175,7 @@ export default async function Page({ params: { brand, author } }) {
                 sizes(size: _2048X2048)
               }
             }
-            ... on Brand_Brandoptions_FlexibleContent_AssetDownload {
+            ... on Audit_Brandoptions_FlexibleContent_AssetDownload {
               fieldGroupName
               sectionTitle
               title
@@ -202,7 +201,7 @@ export default async function Page({ params: { brand, author } }) {
                 }
               }
             }
-            ... on Brand_Brandoptions_FlexibleContent_Tabs {
+            ... on Audit_Brandoptions_FlexibleContent_Tabs {
               fieldGroupName
               sectionTitle
               title
@@ -234,7 +233,7 @@ export default async function Page({ params: { brand, author } }) {
                 }
               }
             }
-            ... on Brand_Brandoptions_FlexibleContent_Colours {
+            ... on Audit_Brandoptions_FlexibleContent_Colours {
               fieldGroupName
               sectionTitle
               title
@@ -244,7 +243,7 @@ export default async function Page({ params: { brand, author } }) {
                 name
               }
             }
-            ... on Brand_Brandoptions_FlexibleContent_Fonts {
+            ... on Audit_Brandoptions_FlexibleContent_Fonts {
               fieldGroupName
               sectionTitle
               title
@@ -263,7 +262,7 @@ export default async function Page({ params: { brand, author } }) {
                 }
               }
             }
-            ... on Brand_Brandoptions_FlexibleContent_EmailSignature {
+            ... on Audit_Brandoptions_FlexibleContent_EmailSignature {
               copy
               fieldGroupName
               passwordProtected
@@ -286,7 +285,7 @@ export default async function Page({ params: { brand, author } }) {
                 link
               }
             }
-            ... on Brand_Brandoptions_FlexibleContent_Stationery {
+            ... on Audit_Brandoptions_FlexibleContent_Stationery {
               fieldGroupName
               sectionTitle
               title
@@ -310,7 +309,7 @@ export default async function Page({ params: { brand, author } }) {
                 }
               }
             }
-            ... on Brand_Brandoptions_FlexibleContent_Gallery {
+            ... on Audit_Brandoptions_FlexibleContent_Gallery {
               fieldGroupName
               sectionTitle
               title
@@ -320,7 +319,7 @@ export default async function Page({ params: { brand, author } }) {
                 id
               }
             }
-            ... on Brand_Brandoptions_FlexibleContent_BrandedImage {
+            ... on Audit_Brandoptions_FlexibleContent_BrandedImage {
               copy
               fieldGroupName
               sectionTitle
@@ -367,14 +366,14 @@ export default async function Page({ params: { brand, author } }) {
   const telephone = dataHomepage?.page?.homepage?.telephone;
   const email = dataHomepage?.page?.homepage?.email;
 
-  const brandData = data?.brand;
-  const flexibleContent = brandData?.brandOptions?.flexibleContent;
-  const brandOptions = brandData?.brandOptions;
-  const bgColour = brandData?.brandOptions?.backgroundColour;
-  const textColour = brandData?.brandOptions?.textColour;
-  const pwd = brandData?.password?.password;
-  const authorNiceName = brandData?.author.node.authorCustomFields.authorNiceName;
-  const hideAuthor = brandData?.brandOptions?.hideAuthor;
+  const auditData = data?.audit;
+  const flexibleContent = auditData?.brandOptions?.flexibleContent;
+  const brandOptions = auditData?.brandOptions;
+  const bgColour = auditData?.brandOptions?.backgroundColour;
+  const textColour = auditData?.brandOptions?.textColour;
+  const pwd = auditData?.password?.password;
+  const authorNiceName = auditData?.author.node.authorCustomFields.authorNiceName;
+  const hideAuthor = auditData?.brandOptions?.hideAuthor;
 
   let nav = [];
   for (let i = 0; i < flexibleContent.length; i++) {
@@ -382,14 +381,14 @@ export default async function Page({ params: { brand, author } }) {
     sectionTitle && nav.push(sectionTitle);
   }
 
-  return brandData ? (
+  return auditData ? (
     <div style={{ 'backgroundColor': bgColour, 'color': textColour }}>
       <HeaderBrand nav={nav} bgColour={bgColour} color={textColour} pwd={pwd} />
       {pwd && <BrandLogin pwd={pwd} bgColour={bgColour} color={textColour} />}
-      <BrandIntro data={brandData} author={authorNiceName} hideAuthor={hideAuthor} />
+      <BrandIntro data={auditData} author={authorNiceName} hideAuthor={hideAuthor} />
       <BrandHero data={brandOptions} />
-      <FlexibleContent data={flexibleContent} pwd={pwd} bgColour={bgColour} colour={textColour} brand={brand} />
+      <FlexibleContent data={flexibleContent} pwd={pwd} bgColour={bgColour} colour={textColour} brand={audit} />
       <Footer border={true} color={textColour} telephone={telephone} email={email} />
     </div>
-  ) : null
+  ) : null;
 }

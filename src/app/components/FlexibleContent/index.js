@@ -30,70 +30,70 @@ const FlexibleContent = ({ data, pwd, bgColour, brand, colour }) => {
     {data && data.forEach((data, i) => {
         const { fieldGroupName, sectionTitle, title, passwordProtected } = data;
 
-        if (fieldGroupName === "Brand_Brandoptions_FlexibleContent_Text") {
+        if (fieldGroupName === "Brand_Brandoptions_FlexibleContent_Text" || fieldGroupName === "Audit_Brandoptions_FlexibleContent_Text") {
             allComponents.push([<Text key={i.toString()} data={data} />, title, sectionTitle]);
         }
-        if (fieldGroupName === "Brand_Brandoptions_FlexibleContent_Text" && !passwordProtected) {
+        if ((fieldGroupName === "Brand_Brandoptions_FlexibleContent_Text" || fieldGroupName === "Audit_Brandoptions_FlexibleContent_Text") && !passwordProtected) {
             restrictedComponents.push([<Text key={i.toString()} data={data} />, title, sectionTitle]);
         }
-        if (fieldGroupName === "Brand_Brandoptions_FlexibleContent_TwoColumns") {
+        if (fieldGroupName === "Brand_Brandoptions_FlexibleContent_TwoColumns" || fieldGroupName === "Audit_Brandoptions_FlexibleContent_TwoColumns") {
             allComponents.push([<TwoColumns key={i.toString()} data={data} />, title, sectionTitle]);
         }
-        if (fieldGroupName === "Brand_Brandoptions_FlexibleContent_TwoColumns" && !passwordProtected) {
+        if ((fieldGroupName === "Brand_Brandoptions_FlexibleContent_TwoColumns" || fieldGroupName === "Audit_Brandoptions_FlexibleContent_TwoColumns") && !passwordProtected) {
             restrictedComponents.push([<TwoColumns key={i.toString()} data={data} />, title, sectionTitle]);
         }
-        if (fieldGroupName === "Brand_Brandoptions_FlexibleContent_LargeImage") {
+        if (fieldGroupName === "Brand_Brandoptions_FlexibleContent_LargeImage" || fieldGroupName === "Audit_Brandoptions_FlexibleContent_LargeImage") {
             allComponents.push([<LargeImage key={i.toString()} data={data} />, title, sectionTitle]);
         }
-        if (fieldGroupName === "Brand_Brandoptions_FlexibleContent_LargeImage" && !passwordProtected) {
+        if ((fieldGroupName === "Brand_Brandoptions_FlexibleContent_LargeImage" && fieldGroupName === "Audit_Brandoptions_FlexibleContent_LargeImage") && !passwordProtected) {
             restrictedComponents.push([<LargeImage key={i.toString()} data={data} />, title, sectionTitle]);
         }
-        if (fieldGroupName === "Brand_Brandoptions_FlexibleContent_AssetDownload") {
+        if (fieldGroupName === "Brand_Brandoptions_FlexibleContent_AssetDownload" || fieldGroupName === "Audit_Brandoptions_FlexibleContent_AssetDownload") {
             allComponents.push([<AssetsDownload key={i.toString()} data={data} colour={colour} />, title, sectionTitle]);
         }
-        if (fieldGroupName === "Brand_Brandoptions_FlexibleContent_AssetDownload" && !passwordProtected) {
+        if ((fieldGroupName === "Brand_Brandoptions_FlexibleContent_AssetDownload" || fieldGroupName === "Audit_Brandoptions_FlexibleContent_AssetDownload") && !passwordProtected) {
             restrictedComponents.push([<AssetsDownload key={i.toString()} data={data} colour={colour} />, title, sectionTitle]);
         }
-        if (fieldGroupName === "Brand_Brandoptions_FlexibleContent_Tabs") {
+        if (fieldGroupName === "Brand_Brandoptions_FlexibleContent_Tabs" || fieldGroupName === "Audit_Brandoptions_FlexibleContent_Tabs") {
             allComponents.push([<Tabs key={i.toString()} data={data} bgColour={bgColour} colour={colour} />, title, sectionTitle]);
         }
-        if (fieldGroupName === "Brand_Brandoptions_FlexibleContent_Tabs" && !passwordProtected) {
+        if ((fieldGroupName === "Brand_Brandoptions_FlexibleContent_Tabs" || fieldGroupName === "Audit_Brandoptions_FlexibleContent_Tabs") && !passwordProtected) {
             restrictedComponents.push([<Tabs key={i.toString()} data={data} bgColour={bgColour} colour={colour} />, title, sectionTitle]);
         }
-        if (fieldGroupName === "Brand_Brandoptions_FlexibleContent_Colours") {
+        if (fieldGroupName === "Brand_Brandoptions_FlexibleContent_Colours" || fieldGroupName === "Audit_Brandoptions_FlexibleContent_Colours") {
             allComponents.push([<Colours key={i.toString()} data={data} />, title, sectionTitle]);
         }
-        if (fieldGroupName === "Brand_Brandoptions_FlexibleContent_Colours" && !passwordProtected) {
+        if ((fieldGroupName === "Brand_Brandoptions_FlexibleContent_Colours" || fieldGroupName === "Audit_Brandoptions_FlexibleContent_Colours") && !passwordProtected) {
             restrictedComponents.push([<Colours key={i.toString()} data={data} />, title, sectionTitle]);
         }
-        if (fieldGroupName === "Brand_Brandoptions_FlexibleContent_Fonts") {
+        if (fieldGroupName === "Brand_Brandoptions_FlexibleContent_Fonts" || fieldGroupName === "Audit_Brandoptions_FlexibleContent_Fonts") {
             allComponents.push([<Fonts key={i.toString()} data={data} colour={colour} />, title, sectionTitle]);
         }
-        if (fieldGroupName === "Brand_Brandoptions_FlexibleContent_Fonts" && !passwordProtected) {
+        if ((fieldGroupName === "Brand_Brandoptions_FlexibleContent_Fonts" || fieldGroupName === "Audit_Brandoptions_FlexibleContent_Fonts") && !passwordProtected) {
             restrictedComponents.push([<Fonts key={i.toString()} data={data} colour={colour} />, title, sectionTitle]);
         }
-        if (fieldGroupName === "Brand_Brandoptions_FlexibleContent_EmailSignature") {
+        if (fieldGroupName === "Brand_Brandoptions_FlexibleContent_EmailSignature" || fieldGroupName === "Audit_Brandoptions_FlexibleContent_EmailSignature") {
             allComponents.push([<EmailSignature key={i.toString()} data={data} colour={colour} bgColour={bgColour} index={i.toString()} />, title, sectionTitle]);
         }
-        if (fieldGroupName === "Brand_Brandoptions_FlexibleContent_EmailSignature" && !passwordProtected) {
+        if ((fieldGroupName === "Brand_Brandoptions_FlexibleContent_EmailSignature" || fieldGroupName === "Audit_Brandoptions_FlexibleContent_EmailSignature") && !passwordProtected) {
             restrictedComponents.push([<EmailSignature key={i.toString()} data={data} colour={colour} bgColour={bgColour} index={i.toString()} />, title, sectionTitle]);
         }
-        if (fieldGroupName === "Brand_Brandoptions_FlexibleContent_Stationery") {
+        if (fieldGroupName === "Brand_Brandoptions_FlexibleContent_Stationery" || fieldGroupName === "Audit_Brandoptions_FlexibleContent_Stationery") {
             allComponents.push([<Stationery key={i.toString()} data={data} />, title, sectionTitle]);
         }
-        if (fieldGroupName === "Brand_Brandoptions_FlexibleContent_Stationery" && !passwordProtected) {
+        if ((fieldGroupName === "Brand_Brandoptions_FlexibleContent_Stationery" || fieldGroupName === "Audit_Brandoptions_FlexibleContent_Stationery") && !passwordProtected) {
             restrictedComponents.push([<Stationery key={i.toString()} data={data} />, title, sectionTitle]);
         }
-        if (fieldGroupName === "Brand_Brandoptions_FlexibleContent_BrandedImage") {
+        if (fieldGroupName === "Brand_Brandoptions_FlexibleContent_BrandedImage" || fieldGroupName === "Audit_Brandoptions_FlexibleContent_BrandedImage") {
             allComponents.push([<BrandedImage key={i.toString()} data={data} bgColour={bgColour} colour={colour} brand={brand} />, title, sectionTitle]);
         }
-        if (fieldGroupName === "Brand_Brandoptions_FlexibleContent_BrandedImage" && !passwordProtected) {
+        if ((fieldGroupName === "Brand_Brandoptions_FlexibleContent_BrandedImage" || fieldGroupName === "Audit_Brandoptions_FlexibleContent_BrandedImage") && !passwordProtected) {
             restrictedComponents.push([<BrandedImage key={i.toString()} data={data} bgColour={bgColour} colour={colour} brand={brand} />, title, sectionTitle]);
         }
-        if (fieldGroupName === "Brand_Brandoptions_FlexibleContent_Gallery") {
+        if (fieldGroupName === "Brand_Brandoptions_FlexibleContent_Gallery" || fieldGroupName === "Audit_Brandoptions_FlexibleContent_Gallery") {
             allComponents.push([<Gallery key={i.toString()} data={data} />, title, sectionTitle]);
         }
-        if (fieldGroupName === "Brand_Brandoptions_FlexibleContent_Gallery" && !passwordProtected) {
+        if ((fieldGroupName === "Brand_Brandoptions_FlexibleContent_Gallery" || fieldGroupName === "Audit_Brandoptions_FlexibleContent_Gallery") && !passwordProtected) {
             restrictedComponents.push([<Gallery key={i.toString()} data={data} />, title, sectionTitle]);
         }
     })};
