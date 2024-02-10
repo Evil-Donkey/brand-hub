@@ -1,6 +1,4 @@
-import parse from "html-react-parser"
-import Head from "next/head"
-import fetchAPI from '../../../lib/api'
+import fetchAPI from '@/app/lib/api'
 import Header from '@/app/components/Header'
 import BranderHero from "@/app/components/BranderHero"
 import BranderContent from "@/app/components/BranderContent"
