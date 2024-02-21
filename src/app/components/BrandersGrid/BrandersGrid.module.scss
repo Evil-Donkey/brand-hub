@@ -1,8 +1,11 @@
 .brandersGrid {
     ul {
-        grid-template-columns: repeat(5, 1fr);
-        grid-auto-rows: 1fr;
+        @media screen and (min-width: 992px) {
+            grid-template-columns: repeat(5, 1fr);
+            grid-auto-rows: 1fr;
+        }
         li {
+            width: 100%;
             background-size: cover;
             background-position: center center;
             min-height: 470px;

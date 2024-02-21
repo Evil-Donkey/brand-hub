@@ -6,7 +6,7 @@ const BrandersGrid = ({ branders }) => {
     return (branders) ? (
         <div className={`my-5 container ${styles.brandersGrid}`}>
             <div className='row'>
-                <ul className='col-12 m-0 d-grid gap-3 list-unstyled'>
+                <ul className='col-12 m-0 d-flex flex-wrap d-md-grid gap-3 list-unstyled'>
                     {branders.map((brander, i) => {
                         const { thumbnail, branderQuote, branderName } = brander.branderOptions;
                         const slug = brander.slug;
