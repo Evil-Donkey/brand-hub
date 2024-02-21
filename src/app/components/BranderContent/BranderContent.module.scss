@@ -32,7 +32,28 @@
         }
     }
 
-    img {
-        transform: translateY(-100px);
+    p,
+    li {
+        font-size: 18px;
+        line-height: 30px;
+    }
+
+    .branderImage {
+        img {
+            transform: translateY(-100px);
+        }
+    }
+
+    .articleContentWrapper {
+        gap: 3rem;
+        @media screen and (min-width: 992px) {
+            gap: 6rem;
+        }
+        .articleColumn {
+            width: 100%;
+            @media screen and (min-width: 992px) {
+                width: 50%;
+            }
+        }
     }
 }
