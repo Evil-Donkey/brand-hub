@@ -1,6 +1,13 @@
 .spotlightItem {
-    img {
-        max-width: 100%;
-        height: auto;
+    transition: all .3s ease;
+    &:hover {
+        transform: translateY(-2px);
+    }
+    .spotlightImageWrapper {
+        background-color: var(--colour-white-00);
+        img {
+            max-width: 100%;
+            height: auto;
+        }
     }
 }

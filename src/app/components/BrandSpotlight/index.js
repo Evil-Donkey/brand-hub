@@ -26,7 +26,11 @@ const Spotlight = ({ brandSpotlightCopy, brandSpotlight }) => {
                         const url = authorSlug + '/' + slug;
                         return (        
                             <Link href={url} className={`${styles.spotlightItem} col-md-4 mb-4 d-flex gap-3 flex-column`} key={id}>
-                                {sourceUrl && <Image src={sourceUrl} width={mediaDetails.width} height={mediaDetails.height} sizes={sizes} alt={altText} />}
+                                {sourceUrl && 
+                                    <div className={styles.spotlightImageWrapper}>
+                                        <Image src={sourceUrl} width={mediaDetails.width} height={mediaDetails.height} sizes={sizes} alt={altText} />
+                                    </div>
+                                }
                                 <div>
                                     <h3 className='mb-0'>{title}</h3>
                                     {authorName && <p>Agency: {authorName}</p>}

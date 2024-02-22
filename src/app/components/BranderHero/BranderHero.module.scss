@@ -1,0 +1,6 @@
+.ctaButton {
+    transition: all .3s ease;
+    &:hover {
+        transform: translateX(-3px);
+    }   
+}

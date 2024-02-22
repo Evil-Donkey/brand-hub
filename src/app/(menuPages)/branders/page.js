@@ -59,6 +59,7 @@ export default async function Branders() {
         title(format: RENDERED)
         content(format: RENDERED)
         branders {
+          join
           branders {
             ... on Brander {
               id
@@ -91,13 +92,14 @@ export default async function Branders() {
   const title = data?.page?.title;
   const content = data?.page?.content;
   const branders = data?.page?.branders?.branders;
+  const join = data?.page?.branders?.join;
   const telephone = dataHomepage?.page?.homepage?.telephone;
   const email = dataHomepage?.page?.homepage?.email;
 
   return (
     <main className={styles.pageWrap}>
       <Header fullMenu={true} color="#ffffff" />
-      <BrandersHero content={content} title={title} />
+      <BrandersHero content={content} title={title} join={join} />
       <BrandersGrid branders={branders} />
       <Footer border={false} telephone={telephone} email={email} color="#ffffff" />
     </main>

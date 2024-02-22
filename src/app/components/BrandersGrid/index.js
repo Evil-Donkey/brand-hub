@@ -12,7 +12,7 @@ const BrandersGrid = ({ branders }) => {
                         const slug = brander.slug;
                         return (
                             <li key={brander.id} className='p-md-5' style={{ backgroundImage: `url(${thumbnail.mediaItemUrl})` }}>
-                                <Link href={`/branders/${slug}`} className='p-4 d-flex align-items-end w-100 h-100'>
+                                <Link href={`/branders/${slug}`} className='p-4 p-md-0 d-flex align-items-end w-100 h-100'>
                                     <div className='d-flex flex-column'>
                                         <h2>{branderQuote}</h2>
                                         <h3>{branderName}</h3>
