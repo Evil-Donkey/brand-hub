@@ -23,7 +23,7 @@ const BranderContent = ({ content }) => {
                         {branderQuote &&
                             <div className={styles.articleColumn}>
                                 <h2>{branderQuote}</h2>
-                                <h4>Brander</h4>
+                                {/* <h4>Brander</h4> */}
                                 <h3>{branderName}</h3>
                             </div>
                         }
