@@ -12,16 +12,10 @@
             font-size: 60px;
             margin-bottom: 15px;
         }
-        @media screen and (min-width: 1200px) {
-            font-size: 80px;
-        }
-        @media screen and (min-width: 1400px) {
-            font-size: 98px;
-        }
     }
     p {
         @media screen and (min-width: 768px) {
-            font-size: 19px;
+            font-size: 18px;
         }
     }
     img {

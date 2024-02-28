@@ -6,10 +6,10 @@ import Share from "../Share"
 const BranderHero = ({ content, featuredImage, title }) => {
     
     return (content || title) ? (
-        <div className='my-5 container'>
+        <div className='my-5 pt-md-5 container'>
             <div className='row mb-5'>
                 {title &&
-                    <div className='col-md-8'>
+                    <div className='col-md-7'>
                         <h1>{title}</h1>
                     </div>
                 }

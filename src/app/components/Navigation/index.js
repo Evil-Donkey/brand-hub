@@ -29,11 +29,11 @@ const Navigation = ({ color }) => {
             href: '/why',
             activeSegment: 'about'
         },
-        // {
-        //     label: ' Branders',
-        //     href: '/branders',
-        //     activeSegment: 'branders'
-        // },
+        {
+            label: ' Branders',
+            href: '/branders',
+            activeSegment: 'branders'
+        },
         {
             label: ' Pricing',
             href: '/pricing',
