@@ -92,9 +92,7 @@ export default async function Page({ params: { audit } }) {
         id
         slug
         title(format: RENDERED)
-        password {
-          password
-        }
+        password
         author {
           node {
             authorCustomFields {
