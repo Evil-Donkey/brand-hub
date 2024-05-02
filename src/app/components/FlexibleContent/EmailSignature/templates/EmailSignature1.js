@@ -109,7 +109,7 @@ export const EmailSignature1 = ({logo, logoUrl, signature, social, fontSize, cop
             </table>
 
             {logo &&
-                <table width="100%" border="0" cellSpacing="0" cellPadding="0" style={{borderBottomStyle: 'solid', borderBottomColor: '#000000', borderBottomWidth: '1px'}}>
+                <table width="600" border="0" cellSpacing="0" cellPadding="0" style={{borderBottomStyle: 'solid', borderBottomColor: '#000000', borderBottomWidth: '1px'}}>
                     <tbody>
                         <tr>
                             <td style={{paddingBottom: '30px'}}>
@@ -126,7 +126,7 @@ export const EmailSignature1 = ({logo, logoUrl, signature, social, fontSize, cop
             }
 
             {footerLogos &&
-                <table width="100%" border="0" cellSpacing="0" cellPadding="0">
+                <table width="600" border="0" cellSpacing="0" cellPadding="0">
                     <tbody>
                         <tr>
                             {footerLogos.map((logo, index) => {
@@ -149,7 +149,7 @@ export const EmailSignature1 = ({logo, logoUrl, signature, social, fontSize, cop
             }
 
             {disclaimer &&
-                <table width="100%" border="0" cellSpacing="0" cellPadding="0">
+                <table width="600" border="0" cellSpacing="0" cellPadding="0">
                     <tbody>
                         <tr>
                             <td style={{paddingTop: '20px', fontSize: '11px', color: '#585858'}}>
