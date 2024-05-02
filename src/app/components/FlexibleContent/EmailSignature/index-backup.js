@@ -3,7 +3,7 @@
 import { useState } from "react"
 import styles from './EmailSignature.module.scss'
 import toCamelCase from '../../../lib/camelCase'
-import { EmailSignature1, SignatureTable1 } from './templates/EmailSignature1'
+import { EmailSignature1, SignatureTable1 } from './templates/EmailSignatureDefault'
 
 const EmailSignature = ({ colour, bgColour, data }) => {
 

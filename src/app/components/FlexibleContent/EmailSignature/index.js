@@ -3,12 +3,14 @@
 import { useState } from "react"
 import styles from './EmailSignature.module.scss'
 import toCamelCase from '../../../lib/camelCase'
+import { EmailSignatureDefault, SignatureTableDefault } from './templates/EmailSignatureDefault'
 import { EmailSignature1, SignatureTable1 } from './templates/EmailSignature1'
 
-const EmailSignature = ({ colour, bgColour, data, index }) => {
+const EmailSignature = ({ colour, data, index }) => {
 
     const social = data?.socials;
     const disclaimer = data?.disclaimer ?? null;
+    const emailType = data?.emailType ?? null;
 
     // new //////////////////
     const defaultSignature = {
@@ -19,14 +21,14 @@ const EmailSignature = ({ colour, bgColour, data, index }) => {
         phone: "Office Phone Number",
         instagramUrl: "https://instagram.com",
         linkedinUrl: "https://linkedin.com",
-        xUrl: "https://x.com"
+        // xUrl: "https://x.com"
     };
 
     const signatureFields = data.fields?? null;
     if (signatureFields && social) {
         signatureFields.push({'name': 'Instagram'});
         signatureFields.push({'name': 'Linkedin'});
-        signatureFields.push({'name': 'X'});
+        // signatureFields.push({'name': 'X'});
     }
     const signatureObj = signatureFields ? signatureFields.reduce((obj, item) => {
         const key = toCamelCase(item.name);
@@ -36,6 +38,7 @@ const EmailSignature = ({ colour, bgColour, data, index }) => {
 
     const signatureMargin = signatureFields ? signatureFields.map(item => item.bottomMargin) : null;
     const signatureLink = signatureFields ? signatureFields.map(item => item.link) : null;
+    const signatureBold = signatureFields ? signatureFields.map(item => item.bold) : null;
 
     // const fields = signatureObj ?? defaultSignature;
     const fields = signatureObj ?? null;
@@ -47,7 +50,10 @@ const EmailSignature = ({ colour, bgColour, data, index }) => {
     
     const copy = data?.copy;
     const logo = data?.logo;
+    const logoUrl = data?.logoUrl;
+    const footerLogos = data?.logos;
     const copyColour = data?.signatureCopyColour;
+    const linksColour = data?.linksColour;
     const fontSize = data?.signatureCopyFontSize;
 
     const handleChange = (evt) => {
@@ -59,59 +65,111 @@ const EmailSignature = ({ colour, bgColour, data, index }) => {
     }
 
     return (
-        <div className={`row ${copy ? `justify-content-between` : 'justify-content-end'}`}>
-            {copy &&
-                <div className='col-md-4 mb-4 mb-md-0'>
-                    <div dangerouslySetInnerHTML={{ __html: copy }} />
-                    <style jsx> 
-                        {` 
-                            input::placeholder {
-                                color: ${colour}; 
-                            }` 
-                        } 
-                    </style>
-                    <form className={styles.signatureForm}>
-                        {fieldsArray && fieldsArray.map(([key, value], i) => {
-                            return (
-                                <input
-                                    key={i.toString()}
-                                    type="text"
-                                    name={key}
-                                    placeholder={value}
-                                    value={signature[key]}
-                                    onChange={handleChange}
-                                    style={{ color: colour, borderColor: colour }}
-                                />
-                            );
-                        })}
-                    </form>
-                </div>
-            }
+        <div className={`row ${fieldsArray ? `justify-content-between` : 'justify-content-end'}`}>
+            <div className='col-md-4 mb-4 mb-md-0'>
+                {copy && <div class="mb-4" dangerouslySetInnerHTML={{ __html: copy }} />}
+                {fieldsArray && 
+                    <>
+                        <style jsx> 
+                            {` 
+                                input::placeholder {
+                                    color: ${colour}; 
+                                }` 
+                            } 
+                        </style>
+                        <form className={styles.signatureForm}>
+                            {fieldsArray.map(([key, value], i) => {
+                                return (
+                                    <input
+                                        key={i.toString()}
+                                        type="text"
+                                        name={key}
+                                        placeholder={value}
+                                        value={signature[key]}
+                                        onChange={handleChange}
+                                        style={{ color: colour, borderColor: colour }}
+                                    />
+                                );
+                            })}
+                        </form>
+                    </>
+                }
+            </div>
+
             <div className='col-md-7'>
-                <div className={`${styles.emailSignatureWrap} p-4 bg-white`}>
-                    <EmailSignature1
-                        logo={logo}
-                        signature={signature}
-                        index={index}
-                        margin={signatureMargin}
-                        link={signatureLink}
-                        disclaimer={disclaimer}
-                        copyColour={copyColour}
-                        fontSize={fontSize}
-                        social={social}
-                    />
-                </div>
-                <SignatureTable1
-                    logo={logo}
-                    signature={signature}
-                    index={index}
-                    margin={signatureMargin}
-                    link={signatureLink}
-                    disclaimer={disclaimer}
-                    copyColour={copyColour}
-                    fontSize={fontSize}
-                    social={social}
-                />
+                {emailType == 'default' &&
+                    <>
+                        <div className={`${styles.emailSignatureWrap} p-4 bg-white`}>
+                            <EmailSignatureDefault
+                                logo={logo}
+                                logoUrl={logoUrl}
+                                signature={signature}
+                                index={index}
+                                margin={signatureMargin}
+                                bold={signatureBold}
+                                link={signatureLink}
+                                linksColour={linksColour}
+                                disclaimer={disclaimer}
+                                copyColour={copyColour}
+                                fontSize={fontSize}
+                                social={social}
+                                footerLogos={footerLogos}
+                            />
+                        </div>
+                        <SignatureTableDefault
+                            logo={logo}
+                            logoUrl={logoUrl}
+                            signature={signature}
+                            index={index}
+                            margin={signatureMargin}
+                            bold={signatureBold}
+                            link={signatureLink}
+                            linksColour={linksColour}
+                            disclaimer={disclaimer}
+                            copyColour={copyColour}
+                            fontSize={fontSize}
+                            social={social}
+                            footerLogos={footerLogos}
+                        />
+                    </>
+                }
+
+                {emailType == 'one' &&
+                    <>
+                        <div className={`${styles.emailSignatureWrap} p-4 bg-white`}>
+                            <EmailSignature1
+                                logo={logo}
+                                logoUrl={logoUrl}
+                                signature={signature}
+                                index={index}
+                                margin={signatureMargin}
+                                bold={signatureBold}
+                                link={signatureLink}
+                                disclaimer={disclaimer}
+                                copyColour={copyColour}
+                                linksColour={linksColour}
+                                fontSize={fontSize}
+                                social={social}
+                                footerLogos={footerLogos}
+                            />
+                        </div>
+                        <SignatureTable1
+                            logo={logo}
+                            logoUrl={logoUrl}
+                            signature={signature}
+                            index={index}
+                            margin={signatureMargin}
+                            bold={signatureBold}
+                            link={signatureLink}
+                            disclaimer={disclaimer}
+                            copyColour={copyColour}
+                            linksColour={linksColour}
+                            fontSize={fontSize}
+                            social={social}
+                            footerLogos={footerLogos}
+                        />
+                    </>
+                }
             </div>
         </div>
     )

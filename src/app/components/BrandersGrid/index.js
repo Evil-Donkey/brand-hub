@@ -9,9 +9,10 @@ const BrandersGrid = ({ branders }) => {
                 <ul className='col-12 m-0 d-flex flex-wrap d-md-grid gap-3 list-unstyled'>
                     {branders.map((brander, i) => {
                         const { thumbnail, branderQuote, branderName, specialBadge } = brander.branderOptions;
+                        const mediaItemUrl = thumbnail.mediaItemUrl ? thumbnail.mediaItemUrl : null;
                         const slug = brander.slug;
                         return (
-                            <li key={brander.id} className='p-md-5' style={{ backgroundImage: `url(${thumbnail.mediaItemUrl})` }}>
+                            <li key={brander.id} className='p-md-5' style={{ backgroundImage: `url(${mediaItemUrl})` }}>
                                 <Link href={`/branders/${slug}`} className='p-4 p-md-0 d-flex align-items-end w-100 h-100'>
                                     <div className='d-flex flex-column'>
                                         {specialBadge && <Image className='mb-3' src="/images/icon-career-special.svg" width={91} height={94} alt="Career special badge" />}

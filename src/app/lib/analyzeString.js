@@ -5,6 +5,10 @@ export default function analyzeString(str) {
     // Email validation pattern
     const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     const isEmail = emailPattern.test(str);
+
+    // Phone number validation pattern (flexible for international formats)
+    const phonePattern = /^\+?\d{1,3}\s*(\(\d+\))?(\s*\(\d+\))?\s*\d+(\s*\d+)*$/;
+    const isPhoneNumber = phonePattern.test(str);
   
-    return { isHttpOrHttps, isEmail };
+    return { isHttpOrHttps, isEmail, isPhoneNumber };
 }

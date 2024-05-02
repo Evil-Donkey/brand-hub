@@ -93,9 +93,7 @@ export default async function Page({ params: { brand, author } }) {
         id
         slug
         title(format: RENDERED)
-        password {
-          password
-        }
+        password
         author {
           node {
             authorCustomFields {
@@ -274,16 +272,30 @@ export default async function Page({ params: { brand, author } }) {
                   width
                 }
               }
+              logoUrl
+              emailType
               sectionTitle
               signatureCopyColour
               signatureCopyFontSize
+              linksColour
               socials
               title
               disclaimer
+              logos {
+                image {
+                  mediaItemUrl
+                  mediaDetails {
+                    height
+                    width
+                  }
+                }
+                url
+              }
               fields {
                 name
                 bottomMargin
                 link
+                bold
               }
             }
             ... on Brand_Brandoptions_FlexibleContent_Stationery {

@@ -7,7 +7,7 @@ import styles from '../EmailSignature.module.scss'
 import analyzeString from '../../../../lib/analyzeString'
 import getBase64StringFromDataURL from '../../../../utils/base64'
 
-export const EmailSignature1 = ({logo, logoUrl, signature, social, fontSize, copyColour, linksColour, margin, bold, link, disclaimer, index, footerLogos}) => {
+export const EmailSignatureDefault = ({logo, signature, social, fontSize, copyColour, margin, link, disclaimer, index}) => {
 
     const signatureArray = signature ? Object.entries(signature) : null;
     
@@ -16,52 +16,52 @@ export const EmailSignature1 = ({logo, logoUrl, signature, social, fontSize, cop
             <table width="600" border="0" cellSpacing="0" cellPadding="0">
                 <tbody>
                     <tr>
-                        {/* <td width="179" align="left" valign="top" style={{borderRightStyle: 'solid', borderRightColor: copyColour ? copyColour : '#252525', borderRightWidth: '1px', paddingRight: '20px'}}>
+                        <td width="179" align="left" valign="top" style={{borderRightStyle: 'solid', borderRightColor: copyColour ? copyColour : '#252525', borderRightWidth: '1px', paddingRight: '20px'}}>
                             <img src={logo.mediaItemUrl} width={logo.mediaDetails.width / 2} height={logo.mediaDetails.height / 2} />
-                        </td> */}
-                        <td align="left" valign="top" style={{paddingBottom: '40px', fontFamily: 'Helvetica Neue, Helvetica, Arial, sans-serif', fontSize: fontSize ? fontSize : '15px', lineHeight: '1.3', color: copyColour ? copyColour : ''}}>
-                            <table width="100%" border="0" cellSpacing="0" cellPadding="0">
+                        </td>
+                        <td width="421" align="left" valign="top" style={{paddingLeft: '30px', fontFamily: 'Arial, Helvetica, sans-serif', fontSize: fontSize ? fontSize : '15px', lineHeight: '1.6', color: copyColour ? copyColour : ''}}>
+                            <table width="421" border="0" cellSpacing="0" cellPadding="0">
                                 <tbody>
                                     {signatureArray && signatureArray.map(([key, value], i) => {
                                         const social = value.startsWith("https://instagram.com") || value.startsWith("https://linkedin.com") || value.startsWith("https://x.com") || value.startsWith("https://twitter.com");
 
-                                        
-                                        if (!social && value) {
+                                        if (i < 1 && !social) {
+                                            return (
+                                                <tr key={i.toString()}>
+                                                    <td style={{lineHeight: '1.6', paddingBottom: margin[i] ? '10px' : ''}}>
+                                                        <strong>{value}</strong><br/>
+                                                    </td>
+                                                </tr>
+                                            );
+                                        } else if (i >= 1 && !social) {
                                             if (link[i]) {
                                                 const linkType = analyzeString(value);
                                                 const isEmail = linkType.isEmail;
-                                                const isNumber = linkType.isPhoneNumber;
                                                 const isHttpOrHttps = linkType.isHttpOrHttps;
-
                                                 return isEmail ?
                                                     <tr key={i.toString()}>
-                                                        <td style={{lineHeight: '1.3', fontWeight: bold[i] ? 'bold' : 'normal', paddingBottom: margin[i] ? '10px' : ''}}>
-                                                            <a style={{color: linksColour, textDecoration: 'underline'}} href={`mailto:${value}`}>{value}<br/></a>
+                                                        <td style={{lineHeight: '1.6', paddingBottom: margin[i] ? '10px' : ''}}>
+                                                            <a style={{color: copyColour, textDecoration: 'none'}} href={`mailto:${value}`}>{value}<br/></a>
                                                         </td>
                                                     </tr>
                                                     
                                                 : isHttpOrHttps ? 
                                                     <tr key={i.toString()}>
-                                                        <td style={{lineHeight: '1.3', fontWeight: bold[i] ? 'bold' : 'normal', paddingBottom: margin[i] ? '10px' : ''}}>
-                                                            <a style={{color: linksColour, textDecoration: 'underline'}} href={value}>{value}<br/></a>
+                                                        <td style={{lineHeight: '1.6', paddingBottom: margin[i] ? '10px' : ''}}>
+                                                            <a style={{color: copyColour, textDecoration: 'none'}} href={value}>{value}<br/></a>
                                                         </td>
                                                     </tr>
                                                     
-                                                : isNumber ?
+                                                : 
                                                     <tr key={i.toString()}>
-                                                        <td style={{lineHeight: '1.3', fontWeight: bold[i] ? 'bold' : 'normal', paddingBottom: margin[i] ? '10px' : ''}}>
-                                                            <a style={{color: linksColour, textDecoration: 'underline'}} href={`tel:${value}`}>{value}<br/></a>
-                                                        </td>
-                                                    </tr>
-                                                : <tr key={i.toString()}>
-                                                        <td style={{lineHeight: '1.3', fontWeight: bold[i] ? 'bold' : 'normal', paddingBottom: margin[i] ? '10px' : ''}}>
-                                                            <a style={{color: linksColour, textDecoration: 'underline'}} href={`https://${value}`}>{value}<br/></a>
+                                                        <td style={{lineHeight: '1.6', paddingBottom: margin[i] ? '10px' : ''}}>
+                                                            <a style={{color: copyColour, textDecoration: 'none'}} href={`https://${value}`}>{value}<br/></a>
                                                         </td>
                                                     </tr>;
                                             } else {
                                                 return (
                                                     <tr key={i.toString()}>
-                                                        <td style={{lineHeight: '1.3', fontWeight: bold[i] ? 'bold' : 'normal', paddingBottom: margin[i] ? '10px' : ''}}>
+                                                        <td style={{lineHeight: '1.6', paddingBottom: margin[i] ? '10px' : ''}}>
                                                             {value}<br/>
                                                         </td>
                                                     </tr>
@@ -72,30 +72,35 @@ export const EmailSignature1 = ({logo, logoUrl, signature, social, fontSize, cop
                                     {social && 
                                         <tr>
                                             <td>
-                                                <table border="0" cellSpacing="0" cellPadding="0">
+                                                <table border="0" cellSpacing="0" cellPadding="0" style={{marginTop: '10px'}}>
                                                     <tbody>
-                                                        {signatureArray && signatureArray.map(([key, value], i) => {
-                                                            const social = value.startsWith("https://instagram.com") || value.startsWith("https://linkedin.com") || value.startsWith("https://x.com") || value.startsWith("https://twitter.com");
-                                                            const ig = value.startsWith("https://instagram.com") ? value : null;
-                                                            const li = value.startsWith("https://linkedin.com") ? value : null;
-                                                            const x = (value.startsWith("https://x.com") || value.startsWith("https://twitter.com")) ? value : null;
-                                                            return social && (
-                                                                <tr>
-                                                                    <td key={i.toString()}>
+                                                        <tr>
+                                                            {signatureArray && signatureArray.map(([key, value], i) => {
+                                                                const social = value.startsWith("https://instagram.com") || value.startsWith("https://linkedin.com") || value.startsWith("https://x.com") || value.startsWith("https://twitter.com");
+                                                                const ig = value.startsWith("https://instagram.com") ? value : null;
+                                                                const li = value.startsWith("https://linkedin.com") ? value : null;
+                                                                const x = (value.startsWith("https://x.com") || value.startsWith("https://twitter.com")) ? value : null;
+                                                                return social && (
+                                                                    <td style={{ paddingRight: '5px' }} key={i.toString()}>
                                                                         {ig && 
-                                                                            <a href={ig} target="_blank" style={{color: linksColour, textDecoration: 'underline'}}>
-                                                                                Instagram
+                                                                            <a href={ig}>
+                                                                                <Image src="/images/icon-instagram.svg" alt="" width="30" height="30" />
                                                                             </a>
                                                                         }
                                                                         {li && 
-                                                                            <a href={li} target="_blank" style={{color: linksColour, textDecoration: 'underline'}}>
-                                                                                LinkedIn
+                                                                            <a href={li}>
+                                                                                <Image src="/images/icon-linkedin.svg" alt="" width="30" height="30" />
+                                                                            </a>
+                                                                        }
+                                                                        {x && 
+                                                                            <a href={x}>
+                                                                                <Image src="/images/icon-x.svg" alt="" width="30" height="30" />
                                                                             </a>
                                                                         }
                                                                     </td>
-                                                                </tr>
-                                                            )
-                                                        })}
+                                                                )
+                                                            })}
+                                                        </tr>
                                                     </tbody>
                                                 </table>
                                             </td>
@@ -106,64 +111,21 @@ export const EmailSignature1 = ({logo, logoUrl, signature, social, fontSize, cop
                         </td>
                     </tr>
                 </tbody>
-            </table>
-
-            {logo &&
-                <table width="100%" border="0" cellSpacing="0" cellPadding="0" style={{borderBottomStyle: 'solid', borderBottomColor: '#000000', borderBottomWidth: '1px'}}>
-                    <tbody>
+                {disclaimer &&
+                    <tfoot>
                         <tr>
-                            <td style={{paddingBottom: '30px'}}>
-                                {logoUrl ?
-                                    <a href={logoUrl} target="_blank">
-                                        <img src={logo.mediaItemUrl} width={logo.mediaDetails.width / 2} height={logo.mediaDetails.height / 2} />
-                                    </a>
-                                    : <img src={logo.mediaItemUrl} width={logo.mediaDetails.width / 2} height={logo.mediaDetails.height / 2} />
-                                }
-                            </td>
-                        </tr>
-                    </tbody>
-                </table>
-            }
-
-            {footerLogos &&
-                <table width="100%" border="0" cellSpacing="0" cellPadding="0">
-                    <tbody>
-                        <tr>
-                            {footerLogos.map((logo, index) => {
-                                const logoUrl = logo.url;
-                                const image = logo.image;
-                                return (
-                                    <td key={index.toString()} style={{paddingTop: '15px'}}>
-                                        {logoUrl ?
-                                            <a href={logoUrl} target="_blank">
-                                                <img src={image.mediaItemUrl} width={image.mediaDetails.width / 2} height={image.mediaDetails.height / 2} />
-                                            </a>
-                                        : <img src={image.mediaItemUrl} width={image.mediaDetails.width / 2} height={image.mediaDetails.height / 2} />
-                                        }
-                                    </td>
-                                );
-                            })}
-                        </tr>
-                    </tbody>
-                </table>
-            }
-
-            {disclaimer &&
-                <table width="100%" border="0" cellSpacing="0" cellPadding="0">
-                    <tbody>
-                        <tr>
-                            <td style={{paddingTop: '20px', fontSize: '11px', color: '#585858'}}>
+                            <td colSpan="2" style={{paddingTop: '20px', fontSize: '13px'}}>
                                 <div dangerouslySetInnerHTML={{ __html: disclaimer }} />
                             </td>
                         </tr>
-                    </tbody>
-                </table>
-            }
+                    </tfoot>
+                }
+            </table>
         </div>
     );
 }
 
-export const SignatureTable1 = ({logo, logoUrl, signature, social, fontSize, copyColour, linksColour, margin, bold, link, disclaimer, index, footerLogos}) => {
+export const SignatureTableDefault = ({logo, signature, link, fontSize, copyColour, margin, disclaimer, index}) => {
 
     const signatureArray = signature ? Object.entries(signature) : null;
 
@@ -264,6 +226,9 @@ export const SignatureTable1 = ({logo, logoUrl, signature, social, fontSize, cop
         }
         if (li) {
             signatureLn = `<td style="padding-right: 5px;"><a href="${li}"><img src="${base64imgLi}" alt="" width="30" height="30" /></a></td>`;
+        }
+        if (x) {
+            signatureX = `<td style="padding-right: 5px;"><a href="${x}"><img src="${base64imgX}" alt="" width="30" height="30" /></a></td>`;
         }
     })}
 
