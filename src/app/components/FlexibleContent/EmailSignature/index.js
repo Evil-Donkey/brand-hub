@@ -67,7 +67,7 @@ const EmailSignature = ({ colour, data, index }) => {
     return (
         <div className={`row ${fieldsArray ? `justify-content-between` : 'justify-content-end'}`}>
             <div className='col-md-4 mb-4 mb-md-0'>
-                {copy && <div class="mb-4" dangerouslySetInnerHTML={{ __html: copy }} />}
+                {copy && <div className="mb-4" dangerouslySetInnerHTML={{ __html: copy }} />}
                 {fieldsArray && 
                     <>
                         <style jsx> 

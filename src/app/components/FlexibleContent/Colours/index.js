@@ -16,10 +16,10 @@ const Colours = ({ data }) => {
     const colours = data?.colours;
 
 
-    let extraRow = null;
-        if (colours.length % 5 == 0) {
-            extraRow = '</div><div class="row justify-content-end">';
-        }
+    // let extraRow = null;
+    // if (colours.length % 5 == 0) {
+    //     extraRow = '</div><div class="row justify-content-end">';
+    // }
 
     return colours && (
         <div className='row justify-content-end'>
