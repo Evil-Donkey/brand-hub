@@ -93,7 +93,9 @@ export default async function Page({ params: { brand, author } }) {
         id
         slug
         title(format: RENDERED)
-        password
+        passwordPassword {
+          password
+        }
         author {
           node {
             authorCustomFields {
@@ -384,9 +386,11 @@ export default async function Page({ params: { brand, author } }) {
   const brandOptions = brandData?.brandOptions;
   const bgColour = brandData?.brandOptions?.backgroundColour;
   const textColour = brandData?.brandOptions?.textColour;
-  const pwd = brandData?.password?.password;
+  const pwd = brandData?.passwordPassword?.password;
   const authorNiceName = brandData?.author.node.authorCustomFields.authorNiceName;
   const hideAuthor = brandData?.brandOptions?.hideAuthor;
+
+  console.log(pwd)
 
   let nav = [];
   for (let i = 0; i < flexibleContent.length; i++) {

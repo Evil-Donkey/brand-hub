@@ -92,7 +92,9 @@ export default async function Page({ params: { audit } }) {
         id
         slug
         title(format: RENDERED)
-        password
+        passwordPassword {
+          password
+        }
         author {
           node {
             authorCustomFields {
@@ -369,7 +371,7 @@ export default async function Page({ params: { audit } }) {
   const brandOptions = auditData?.brandOptions;
   const bgColour = auditData?.brandOptions?.backgroundColour;
   const textColour = auditData?.brandOptions?.textColour;
-  const pwd = auditData?.password?.password;
+  const pwd = auditData?.passwordPassword?.password;
   const authorNiceName = auditData?.author.node.authorCustomFields.authorNiceName;
   const hideAuthor = auditData?.brandOptions?.hideAuthor;
 
