@@ -25,11 +25,11 @@ const EmailSignature = ({ colour, data, index }) => {
     };
 
     const signatureFields = data.fields?? null;
-    // if (signatureFields && social) {
-    //     signatureFields.push({'name': 'Instagram'});
-    //     signatureFields.push({'name': 'Linkedin'});
-    //     // signatureFields.push({'name': 'X'});
-    // }
+    if (signatureFields && social && (emailType == 'default')) {
+        signatureFields.push({'name': 'Instagram'});
+        signatureFields.push({'name': 'Linkedin'});
+        // signatureFields.push({'name': 'X'});
+    }
     const signatureObj = signatureFields ? signatureFields.reduce((obj, item) => {
         const key = toCamelCase(item.name);
         obj[key] = item.name;
@@ -102,7 +102,7 @@ const EmailSignature = ({ colour, data, index }) => {
                                     />
                                 );
                             })}
-                            {social &&
+                            {social && (emailType == 'one') &&
                             <>
                                 <input
                                     type="text"
