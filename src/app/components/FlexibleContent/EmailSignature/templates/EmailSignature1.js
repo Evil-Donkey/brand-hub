@@ -10,15 +10,23 @@ import getBase64StringFromDataURL from '../../../../utils/base64'
 export const EmailSignature1 = ({logo, logoUrl, signature, social, fontSize, copyColour, linksColour, margin, bold, link, disclaimer, index, footerLogos}) => {
 
     const signatureArray = signature ? Object.entries(signature) : null;
+
+    const responsiveStyles = `
+        @media (max-width: 768px) {
+            .footer-logo-td {
+                display: block;
+                width: 50%; /* Each logo takes half the width of the container */
+                float: left;
+            }
+        }
+    `;
     
     return (
         <div id={`emailSignature-${index}`} className='signature'>
-            <table width="600" border="0" cellSpacing="0" cellPadding="0">
+            <style dangerouslySetInnerHTML={{ __html: responsiveStyles }} />
+            <table width="100%" border="0" cellSpacing="0" cellPadding="0">
                 <tbody>
                     <tr>
-                        {/* <td width="179" align="left" valign="top" style={{borderRightStyle: 'solid', borderRightColor: copyColour ? copyColour : '#252525', borderRightWidth: '1px', paddingRight: '20px'}}>
-                            <img src={logo.mediaItemUrl} width={logo.mediaDetails.width / 2} height={logo.mediaDetails.height / 2} />
-                        </td> */}
                         <td align="left" valign="top" style={{paddingBottom: '40px', fontFamily: 'Helvetica Neue, Helvetica, Arial, sans-serif', fontSize: fontSize ? fontSize : '15px', lineHeight: '1.3', color: copyColour ? copyColour : ''}}>
                             <table width="100%" border="0" cellSpacing="0" cellPadding="0">
                                 <tbody>
@@ -109,7 +117,7 @@ export const EmailSignature1 = ({logo, logoUrl, signature, social, fontSize, cop
             </table>
 
             {logo &&
-                <table width="600" border="0" cellSpacing="0" cellPadding="0" style={{borderBottomStyle: 'solid', borderBottomColor: '#000000', borderBottomWidth: '1px'}}>
+                <table width="100%" border="0" cellSpacing="0" cellPadding="0" style={{borderBottomStyle: 'solid', borderBottomColor: '#000000', borderBottomWidth: '1px'}}>
                     <tbody>
                         <tr>
                             <td style={{paddingBottom: '30px'}}>
@@ -126,14 +134,14 @@ export const EmailSignature1 = ({logo, logoUrl, signature, social, fontSize, cop
             }
 
             {footerLogos &&
-                <table width="600" border="0" cellSpacing="0" cellPadding="0">
+                <table width="100%" border="0" cellSpacing="0" cellPadding="0">
                     <tbody>
                         <tr>
                             {footerLogos.map((logo, index) => {
                                 const logoUrl = logo.url;
                                 const image = logo.image;
                                 return (
-                                    <td key={index.toString()} style={{paddingTop: '15px'}}>
+                                    <td key={index.toString()} className="footer-logo-td" style={{paddingTop: '15px'}}>
                                         {logoUrl ?
                                             <a href={logoUrl} target="_blank">
                                                 <img src={image.mediaItemUrl} width={image.mediaDetails.width / 2} height={image.mediaDetails.height / 2} />
@@ -149,7 +157,7 @@ export const EmailSignature1 = ({logo, logoUrl, signature, social, fontSize, cop
             }
 
             {disclaimer &&
-                <table width="600" border="0" cellSpacing="0" cellPadding="0">
+                <table width="100%" border="0" cellSpacing="0" cellPadding="0">
                     <tbody>
                         <tr>
                             <td style={{paddingTop: '20px', fontSize: '11px', color: '#585858'}}>
