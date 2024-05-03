@@ -27,7 +27,7 @@ export const EmailSignature1 = ({logo, logoUrl, signature, social, fontSize, cop
             <table width="100%" border="0" cellSpacing="0" cellPadding="0">
                 <tbody>
                     <tr>
-                        <td align="left" valign="top" style={{paddingBottom: '40px', fontFamily: 'Helvetica Neue, Helvetica, Arial, sans-serif', fontSize: fontSize ? fontSize : '15px', lineHeight: '1.3', color: copyColour ? copyColour : ''}}>
+                        <td align="left" valign="top" style={{paddingBottom: '40px', fontFamily: 'Helvetica Neue, Helvetica, Arial, sans-serif', fontSize: fontSize ? fontSize : '15px', lineHeight: '1.3', color: copyColour ? copyColour : '#000000'}}>
                             <table width="100%" border="0" cellSpacing="0" cellPadding="0">
                                 <tbody>
                                     {signatureArray && signatureArray.map(([key, value], i) => {
@@ -174,15 +174,8 @@ export const EmailSignature1 = ({logo, logoUrl, signature, social, fontSize, cop
 export const SignatureTable1 = ({logo, logoUrl, signature, social, fontSize, copyColour, linksColour, margin, bold, link, disclaimer, index, footerLogos}) => {
 
     const signatureArray = signature ? Object.entries(signature) : null;
-
-    const instagramUrl = signature?.instagramUrl ?? null;
-    const linkedinUrl = signature?.linkedinUrl ?? null;
-    const xUrl = signature?.xUrl ?? null;
     
     const [base64img, setBase64img] = useState(logo.mediaItemUrl);
-    const [base64imgIg, setBase64imgIg] = useState(instagramUrl);
-    const [base64imgLi, setBase64imgLi] = useState(linkedinUrl);
-    const [base64imgX, setBase64imgX] = useState(xUrl);
     
     useEffect(() => {
         // Get the remote image as a Blob with the fetch API
@@ -203,36 +196,6 @@ export const SignatureTable1 = ({logo, logoUrl, signature, social, fontSize, cop
                 };
                 reader.readAsDataURL(blob);
             });
-
-        fetch('/images/icon-instagram.svg')
-            .then((res) => res.blob())
-            .then((blob) => {
-                const reader = new FileReader();
-                reader.onloadend = () => {
-                    setBase64imgIg(reader.result);
-                };
-                reader.readAsDataURL(blob);
-            });
-
-        fetch('/images/icon-linkedin.svg')
-            .then((res) => res.blob())
-            .then((blob) => {
-                const reader = new FileReader();
-                reader.onloadend = () => {
-                    setBase64imgLi(reader.result);
-                };
-                reader.readAsDataURL(blob);
-            });
-
-        fetch('/images/icon-x.svg')
-            .then((res) => res.blob())
-            .then((blob) => {
-                const reader = new FileReader();
-                reader.onloadend = () => {
-                    setBase64imgX(reader.result);
-                };
-                reader.readAsDataURL(blob);
-            });
     }, [logo]);
 
     let signatureLogo = base64img ? `<img src="${base64img}" width="${logo.mediaDetails.width / 2}" height="${logo.mediaDetails.height / 2}"/>` : '';
@@ -245,43 +208,46 @@ export const SignatureTable1 = ({logo, logoUrl, signature, social, fontSize, cop
         const social = value.startsWith("https://instagram.com") || value.startsWith("https://linkedin.com") || value.startsWith("https://x.com") || value.startsWith("https://twitter.com");
         const ig = value.startsWith("https://instagram.com") ? value : null;
         const li = value.startsWith("https://linkedin.com") ? value : null;
-        const x = (value.startsWith("https://x.com") || value.startsWith("https://twitter.com")) ? value : null;
 
         if (!social) {
-            if (i === 0) {
-                emailString += `<tr><td style="line-height: 1.6; padding-bottom: ${margin[i] ? `10px` : ``}"><strong>${value}</strong><br/></td></tr>`;
+            if (link[i]) {
+                const linkType = analyzeString(value);
+                const isEmail = linkType.isEmail;
+                const isNumber = linkType.isPhoneNumber;
+                const isHttpOrHttps = linkType.isHttpOrHttps;
+                isEmail ? 
+                    emailString += `<tr><td style="line-height: 1.3; font-weight: ${bold[i] ? `bold` : `normal`}; padding-bottom: ${margin[i] ? `10px` : ``}"><a style="color: ${linksColour}; text-decoration: underline;" href="mailto:${value}">${value}<br/></a></td></tr>` 
+                : isHttpOrHttps ? 
+                    emailString += `<tr><td style="line-height: 1.3; font-weight: ${bold[i] ? `bold` : `normal`}; padding-bottom: ${margin[i] ? `10px` : ``}"><a style="color: ${linksColour}; text-decoration: underline;" href="${value}">${value}<br/></a></td></tr>`
+                : isNumber ? 
+                    emailString += `<tr><td style="line-height: 1.3; font-weight: ${bold[i] ? `bold` : `normal`}; padding-bottom: ${margin[i] ? `10px` : ``}"><a style="color: ${linksColour}; text-decoration: underline;" href="tel:${value}">${value}<br/></a></td></tr>`
+                :   emailString += `<tr><td style="line-height: 1.3; font-weight: ${bold[i] ? `bold` : `normal`}; padding-bottom: ${margin[i] ? `10px` : ``}"><a style="color: ${linksColour}; text-decoration: underline;" href="https://${value}">${value}<br/></a></td></tr>`;
             } else {
-                if (link[i]) {
-                    const linkType = analyzeString(value);
-                    const isEmail = linkType.isEmail;
-                    const isHttpOrHttps = linkType.isHttpOrHttps;
-                    isEmail ? 
-                    emailString += `<tr><td style="line-height: 1.6; padding-bottom: ${margin[i] ? `10px` : ``}"><a style="color: ${copyColour}; text-decoration: none;" href="mailto:${value}">${value}<br/></a></td></tr>` 
-                        : isHttpOrHttps ? 
-                    emailString += `<tr><td style="line-height: 1.6; padding-bottom: ${margin[i] ? `10px` : ``}"><a style="color: ${copyColour}; text-decoration: none;" href="${value}">${value}<br/></a></td></tr>`
-                        : 
-                    emailString += `<tr><td style="line-height: 1.6; padding-bottom: ${margin[i] ? `10px` : ``}"><a style="color: ${copyColour}; text-decoration: none;" href="https://${value}">${value}<br/></a></td></tr>`;
-                } else {
-                    emailString += `<tr><td style="line-height: 1.6; padding-bottom: ${margin[i] ? `10px` : ``}">${value}<br/></td></tr>`;
-                }
+                emailString += `<tr><td style="line-height: 1.3; font-weight: ${bold[i] ? `bold` : `normal`}; padding-bottom: ${margin[i] ? `10px` : ``}">${value}<br/></td></tr>`;
             }
         }
 
         if (ig) {
-            signatureIg = `<td style="padding-right: 5px;"><a href="${ig}"><img src="${base64imgIg}" alt="" width="30" height="30" /></a></td>`;
+            signatureIg = `<tr><td><a style="color: ${linksColour}; text-decoration: underline;" href="${ig}">Instagram</a></td></tr>`;
         }
         if (li) {
-            signatureLn = `<td style="padding-right: 5px;"><a href="${li}"><img src="${base64imgLi}" alt="" width="30" height="30" /></a></td>`;
+            signatureLn = `<tr><td><a style="color: ${linksColour}; text-decoration: underline;" href="${li}">Linked</a></td></tr>`;
         }
     })}
 
     const disclaimerCopy = disclaimer ? `
-        <tfoot border="0" cell-spacing="0" cell-padding="0" style="margin-top: 10px;">
-            <tr><td colspan="2">${disclaimer}</td></tr>
-        </tfoot>`
+        <table width="100%" border="0" cellSpacing="0" cellPadding="0">
+            <tbody>
+                <tr>
+                    <td style="padding-top: 20px; font-size: 11px; color: #585858;">
+                        ${disclaimer}
+                    </td>
+                </tr>
+            </tbody>
+        </table>`
     : ``;
 
-    let signatureTable = `<table width="600" border="0" cellSpacing="0" cellPadding="0"><tbody><tr><td width="179" align="left" valign="top" style="border-right-style: solid; border-right-color: ${copyColour ? copyColour : '#252525'}; border-right-width: 1px; padding-left: 20px;">${signatureLogo}</td><td width="421" align="left" valign="top" style="padding-left: 30px; font-family: Arial, Helvetica, 'sans-serif'; font-size: ${fontSize ? fontSize : '15px'}; line-height: 1.6; color:${copyColour ? copyColour : ''};"><table width="421" border="0" cellSpacing="0" cellPadding="0"><tbody>${emailString}</tbody></table></td>${(signatureIg || signatureLn || signatureX) ? `<table border="0" cell-spacing="0" cell-padding="0" style="margin-top: 10px;"><tbody><tr>${signatureIg}${signatureLn}${signatureX}</tr></tbody>${disclaimerCopy}</table>` : ``}</tr></tbody></table>`;
+    let signatureTable = `<table width="100%" border="0" cellSpacing="0" cellPadding="0"><tbody><tr><td align="left" valign="top" style="padding-bottom: 30px; font-family: Helvetica Neue, Helvetica, Arial, sans-serif; font-size: ${fontSize ? fontSize : '15px'}; line-height: 1.3; color:${copyColour ? copyColour : '#000000'};"><table width="100%" border="0" cellSpacing="0" cellPadding="0"><tbody>${emailString}</tbody></table></td>${(signatureIg || signatureLn) ? `<table border="0" cell-spacing="0" cell-padding="0" style="margin-top: 10px;"><tbody>${signatureIg}${signatureLn}</tbody></table>` : ``}</tr></tbody></table>${disclaimerCopy}`;
 
     return (
         <>
