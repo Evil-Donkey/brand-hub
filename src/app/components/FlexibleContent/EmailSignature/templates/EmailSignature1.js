@@ -7,7 +7,24 @@ import styles from '../EmailSignature.module.scss'
 import analyzeString from '../../../../lib/analyzeString'
 import getBase64StringFromDataURL from '../../../../utils/base64'
 
-export const EmailSignature1 = ({logo, logoUrl, signature, social, fontSize, copyColour, linksColour, margin, bold, link, disclaimer, index, footerLogos}) => {
+export const EmailSignature1 = ({
+    bold,
+    copyColour, 
+    disclaimer, 
+    fontSize, 
+    footerLogos,
+    index, 
+    instagramUrl,
+    italic, 
+    link,
+    linkedinUrl,
+    linksColour, 
+    logo, 
+    logoUrl, 
+    margin, 
+    signature, 
+    social,
+}) => {
 
     const signatureArray = signature ? Object.entries(signature) : null;
 
@@ -31,10 +48,10 @@ export const EmailSignature1 = ({logo, logoUrl, signature, social, fontSize, cop
                             <table width="100%" border="0" cellSpacing="0" cellPadding="0">
                                 <tbody>
                                     {signatureArray && signatureArray.map(([key, value], i) => {
-                                        const social = value.startsWith("https://instagram.com") || value.startsWith("https://linkedin.com") || value.startsWith("https://x.com") || value.startsWith("https://twitter.com");
+                                        // const social = value.startsWith("https://instagram.com") || value.startsWith("https://www.instagram.com") || value.startsWith("https://linkedin.com") || value.startsWith("https://www.linkedin.com") || value.startsWith("https://x.com") || value.startsWith("https://www.x.com") || value.startsWith("https://twitter.com") || value.startsWith("https://www.twitter.com");
 
                                         
-                                        if (!social && value) {
+                                        if (value) {
                                             if (link[i]) {
                                                 const linkType = analyzeString(value);
                                                 const isEmail = linkType.isEmail;
@@ -43,33 +60,33 @@ export const EmailSignature1 = ({logo, logoUrl, signature, social, fontSize, cop
 
                                                 return isEmail ?
                                                     <tr key={i.toString()}>
-                                                        <td style={{lineHeight: '1.3', fontWeight: bold[i] ? 'bold' : 'normal', paddingBottom: margin[i] ? '10px' : ''}}>
+                                                        <td style={{lineHeight: '1.3', fontStyle: italic[i] ? 'italic' : '', fontWeight: bold[i] ? 'bold' : 'normal', paddingBottom: margin[i] ? '10px' : ''}}>
                                                             <a style={{color: linksColour, textDecoration: 'underline'}} href={`mailto:${value}`}>{value}<br/></a>
                                                         </td>
                                                     </tr>
                                                     
                                                 : isHttpOrHttps ? 
                                                     <tr key={i.toString()}>
-                                                        <td style={{lineHeight: '1.3', fontWeight: bold[i] ? 'bold' : 'normal', paddingBottom: margin[i] ? '10px' : ''}}>
+                                                        <td style={{lineHeight: '1.3', fontStyle: italic[i] ? 'italic' : '', fontWeight: bold[i] ? 'bold' : 'normal', paddingBottom: margin[i] ? '10px' : ''}}>
                                                             <a style={{color: linksColour, textDecoration: 'underline'}} href={value}>{value}<br/></a>
                                                         </td>
                                                     </tr>
                                                     
                                                 : isNumber ?
                                                     <tr key={i.toString()}>
-                                                        <td style={{lineHeight: '1.3', fontWeight: bold[i] ? 'bold' : 'normal', paddingBottom: margin[i] ? '10px' : ''}}>
+                                                        <td style={{lineHeight: '1.3', fontStyle: italic[i] ? 'italic' : '', fontWeight: bold[i] ? 'bold' : 'normal', paddingBottom: margin[i] ? '10px' : ''}}>
                                                             <a style={{color: linksColour, textDecoration: 'underline'}} href={`tel:${value}`}>{value}<br/></a>
                                                         </td>
                                                     </tr>
                                                 : <tr key={i.toString()}>
-                                                        <td style={{lineHeight: '1.3', fontWeight: bold[i] ? 'bold' : 'normal', paddingBottom: margin[i] ? '10px' : ''}}>
+                                                        <td style={{lineHeight: '1.3', fontStyle: italic[i] ? 'italic' : '', fontWeight: bold[i] ? 'bold' : 'normal', paddingBottom: margin[i] ? '10px' : ''}}>
                                                             <a style={{color: linksColour, textDecoration: 'underline'}} href={`https://${value}`}>{value}<br/></a>
                                                         </td>
                                                     </tr>;
                                             } else {
                                                 return (
                                                     <tr key={i.toString()}>
-                                                        <td style={{lineHeight: '1.3', fontWeight: bold[i] ? 'bold' : 'normal', paddingBottom: margin[i] ? '10px' : ''}}>
+                                                        <td style={{lineHeight: '1.3', fontStyle: italic[i] ? 'italic' : '', fontWeight: bold[i] ? 'bold' : 'normal', paddingBottom: margin[i] ? '10px' : ''}}>
                                                             {value}<br/>
                                                         </td>
                                                     </tr>
@@ -77,15 +94,15 @@ export const EmailSignature1 = ({logo, logoUrl, signature, social, fontSize, cop
                                             }
                                         }
                                     })}
-                                    {social && 
+                                    {/* {social && 
                                         <tr>
                                             <td>
                                                 <table border="0" cellSpacing="0" cellPadding="0">
                                                     <tbody>
                                                         {signatureArray && signatureArray.map(([key, value], i) => {
                                                             const social = value.startsWith("https://instagram.com") || value.startsWith("https://linkedin.com") || value.startsWith("https://x.com") || value.startsWith("https://twitter.com");
-                                                            const ig = value.startsWith("https://instagram.com") ? value : null;
-                                                            const li = value.startsWith("https://linkedin.com") ? value : null;
+                                                            const ig = value.startsWith("https://instagram.com") || value.startsWith("https://www.instagram.com") ? value : null;
+                                                            const li = value.startsWith("https://linkedin.com") || value.startsWith("https://www.linkedin.com") ? value : null;
                                                             const x = (value.startsWith("https://x.com") || value.startsWith("https://twitter.com")) ? value : null;
                                                             return social && (
                                                                 <tr>
@@ -104,6 +121,34 @@ export const EmailSignature1 = ({logo, logoUrl, signature, social, fontSize, cop
                                                                 </tr>
                                                             )
                                                         })}
+                                                    </tbody>
+                                                </table>
+                                            </td>
+                                        </tr>
+                                    } */}
+                                    {(instagramUrl || linkedinUrl) && 
+                                        <tr>
+                                            <td>
+                                                <table border="0" cellSpacing="0" cellPadding="0">
+                                                    <tbody>
+                                                        {instagramUrl && 
+                                                            <tr>
+                                                                <td>
+                                                                    <a href={instagramUrl} target="_blank" style={{color: linksColour, textDecoration: 'underline', fontFamily: 'Helvetica Neue, Helvetica, Arial, sans-serif', fontSize: '15px', fontWeight: 'normal'}}>
+                                                                        Instagram
+                                                                    </a>
+                                                                </td>
+                                                            </tr>
+                                                        }
+                                                        {linkedinUrl && 
+                                                            <tr>
+                                                                <td>
+                                                                    <a href={linkedinUrl} target="_blank" style={{color: linksColour, textDecoration: 'underline', fontFamily: 'Helvetica Neue, Helvetica, Arial, sans-serif', fontSize: '15px', fontWeight: 'normal'}}>
+                                                                        LinkedIn
+                                                                    </a>
+                                                                </td>
+                                                            </tr>
+                                                        }
                                                     </tbody>
                                                 </table>
                                             </td>

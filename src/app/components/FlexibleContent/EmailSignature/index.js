@@ -25,11 +25,11 @@ const EmailSignature = ({ colour, data, index }) => {
     };
 
     const signatureFields = data.fields?? null;
-    if (signatureFields && social) {
-        signatureFields.push({'name': 'Instagram'});
-        signatureFields.push({'name': 'Linkedin'});
-        // signatureFields.push({'name': 'X'});
-    }
+    // if (signatureFields && social) {
+    //     signatureFields.push({'name': 'Instagram'});
+    //     signatureFields.push({'name': 'Linkedin'});
+    //     // signatureFields.push({'name': 'X'});
+    // }
     const signatureObj = signatureFields ? signatureFields.reduce((obj, item) => {
         const key = toCamelCase(item.name);
         obj[key] = item.name;
@@ -39,6 +39,7 @@ const EmailSignature = ({ colour, data, index }) => {
     const signatureMargin = signatureFields ? signatureFields.map(item => item.bottomMargin) : null;
     const signatureLink = signatureFields ? signatureFields.map(item => item.link) : null;
     const signatureBold = signatureFields ? signatureFields.map(item => item.bold) : null;
+    const signatureItalic = signatureFields ? signatureFields.map(item => item.italic) : null;
 
     // const fields = signatureObj ?? defaultSignature;
     const fields = signatureObj ?? null;
@@ -46,6 +47,8 @@ const EmailSignature = ({ colour, data, index }) => {
     // new //////////////////
 
     const [signature, setSignature] = useState(fields);
+    const [instagramUrl, setInstagram] = useState(null);
+    const [linkedinUrl, setLinkedin] = useState(null);
 
     
     const copy = data?.copy;
@@ -62,6 +65,14 @@ const EmailSignature = ({ colour, data, index }) => {
           ...signature,
           [evt.target.name]: value
         });
+    }
+    const handleInstagramUrl = (evt) => {
+        const value = evt.target.value;
+        setInstagram(value);
+    }
+    const handleLinkedinUrl = (evt) => {
+        const value = evt.target.value;
+        setLinkedin(value);
     }
 
     return (
@@ -91,6 +102,24 @@ const EmailSignature = ({ colour, data, index }) => {
                                     />
                                 );
                             })}
+                            {social &&
+                            <>
+                                <input
+                                    type="text"
+                                    name="instagram"
+                                    placeholder="Instagram url"
+                                    onChange={handleInstagramUrl}
+                                    style={{ color: colour, borderColor: colour }}
+                                />
+                                <input
+                                    type="text"
+                                    name="linkedin"
+                                    placeholder="LinkedIn url"
+                                    onChange={handleLinkedinUrl}
+                                    style={{ color: colour, borderColor: colour }}
+                                />
+                            </>
+                            }
                         </form>
                     </>
                 }
@@ -107,6 +136,7 @@ const EmailSignature = ({ colour, data, index }) => {
                                 index={index}
                                 margin={signatureMargin}
                                 bold={signatureBold}
+                                italic={signatureItalic}
                                 link={signatureLink}
                                 linksColour={linksColour}
                                 disclaimer={disclaimer}
@@ -123,6 +153,7 @@ const EmailSignature = ({ colour, data, index }) => {
                             index={index}
                             margin={signatureMargin}
                             bold={signatureBold}
+                            italic={signatureItalic}
                             link={signatureLink}
                             linksColour={linksColour}
                             disclaimer={disclaimer}
@@ -144,6 +175,7 @@ const EmailSignature = ({ colour, data, index }) => {
                                 index={index}
                                 margin={signatureMargin}
                                 bold={signatureBold}
+                                italic={signatureItalic}
                                 link={signatureLink}
                                 disclaimer={disclaimer}
                                 copyColour={copyColour}
@@ -151,6 +183,8 @@ const EmailSignature = ({ colour, data, index }) => {
                                 fontSize={fontSize}
                                 social={social}
                                 footerLogos={footerLogos}
+                                instagramUrl={instagramUrl}
+                                linkedinUrl={linkedinUrl}
                             />
                         </div>
                         <SignatureTable1
@@ -160,6 +194,7 @@ const EmailSignature = ({ colour, data, index }) => {
                             index={index}
                             margin={signatureMargin}
                             bold={signatureBold}
+                            italic={signatureItalic}
                             link={signatureLink}
                             disclaimer={disclaimer}
                             copyColour={copyColour}
@@ -167,6 +202,8 @@ const EmailSignature = ({ colour, data, index }) => {
                             fontSize={fontSize}
                             social={social}
                             footerLogos={footerLogos}
+                            instagramUrl={instagramUrl}
+                            linkedinUrl={linkedinUrl}
                         />
                     </>
                 }
