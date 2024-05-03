@@ -35,22 +35,22 @@ export async function generateMetadata({ params: {brand} }) {
 
   const seo = data?.brand?.seo;
  
+  const opengraphType = seo?.opengraphType || 'website';
+
   return {
     title: data?.brand?.title,
-    description: seo.metaDesc,
+    description: seo?.metaDesc,
     openGraph: {
-      title: seo.openGraphTitle,
-      description: seo.openGraphTitle,
-      url: seo.openGraphTitle,
-      siteName: seo.openGraphTitle,
-      images: [
-        {
-          url: seo.opengraphImage?.mediaItemUrl,
-          width: seo.opengraphImage?.mediaDetails.width,
-          height: seo.opengraphImage?.mediaDetails.height,
-        }
-      ],
-      type: seo.opengraphType,
+      title: seo?.openGraphTitle,
+      description: seo?.openGraphTitle,
+      url: seo?.openGraphTitle,
+      siteName: seo?.openGraphTitle,
+      images: seo?.opengraphImage ? [{
+        url: seo?.opengraphImage?.mediaItemUrl,
+        width: seo?.opengraphImage?.mediaDetails.width,
+        height: seo?.opengraphImage?.mediaDetails.height,
+      }] : [],
+      type: opengraphType,
     }
   }
 }
@@ -298,6 +298,7 @@ export default async function Page({ params: { brand, author } }) {
                 bottomMargin
                 link
                 bold
+                italic
               }
             }
             ... on Brand_Brandoptions_FlexibleContent_Stationery {
@@ -390,10 +391,8 @@ export default async function Page({ params: { brand, author } }) {
   const authorNiceName = brandData?.author.node.authorCustomFields.authorNiceName;
   const hideAuthor = brandData?.brandOptions?.hideAuthor;
 
-  console.log(pwd)
-
   let nav = [];
-  for (let i = 0; i < flexibleContent.length; i++) {
+  for (let i = 0; i < flexibleContent?.length; i++) {
     const sectionTitle = flexibleContent[i].sectionTitle;
     sectionTitle && nav.push(sectionTitle);
   }
