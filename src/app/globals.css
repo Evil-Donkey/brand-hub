@@ -16,6 +16,7 @@
   --colour-grey-02:    #4d4D4D;
   --colour-grey-03:    #494949;
   --colour-orange-00:  #F9592C;
+  --colour-blue-00:    #B4C6E5;
 }
 
 @media (prefers-color-scheme: dark) {
@@ -91,21 +92,21 @@ b, strong {
 }
 
 .cta__btn {
-  color: var(--colour-white-00);
-  font-family: var(--roboto-flex);
-  background-color: var(--colour-orange-00);
+  color: var(--colour-black-00);
+  font-family: var(--open-sans);
+  background-color: var(--colour-blue-00);
   border-radius: 5px;
   text-transform: uppercase;
   border: none;
   padding: 10px 20px;
-  font-weight: 400;
+  font-weight: 700;
   font-size: 13px;
   letter-spacing: 2px;
   display: inline-block;
   cursor: pointer;
   transition: all .3s ease;
   text-align: center;
-  border: 1px solid var(--colour-orange-00);
+  border: 1px solid var(--colour-blue-00);
 }
 @media screen and (max-width: 991px) {
   .cta__btn {
@@ -118,17 +119,17 @@ b, strong {
 .cta__btn:hover {
   background-color: var(--colour-white-00);
   color: var(--colour-black-03);
-  border: 1px solid var(--colour-black-03);
+  border: 1px solid var(--colour-white-00);
   /* transform: translateY(-2px); */
 }
 
 .cta__btn--transparent {
   background-color: transparent;
-  border: 1px solid var(--colour-black-03);
-  color: var(--colour-black-03);
+  border: 1px solid var(--colour-white-00);
+  color: var(--colour-white-00);
 }
 .cta__btn--transparent:hover {
-  background-color: var(--colour-orange-00);
-  color: var(--colour-white-00);
-  border-color: var(--colour-orange-00);
+  background-color: var(--colour-white-00);
+  color: var(--colour-black-03);
+  border-color: var(--colour-white-00);
 }
