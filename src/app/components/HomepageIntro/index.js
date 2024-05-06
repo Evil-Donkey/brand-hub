@@ -4,7 +4,7 @@ import Link from 'next/link'
 import styles from './HomepageIntro.module.scss'
 // import { trackEvent } from '../GoogleTagManager'
 
-const Intro = ({ content, cta, email, telephone, title }) => {
+const Intro = ({ backgroundColor, color, content, cta, email, telephone, title }) => {
 
     // const trackDemo = () => {
     //     trackEvent({
@@ -23,21 +23,18 @@ const Intro = ({ content, cta, email, telephone, title }) => {
     // };
 
     return (
-        <div className={styles.introContainer}>
+        <div className={styles.introContainer} style={{backgroundColor: backgroundColor, color: color}}>
             <div className={`${styles.introContainer} container`}>
-                <div className='row justify-content-between align-items-end text-center text-md-start'>
+                <div className='row justify-content-between text-center text-md-start'>
                     {title &&
-                        <div className='col-md-6 mb-5 mb-md-0'>
-                            <h1>{title}</h1>
+                        <div className='col-md-5 mb-5 mb-md-0'>
+                            <h1 className="m-0">{title}</h1>
                         </div>
                     }
-                    <div className='col-md-5'>
+                    <div className='col-md-5 d-flex flex-column justify-content-between'>
                         {content && <div dangerouslySetInnerHTML={{ __html: content }} />}
                         <div className={`d-flex flex-column flex-lg-row gap-lg-3 align-items-center ${!content ? 'justify-content-end' : ''}`}>
-                            {!cta && <Link href="#form-request" className="cta__btn mt-3">Request demo</Link>}
-                            {cta && <Link href="/contact" className="cta__btn mt-3">{cta}</Link>}
-                            {telephone && <a href={`tel:${telephone}`} className="cta__btn cta__btn mt-3" target="_blank">Call us</a>}
-                            {email && !cta && <a href={`mailto:${email}`} className="cta__btn cta__btn mt-3" target="_blank">Email us</a>}
+                            <Link href="#form-request" className="cta__btn mt-3">Book a demo</Link>
                         </div>
                     </div>
                 </div>

@@ -3,10 +3,10 @@ import Logo from '../Logo'
 import Navigation from '../Navigation'
 import styles from './Header.module.scss'
 
-const Header = ({ color, fullMenu }) => {
+const Header = ({ backgroundColor, color, fullMenu }) => {
 
     return (
-        <>
+        <div style={{backgroundColor: backgroundColor, color: color}}>
             <div className={`${styles.headerContainer} container py-3`}>
                 <div className="row align-items-center justify-content-between">
                     <div className='col-auto'>
@@ -21,7 +21,7 @@ const Header = ({ color, fullMenu }) => {
                     }
                 </div>
             </div>
-        </>
+        </div>
     );
 }
 
