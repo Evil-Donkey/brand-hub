@@ -22,8 +22,6 @@ const Intro = ({ backgroundColor, color, content, isHome, title }) => {
     //     });
     // };
 
-    console.log(isHome)
-
     return (
         <div className={styles.introContainer} style={{backgroundColor: backgroundColor, color: color}}>
             <div className={`${styles.introContainer} container`}>
