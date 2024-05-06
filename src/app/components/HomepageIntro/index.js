@@ -4,7 +4,7 @@ import Link from 'next/link'
 import styles from './HomepageIntro.module.scss'
 // import { trackEvent } from '../GoogleTagManager'
 
-const Intro = ({ backgroundColor, color, content, cta, email, telephone, title }) => {
+const Intro = ({ backgroundColor, color, content, isHome, title }) => {
 
     // const trackDemo = () => {
     //     trackEvent({
@@ -22,13 +22,15 @@ const Intro = ({ backgroundColor, color, content, cta, email, telephone, title }
     //     });
     // };
 
+    console.log(isHome)
+
     return (
         <div className={styles.introContainer} style={{backgroundColor: backgroundColor, color: color}}>
             <div className={`${styles.introContainer} container`}>
                 <div className='row justify-content-between text-center text-md-start'>
                     {title &&
                         <div className='col-md-5 mb-5 mb-md-0'>
-                            <h1 className="m-0">{title}</h1>
+                            <h1 className={`m-0 ${isHome ? styles.heroGraphic : ``}`}>{title}</h1>
                         </div>
                     }
                     <div className='col-md-5 d-flex flex-column justify-content-between'>

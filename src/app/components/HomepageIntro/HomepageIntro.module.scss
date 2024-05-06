@@ -5,6 +5,32 @@
         font-size: 50px;
         line-height: 1.1;
         margin-bottom: 0;
+        &.heroGraphic {
+            position: relative;
+            &:before {
+                content: "";
+                position: absolute;
+                top: 54%;
+                transform: translateY(-50%);
+                display: none;
+                width: 220px;
+                height: 120px;
+                background-size: contain;
+                background-position: center;
+                background-repeat: no-repeat;
+                background-image: url('/images/graphic-homepage-hero.svg');
+                @media screen and (min-width: 992px) {
+                    display: block;
+                    right: -175px;
+                }
+                @media screen and (min-width: 1200px) {
+                    right: -145px;
+                }
+                @media screen and (min-width: 1400px) {
+                    right: -75px;
+                }
+            }
+        }
         @media screen and (min-width: 768px) {
             font-size: 100px;
         }

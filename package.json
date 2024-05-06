@@ -30,7 +30,8 @@
     "react-selecto": "^1.26.0",
     "react-share": "^5.0.3",
     "react-youtube": "^10.1.0",
-    "simple-color-converter": "^2.1.13"
+    "simple-color-converter": "^2.1.13",
+    "styled-components": "^6.1.9"
   },
   "devDependencies": {
     "sass": "^1.64.1"

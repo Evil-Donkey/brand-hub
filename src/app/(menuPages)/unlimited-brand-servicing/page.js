@@ -1,10 +1,10 @@
-import fetchAPI from '@/app/lib/api'
-import Header from '@/app/components/Header'
-import Intro from '@/app/components/HomepageIntro'
-import Blocks from '@/app/components/HomepageBlocks'
-import FormRequest from '@/app/components/FormRequest'
-import Footer from '@/app/components/Footer'
-import styles from '@/app/Homepage.module.scss'
+import fetchAPI from '../../lib/api'
+import Header from '../../components/Header'
+import Intro from '../../components/HomepageIntro'
+import Blocks from '../../components/HomepageBlocks'
+import FormRequest from '../../components/FormRequest'
+import Footer from '../../components/Footer'
+import styles from '../../Homepage.module.scss'
 
 export async function generateMetadata() {
 
@@ -88,7 +88,7 @@ export default async function Why() {
   return (
     <main className={styles.homepageMainWrap}>
       <Header fullMenu={true} backgroundColor={backgroundColor} color={color} />
-      <Intro backgroundColor={backgroundColor} color={color} content={content} title={title} />
+      <Intro backgroundColor={backgroundColor} color={color} content={content} title={title} isHome={true} />
       <Footer border={false} telephone={telephone} email={email} />
     </main>
   )
