@@ -1,7 +1,7 @@
 import Script from 'next/script'
 import GoogleAnalytics from './components/GoogleAnalytics'
 import GoogleTagManager from './components/GoogleTagManager'
-import { robotoFlex, robotoSlab } from './utils/fonts'
+import { anton, openSans, robotoFlex, robotoSlab } from './utils/fonts'
 import 'bootstrap/dist/css/bootstrap.css'
 import './globals.css'
 
@@ -20,7 +20,7 @@ export default function RootLayout({ children, params }) {
     <html lang="en">
       <GoogleAnalytics GA_TRACKING_ID={GA_TRACKING_ID} />
       <GoogleTagManager GTM_ID={GTM_ID} />
-      <body className={`${robotoSlab.variable} ${robotoFlex.className}`}>
+      <body className={`${robotoSlab.variable} ${anton.variable} ${openSans.variable} ${robotoFlex.className}`}>
         {children}
         <noscript
             dangerouslySetInnerHTML={{

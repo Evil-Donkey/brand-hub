@@ -14,7 +14,7 @@ const Navigation = ({ color }) => {
         if (pathname == "/branders") {
             document.documentElement.style.setProperty("--theme-nav-00", '#ffffff');
         } else {
-            document.documentElement.style.setProperty("--theme-nav-00", '#231F20');
+            document.documentElement.style.setProperty("--theme-nav-00", color ? color : '#231F20');
         }
     }, []);
 
