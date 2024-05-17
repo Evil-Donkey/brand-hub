@@ -1,7 +1,7 @@
 import fetchAPI from './lib/api'
 import Header from './components/Header'
 import Intro from './components/HomepageIntro'
-import PageFlexibleContent from './components/PageFlexibleContent'
+// import PageFlexibleContent from './components/PageFlexibleContent'
 import Footer from './components/Footer'
 import styles from './Homepage.module.scss'
 
@@ -132,7 +132,7 @@ export default async function Why() {
     <main className={styles.homepageMainWrap}>
       <Header fullMenu={true} backgroundColor={backgroundColor} color={color} />
       <Intro backgroundColor={backgroundColor} color={color} content={content} title={title} isHome={true} />
-      <PageFlexibleContent data={flexibleContent} />
+      {/* <PageFlexibleContent data={flexibleContent} /> */}
       <Footer border={false} telephone={telephone} email={email} />
     </main>
   )
