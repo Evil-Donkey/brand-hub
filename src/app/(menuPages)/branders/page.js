@@ -31,23 +31,23 @@ export async function generateMetadata() {
 
   const seo = data?.page?.seo;
  
+  const opengraphType = seo?.opengraphType || 'website';
+
   return {
-    title: 'Branders',
-    description: seo.metaDesc,
+    title: 'Branders | Brand Hub',
+    description: seo?.metaDesc,
     openGraph: {
-      title: seo.openGraphTitle,
-      description: seo.openGraphTitle,
-      url: seo.openGraphTitle,
-      siteName: seo.openGraphTitle,
-      images: [
-        {
-          url: seo.opengraphImage?.mediaItemUrl,
-          width: seo.opengraphImage?.mediaDetails.width,
-          height: seo.opengraphImage?.mediaDetails.height,
-        }
-      ],
-      type: seo.opengraphType,
-    },
+      title: seo?.openGraphTitle,
+      description: seo?.openGraphTitle,
+      url: seo?.openGraphTitle,
+      siteName: seo?.openGraphTitle,
+      images: seo?.opengraphImage ? [{
+        url: seo?.opengraphImage?.mediaItemUrl,
+        width: seo?.opengraphImage?.mediaDetails.width,
+        height: seo?.opengraphImage?.mediaDetails.height,
+      }] : [],
+      type: opengraphType,
+    }
   }
 }
 
@@ -79,12 +79,12 @@ export default async function Branders() {
     }
   `);
 
-  const dataHomepage = await fetchAPI(`
-    query getHomepage {
-      page(id: "5", idType: DATABASE_ID) {
-        homepage {
-          telephone
+  const dataOptions = await fetchAPI(`
+    query ThemeSettings {
+      acfOptionsThemeSettings {
+        themeSettings {
           email
+          telephone
         }
       }
     }
@@ -94,8 +94,8 @@ export default async function Branders() {
   const content = data?.page?.content;
   const branders = data?.page?.branders?.branders;
   const join = data?.page?.branders?.join;
-  const telephone = dataHomepage?.page?.homepage?.telephone;
-  const email = dataHomepage?.page?.homepage?.email;
+  const telephone = dataOptions?.acfOptionsThemeSettings?.themeSettings?.telephone;
+  const email = dataOptions?.acfOptionsThemeSettings?.themeSettings?.email;
 
   return (
     <main className={styles.pageWrap}>

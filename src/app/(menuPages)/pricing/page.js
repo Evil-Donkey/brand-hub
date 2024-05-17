@@ -32,23 +32,23 @@ export async function generateMetadata() {
 
   const seo = data?.page?.seo;
  
+  const opengraphType = seo?.opengraphType || 'website';
+
   return {
-    title: 'Pricing',
-    description: seo.metaDesc,
+    title: 'Pricing | Brand Hub',
+    description: seo?.metaDesc,
     openGraph: {
-      title: seo.openGraphTitle,
-      description: seo.openGraphTitle,
-      url: seo.openGraphTitle,
-      siteName: seo.openGraphTitle,
-      images: [
-        {
-          url: seo.opengraphImage?.mediaItemUrl,
-          width: seo.opengraphImage?.mediaDetails.width,
-          height: seo.opengraphImage?.mediaDetails.height,
-        }
-      ],
-      type: seo.opengraphType,
-    },
+      title: seo?.openGraphTitle,
+      description: seo?.openGraphTitle,
+      url: seo?.openGraphTitle,
+      siteName: seo?.openGraphTitle,
+      images: seo?.opengraphImage ? [{
+        url: seo?.opengraphImage?.mediaItemUrl,
+        width: seo?.opengraphImage?.mediaDetails.width,
+        height: seo?.opengraphImage?.mediaDetails.height,
+      }] : [],
+      type: opengraphType,
+    }
   }
 }
 
@@ -86,20 +86,20 @@ export default async function Pricing() {
     }
   `);
 
-  const dataHomepage = await fetchAPI(`
-    query getHomepage {
-      page(id: "5", idType: DATABASE_ID) {
-        homepage {
-          telephone
+  const dataOptions = await fetchAPI(`
+    query ThemeSettings {
+      acfOptionsThemeSettings {
+        themeSettings {
           email
+          telephone
         }
       }
     }
   `);
 
   const title = data?.page?.title;
-  const telephone = dataHomepage?.page?.homepage?.telephone;
-  const email = dataHomepage?.page?.homepage?.email;
+  const telephone = dataOptions?.acfOptionsThemeSettings?.themeSettings?.telephone;
+  const email = dataOptions?.acfOptionsThemeSettings?.themeSettings?.email;
   const pricingOptions = data?.page?.pricing?.options;
 
   return (
