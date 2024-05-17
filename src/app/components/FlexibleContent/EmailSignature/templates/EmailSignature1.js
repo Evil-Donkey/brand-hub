@@ -1,6 +1,6 @@
-'use client'
+// 'use client'
 
-import { useEffect, useState } from 'react'
+// import { useEffect, useState } from 'react'
 import CopySignature from './CopySignature';
 import Image from 'next/image'
 import styles from '../EmailSignature.module.scss'
@@ -29,11 +29,13 @@ export const EmailSignature1 = ({
     const signatureArray = signature ? Object.entries(signature) : null;
 
     const responsiveStyles = `
+        .footer-logo-td {
+            float: left;
+        }
         @media (max-width: 768px) {
             .footer-logo-td {
                 display: block;
-                width: 50%; /* Each logo takes half the width of the container */
-                float: left;
+                width: 50%;
             }
         }
     `;
@@ -162,7 +164,7 @@ export const EmailSignature1 = ({
             </table>
 
             {logo &&
-                <table width="100%" border="0" cellSpacing="0" cellPadding="0" style={{borderBottomStyle: 'solid', borderBottomColor: '#000000', borderBottomWidth: '1px'}}>
+                <table width="100%" border="0" cellSpacing="0" cellPadding="0">
                     <tbody>
                         <tr>
                             <td style={{paddingBottom: '30px'}}>
@@ -179,23 +181,26 @@ export const EmailSignature1 = ({
             }
 
             {footerLogos &&
-                <table width="100%" border="0" cellSpacing="0" cellPadding="0">
+                <table border="0" cellSpacing="0" cellPadding="0" style={{borderTopStyle: 'solid', borderTopColor: '#000000', borderTopWidth: '1px'}}>
                     <tbody>
                         <tr>
-                            {footerLogos.map((logo, index) => {
-                                const logoUrl = logo.url;
-                                const image = logo.image;
-                                return (
-                                    <td key={index.toString()} className="footer-logo-td" style={{paddingTop: '15px'}}>
-                                        {logoUrl ?
-                                            <a href={logoUrl} target="_blank">
-                                                <img src={image.mediaItemUrl} width={image.mediaDetails.width / 2} height={image.mediaDetails.height / 2} />
-                                            </a>
-                                        : <img src={image.mediaItemUrl} width={image.mediaDetails.width / 2} height={image.mediaDetails.height / 2} />
-                                        }
-                                    </td>
-                                );
-                            })}
+                            <td>
+                                {footerLogos.map((logo, index) => {
+                                    const logoUrl = logo.url;
+                                    const image = logo.image;
+                                    const isLastItem = index === footerLogos.length - 1;
+                                    return (
+                                        <div key={index.toString()} className="footer-logo-td" style={{paddingTop: '15px', paddingRight: !isLastItem ? '40px' : '0px'}}>
+                                            {logoUrl ?
+                                                <a href={logoUrl} target="_blank">
+                                                    <img src={image.mediaItemUrl} width={image.mediaDetails.width / 2} height={image.mediaDetails.height / 2} />
+                                                </a>
+                                            : <img src={image.mediaItemUrl} width={image.mediaDetails.width / 2} height={image.mediaDetails.height / 2} />
+                                            }
+                                        </div>
+                                    );
+                                })}
+                            </td>
                         </tr>
                     </tbody>
                 </table>
@@ -220,30 +225,30 @@ export const SignatureTable1 = ({logo, logoUrl, signature, social, fontSize, cop
 
     const signatureArray = signature ? Object.entries(signature) : null;
     
-    const [base64img, setBase64img] = useState(logo.mediaItemUrl);
+    // const [base64img, setBase64img] = useState(logo.mediaItemUrl);
     
-    useEffect(() => {
-        // Get the remote image as a Blob with the fetch API
-        fetch(logo.mediaItemUrl)
-            .then((res) => res.blob())
-            .then((blob) => {
-                // Read the Blob as DataURL using the FileReader API
-                const reader = new FileReader();
-                reader.onloadend = () => {
-                    // console.log(reader.result);
-                    // Logs data:image/jpeg;base64,wL2dvYWwgbW9yZ...
-                    setBase64img(reader.result);
+    // useEffect(() => {
+    //     // Get the remote image as a Blob with the fetch API
+    //     fetch(logo.mediaItemUrl)
+    //         .then((res) => res.blob())
+    //         .then((blob) => {
+    //             // Read the Blob as DataURL using the FileReader API
+    //             const reader = new FileReader();
+    //             reader.onloadend = () => {
+    //                 // console.log(reader.result);
+    //                 // Logs data:image/jpeg;base64,wL2dvYWwgbW9yZ...
+    //                 setBase64img(reader.result);
 
-                    // Convert to Base64 string
-                    // const base64 = getBase64StringFromDataURL(reader.result);
-                    // console.log(base64);
-                    // Logs wL2dvYWwgbW9yZ...
-                };
-                reader.readAsDataURL(blob);
-            });
-    }, [logo]);
+    //                 // Convert to Base64 string
+    //                 // const base64 = getBase64StringFromDataURL(reader.result);
+    //                 // console.log(base64);
+    //                 // Logs wL2dvYWwgbW9yZ...
+    //             };
+    //             reader.readAsDataURL(blob);
+    //         });
+    // }, [logo]);
 
-    let signatureLogo = base64img ? `<img src="${base64img}" width="${logo.mediaDetails.width / 2}" height="${logo.mediaDetails.height / 2}"/>` : '';
+    // let signatureLogo = base64img ? `<img src="${base64img}" width="${logo.mediaDetails.width / 2}" height="${logo.mediaDetails.height / 2}"/>` : '';
     let emailString = null;
     let signatureIg = null;
     let signatureLn = null;
