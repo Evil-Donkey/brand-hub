@@ -15,8 +15,10 @@ const Header = ({ backgroundColor, color, fullMenu }) => {
                         </Link>
                     </div>
                     {fullMenu &&
-                        <div className='col-auto align-self-end'>
+                        <div className='col-auto align-self-end d-flex align-items-center gap-3'>
                             <Navigation color={color} />
+                            {/* <Link href="#form-request" className="cta__btn">Book a demo</Link>
+                            <Link href="/pricing" className="cta__btn cta__btn--transparent">Sign up</Link> */}
                         </div>
                     }
                 </div>
