@@ -2,10 +2,10 @@ import fetchAPI from './lib/api'
 import Header from './components/Header'
 import Intro from './components/HomepageIntro'
 // import PageFlexibleContent from './components/PageFlexibleContent'
-// import Blocks from './components/HomepageBlocks'
-// import KeyList from './components/HomepageKeyList'
-// import Spotlight from './components/BrandSpotlight'
-// import FormRequest from './components/FormRequest'
+import Blocks from './components/HomepageBlocks'
+import KeyList from './components/HomepageKeyList'
+import Spotlight from './components/BrandSpotlight'
+import FormRequest from './components/FormRequest'
 import Footer from './components/Footer'
 import styles from './Homepage.module.scss'
 
@@ -13,7 +13,7 @@ export async function generateMetadata() {
 
   const data = await fetchAPI(`
     query getContactPage {
-      page(id: "883", idType: DATABASE_ID) {
+      page(id: "5", idType: DATABASE_ID) {
         seo {
           metaDesc
           opengraphUrl
@@ -55,56 +55,55 @@ export async function generateMetadata() {
   }
 }
 
-export default async function Why() {
+export default async function Home() {
 
   const data = await fetchAPI(`
     query getHomePage {
       page(id: "5", idType: DATABASE_ID) {
         content(format: RENDERED)
         title(format: RENDERED)
-        pageOptions {
-          backgroundColor
-          textColor
-        }
-        flexibleContent {
-          flexibleContent {
-            ... on Page_Flexiblecontent_FlexibleContent_TwoColumnsTextimage {
-              backgroundColor
-              fieldGroupName
-              rows {
-                copy
-                image {
+        homepage {
+          telephone
+          email
+          keyList {
+            keyItem
+          }
+          sections {
+            copy
+            ctaLabel
+            ctaUrl
+            image {
+              mediaItemUrl
+              mediaDetails {
+                height
+                width
+              }
+              altText
+            }
+          }
+          brandSpotlightCopy
+          brandSpotlight {
+            ... on Brand {
+              id
+              author {
+                node {
+                  authorCustomFields {
+                    authorNiceName
+                    urlSlug
+                  }
+                }
+              }
+              brandOptions {
+                spotlightFeaturedImage {
                   altText
                   mediaDetails {
                     height
                     width
                   }
+                  sizes(size: SPOTLIGHT_SIZE)
+                  sourceUrl(size: SPOTLIGHT_SIZE)
                   mediaItemUrl
                 }
-              }
-            }
-            ... on Page_Flexiblecontent_FlexibleContent_ThreeColumnsGrid {
-              backgroundColor
-              textColor
-              fieldGroupName
-              heading
-              grid {
-                copy
-                icon {
-                  altText
-                  mediaDetails {
-                    height
-                    width
-                  }
-                  mediaItemUrl
-                }
-              }
-            }
-            ... on Page_Flexiblecontent_FlexibleContent_Faqs {
-              fieldGroupName
-              faqs {
-                answer
-                question
               }
             }
           }
@@ -132,11 +131,20 @@ export default async function Why() {
   const email = dataOptions?.acfOptionsThemeSettings?.themeSettings?.email;
   const flexibleContent = data?.page?.flexibleContent?.flexibleContent;
 
+  const keyList = data?.page?.homepage?.keyList;
+  const sections = data?.page?.homepage?.sections;
+  const brandSpotlight = data?.page?.homepage?.brandSpotlight;
+  const brandSpotlightCopy = data?.page?.homepage?.brandSpotlightCopy;
+
+
   return (
     <main className={styles.homepageMainWrap}>
-      <Header fullMenu={true} backgroundColor={backgroundColor} color={color} />
-      <Intro backgroundColor={backgroundColor} color={color} content={content} title={title} isHome={true} />
-      {/* <PageFlexibleContent data={flexibleContent} /> */}
+      <Header fullMenu={true} />
+      <Intro title={title} content={content} telephone={telephone} email={email} />
+      <KeyList keyList={keyList} />
+      <Blocks sections={sections} />
+      <Spotlight brandSpotlight={brandSpotlight} brandSpotlightCopy={brandSpotlightCopy} />
+      <FormRequest />
       <Footer border={false} telephone={telephone} email={email} />
     </main>
   )
