@@ -105,6 +105,7 @@ export default async function Home() {
                   mediaItemUrl
                 }
               }
+              slug
             }
           }
         }
