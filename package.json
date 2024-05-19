@@ -34,6 +34,14 @@
     "styled-components": "^6.1.9"
   },
   "devDependencies": {
+    "@types/istanbul-lib-coverage": "^2.0.6",
+    "@types/istanbul-lib-report": "^3.0.3",
+    "@types/istanbul-reports": "^3.0.4",
+    "@types/node": "^20.12.11",
+    "@types/stack-utils": "^2.0.3",
+    "@types/stylis": "^4.2.6",
+    "@types/yargs": "^17.0.32",
+    "@types/yargs-parser": "^21.0.3",
     "sass": "^1.64.1"
   }
 }
