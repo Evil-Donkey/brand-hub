@@ -184,23 +184,21 @@ export const EmailSignature1 = ({
                 <table border="0" cellSpacing="0" cellPadding="0" style={{borderTopStyle: 'solid', borderTopColor: '#000000', borderTopWidth: '1px'}}>
                     <tbody>
                         <tr>
-                            <td>
-                                {footerLogos.map((logo, index) => {
-                                    const logoUrl = logo.url;
-                                    const image = logo.image;
-                                    const isLastItem = index === footerLogos.length - 1;
-                                    return (
-                                        <div key={index.toString()} className="footer-logo-td" style={{paddingTop: '15px', paddingRight: !isLastItem ? '40px' : '0px'}}>
-                                            {logoUrl ?
-                                                <a href={logoUrl} target="_blank">
-                                                    <img src={image.mediaItemUrl} width={image.mediaDetails.width / 2} height={image.mediaDetails.height / 2} />
-                                                </a>
-                                            : <img src={image.mediaItemUrl} width={image.mediaDetails.width / 2} height={image.mediaDetails.height / 2} />
-                                            }
-                                        </div>
-                                    );
-                                })}
-                            </td>
+                            {footerLogos.map((logo, index) => {
+                                const logoUrl = logo.url;
+                                const image = logo.image;
+                                const isLastItem = index === footerLogos.length - 1;
+                                return (
+                                    <td key={index.toString()} className="footer-logo-td" style={{paddingTop: '15px', paddingRight: !isLastItem ? '40px' : '0px'}}>
+                                        {logoUrl ?
+                                            <a href={logoUrl} target="_blank">
+                                                <img src={image.mediaItemUrl} width={image.mediaDetails.width / 2} height={image.mediaDetails.height / 2} />
+                                            </a>
+                                        : <img src={image.mediaItemUrl} width={image.mediaDetails.width / 2} height={image.mediaDetails.height / 2} />
+                                        }
+                                    </td>
+                                );
+                            })}
                         </tr>
                     </tbody>
                 </table>
