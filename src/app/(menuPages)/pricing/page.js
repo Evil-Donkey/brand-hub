@@ -1,8 +1,7 @@
 import fetchAPI from '@/app/lib/api'
 import Header from '@/app/components/Header'
 import Intro from '@/app/components/HomepageIntro'
-import PricingOptions from '@/app/components/PricingOptions'
-import FormRequest from '@/app/components/FormRequest'
+import PageFlexibleContent from '@/app/components/PageFlexibleContent'
 import Footer from '@/app/components/Footer'
 import styles from '@/app/Homepage.module.scss'
 
@@ -58,31 +57,93 @@ export default async function Pricing() {
     query getPricingPage {
       page(id: "250", idType: DATABASE_ID) {
         title(format: RENDERED)
-        pricing {
-          options {
-            backgroundColor
-            included
-            name
-            textColor
-            image {
-              altText
-              mediaDetails {
-                height
-                width
-              }
-              mediaItemUrl
+        pageOptions {
+          backgroundColor
+          textColor
+        }
+        featuredImage {
+          node {
+            altText
+            mediaDetails {
+              height
+              width
             }
-            imageMonthly {
-              altText
-              mediaDetails {
-                height
-                width
+            mediaItemUrl
+          }
+        }
+        flexibleContent {
+          flexibleContent {
+            ... on Page_Flexiblecontent_FlexibleContent_TwoColumnsTextimage {
+              backgroundColor
+              fieldGroupName
+              textColor
+              rows {
+                copy
+                image {
+                  altText
+                  mediaDetails {
+                    height
+                    width
+                  }
+                  mediaItemUrl
+                }
+                video {
+                  mediaItemUrl
+                }
               }
-              mediaItemUrl
+            }
+            ... on Page_Flexiblecontent_FlexibleContent_ThreeColumnsGrid {
+              backgroundColor
+              fieldGroupName
+              heading
+              textColor
+              grid {
+                copy
+                icon {
+                  altText
+                  mediaDetails {
+                    height
+                    width
+                  }
+                  mediaItemUrl
+                }
+              }
+            }
+            ... on Page_Flexiblecontent_FlexibleContent_Faqs {
+              fieldGroupName
+              faqs {
+                answer
+                question
+              }
+            }
+            ... on Page_Flexiblecontent_FlexibleContent_Pricing {
+              backgroundColor
+              fieldGroupName
+              options {
+                ctaLabel
+                ctaUrl
+                features
+                month
+                name
+                price
+                services
+                servicesRow
+                theme
+                type
+              }
+            }
+            ... on Page_Flexiblecontent_FlexibleContent_SingleCentredColumn {
+              fieldGroupName
+              backgroundColor
+              copy
+              textColor
             }
           }
         }
       }
+      acfFlexibleContentFeaturesOptions
+      acfFlexibleContentServicesOptions
+      acfFlexibleContentServicesRowOptions
     }
   `);
 
@@ -97,18 +158,37 @@ export default async function Pricing() {
     }
   `);
 
+  const backgroundColor = data?.page?.pageOptions?.backgroundColor;
+  const color = data?.page?.pageOptions?.textColor;
   const title = data?.page?.title;
+  const featuredImage = data?.page?.featuredImage;
   const telephone = dataOptions?.acfOptionsThemeSettings?.themeSettings?.telephone;
   const email = dataOptions?.acfOptionsThemeSettings?.themeSettings?.email;
-  const pricingOptions = data?.page?.pricing?.options;
+  const flexibleContent = data?.page?.flexibleContent?.flexibleContent;
+  const features = data?.acfFlexibleContentFeaturesOptions;
+  const services = data?.acfFlexibleContentServicesOptions;
+  const servicesRow = data?.acfFlexibleContentServicesRowOptions;
 
   return (
     <main className={styles.homepageMainWrap}>
-      <Header fullMenu={true} />
-      <Intro title={title} telephone={telephone} email={email} />
-      <PricingOptions pricingOptions={pricingOptions} />
-      <FormRequest />
-      <Footer border={false} telephone={telephone} email={email} />
+      <Header fullMenu={true} backgroundColor={backgroundColor} color={color} />
+      <Intro 
+        backgroundColor={backgroundColor} 
+        color={color} 
+        title={title} 
+        c1={8} 
+        c2={4}
+        isPricing={true}
+        featuredImage={featuredImage}
+      />
+      <PageFlexibleContent data={flexibleContent} features={features} services={services} servicesRow={servicesRow} />
+      <Footer 
+        border={false} 
+        telephone={telephone} 
+        email={email} 
+        color={color}
+        backgroundColor={backgroundColor} 
+      />
     </main>
   )
 }

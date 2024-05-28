@@ -18,6 +18,9 @@
                 height: 3px;
                 background-color: var(--theme-nav-00);
                 left: 0;
+                @media screen and (min-width: 768px) {
+                    bottom: -18px;
+                }
             }
         }
         // &:first-child {

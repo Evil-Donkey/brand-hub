@@ -8,7 +8,7 @@ export async function generateMetadata() {
 
   const data = await fetchAPI(`
     query getContactPage {
-      page(id: "3", idType: DATABASE_ID) {
+      page(id: "973", idType: DATABASE_ID) {
         seo {
           metaDesc
           opengraphUrl
@@ -33,7 +33,7 @@ export async function generateMetadata() {
   const opengraphType = seo?.opengraphType || 'website';
 
   return {
-    title: 'Privacy Policy | Brand Hub',
+    title: 'Terms of Service | Brand Hub',
     description: seo?.metaDesc,
     openGraph: {
       title: seo?.openGraphTitle,
@@ -54,7 +54,7 @@ export default async function PrivacyPolicy() {
 
   const data = await fetchAPI(`
     query getPrivacyPolicy {
-      page(id: "3", idType: DATABASE_ID) {
+      page(id: "973", idType: DATABASE_ID) {
         title
         content(format: RENDERED)
         pageOptions {

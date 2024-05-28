@@ -30,14 +30,55 @@
                     right: -75px;
                 }
             }
+
+            @media screen and (min-width: 768px) {
+                font-size: 80px;
+            }
+            @media screen and (min-width: 992px) {
+                font-size: 110px;
+            }
         }
-        @media screen and (min-width: 768px) {
-            font-size: 60px;
+        @media screen and (min-width: 992px) {
+            font-size: 80px;
         }
     }
     p {
-        @media screen and (min-width: 768px) {
-            font-size: 19px;
+        @media screen and (min-width: 992px) {
+            font-size: 24px !important;
+            line-height: 36px;
+        }
+    }
+}
+
+.rotatingList {
+    position: relative;
+    &:before {
+        content: "";
+        position: absolute;
+        bottom: 10px;
+        left: 12px;
+        height: 2px;
+        width: calc(100% - 24px);
+        background-color: var(--colour-white-00);
+    }
+    h2 {
+        position: relative;
+        display: flex;
+        white-space: nowrap;
+        @media screen and (max-width: 767px) {
+            font-size: 30px;
+            letter-spacing: 0;
+        }
+        div {
+            display: inline-block;
+            position: relative;
+            span {
+                color: var(--colour-blue-00);
+                position: absolute;
+                left: 10px;
+                // right: 0;
+                white-space: nowrap;
+            }
         }
     }
 }
