@@ -28,7 +28,7 @@ const TwoColumnsTextImage = ({ data }) => {
                                     </div>
                                 }
                             </div>
-                            <div className='col-md-6 col-lg-4 text-center text-md-start'>
+                            <div className='col-md-6 col-lg-5 text-center text-md-start'>
                                 <div dangerouslySetInnerHTML={{ __html: copy }} />
                             </div>
                         </div>
