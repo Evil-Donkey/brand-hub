@@ -58,6 +58,11 @@ export default async function Branders() {
       page(id: "531", idType: DATABASE_ID) {
         title(format: RENDERED)
         content(format: RENDERED)
+        pageOptions {
+          backgroundColor
+          textColor
+          faq
+        }
         branders {
           join
           branders {
@@ -90,6 +95,8 @@ export default async function Branders() {
     }
   `);
 
+  const backgroundColor = data?.page?.pageOptions?.backgroundColor;
+  const color = data?.page?.pageOptions?.textColor;
   const title = data?.page?.title;
   const content = data?.page?.content;
   const branders = data?.page?.branders?.branders;
@@ -99,7 +106,11 @@ export default async function Branders() {
 
   return (
     <main className={styles.pageWrap}>
-      <Header fullMenu={true} color="#ffffff" />
+      <Header 
+        fullMenu={true} 
+        backgroundColor={backgroundColor} 
+        color={color}
+      />
       <BrandersHero content={content} title={title} join={join} />
       <BrandersGrid branders={branders} />
       <Footer border={false} telephone={telephone} email={email} color="#ffffff" />

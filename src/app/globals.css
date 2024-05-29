@@ -189,3 +189,16 @@ img {
   color: var(--colour-black-03);
   border-color: var(--colour-black-03);
 }
+
+.not-found-wrapper {
+  background-color: var(--colour-black-03);
+  color: var(--colour-white-00);
+  min-height: 100vh;
+  padding-top: 10rem;
+  padding-bottom: 3rem;
+}
+.not-found-wrapper h1 {
+  font-size: 50px;
+  line-height: 60px;
+  margin-bottom: 20px;
+}

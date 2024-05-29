@@ -23,6 +23,12 @@
                 }
             }
         }
+        a {
+            transition: all .3s ease;
+            &:hover {
+                color: var(--colour-blue-00);
+            }
+        }
         // &:first-child {
         //     &:before {
         //         display: none !important;

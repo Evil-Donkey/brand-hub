@@ -12,6 +12,7 @@ const Footer = ({ border, color, backgroundColor, email, telephone }) => {
                         <a href="/privacy-policy">Privacy policy</a>
                         <a href="/terms-of-service">Terms of Service</a>
                         <a href="/branders">Branders Blog</a>
+                        <a href="https://billing.stripe.com/p/login/28obKX11v2os6KA3cc" target="_blank">Client login</a>
                     </div>
                     <div className='col-auto'>
                         <Logo color={color} />

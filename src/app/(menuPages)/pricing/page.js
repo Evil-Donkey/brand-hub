@@ -179,6 +179,7 @@ export default async function Pricing() {
         backgroundColor={backgroundColor} 
         color={color} 
         bookDemoUrl={bookDemoUrl}
+        hideSignUp={true}
       />
 
       <Intro 

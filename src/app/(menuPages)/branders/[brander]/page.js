@@ -83,6 +83,11 @@ export default async function Page({ params: { brander } }) {
         slug
         title(format: RENDERED)
         content(format: RENDERED)
+        pageOptions {
+          backgroundColor
+          textColor
+          faq
+        }
         seo {
           metaDesc
           title
@@ -128,6 +133,8 @@ export default async function Page({ params: { brander } }) {
     }
   `);
 
+  const backgroundColor = data?.brander?.pageOptions?.backgroundColor;
+  const color = data?.brander?.pageOptions?.textColor;
   const telephone = dataOptions?.acfOptionsThemeSettings?.themeSettings?.telephone;
   const email = dataOptions?.acfOptionsThemeSettings?.themeSettings?.email;
 
@@ -139,7 +146,11 @@ export default async function Page({ params: { brander } }) {
 
   return branderData ? (
     <main className={styles.pageWrap}>
-      <Header fullMenu={true} color="#ffffff" />
+      <Header 
+        fullMenu={true} 
+        backgroundColor={backgroundColor} 
+        color={color}
+      />
       <BranderHero content={content} title={title} featuredImage={featuredImage} />
       <BranderContent content={branderContent} />
       <Footer border={false} telephone={telephone} email={email} color="#ffffff" />

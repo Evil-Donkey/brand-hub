@@ -1,3 +1,7 @@
+.headerContainerWrapper {
+    transition: transform 0.3s ease;
+}
+
 .headerContainer {
     position: relative;
     &:before {
@@ -9,6 +13,17 @@
         width: calc(100% - 1.5rem);
         background-color: var(--theme-nav-00);
     }   
+}
+
+.fixedHeader {
+    position: fixed;
+    top: 0;
+    width: 100%;
+    z-index: 1000;
+}
+
+.headerHidden {
+    transform: translateY(-100%);
 }
 
 .menuIcon {
