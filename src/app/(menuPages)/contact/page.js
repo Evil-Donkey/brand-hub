@@ -3,6 +3,7 @@ import Header from '@/app/components/Header'
 import Intro from '@/app/components/HomepageIntro'
 import PageFlexibleContent from '@/app/components/PageFlexibleContent'
 import FormRequest from '@/app/components/FormRequest'
+import Faqs from '@/app/components/Faqs'
 import Footer from '@/app/components/Footer'
 import styles from '@/app/Homepage.module.scss'
 
