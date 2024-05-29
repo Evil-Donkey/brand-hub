@@ -1,6 +1,7 @@
 import fetchAPI from '@/app/lib/api'
 import Header from '@/app/components/Header'
 import Intro from '@/app/components/HomepageIntro'
+import ContactBlock from '@/app/components/ContactBlock'
 import PageFlexibleContent from '@/app/components/PageFlexibleContent'
 import FormRequest from '@/app/components/FormRequest'
 import Faqs from '@/app/components/Faqs'
@@ -193,36 +194,12 @@ export default async function Contact() {
         featuredImage={featuredImage}
       />
 
-      <div className='container py-5'>
-        <div className='row'>
-          <div className='col-md-4'>
-            <h2 className="mb-3">Our details</h2>
-          </div>
-          <div className='col-md-8'>
-            <div className='d-flex flex-column flex-md-row gap-md-5'>
-              <div>
-                <p>
-                  <b>Contact us</b>
-                  <br />
-                  {telephone}
-                  <br />
-                  <a href={`mailto:${email}`} target="_blank" rel="noreferrer">{email}</a>
-                </p>
-              </div>
-
-              <div>
-                <p>
-                  <b>Follow us</b>
-                  <br />
-                  <a href={instagram} target="_blank" rel="noreferrer">Instagram</a>
-                  <br />
-                  <a href={linkedin} target="_blank" rel="noreferrer">LinkedIn</a>
-                </p>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
+      <ContactBlock 
+        email={email}
+        instagram={instagram}
+        linkedin={linkedin}
+        telephone={telephone}
+      />
       
       <PageFlexibleContent data={flexibleContent} />
       

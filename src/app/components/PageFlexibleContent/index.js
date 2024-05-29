@@ -1,7 +1,6 @@
 import SingleCentredColumn from './SingleCentredColumn'
 import TwoColumnsTextImage from './TwoColumnsTextImage'
 import ThreeColumnsGrid from './ThreeColumnsGrid'
-// import Faqs from './Faqs'
 import Pricing from './Pricing'
 
 const PageFlexibleContent = ({ data, features, services, servicesRow }) => {
@@ -20,9 +19,6 @@ const PageFlexibleContent = ({ data, features, services, servicesRow }) => {
         if (fieldGroupName === "Page_Flexiblecontent_FlexibleContent_ThreeColumnsGrid") {
             flexibleContentArray.push(<ThreeColumnsGrid data={data} />);
         }
-        // if (fieldGroupName === "Page_Flexiblecontent_FlexibleContent_Faqs") {
-        //     flexibleContentArray.push(<Faqs data={data} />);
-        // }
         if (fieldGroupName === "Page_Flexiblecontent_FlexibleContent_Pricing") {
             flexibleContentArray.push(<Pricing data={data} allFeatures={features} allServices={services} allServicesRow={servicesRow} />);
         }
