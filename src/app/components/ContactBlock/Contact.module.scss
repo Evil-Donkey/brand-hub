@@ -1,0 +1,8 @@
+.contactWrapper {
+  a {
+    &:hover {
+      color: var(--colour-blue-00);
+      text-decoration: underline;
+    }
+  }
+}

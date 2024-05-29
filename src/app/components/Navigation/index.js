@@ -30,11 +30,6 @@ const Navigation = ({ color }) => {
             activeSegment: 'about'
         },
         {
-            label: ' Branders',
-            href: '/branders',
-            activeSegment: 'branders'
-        },
-        {
             label: ' Pricing',
             href: '/pricing',
             activeSegment: 'pricing'

@@ -31,23 +31,23 @@ export async function generateMetadata() {
 
   const seo = data?.page?.seo;
  
+  const opengraphType = seo?.opengraphType || 'website';
+
   return {
-    title: 'Branders',
-    description: seo.metaDesc,
+    title: 'Branders | Brand Hub',
+    description: seo?.metaDesc,
     openGraph: {
-      title: seo.openGraphTitle,
-      description: seo.openGraphTitle,
-      url: seo.openGraphTitle,
-      siteName: seo.openGraphTitle,
-      images: [
-        {
-          url: seo.opengraphImage?.mediaItemUrl,
-          width: seo.opengraphImage?.mediaDetails.width,
-          height: seo.opengraphImage?.mediaDetails.height,
-        }
-      ],
-      type: seo.opengraphType,
-    },
+      title: seo?.openGraphTitle,
+      description: seo?.openGraphTitle,
+      url: seo?.openGraphTitle,
+      siteName: seo?.openGraphTitle,
+      images: seo?.opengraphImage ? [{
+        url: seo?.opengraphImage?.mediaItemUrl,
+        width: seo?.opengraphImage?.mediaDetails.width,
+        height: seo?.opengraphImage?.mediaDetails.height,
+      }] : [],
+      type: opengraphType,
+    }
   }
 }
 
@@ -58,6 +58,11 @@ export default async function Branders() {
       page(id: "531", idType: DATABASE_ID) {
         title(format: RENDERED)
         content(format: RENDERED)
+        pageOptions {
+          backgroundColor
+          textColor
+          faq
+        }
         branders {
           join
           branders {
@@ -79,27 +84,33 @@ export default async function Branders() {
     }
   `);
 
-  const dataHomepage = await fetchAPI(`
-    query getHomepage {
-      page(id: "5", idType: DATABASE_ID) {
-        homepage {
-          telephone
+  const dataOptions = await fetchAPI(`
+    query ThemeSettings {
+      acfOptionsThemeSettings {
+        themeSettings {
           email
+          telephone
         }
       }
     }
   `);
 
+  const backgroundColor = data?.page?.pageOptions?.backgroundColor;
+  const color = data?.page?.pageOptions?.textColor;
   const title = data?.page?.title;
   const content = data?.page?.content;
   const branders = data?.page?.branders?.branders;
   const join = data?.page?.branders?.join;
-  const telephone = dataHomepage?.page?.homepage?.telephone;
-  const email = dataHomepage?.page?.homepage?.email;
+  const telephone = dataOptions?.acfOptionsThemeSettings?.themeSettings?.telephone;
+  const email = dataOptions?.acfOptionsThemeSettings?.themeSettings?.email;
 
   return (
     <main className={styles.pageWrap}>
-      <Header fullMenu={true} color="#ffffff" />
+      <Header 
+        fullMenu={true} 
+        backgroundColor={backgroundColor} 
+        color={color}
+      />
       <BrandersHero content={content} title={title} join={join} />
       <BrandersGrid branders={branders} />
       <Footer border={false} telephone={telephone} email={email} color="#ffffff" />

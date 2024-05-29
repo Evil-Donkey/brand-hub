@@ -1,4 +1,4 @@
-import { Roboto_Slab, Roboto_Flex, Open_Sans, Anton } from 'next/font/google'
+import { Anton, Roboto_Slab, Roboto_Flex, Open_Sans } from 'next/font/google'
 
 export const robotoSlab = Roboto_Slab({ 
     subsets: ['latin'],

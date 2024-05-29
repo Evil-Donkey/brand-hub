@@ -352,19 +352,19 @@ export default async function Page({ params: { audit } }) {
     }`
   );
 
-  const dataHomepage = await fetchAPI(`
-    query getHomepage {
-      page(id: "5", idType: DATABASE_ID) {
-        homepage {
-          telephone
+  const dataOptions = await fetchAPI(`
+    query ThemeSettings {
+      acfOptionsThemeSettings {
+        themeSettings {
           email
+          telephone
         }
       }
     }
   `);
 
-  const telephone = dataHomepage?.page?.homepage?.telephone;
-  const email = dataHomepage?.page?.homepage?.email;
+  const telephone = dataOptions?.acfOptionsThemeSettings?.themeSettings?.telephone;
+  const email = dataOptions?.acfOptionsThemeSettings?.themeSettings?.email;
 
   const auditData = data?.audit;
   const flexibleContent = auditData?.brandOptions?.flexibleContent;

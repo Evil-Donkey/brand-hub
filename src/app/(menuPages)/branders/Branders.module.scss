@@ -8,6 +8,9 @@
         font-size: 38px;
         line-height: 1.1;
         margin-bottom: 0;
+        font-family: var(--open-sans);
+        font-weight: 100;
+        letter-spacing: 0;
         @media screen and (min-width: 768px) {
             font-size: 80px;
         }
@@ -17,6 +20,16 @@
         @media screen and (min-width: 1400px) {
             font-size: 140px;
         }
+    }
+    h2 {
+        font-family: var(--open-sans);
+        font-weight: 100;
+        letter-spacing: 0;
+    }
+    h3 {
+        font-family: var(--open-sans);
+        font-weight: 600;
+        letter-spacing: 0;
     }
     p {
         @media screen and (min-width: 768px) {

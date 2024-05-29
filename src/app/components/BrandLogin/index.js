@@ -51,7 +51,7 @@ const BrandLogin = ({ bgColour, color, pwd }) => {
                                 />
                                 <input type='submit' value='Enter' style={{ color: bgColour, backgroundColor: color }} />
                             </form>
-                            {err && <p className='m-0'>Incorrect password. Please try again.</p>}
+                            {err && <p className='m-0' style={{ color: color }}>Incorrect password. Please try again.</p>}
                         </div>
                     </div>
                 </div>

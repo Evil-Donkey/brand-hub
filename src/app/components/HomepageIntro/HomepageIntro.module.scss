@@ -1,17 +1,84 @@
 .introContainer {
-    padding-top: 3rem;
+    padding-top: 10rem;
     padding-bottom: 3rem;
     h1 {
         font-size: 50px;
         line-height: 1.1;
         margin-bottom: 0;
-        @media screen and (min-width: 768px) {
-            font-size: 100px;
+        &.heroGraphic {
+            position: relative;
+            &:before {
+                content: "";
+                position: absolute;
+                top: 54%;
+                transform: translateY(-50%);
+                display: none;
+                width: 220px;
+                height: 120px;
+                background-size: contain;
+                background-position: center;
+                background-repeat: no-repeat;
+                background-image: url('/images/graphic-homepage-hero.svg');
+                @media screen and (min-width: 992px) {
+                    display: block;
+                    right: -175px;
+                }
+                @media screen and (min-width: 1200px) {
+                    right: -145px;
+                }
+                @media screen and (min-width: 1400px) {
+                    right: -75px;
+                }
+            }
+
+            @media screen and (min-width: 768px) {
+                font-size: 80px;
+            }
+            @media screen and (min-width: 992px) {
+                font-size: 110px;
+            }
+        }
+        @media screen and (min-width: 992px) {
+            font-size: 80px;
         }
     }
     p {
-        @media screen and (min-width: 768px) {
-            font-size: 19px;
+        @media screen and (min-width: 992px) {
+            font-size: 24px !important;
+            line-height: 36px;
+        }
+    }
+}
+
+.rotatingList {
+    position: relative;
+    &:before {
+        content: "";
+        position: absolute;
+        bottom: 10px;
+        left: 12px;
+        height: 2px;
+        width: calc(100% - 24px);
+        background-color: var(--colour-white-00);
+    }
+    h2 {
+        position: relative;
+        display: flex;
+        white-space: nowrap;
+        @media screen and (max-width: 767px) {
+            font-size: 30px;
+            letter-spacing: 0;
+        }
+        div {
+            display: inline-block;
+            position: relative;
+            span {
+                color: var(--colour-blue-00);
+                position: absolute;
+                left: 10px;
+                // right: 0;
+                white-space: nowrap;
+            }
         }
     }
 }
