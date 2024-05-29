@@ -23,7 +23,7 @@ const TwoColumnsTextImage = ({ data }) => {
                                     />
                                 }
                                 {video &&
-                                    <div className='iframeWrapper'>
+                                    <div className={styles.iframeWrapper}>
                                         <video src={video.mediaItemUrl} loop muted autoPlay webkit-playsinline="true" playsInline />
                                     </div>
                                 }

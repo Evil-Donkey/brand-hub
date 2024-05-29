@@ -61,6 +61,8 @@ const Pricing = ({ data, allFeatures, allServices, allServicesRow }) => {
                                                         let featureText = feature;
                                                         if (!month && feature === 'One brand') {
                                                             featureText = 'Multiple brands';
+                                                        } else if (!month && feature === 'One request at a time') {
+                                                            featureText = 'Multiple requests';
                                                         } else if (j !== 0 && feature === '5 day slow delivery') {
                                                             featureText = 'Average 48 hour delivery';
                                                         }

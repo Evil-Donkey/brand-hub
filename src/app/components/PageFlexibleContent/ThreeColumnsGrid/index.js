@@ -21,12 +21,14 @@ const TwoColumnsTextImage = ({ data }) => {
                             const { copy, icon } = row;
                             return (
                                 <div key={i.toString()} className='col-md-4 px-lg-5 text-center d-flex flex-column gap-3 align-items-center mb-4'>
-                                    <Image 
-                                        src={icon.mediaItemUrl} 
-                                        width={icon.mediaDetails.width} 
-                                        height={icon.mediaDetails.height}
-                                        alt={icon.altText}
-                                    />
+                                    <div className={styles.iconWrap}>
+                                        <Image 
+                                            src={icon.mediaItemUrl} 
+                                            width={icon.mediaDetails.width} 
+                                            height={icon.mediaDetails.height}
+                                            alt={icon.altText}
+                                        />
+                                    </div>
                                     <div dangerouslySetInnerHTML={{ __html: copy }} />
                                 </div>
                             );

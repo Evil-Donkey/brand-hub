@@ -19,3 +19,24 @@
         margin-bottom: 15px;
     }
 }
+
+.iframeWrapper {
+    position: relative; 
+    aspect-ratio: 4/3;
+    overflow: hidden;
+    max-width: 100%;
+    width: 100%;
+    height: auto;
+    iframe,
+    object,
+    embed,
+    > div,
+    video { 
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+    }
+  }
