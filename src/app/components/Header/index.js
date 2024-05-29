@@ -3,7 +3,7 @@ import Logo from '../Logo'
 import Navigation from '../Navigation'
 import styles from './Header.module.scss'
 
-const Header = ({ backgroundColor, color, fullMenu }) => {
+const Header = ({ backgroundColor, bookDemoUrl, color, fullMenu }) => {
 
     return (
         <div style={{backgroundColor: backgroundColor, color: color}}>
@@ -18,7 +18,7 @@ const Header = ({ backgroundColor, color, fullMenu }) => {
                         <div className='col-10 col-md-auto align-self-end d-flex flex-wrap align-items-center justify-content-end gap-3'>
                             <Navigation color={color} />
                             <div className='d-flex align-items-center gap-3 order-first order-md-last'>
-                                <Link href="#form-request" className="cta__btn">Book a demo</Link>
+                                <a href={bookDemoUrl} target="_blank" className="cta__btn">Book a demo</a>
                                 <Link href="/pricing" className="cta__btn cta__btn--transparent">Sign up</Link>
                             </div>
                         </div>

@@ -2,10 +2,9 @@
 
 import { useState } from 'react';
 import styles from './Faqs.module.scss';
-import Link from 'next/link';
 
-const Faqs = ({ data }) => {
-    const { faqs } = data;
+const Faqs = ({ data, bookDemoUrl }) => {
+
     const [openIndices, setOpenIndices] = useState([]);
 
     const handleToggle = (index) => {
@@ -23,14 +22,14 @@ const Faqs = ({ data }) => {
                     <div className={`${styles.imageWrap} p-3 p-md-4 d-flex flex-column align-items-center text-center`}>
                         <img src='/images/graphic-faq.svg' alt='FAQ Image' />
                         <h2 className='my-4'>Book a 15-minute demo</h2>
-                        <Link href="#form-request" className="cta__btn cta__btn--dark">Book a demo</Link>
+                        <a href={bookDemoUrl} className="cta__btn cta__btn--dark" target="_blank">Book a demo</a>
                     </div>
                 </div>
-                {faqs &&
+                {data &&
                     <div className='col-md-6 mt-5 mt-md-0'>
                         <h2>FAQ:</h2>
                         <ul>
-                            {faqs.map((faq, i) => {
+                            {data.map((faq, i) => {
                                 const { answer, question } = faq;
                                 return (
                                     <li key={i.toString()} className={`${openIndices.includes(i) ? styles.open : ''}`}>

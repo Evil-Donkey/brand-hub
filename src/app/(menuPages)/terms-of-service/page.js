@@ -1,6 +1,7 @@
 import fetchAPI from '../../lib/api'
 import Header from '@/app/components/Header'
 import Intro from '@/app/components/HomepageIntro'
+import Faqs from '@/app/components/Faqs'
 import Footer from '../../components/Footer'
 import styles from './PrivacyPolicy.module.scss'
 
@@ -60,6 +61,7 @@ export default async function PrivacyPolicy() {
         pageOptions {
           backgroundColor
           textColor
+          faq
         }
       }
     }
@@ -71,6 +73,11 @@ export default async function PrivacyPolicy() {
         themeSettings {
           email
           telephone
+          bookDemoUrl
+          faqs {
+            answer
+            question
+          }
         }
       }
     }
@@ -82,16 +89,26 @@ export default async function PrivacyPolicy() {
   const content = data?.page?.content;
   const telephone = dataOptions?.acfOptionsThemeSettings?.themeSettings?.telephone;
   const email = dataOptions?.acfOptionsThemeSettings?.themeSettings?.email;
+  const faq = data?.page?.pageOptions?.faq;
+  const bookDemoUrl = dataOptions?.acfOptionsThemeSettings?.themeSettings?.bookDemoUrl;
+  const faqs = dataOptions?.acfOptionsThemeSettings?.themeSettings?.faqs;
   
   return (
     <main className={styles.pageWrap}>
-      <Header fullMenu={true} backgroundColor={backgroundColor} color={color} />
+      <Header 
+        fullMenu={true} 
+        backgroundColor={backgroundColor} 
+        color={color} 
+        bookDemoUrl={bookDemoUrl}
+      />
+      
       <Intro 
         backgroundColor={backgroundColor} 
         color={color} 
         title={title} 
         c1={12}
       />
+      
       <div className='container py-5'>
         <div className='row'>
           <div className='col-md-9'>
@@ -99,6 +116,9 @@ export default async function PrivacyPolicy() {
           </div>
         </div>
       </div>
+
+      {faq && <Faqs data={faqs} bookDemoUrl={bookDemoUrl} />}
+
       <Footer 
         border={false} 
         telephone={telephone} 

@@ -2,6 +2,7 @@ import fetchAPI from '@/app/lib/api'
 import Header from '@/app/components/Header'
 import Intro from '@/app/components/HomepageIntro'
 import PageFlexibleContent from '@/app/components/PageFlexibleContent'
+import Faqs from '@/app/components/Faqs'
 import Footer from '@/app/components/Footer'
 import styles from '@/app/Homepage.module.scss'
 
@@ -60,6 +61,7 @@ export default async function Pricing() {
         pageOptions {
           backgroundColor
           textColor
+          faq
         }
         featuredImage {
           node {
@@ -109,13 +111,6 @@ export default async function Pricing() {
                 }
               }
             }
-            ... on Page_Flexiblecontent_FlexibleContent_Faqs {
-              fieldGroupName
-              faqs {
-                answer
-                question
-              }
-            }
             ... on Page_Flexiblecontent_FlexibleContent_Pricing {
               backgroundColor
               fieldGroupName
@@ -153,6 +148,11 @@ export default async function Pricing() {
         themeSettings {
           email
           telephone
+          bookDemoUrl
+          faqs {
+            answer
+            question
+          }
         }
       }
     }
@@ -168,10 +168,19 @@ export default async function Pricing() {
   const features = data?.acfFlexibleContentFeaturesOptions;
   const services = data?.acfFlexibleContentServicesOptions;
   const servicesRow = data?.acfFlexibleContentServicesRowOptions;
+  const faq = data?.page?.pageOptions?.faq;
+  const bookDemoUrl = dataOptions?.acfOptionsThemeSettings?.themeSettings?.bookDemoUrl;
+  const faqs = dataOptions?.acfOptionsThemeSettings?.themeSettings?.faqs;
 
   return (
     <main className={styles.homepageMainWrap}>
-      <Header fullMenu={true} backgroundColor={backgroundColor} color={color} />
+      <Header 
+        fullMenu={true} 
+        backgroundColor={backgroundColor} 
+        color={color} 
+        bookDemoUrl={bookDemoUrl}
+      />
+
       <Intro 
         backgroundColor={backgroundColor} 
         color={color} 
@@ -181,7 +190,16 @@ export default async function Pricing() {
         isPricing={true}
         featuredImage={featuredImage}
       />
-      <PageFlexibleContent data={flexibleContent} features={features} services={services} servicesRow={servicesRow} />
+      
+      <PageFlexibleContent 
+        data={flexibleContent} 
+        features={features} 
+        services={services} 
+        servicesRow={servicesRow}
+      />
+
+      {faq && <Faqs data={faqs} bookDemoUrl={bookDemoUrl} />}
+      
       <Footer 
         border={false} 
         telephone={telephone} 

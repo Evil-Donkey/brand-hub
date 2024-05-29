@@ -10,16 +10,16 @@ const Pricing = ({ data, allFeatures, allServices, allServicesRow }) => {
         <div className={styles.pricingWrapper} style={{backgroundColor: backgroundColor}}>
             <div className='container'>
                 <div className='row justify-content-center'>
-                    {options && options.map((option, i) => {
+                    {options && options.map((option, j) => {
                         const { ctaLabel, ctaUrl, month, name, price, features, services, servicesRow, theme, type } = option;
 
                         if (type === 'column') {
                             return (
-                                <div className='col-md-6 col-lg-3 mb-4' key={i.toString()}>
+                                <div className='col-md-6 col-lg-3 mb-4' key={j.toString()}>
                                     <div className={`p-4 py-md-5 rounded-2 d-flex flex-column h-100 ${styles.pricingOption} ${theme === 'dark' ? styles.pricingOptionDark : styles.pricingOptionLight}`}>
                                         {name && <h2 className='mb-md-4 text-md-center'>{name}</h2>}
                                         {price && <h3 className={`mb-4 text-md-center ${!month && styles.noMonth}`}>
-                                            £{price}{month && <span>/month</span>}
+                                            {month && '£'}{price}{month && <span>/month</span>}
                                         </h3>}
                                         {services &&
                                             <div className='mb-5'>
@@ -58,6 +58,12 @@ const Pricing = ({ data, allFeatures, allServices, allServicesRow }) => {
                                                 <h4 className='mb-3'>Features</h4>
                                                 <ul className='m-0 d-flex flex-column gap-1 list-unstyled p-0'>
                                                     {allFeatures.map((feature, i) => {
+                                                        let featureText = feature;
+                                                        if (!month && feature === 'One brand') {
+                                                            featureText = 'Multiple brands';
+                                                        } else if (j !== 0 && feature === '7 day slow delivery') {
+                                                            featureText = 'Average 48 hour delivery';
+                                                        }
                                                         return (
                                                             <li key={i.toString()} className='d-flex gap-3 align-items-center'>
                                                                 {features.includes(feature) ? (
@@ -77,7 +83,7 @@ const Pricing = ({ data, allFeatures, allServices, allServicesRow }) => {
                                                                         }
                                                                     </span>
                                                                 }
-                                                                {feature}
+                                                                {featureText}
                                                             </li>
                                                         );
                                                     })}
@@ -95,11 +101,11 @@ const Pricing = ({ data, allFeatures, allServices, allServicesRow }) => {
                             )
                         } else if (type === 'row') {
                             return (
-                                <div className={`${styles.pricingCardRow} col-12 mb-4`} key={i.toString()}>
+                                <div className={`${styles.pricingCardRow} col-12 mb-4`} key={j.toString()}>
                                     <div className={`px-3 px-lg-5 py-4 rounded-2 d-flex flex-column flex-md-row align-items-md-center justify-content-between ${styles.pricingOption} ${theme === 'dark' ? styles.pricingOptionDark : styles.pricingOptionLight}`}>
                                         {name && <h2 className='mb-4 mb-md-0 text-md-center'>{name}</h2>}
                                         {price && <h3 className={`mb-4 mb-md-0 text-md-center ${!month && styles.noMonth}`}>
-                                            £{price}{month && <span>/month</span>}
+                                            {month && '£'}{price}{month && <span>/month</span>}
                                         </h3>}
 
                                         {servicesRow &&

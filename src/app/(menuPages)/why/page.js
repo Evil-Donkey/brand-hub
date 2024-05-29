@@ -2,6 +2,7 @@ import fetchAPI from '@/app/lib/api'
 import Header from '@/app/components/Header'
 import Intro from '@/app/components/HomepageIntro'
 import PageFlexibleContent from '@/app/components/PageFlexibleContent'
+import Faqs from '@/app/components/Faqs'
 import Footer from '@/app/components/Footer'
 import styles from '@/app/Homepage.module.scss'
 
@@ -60,6 +61,7 @@ export default async function Why() {
         pageOptions {
           backgroundColor
           textColor
+          faq
         }
         featuredImage {
           node {
@@ -109,13 +111,6 @@ export default async function Why() {
                 }
               }
             }
-            ... on Page_Flexiblecontent_FlexibleContent_Faqs {
-              fieldGroupName
-              faqs {
-                answer
-                question
-              }
-            }
             ... on Page_Flexiblecontent_FlexibleContent_Pricing {
               backgroundColor
               fieldGroupName
@@ -150,6 +145,11 @@ export default async function Why() {
         themeSettings {
           email
           telephone
+          bookDemoUrl
+          faqs {
+            answer
+            question
+          }
         }
       }
     }
@@ -162,10 +162,19 @@ export default async function Why() {
   const telephone = dataOptions?.acfOptionsThemeSettings?.themeSettings?.telephone;
   const email = dataOptions?.acfOptionsThemeSettings?.themeSettings?.email;
   const flexibleContent = data?.page?.flexibleContent?.flexibleContent;
+  const faq = data?.page?.pageOptions?.faq;
+  const bookDemoUrl = dataOptions?.acfOptionsThemeSettings?.themeSettings?.bookDemoUrl;
+  const faqs = dataOptions?.acfOptionsThemeSettings?.themeSettings?.faqs;
 
   return (
     <main className={styles.homepageMainWrap}>
-      <Header fullMenu={true} backgroundColor={backgroundColor} color={color} />
+      <Header 
+        fullMenu={true} 
+        backgroundColor={backgroundColor} 
+        color={color} 
+        bookDemoUrl={bookDemoUrl}
+      />
+
       <Intro 
         backgroundColor={backgroundColor} 
         color={color} 
@@ -174,7 +183,11 @@ export default async function Why() {
         c2={4}
         featuredImage={featuredImage}
       />
+      
       <PageFlexibleContent data={flexibleContent} />
+      
+      {faq && <Faqs data={faqs} bookDemoUrl={bookDemoUrl} />}
+
       <Footer 
         border={false} 
         telephone={telephone} 

@@ -65,6 +65,7 @@ export default async function Contact() {
         pageOptions {
           backgroundColor
           textColor
+          faq
         }
         featuredImage {
           node {
@@ -114,13 +115,6 @@ export default async function Contact() {
                 }
               }
             }
-            ... on Page_Flexiblecontent_FlexibleContent_Faqs {
-              fieldGroupName
-              faqs {
-                answer
-                question
-              }
-            }
             ... on Page_Flexiblecontent_FlexibleContent_Pricing {
               backgroundColor
               fieldGroupName
@@ -157,6 +151,11 @@ export default async function Contact() {
           telephone
           instagram
           linkedin
+          bookDemoUrl
+          faqs {
+            answer
+            question
+          }
         }
       }
     }
@@ -171,10 +170,19 @@ export default async function Contact() {
   const instagram = dataOptions?.acfOptionsThemeSettings?.themeSettings?.instagram;
   const linkedin = dataOptions?.acfOptionsThemeSettings?.themeSettings?.linkedin;
   const flexibleContent = data?.page?.flexibleContent?.flexibleContent;
+  const faq = data?.page?.pageOptions?.faq;
+  const bookDemoUrl = dataOptions?.acfOptionsThemeSettings?.themeSettings?.bookDemoUrl;
+  const faqs = dataOptions?.acfOptionsThemeSettings?.themeSettings?.faqs;
 
   return (
     <main className={styles.homepageMainWrap}>
-      <Header fullMenu={true} backgroundColor={backgroundColor} color={color} />
+      <Header 
+        fullMenu={true} 
+        backgroundColor={backgroundColor} 
+        color={color} 
+        bookDemoUrl={bookDemoUrl}
+      />
+      
       <Intro 
         backgroundColor={backgroundColor} 
         color={color} 
@@ -183,6 +191,7 @@ export default async function Contact() {
         c2={6}
         featuredImage={featuredImage}
       />
+
       <div className='container py-5'>
         <div className='row'>
           <div className='col-md-4'>
@@ -213,8 +222,13 @@ export default async function Contact() {
           </div>
         </div>
       </div>
+      
       <PageFlexibleContent data={flexibleContent} />
+      
       <FormRequest />
+
+      {faq && <Faqs data={faqs} bookDemoUrl={bookDemoUrl} />}
+
       <Footer 
         border={false} 
         telephone={telephone} 

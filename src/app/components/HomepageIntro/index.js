@@ -48,9 +48,9 @@ const Intro = ({
             for (let i = 0; i < elements.length; i++) {
                 const nextIndex = (i + 1) % elements.length;
     
-                tl.to(elements[i], { opacity: 1, x: 0, duration: 1, ease: 'power2.inOut' })
-                  .to(elements[i], { opacity: 0, x: 50, duration: 1, ease: 'power2.inOut' }, '+=1.5')
-                  .to(elements[nextIndex], { opacity: 1, x: 0, duration: 1, ease: 'power2.inOut' }, '-=0.5');
+                tl.to(elements[i], { opacity: 1, x: 0, duration: .5, ease: 'power2.inOut' })
+                  .to(elements[i], { opacity: 0, x: 50, duration: .5, ease: 'power2.inOut' }, '+=.5')
+                  .to(elements[nextIndex], { opacity: 1, x: 0, duration: .5, ease: 'power2.inOut' }, '-=0.5');
             }
         }
     }, [homepageRotatingList]);
