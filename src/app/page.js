@@ -1,13 +1,10 @@
 import fetchAPI from './lib/api'
 import Header from './components/Header'
 import Intro from './components/HomepageIntro'
-import Blocks from './components/HomepageBlocks'
-import KeyList from './components/HomepageKeyList'
-import Spotlight from './components/BrandSpotlight'
-import FormRequest from './components/FormRequest'
+import PageFlexibleContent from './components/PageFlexibleContent'
+import Faqs from './components/Faqs'
 import Footer from './components/Footer'
 import styles from './Homepage.module.scss'
-
 
 export async function generateMetadata() {
 
@@ -35,77 +32,102 @@ export async function generateMetadata() {
 
   const seo = data?.page?.seo;
  
+  const opengraphType = seo?.opengraphType || 'website';
+
   return {
-    title: 'Home | Brand Hub',
-    description: seo.metaDesc,
+    title: 'Unlimited Brand Servicing | Brand Hub',
+    description: seo?.metaDesc,
     openGraph: {
-      title: seo.openGraphTitle,
-      description: seo.openGraphTitle,
-      url: seo.openGraphTitle,
-      siteName: seo.openGraphTitle,
-      images: [
-        {
-          url: seo.opengraphImage?.mediaItemUrl,
-          width: seo.opengraphImage?.mediaDetails.width,
-          height: seo.opengraphImage?.mediaDetails.height,
-        }
-      ],
-      type: seo.opengraphType,
-    },
+      title: seo?.openGraphTitle,
+      description: seo?.openGraphTitle,
+      url: seo?.openGraphTitle,
+      siteName: seo?.openGraphTitle,
+      images: seo?.opengraphImage ? [{
+        url: seo?.opengraphImage?.mediaItemUrl,
+        width: seo?.opengraphImage?.mediaDetails.width,
+        height: seo?.opengraphImage?.mediaDetails.height,
+      }] : [],
+      type: opengraphType,
+    }
   }
 }
 
-export default async function Home() {
+export default async function Why() {
 
   const data = await fetchAPI(`
-    query getHomepage {
+    query getHomePage {
       page(id: "5", idType: DATABASE_ID) {
         content(format: RENDERED)
         title(format: RENDERED)
-        homepage {
-          telephone
-          email
-          keyList {
-            keyItem
+        pageOptions {
+          backgroundColor
+          textColor
+          faq
+        }
+        homepageRotatingList {
+          rotatingList {
+            text
           }
-          sections {
-            copy
-            ctaLabel
-            ctaUrl
-            image {
-              mediaItemUrl
-              mediaDetails {
-                height
-                width
-              }
-              altText
-            }
-          }
-          brandSpotlightCopy
-          brandSpotlight {
-            ... on Brand {
-              id
-              author {
-                node {
-                  authorCustomFields {
-                    authorNiceName
-                    urlSlug
-                  }
-                }
-              }
-              title(format: RENDERED)
-              slug
-              brandOptions {
-                spotlightFeaturedImage {
+        }
+        flexibleContent {
+          flexibleContent {
+            ... on Page_Flexiblecontent_FlexibleContent_TwoColumnsTextimage {
+              backgroundColor
+              fieldGroupName
+              textColor
+              rows {
+                copy
+                image {
                   altText
                   mediaDetails {
                     height
                     width
                   }
-                  sizes(size: SPOTLIGHT_SIZE)
-                  sourceUrl(size: SPOTLIGHT_SIZE)
+                  mediaItemUrl
+                }
+                video {
+                  mediaItemUrl
                 }
               }
+            }
+            ... on Page_Flexiblecontent_FlexibleContent_ThreeColumnsGrid {
+              backgroundColor
+              fieldGroupName
+              heading
+              textColor
+              grid {
+                copy
+                icon {
+                  altText
+                  mediaDetails {
+                    height
+                    width
+                  }
+                  mediaItemUrl
+                }
+              }
+            }
+            ... on Page_Flexiblecontent_FlexibleContent_Pricing {
+              backgroundColor
+              fieldGroupName
+              options {
+                ctaLabel
+                ctaUrl
+                features
+                month
+                name
+                price
+                services
+                servicesRow
+                theme
+                type
+              }
+            }
+            ... on Page_Flexiblecontent_FlexibleContent_SingleCentredColumn {
+              fieldGroupName
+              backgroundColor
+              copy
+              textColor
             }
           }
         }
@@ -113,24 +135,65 @@ export default async function Home() {
     }
   `);
 
+  const dataOptions = await fetchAPI(`
+    query ThemeSettings {
+      acfOptionsThemeSettings {
+        themeSettings {
+          email
+          telephone
+          bookDemoUrl
+          faqs {
+            answer
+            question
+          }
+        }
+      }
+    }
+  `);
+
+  const backgroundColor = data?.page?.pageOptions?.backgroundColor;
+  const color = data?.page?.pageOptions?.textColor;
   const title = data?.page?.title;
   const content = data?.page?.content;
-  const telephone = data?.page?.homepage?.telephone;
-  const email = data?.page?.homepage?.email;
-  const keyList = data?.page?.homepage?.keyList;
-  const sections = data?.page?.homepage?.sections;
-  const brandSpotlight = data?.page?.homepage?.brandSpotlight;
-  const brandSpotlightCopy = data?.page?.homepage?.brandSpotlightCopy;
+  const homepageRotatingList = data?.page?.homepageRotatingList?.rotatingList;
+  const telephone = dataOptions?.acfOptionsThemeSettings?.themeSettings?.telephone;
+  const email = dataOptions?.acfOptionsThemeSettings?.themeSettings?.email;
+  const flexibleContent = data?.page?.flexibleContent?.flexibleContent;
+  const faq = data?.page?.pageOptions?.faq;
+  const bookDemoUrl = dataOptions?.acfOptionsThemeSettings?.themeSettings?.bookDemoUrl;
+  const faqs = dataOptions?.acfOptionsThemeSettings?.themeSettings?.faqs;
 
   return (
     <main className={styles.homepageMainWrap}>
-      <Header fullMenu={true} />
-      <Intro title={title} content={content} telephone={telephone} email={email} />
-      <KeyList keyList={keyList} />
-      <Blocks sections={sections} />
-      <Spotlight brandSpotlight={brandSpotlight} brandSpotlightCopy={brandSpotlightCopy} />
-      <FormRequest />
-      <Footer border={false} telephone={telephone} email={email} />
+      <Header 
+        fullMenu={true} 
+        backgroundColor={backgroundColor} 
+        color={color}
+        bookDemoUrl={bookDemoUrl}
+      />
+      
+      <Intro 
+        backgroundColor={backgroundColor} 
+        color={color} 
+        content={content} 
+        title={title} 
+        isHome={true}
+        homepageRotatingList={homepageRotatingList}
+      />
+
+      <PageFlexibleContent 
+        data={flexibleContent}
+      />
+
+      {faq && <Faqs data={faqs} bookDemoUrl={bookDemoUrl} />}
+
+      <Footer 
+        border={false} 
+        telephone={telephone} 
+        email={email} 
+        color={color}
+        backgroundColor={backgroundColor} 
+      />
     </main>
   )
-}
+};

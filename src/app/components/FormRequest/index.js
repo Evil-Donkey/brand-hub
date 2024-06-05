@@ -73,7 +73,7 @@ const FormRequest = () => {
                         lastName: formData.lastName || null,
                         email: formData.email || null,
                         company: formData.company || null,
-                        website: formData.website || null,
+                        telephone: formData.telephone || null,
                         newsletter: newsletterChecked || null,
                         time: new Date()
                     })
@@ -83,7 +83,7 @@ const FormRequest = () => {
                             lastName: '',
                             email: '',
                             company: '',
-                            website: '',
+                            telephone: '',
                             newsletter: false
                         })
                         getRequests()
@@ -113,11 +113,12 @@ const FormRequest = () => {
 
     return (
         <div className={styles.request} id="form-request">
-            <div className={`container`}>
-                <div className="row justify-content-center">
-                    <div className="col-md-9 col-lg-6">
-                        <h2 className="mb-3 text-center">Ready to Dive In?</h2>
-                        <p className="mb-5 text-center">Request a demo</p>
+            <div className='container'>
+                <div className="row">
+                    <div className="col-md-4">
+                        <h2 className="mb-3">Enquiries</h2>
+                    </div>
+                    <div className="col-md-8">
                         <form onSubmit={sendRequest}>
                             <div className="row">
                                 <div className="col-md-6 mb-2">
@@ -127,7 +128,7 @@ const FormRequest = () => {
                                         id="firstName"
                                         className={styles.input}
                                         required
-                                        placeholder="First Name"
+                                        placeholder="First Name *"
                                         value={formData.firstName || ''}
                                         onChange={updateInput}
                                     />
@@ -139,7 +140,7 @@ const FormRequest = () => {
                                         id="lastName"
                                         className={styles.input}
                                         required
-                                        placeholder="Last Name"
+                                        placeholder="Last Name *"
                                         value={formData.lastName || ''}
                                         onChange={updateInput}
                                     />
@@ -153,7 +154,7 @@ const FormRequest = () => {
                                         id="emailField"
                                         className={styles.input}
                                         required
-                                        placeholder="Email"
+                                        placeholder="Email *"
                                         value={formData.email || ''}
                                         onChange={updateInput}
                                     />
@@ -175,10 +176,10 @@ const FormRequest = () => {
                                 <div className="col mb-2">
                                     <input
                                         type="text"
-                                        name="website"
+                                        name="telephone"
                                         className={styles.input}
-                                        placeholder="Website Address"
-                                        value={formData.website || ''}
+                                        placeholder="Telephone number"
+                                        value={formData.telephone || ''}
                                         onChange={updateInput}
                                     />
                                 </div>
@@ -210,7 +211,7 @@ const FormRequest = () => {
                                     </label>
                                 </div>
                                 <div className="col-md-auto mt-5 mt-md-0">
-                                    <button type="submit" id="requestSubmit" className={styles.submitBtn}>
+                                    <button type="submit" id="requestSubmit" className={'cta__btn cta__btn--border'}>
                                         Submit
                                     </button>
                                 </div>

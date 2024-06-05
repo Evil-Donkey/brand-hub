@@ -1,0 +1,33 @@
+.textWrapper {
+    h2 {
+        font-weight: 100;
+        letter-spacing: 0;
+        font-family: var(--open-sans);
+    }
+}
+
+.filesWrap {
+    h5 {
+        cursor: pointer;
+    }
+}
+
+.iframeWrapper {
+    position: relative; 
+    padding-bottom: 56.25%;
+    overflow: hidden;
+    max-width: 100%;
+    width: 100%;
+    height: auto;
+    iframe,
+    object,
+    embed,
+    > div,
+    video { 
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+    }
+}

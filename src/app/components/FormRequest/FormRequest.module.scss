@@ -1,16 +1,9 @@
 .request {
-    padding: 5rem 0;
-    background-image: url('/images/form-bg.jpg');
-    background-size: cover;
-    background-position: center;
-    border-top: 1px solid var(--colour-black-03);
-    border-bottom: 1px solid var(--colour-black-03);
+    padding: 0 0 5rem;
     background-color: var(--colour-white-00);
     color: var(--colour-black-03);
-    h2 {
-        @media screen and (min-width: 768px) {
-            font-size: 45px;   
-        }
+    @media screen and (min-width: 768px) {
+        padding: 5rem 0;
     }
 }
 

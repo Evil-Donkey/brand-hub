@@ -1,14 +1,29 @@
+.headerContainerWrapper {
+    transition: transform 0.3s ease;
+}
+
 .headerContainer {
     position: relative;
     &:before {
         content: "";
         position: absolute;
-        bottom: 0;
+        bottom: 4px;
         left: .75rem;
         height: 1px;
         width: calc(100% - 1.5rem);
         background-color: var(--theme-nav-00);
     }   
+}
+
+.fixedHeader {
+    position: fixed;
+    top: 0;
+    width: 100%;
+    z-index: 1000;
+}
+
+.headerHidden {
+    transform: translateY(-100%);
 }
 
 .menuIcon {
