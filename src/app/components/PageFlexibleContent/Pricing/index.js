@@ -95,7 +95,7 @@ const Pricing = ({ data, allFeatures, allServices, allServicesRow }) => {
 
                                         {ctaLabel && ctaUrl && (
                                             <div className='align-self-center'>
-                                                <Link href={ctaUrl} className={`cta__btn ${theme === 'dark' ? 'cta__btn--transparent' : 'cta__btn--border'}`}>{ctaLabel}</Link>
+                                                <Link href={ctaUrl} target="_blank" className={`cta__btn ${theme === 'dark' ? 'cta__btn--transparent' : 'cta__btn--border'}`}>{ctaLabel}</Link>
                                             </div>
                                         )}
                                     </div>
