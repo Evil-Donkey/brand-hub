@@ -1,0 +1,46 @@
+.twoBoxes {
+    padding-top: 3rem;
+    padding-bottom: 3rem;
+    gap: 30px;
+    @media screen and (min-width: 992px) {
+        padding-top: 80px;
+        padding-bottom: 80px;
+        gap: 80px;
+    }
+    img {
+        height: auto;
+    }
+
+    h2 {
+        @media screen and (min-width: 992px) {
+            font-size: 50px;
+        }
+    }
+
+    h5 {
+        color: var(--colour-blue-00);
+        font-size: 20px;
+        font-family: var(--open-sans);
+        font-weight: 100;
+        margin-bottom: 15px;
+    }
+}
+
+.box {
+    border-radius: 5px;
+    h3 {
+        @media screen and (min-width: 992px) {
+            font-size: 44px;
+        }
+    }
+    ol {
+        padding-left: 1rem;
+        li {
+            font-family: var(--roboto-flex);
+            margin-bottom: 30px;
+            @media screen and (min-width: 992px) {
+                font-size: 18px;
+            }
+        }
+    }
+}
