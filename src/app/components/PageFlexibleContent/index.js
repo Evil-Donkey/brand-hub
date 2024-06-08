@@ -2,6 +2,7 @@ import SingleCentredColumn from './SingleCentredColumn'
 import TwoColumnsTextImage from './TwoColumnsTextImage'
 import ThreeColumnsGrid from './ThreeColumnsGrid'
 import Pricing from './Pricing'
+import Comparising from './Comparising'
 
 const PageFlexibleContent = ({ data, features, services, servicesRow }) => {
 
@@ -21,6 +22,9 @@ const PageFlexibleContent = ({ data, features, services, servicesRow }) => {
         }
         if (fieldGroupName === "Page_Flexiblecontent_FlexibleContent_Pricing") {
             flexibleContentArray.push(<Pricing data={data} allFeatures={features} allServices={services} allServicesRow={servicesRow} />);
+        }
+        if (fieldGroupName === "Page_Flexiblecontent_FlexibleContent_Comparison") {
+            flexibleContentArray.push(<Comparising data={data} allFeatures={features} allServices={services} />);
         }
     })}
 
