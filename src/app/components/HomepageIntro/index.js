@@ -16,6 +16,7 @@ const Intro = ({
     homepageRotatingList,
     isHome, 
     isPricing,
+    isComparising,
     title }) => {
 
     // const trackDemo = () => {
@@ -61,8 +62,15 @@ const Intro = ({
                 <div className='row justify-content-between align-items-center'>
                     {title &&
                         <div className={`col-lg-${c1 ? c1 : '5'} mb-5 mb-lg-0`}>
-                            <h1 className={`m-0 ${isHome ? styles.heroGraphic : ``}`}>{title}</h1>
+                            <h1 className={`m-0 ${isHome ? styles.heroGraphic : ``}`} dangerouslySetInnerHTML={{ __html: title }} />
                             {isPricing && <img className="mt-3" src='/images/graphic-pricing.png' width="300" alt='Pricing Graphic' />}
+                            {isComparising && 
+                                <div className="row mt-4">
+                                    <div className='col-md-7'>
+                                        <div dangerouslySetInnerHTML={{ __html: content }} />
+                                    </div>
+                                </div>
+                            }
                         </div>
                     }
                     <div className={`col-lg-${c2 ? c2 : '5'} d-flex flex-column justify-content-between ${featuredImage ? `align-items-center align-items-lg-end` : ``}`}>
@@ -79,7 +87,7 @@ const Intro = ({
                                 </div>
                             </div>
                         }
-                        {content &&
+                        {!isComparising && content &&
                             <div className='row'>
                                 <div className='col-10 col-md-9 col-lg-12 col-xl-9'>
                                     <div dangerouslySetInnerHTML={{ __html: content }} />

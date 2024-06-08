@@ -5,6 +5,13 @@
         font-size: 50px;
         line-height: 1.1;
         margin-bottom: 0;
+        span {
+            color: var(--colour-blue-00);
+            font-size: 30px;
+            @media screen and (min-width: 992px) {
+                font-size: 50px;
+            }
+        }
         &.heroGraphic {
             position: relative;
             &:before {
