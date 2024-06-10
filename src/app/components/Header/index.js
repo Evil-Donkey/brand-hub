@@ -14,7 +14,11 @@ const Header = ({ backgroundColor, bookDemoUrl, color, fullMenu, hideSignUp }) =
     useEffect(() => {
         const handleScroll = () => {
             const currentScrollTop = window.pageYOffset || document.documentElement.scrollTop;
-            if (currentScrollTop > lastScrollTop && currentScrollTop > 100) {
+            const maxScroll = document.documentElement.scrollHeight - window.innerHeight;
+            
+            if (currentScrollTop >= maxScroll) {
+                setIsScrollingUp(true);
+            } else if (currentScrollTop > lastScrollTop && currentScrollTop > 100) {
                 setIsScrollingUp(false);
             } else {
                 setIsScrollingUp(true);
