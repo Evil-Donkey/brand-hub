@@ -138,6 +138,25 @@ export default async function Pricing() {
               copy
               textColor
             }
+            ... on Page_Flexiblecontent_FlexibleContent_TwoBoxes {
+              backgroundColor
+              fieldGroupName
+              heading
+              textColor
+              boxes {
+                backgroundColor
+                color
+                copy
+                graphic {
+                  altText
+                  mediaDetails {
+                    height
+                    width
+                  }
+                  mediaItemUrl
+                }
+              }
+            }
             ... on Page_Flexiblecontent_FlexibleContent_Comparison {
               backgroundColor
               fieldGroupName
