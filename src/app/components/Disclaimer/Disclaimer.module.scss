@@ -1,0 +1,12 @@
+.disclaimer {
+    p {
+        font-size: 14px;
+        a {
+            text-decoration: underline;
+            transition: all .3s ease;
+            &:hover {
+                color: var(--colour-blue-00);
+            }
+        }
+    }
+}

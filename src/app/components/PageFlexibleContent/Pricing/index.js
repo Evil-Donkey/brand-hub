@@ -64,7 +64,7 @@ const Pricing = ({ data, allFeatures, allServices, allServicesRow }) => {
                                                         } else if (!month && feature === 'One request at a time') {
                                                             featureText = 'Multiple requests';
                                                         } else if (j !== 0 && feature === '5 day slow delivery') {
-                                                            featureText = 'Average 48 hour delivery';
+                                                            featureText = '12 to 48 hour delivery';
                                                         }
                                                         return (
                                                             <li key={i.toString()} className='d-flex gap-3 align-items-center'>

@@ -1,0 +1,126 @@
+.pricingWrapper {
+  padding-bottom: 3rem;
+  @media screen and (min-width: 992px) {
+    padding-bottom: 80px;
+  }
+}
+
+.logoWrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 120px;
+  border-bottom: 2px dashed var(--colour-white-00);
+}
+
+.pricingOption {
+  h2 {
+    font-size: 30px;
+    font-family: var(--open-sans);
+    color: var(--colour-grey-05);
+    letter-spacing: 0;
+    font-weight: 100;
+    margin: 0;
+  }
+  h3 {
+    font-size: 60px;
+    letter-spacing: 1px;
+    @media screen and (min-width: 992px) {
+      font-size: 70px;
+      line-height: 65px;
+      min-height: 90px;
+      &.noMonth {
+        font-size: 50px;
+      }
+    }
+    span {
+      font-size: 15px;
+      @media screen and (min-width: 992px) {
+        font-size: 20px;
+      }
+    }
+  }
+  .listWrapper {
+    border-bottom: 2px dashed var(--colour-white-00);
+    ul {
+      li {
+        font-weight: 300;
+        font-size: 15px;
+      }
+    }
+  }
+
+  &Dark {
+    background-color: var(--colour-grey-02);
+    h2 {
+      color: var(--colour-grey-05);
+    }
+    h3,
+    h4,
+    li {
+      color: var(--colour-grey-05);
+    }
+
+    .priceWrapper {
+      p {
+        color: var(--colour-grey-05);
+      }
+    }
+  }
+
+  &Light {
+    background-color: var(--colour-blue-00);
+    h2 {
+      color: var(--colour-white-00);
+    }
+    h3,
+    h4 {
+      color: var(--colour-black-03);
+    }
+  }
+
+  .priceWrapper {
+    border-bottom: 2px dashed var(--colour-white-00);
+    @media screen and (min-width: 992px) {
+      min-height: 250px;
+    }
+    @media screen and (min-width: 1200px) {
+      min-height: 300px;
+    }
+    @media screen and (min-width: 1400px) {
+      min-height: 280px;
+    }
+    p {
+      font-family: var(--open-sans);
+      font-size: 15px;
+      font-weight: 500;
+      min-width: 40px;
+    }
+    h3 {
+      min-height: 0;
+      font-size: 30px;
+      margin: 0;
+      line-height: 1.1;
+      @media screen and (min-width: 992px) {
+        font-size: 40px;
+      }
+      span {
+        font-size: 15px;
+        @media screen and (min-width: 992px) {
+          font-size: 20px;
+        }
+      }
+    }
+  }
+}
+
+.badge {
+  position: absolute;
+  top: 10px;
+  right: 20px;
+  @media screen and (min-width: 992px) {
+    top: 0;
+    right: 30px;
+    transform: translateY(-50%);
+  }
+}
