@@ -1,16 +1,17 @@
-import fetchAPI from './lib/api'
-import Header from './components/Header'
-import Intro from './components/HomepageIntro'
-import PageFlexibleContent from './components/PageFlexibleContent'
-import Faqs from './components/Faqs'
-import Footer from './components/Footer'
-import styles from './Homepage.module.scss'
+import fetchAPI from '@/app/lib/api'
+import Header from '@/app/components/Header'
+import Intro from '@/app/components/HomepageIntro'
+import PageFlexibleContent from '@/app/components/PageFlexibleContent'
+import Faqs from '@/app/components/Faqs'
+import Disclaimer from '@/app/components/Disclaimer'
+import Footer from '@/app/components/Footer'
+import styles from '@/app/Homepage.module.scss'
 
 export async function generateMetadata() {
 
   const data = await fetchAPI(`
-    query getContactPage {
-      page(id: "5", idType: DATABASE_ID) {
+    query getAlternativePage {
+      page(id: "1176", idType: DATABASE_ID) {
         seo {
           title
           metaDesc
@@ -53,21 +54,29 @@ export async function generateMetadata() {
   }
 }
 
-export default async function Why() {
+export default async function Pricing() {
 
   const data = await fetchAPI(`
-    query getHomePage {
-      page(id: "5", idType: DATABASE_ID) {
-        content(format: RENDERED)
+    query getPricingPage {
+      page(id: "1176", idType: DATABASE_ID) {
         title(format: RENDERED)
+        content(format: RENDERED)
+        disclaimer {
+          disclaimer
+        }
         pageOptions {
           backgroundColor
           textColor
           faq
         }
-        homepageRotatingList {
-          rotatingList {
-            text
+        featuredImage {
+          node {
+            altText
+            mediaDetails {
+              height
+              width
+            }
+            mediaItemUrl
           }
         }
         flexibleContent {
@@ -149,9 +158,34 @@ export default async function Why() {
                 }
               }
             }
+            ... on Page_Flexiblecontent_FlexibleContent_Comparison {
+              backgroundColor
+              fieldGroupName
+              options {
+                features
+                name
+                priceCopy
+                priceFrom
+                priceTo
+                dollars
+                services
+                theme
+                ukBadge
+                logo {
+                  altText
+                  mediaDetails {
+                    height
+                    width
+                  }
+                  mediaItemUrl
+                }
+              }
+            }
           }
         }
       }
+      acfFlexibleContentComparisonFeaturesOptions
+      acfFlexibleContentComparisonServicesOptions
     }
   `);
 
@@ -175,10 +209,13 @@ export default async function Why() {
   const color = data?.page?.pageOptions?.textColor;
   const title = data?.page?.title;
   const content = data?.page?.content;
-  const homepageRotatingList = data?.page?.homepageRotatingList?.rotatingList;
+  const disclaimer = data?.page?.disclaimer.disclaimer;
+  const featuredImage = data?.page?.featuredImage;
   const telephone = dataOptions?.acfOptionsThemeSettings?.themeSettings?.telephone;
   const email = dataOptions?.acfOptionsThemeSettings?.themeSettings?.email;
   const flexibleContent = data?.page?.flexibleContent?.flexibleContent;
+  const features = data?.acfFlexibleContentComparisonFeaturesOptions;
+  const services = data?.acfFlexibleContentComparisonServicesOptions;
   const faq = data?.page?.pageOptions?.faq;
   const bookDemoUrl = dataOptions?.acfOptionsThemeSettings?.themeSettings?.bookDemoUrl;
   const faqs = dataOptions?.acfOptionsThemeSettings?.themeSettings?.faqs;
@@ -188,25 +225,32 @@ export default async function Why() {
       <Header 
         fullMenu={true} 
         backgroundColor={backgroundColor} 
-        color={color}
+        color={color} 
         bookDemoUrl={bookDemoUrl}
+        hideSignUp={false}
       />
-      
+
       <Intro 
         backgroundColor={backgroundColor} 
         color={color} 
-        content={content} 
+        content={content}
         title={title} 
-        isHome={true}
-        homepageRotatingList={homepageRotatingList}
+        c1={8} 
+        c2={4}
+        featuredImage={featuredImage}
+        isComparising={true}
       />
-
+      
       <PageFlexibleContent 
-        data={flexibleContent}
+        data={flexibleContent} 
+        features={features} 
+        services={services} 
       />
 
       {faq && <Faqs data={faqs} bookDemoUrl={bookDemoUrl} />}
 
+      {disclaimer && <Disclaimer disclaimer={disclaimer} />}
+      
       <Footer 
         border={false} 
         telephone={telephone} 
@@ -216,4 +260,4 @@ export default async function Why() {
       />
     </main>
   )
-};
+}

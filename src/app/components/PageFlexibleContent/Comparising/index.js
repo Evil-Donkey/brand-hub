@@ -11,7 +11,7 @@ const Comparising = ({ data, allFeatures, allServices }) => {
             <div className='container'>
                 <div className='row justify-content-center'>
                     {options && options.map((option, j) => {
-                        const { name, priceFrom, priceTo, priceCopy, features, services, theme, ukBadge, logo } = option;
+                        const { name, priceFrom, priceTo, priceCopy, dollars, features, services, theme, ukBadge, logo } = option;
 
                         return (
                             <div className='col-md-6 col-xl-3 mb-4 position-relative' key={j.toString()}>
@@ -56,11 +56,11 @@ const Comparising = ({ data, allFeatures, allServices }) => {
                                             <h4 className='mb-3'>Price:</h4>
                                             <div className='d-flex align-items-end gap-3 mb-2'>
                                                 <p className='m-0'>From:</p>
-                                                <h3>£{priceFrom}<span>/month</span></h3>
+                                                <h3>{dollars ? `$` : `£`}{priceFrom}<span>/month</span></h3>
                                             </div>
                                             <div className='d-flex align-items-end gap-3 mb-4'>
                                                 <p className='m-0'>To:</p>
-                                                <h3>£{priceTo}<span>/month</span></h3>
+                                                <h3>{dollars ? `$` : `£`}{priceTo}<span>/month</span></h3>
                                             </div>
                                             {priceCopy && <p dangerouslySetInnerHTML={{ __html: priceCopy }} />}
                                         </div>

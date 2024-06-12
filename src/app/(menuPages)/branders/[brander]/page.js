@@ -14,6 +14,7 @@ export async function generateMetadata({ params: {brander} }) {
       brander(id: "${brander}", idType: SLUG) {
         title(format: RENDERED)
         seo {
+          title
           metaDesc
           opengraphUrl
           opengraphTitle
@@ -37,7 +38,7 @@ export async function generateMetadata({ params: {brander} }) {
   const opengraphType = seo?.opengraphType || 'website';
 
   return {
-    title: 'Branders | Brand Hub',
+    title: seo?.title,
     description: seo?.metaDesc,
     openGraph: {
       title: seo?.openGraphTitle,

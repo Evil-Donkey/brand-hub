@@ -11,6 +11,7 @@ export async function generateMetadata() {
     query getBrandersPage {
       page(id: "531", idType: DATABASE_ID) {
         seo {
+          title
           metaDesc
           opengraphUrl
           opengraphTitle
@@ -34,7 +35,7 @@ export async function generateMetadata() {
   const opengraphType = seo?.opengraphType || 'website';
 
   return {
-    title: 'Branders | Brand Hub',
+    title: seo?.title,
     description: seo?.metaDesc,
     openGraph: {
       title: seo?.openGraphTitle,

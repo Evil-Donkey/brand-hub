@@ -13,6 +13,7 @@ export async function generateMetadata() {
     query getAlternativePage {
       page(id: "1097", idType: DATABASE_ID) {
         seo {
+          title
           metaDesc
           opengraphUrl
           opengraphTitle
@@ -36,7 +37,7 @@ export async function generateMetadata() {
   const opengraphType = seo?.opengraphType || 'website';
 
   return {
-    title: 'Brand Hub vs Others | Brand Hub',
+    title: seo?.title,
     description: seo?.metaDesc,
     openGraph: {
       title: seo?.openGraphTitle,
@@ -166,6 +167,7 @@ export default async function Pricing() {
                 priceCopy
                 priceFrom
                 priceTo
+                dollars
                 services
                 theme
                 ukBadge

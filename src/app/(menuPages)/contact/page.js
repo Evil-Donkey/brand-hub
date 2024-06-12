@@ -14,6 +14,7 @@ export async function generateMetadata() {
     query getContactPage {
       page(id: "231", idType: DATABASE_ID) {
         seo {
+          title
           metaDesc
           schema {
             raw
@@ -41,7 +42,7 @@ export async function generateMetadata() {
   const opengraphType = seo?.opengraphType || 'website';
 
   return {
-    title: 'Contact us | Brand Hub',
+    title: seo?.title,
     description: seo?.metaDesc,
     openGraph: {
       title: seo?.openGraphTitle,
