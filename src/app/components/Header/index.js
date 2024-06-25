@@ -9,28 +9,28 @@ import styles from './Header.module.scss'
 const Header = ({ backgroundColor, bookDemoUrl, color, fullMenu, hideSignUp }) => {
 
     const [isScrollingUp, setIsScrollingUp] = useState(true);
-    const [lastScrollTop, setLastScrollTop] = useState(0);
+    // const [lastScrollTop, setLastScrollTop] = useState(0);
 
-    useEffect(() => {
-        const handleScroll = () => {
-            const currentScrollTop = window.pageYOffset || document.documentElement.scrollTop;
-            const maxScroll = document.documentElement.scrollHeight - window.innerHeight;
+    // useEffect(() => {
+    //     const handleScroll = () => {
+    //         const currentScrollTop = window.pageYOffset || document.documentElement.scrollTop;
+    //         const maxScroll = document.documentElement.scrollHeight - window.innerHeight;
             
-            if (currentScrollTop >= maxScroll) {
-                setIsScrollingUp(true);
-            } else if (currentScrollTop > lastScrollTop && currentScrollTop > 100) {
-                setIsScrollingUp(false);
-            } else {
-                setIsScrollingUp(true);
-            }
-            setLastScrollTop(currentScrollTop <= 0 ? 0 : currentScrollTop);
-        };
+    //         if (currentScrollTop >= maxScroll) {
+    //             setIsScrollingUp(true);
+    //         } else if (currentScrollTop > lastScrollTop && currentScrollTop > 100) {
+    //             setIsScrollingUp(false);
+    //         } else {
+    //             setIsScrollingUp(true);
+    //         }
+    //         setLastScrollTop(currentScrollTop <= 0 ? 0 : currentScrollTop);
+    //     };
 
-        window.addEventListener('scroll', handleScroll);
-        return () => {
-            window.removeEventListener('scroll', handleScroll);
-        };
-    }, [lastScrollTop]);
+    //     window.addEventListener('scroll', handleScroll);
+    //     return () => {
+    //         window.removeEventListener('scroll', handleScroll);
+    //     };
+    // }, [lastScrollTop]);
 
     return (
         <div

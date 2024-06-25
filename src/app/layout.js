@@ -23,6 +23,7 @@ export default function RootLayout({ children, params }) {
       <GoogleAnalytics GA_TRACKING_ID={GA_TRACKING_ID} />
       <GoogleTagManager GTM_ID={GTM_ID} />
       <Hotjar HOTJAR_ID={HOTJAR_ID} />
+      <Script src='https://cdn-cookieyes.com/client_data/d26ba0914ff0166d644773ea/script.js' strategy='beforeInteractive' />
       <body className={`${robotoSlab.variable} ${anton.variable} ${openSans.variable} ${robotoFlex.className}`}>
         {children}
         <noscript
