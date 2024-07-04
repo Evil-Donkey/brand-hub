@@ -5,6 +5,7 @@ import gsap from 'gsap'
 import ReactPlayer from 'react-player'
 import Image from 'next/image'
 import styles from './HomepageIntro.module.scss'
+import useWindowWidth from '@/app/lib/windowWidth'
 // import { trackEvent } from '../GoogleTagManager'
 
 const Intro = ({ 
@@ -19,6 +20,8 @@ const Intro = ({
     isPricing,
     isComparising,
     title }) => {
+
+        const windowWidth = useWindowWidth();
 
     // const trackDemo = () => {
     //     trackEvent({
@@ -39,7 +42,7 @@ const Intro = ({
     const rotatingListRef = useRef(null);
     const image = featuredImage ? featuredImage.node : null;
 
-    const pb = isHome ? '20rem' : '3rem';
+    const pb = isHome && windowWidth > 992 ? '20rem' : isHome ? '13rem' : '3rem';
 
 
     useEffect(() => {

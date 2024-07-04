@@ -1,6 +1,9 @@
 .introContainer {
-    padding-top: 10rem;
+    padding-top: 13rem;
     padding-bottom: 3rem;
+    @media screen and (min-width: 992px) {
+        padding-top: 10rem;
+    }
     h1 {
         font-size: 50px;
         line-height: 1.1;
@@ -91,7 +94,10 @@
 }
 
 .introVideo {
-    margin-top: -15rem;
+    margin-top: -9rem;
+    @media screen and (min-width: 992px) {
+        margin-top: -15rem;
+    }
 }
 .videoWrapper {
     position: relative;
