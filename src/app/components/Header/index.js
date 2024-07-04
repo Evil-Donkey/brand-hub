@@ -69,7 +69,9 @@ const Header = ({ backgroundColor, bookDemoUrl, color, discountBarCopy, fullMenu
                     <div className='container'>
                         <div className='row justify-content-center'>
                             <div className='col-auto'>
-                                <p dangerouslySetInnerHTML={{ __html: discountBarCopy }} />
+                                <Link href="/pricing">
+                                    <p dangerouslySetInnerHTML={{ __html: discountBarCopy }} />
+                                </Link>
                             </div>
                         </div>
                     </div>
