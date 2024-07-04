@@ -6,20 +6,47 @@ import Logo from '../Logo'
 import Navigation from '../Navigation'
 import styles from './Header.module.scss'
 
-const Header = ({ backgroundColor, bookDemoUrl, color, fullMenu, hideSignUp }) => {
+const Header = ({ backgroundColor, bookDemoUrl, color, discountBarCopy, fullMenu, hideSignUp }) => {
 
     const [isScrollingUp, setIsScrollingUp] = useState(true);
+    const [lastScrollTop, setLastScrollTop] = useState(0);
+
+    useEffect(() => {
+        const handleScroll = () => {
+            const currentScrollTop = window.pageYOffset || document.documentElement.scrollTop;
+            const maxScroll = document.documentElement.scrollHeight - window.innerHeight;
+            
+            if (currentScrollTop >= maxScroll) {
+                setIsScrollingUp(true);
+            } else if (currentScrollTop > lastScrollTop && currentScrollTop > 100) {
+                setIsScrollingUp(false);
+            } else {
+                setIsScrollingUp(true);
+            }
+            setLastScrollTop(currentScrollTop <= 0 ? 0 : currentScrollTop);
+        };
+
+        window.addEventListener('scroll', handleScroll);
+        return () => {
+            window.removeEventListener('scroll', handleScroll);
+        };
+    }, [lastScrollTop]);
+
+
+    // const [isScrollingUp, setIsScrollingUp] = useState(true);
     // const [lastScrollTop, setLastScrollTop] = useState(0);
+    // const [hideDiscountBar, setHideDiscountBar] = useState(false);
 
     // useEffect(() => {
     //     const handleScroll = () => {
     //         const currentScrollTop = window.pageYOffset || document.documentElement.scrollTop;
-    //         const maxScroll = document.documentElement.scrollHeight - window.innerHeight;
-            
-    //         if (currentScrollTop >= maxScroll) {
-    //             setIsScrollingUp(true);
-    //         } else if (currentScrollTop > lastScrollTop && currentScrollTop > 100) {
+
+    //         if (currentScrollTop > lastScrollTop && currentScrollTop > 100) {
     //             setIsScrollingUp(false);
+    //             setHideDiscountBar(true);
+    //         } else if (currentScrollTop <= 100) {
+    //             setIsScrollingUp(true);
+    //             setHideDiscountBar(false);
     //         } else {
     //             setIsScrollingUp(true);
     //         }
@@ -37,6 +64,17 @@ const Header = ({ backgroundColor, bookDemoUrl, color, fullMenu, hideSignUp }) =
             className={`${styles.headerContainerWrapper} ${fullMenu ? styles.fixedHeader : ''} ${isScrollingUp ? '' : styles.headerHidden}`}
             style={{ backgroundColor: backgroundColor, color: color }}
         >
+            {discountBarCopy &&
+                <div className={styles.discountBar}>
+                    <div className='container'>
+                        <div className='row justify-content-center'>
+                            <div className='col-auto'>
+                                <p dangerouslySetInnerHTML={{ __html: discountBarCopy }} />
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            }
             <div className={`${styles.headerContainer} container py-3`}>
                 <div className="row align-items-md-center justify-content-between">
                     <div className='col-2 col-md-auto'>

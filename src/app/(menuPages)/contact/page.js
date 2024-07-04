@@ -174,6 +174,7 @@ export default async function Contact() {
           instagram
           linkedin
           bookDemoUrl
+          discountBarCopy
           faqs {
             answer
             question
@@ -194,6 +195,7 @@ export default async function Contact() {
   const flexibleContent = data?.page?.flexibleContent?.flexibleContent;
   const faq = data?.page?.pageOptions?.faq;
   const bookDemoUrl = dataOptions?.acfOptionsThemeSettings?.themeSettings?.bookDemoUrl;
+  const discountBarCopy = dataOptions?.acfOptionsThemeSettings?.themeSettings?.discountBarCopy;
   const faqs = dataOptions?.acfOptionsThemeSettings?.themeSettings?.faqs;
 
   return (
@@ -203,6 +205,7 @@ export default async function Contact() {
         backgroundColor={backgroundColor} 
         color={color} 
         bookDemoUrl={bookDemoUrl}
+        discountBarCopy={discountBarCopy}
       />
       
       <Intro 

@@ -196,6 +196,7 @@ export default async function Pricing() {
           email
           telephone
           bookDemoUrl
+          discountBarCopy
           faqs {
             answer
             question
@@ -218,6 +219,7 @@ export default async function Pricing() {
   const services = data?.acfFlexibleContentComparisonServicesOptions;
   const faq = data?.page?.pageOptions?.faq;
   const bookDemoUrl = dataOptions?.acfOptionsThemeSettings?.themeSettings?.bookDemoUrl;
+  const discountBarCopy = dataOptions?.acfOptionsThemeSettings?.themeSettings?.discountBarCopy;
   const faqs = dataOptions?.acfOptionsThemeSettings?.themeSettings?.faqs;
 
   return (
@@ -228,6 +230,7 @@ export default async function Pricing() {
         color={color} 
         bookDemoUrl={bookDemoUrl}
         hideSignUp={false}
+        discountBarCopy={discountBarCopy}
       />
 
       <Intro 

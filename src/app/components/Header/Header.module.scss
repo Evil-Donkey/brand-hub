@@ -23,7 +23,10 @@
 }
 
 .headerHidden {
-    transform: translateY(-100%);
+    transform: translateY(-58px);
+    @media screen and (min-width: 768px) {
+        transform: translateY(-34px);
+    }
 }
 
 .menuIcon {
@@ -120,6 +123,41 @@
                     transform: translateX(3px);
                 }
             }
+        }
+    }
+}
+
+.discountBar {
+    background-color: var(--colour-blue-00);
+    color: var(--colour-black-03);
+    padding: 5px;
+    p {
+        margin: 0;
+        font-weight: 300;
+        font-size: 16px !important;
+        position: relative;
+        text-align: center;
+        &:before,
+        &:after {
+            content: "";
+            position: absolute;
+            top: 5px;
+            width: 15px;
+            height: 15px;
+            display: none;
+            background-size: contain;
+            background-repeat: no-repeat;
+            background-position: center center;
+            background-image: url(/images/icon-gift.svg);
+            @media screen and (min-width: 768px) {
+                display: block;
+            }
+        }
+        &:before {
+            left: -20px;
+        }
+        &:after {
+            right: -20px;
         }
     }
 }
