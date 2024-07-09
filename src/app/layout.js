@@ -1,5 +1,7 @@
 import Script from 'next/script'
+import Head from 'next/head'
 import GoogleAnalytics from './components/GoogleAnalytics'
+import GoogleConsentMode from './components/GoogleConsentMode'
 import GoogleTagManager from './components/GoogleTagManager'
 import Hotjar from './components/Hotjar'
 import { anton, openSans, robotoFlex, robotoSlab } from './utils/fonts'
@@ -20,17 +22,21 @@ export const metadata = {
 export default function RootLayout({ children, params }) {
   return (
     <html lang="en">
-      <GoogleAnalytics GA_TRACKING_ID={GA_TRACKING_ID} />
-      <GoogleTagManager GTM_ID={GTM_ID} />
-      <Hotjar HOTJAR_ID={HOTJAR_ID} />
-      <Script src='https://cdn-cookieyes.com/client_data/d26ba0914ff0166d644773ea/script.js' strategy='beforeInteractive' />
+      <Head>
+        <title>{metadata.title.default}</title>
+        <GoogleAnalytics GA_TRACKING_ID={GA_TRACKING_ID} />
+        <GoogleConsentMode />
+        <GoogleTagManager GTM_ID={GTM_ID} />
+        <Script src='https://cdn-cookieyes.com/client_data/d26ba0914ff0166d644773ea/script.js' strategy='beforeInteractive' />
+        <Hotjar HOTJAR_ID={HOTJAR_ID} />
+        <noscript
+          dangerouslySetInnerHTML={{
+            __html: `<iframe src="https://www.googletagmanager.com/ns.html?id=${GTM_ID}" height="0" width="0" style="display: none; visibility: hidden;"></iframe>`,
+          }}
+        />
+      </Head>
       <body className={`${robotoSlab.variable} ${anton.variable} ${openSans.variable} ${robotoFlex.className}`}>
         {children}
-        <noscript
-            dangerouslySetInnerHTML={{
-            __html: `<iframe src="https://www.googletagmanager.com/ns.html?id=${GTM_ID}" height="0" width="0" style="display: none; visibility: hidden;"></iframe>`,
-            }} 
-        />
       </body>
     </html>
   )

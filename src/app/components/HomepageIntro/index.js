@@ -1,6 +1,6 @@
 'use client'
 
-import { useEffect, useRef } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import gsap from 'gsap'
 import ReactPlayer from 'react-player'
 import Image from 'next/image'
@@ -39,6 +39,7 @@ const Intro = ({
     //     });
     // };
 
+    const [isMounted, setIsMounted] = useState(false);
     const rotatingListRef = useRef(null);
     const image = featuredImage ? featuredImage.node : null;
 
@@ -46,6 +47,8 @@ const Intro = ({
 
 
     useEffect(() => {
+        setIsMounted(true);
+
         if (homepageRotatingList && homepageRotatingList.length > 0) {
             const elements = rotatingListRef.current.children;
             const tl = gsap.timeline({ repeat: -1 });
@@ -107,7 +110,7 @@ const Intro = ({
                 </div>
             </div>
 
-            {isHome &&
+            {isHome && isMounted && (
                 <div className={styles.introVideo}>
                     <div className='container'>
                         <div className='row justify-content-center'>
@@ -140,7 +143,7 @@ const Intro = ({
                         </div>
                     </div>
                 </div>
-            }
+            )}
         </>
     );
 }
