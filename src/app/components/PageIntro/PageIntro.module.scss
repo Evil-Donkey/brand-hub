@@ -5,24 +5,9 @@
         padding-top: 10rem;
     }
     h1 {
-        font-size: 30px;
+        font-size: 50px;
         line-height: 1.1;
         margin-bottom: 0;
-        color: var(--colour-black-03);
-        display: inline-block;
-        @media screen and (min-width: 768px) {
-            font-size: 50px;
-        }
-        &.introHeading1 {
-            border-radius: 20px;
-            padding: 20px;
-            background-color: var(--colour-blue-00);
-        }
-        &.introHeading2 {
-            border-radius: 20px;
-            padding: 20px;
-            background-color: var(--colour-green-00);
-        }
         // span {
         //     color: var(--colour-blue-00);
         //     font-size: 30px;
@@ -69,31 +54,36 @@
     }
     p {
         @media screen and (min-width: 992px) {
-            font-size: 20px !important;
-            line-height: 27px;
+            font-size: 24px !important;
+            line-height: 36px;
         }
-    }
-
-    img {
-        transform: translateY(3rem);
     }
 }
 
 .rotatingList {
+    position: relative;
+    &:before {
+        content: "";
+        position: absolute;
+        bottom: 10px;
+        left: 12px;
+        height: 2px;
+        width: calc(100% - 24px);
+        background-color: var(--colour-white-00);
+    }
     h2 {
-        font-size: calc(70px + 5vw);
         position: relative;
         display: flex;
         white-space: nowrap;
         @media screen and (max-width: 767px) {
-            font-size: calc(50px + 5vw);
+            font-size: 30px;
             letter-spacing: 0;
         }
         div {
             display: inline-block;
             position: relative;
             span {
-                color: var(--colour-white-00);
+                color: var(--colour-blue-00);
                 position: absolute;
                 left: 10px;
                 // right: 0;

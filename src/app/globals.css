@@ -19,6 +19,7 @@
   --colour-grey-05:    #C0C0C0;
   --colour-orange-00:  #F9592C;
   --colour-blue-00:    #B4C6E5;
+  --colour-green-00:   #43FDBA;
 }
 
 @media (prefers-color-scheme: dark) {
@@ -132,7 +133,7 @@ img {
 .cta__btn {
   color: var(--colour-black-00);
   font-family: var(--open-sans);
-  background-color: var(--colour-blue-00);
+  background-color: var(--colour-green-00);
   border-radius: 5px;
   text-transform: uppercase;
   border: none;
@@ -144,7 +145,7 @@ img {
   cursor: pointer;
   transition: all .3s ease;
   text-align: center;
-  border: 2px solid var(--colour-blue-00);
+  border: 2px solid var(--colour-green-00);
 }
 /* @media screen and (max-width: 991px) {
   .cta__btn {

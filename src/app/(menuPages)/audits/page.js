@@ -1,6 +1,6 @@
 import fetchAPI from '@/app/lib/api'
 import Header from '@/app/components/Header'
-import Intro from '@/app/components/HomepageIntro'
+import Intro from '@/app/components/PageIntro'
 import AuditsBlocks from '@/app/components/AuditsBlocks'
 import Footer from '@/app/components/Footer'
 import styles from '@/app/Homepage.module.scss'

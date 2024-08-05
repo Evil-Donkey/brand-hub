@@ -1,6 +1,6 @@
 import fetchAPI from '../../lib/api'
 import Header from '@/app/components/Header'
-import Intro from '@/app/components/HomepageIntro'
+import Intro from '@/app/components/PageIntro'
 import Faqs from '@/app/components/Faqs'
 import Footer from '../../components/Footer'
 import styles from './PrivacyPolicy.module.scss'

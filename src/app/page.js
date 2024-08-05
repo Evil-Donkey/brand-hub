@@ -1,6 +1,6 @@
 import fetchAPI from './lib/api'
 import Header from './components/Header'
-import Intro from './components/HomepageIntro'
+import HomeIntro from './components/HomepageIntro'
 import PageFlexibleContent from './components/PageFlexibleContent'
 import Faqs from './components/Faqs'
 import Footer from './components/Footer'
@@ -60,6 +60,16 @@ export default async function Why() {
       page(id: "5", idType: DATABASE_ID) {
         content(format: RENDERED)
         title(format: RENDERED)
+        featuredImage {
+          node {
+            altText
+            mediaDetails {
+              height
+              width
+            }
+            mediaItemUrl
+          }
+        }
         pageOptions {
           backgroundColor
           textColor
@@ -176,6 +186,7 @@ export default async function Why() {
   const color = data?.page?.pageOptions?.textColor;
   const title = data?.page?.title;
   const content = data?.page?.content;
+  const featuredImage = data?.page?.featuredImage;
   const homepageRotatingList = data?.page?.homepageRotatingList?.rotatingList;
   const telephone = dataOptions?.acfOptionsThemeSettings?.themeSettings?.telephone;
   const email = dataOptions?.acfOptionsThemeSettings?.themeSettings?.email;
@@ -195,12 +206,12 @@ export default async function Why() {
         discountBarCopy={discountBarCopy}
       />
       
-      <Intro 
+      <HomeIntro 
         backgroundColor={backgroundColor} 
         color={color} 
         content={content} 
         title={title} 
-        isHome={true}
+        featuredImage={featuredImage}
         homepageRotatingList={homepageRotatingList}
       />
 

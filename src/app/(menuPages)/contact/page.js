@@ -1,6 +1,6 @@
 import fetchAPI from '@/app/lib/api'
 import Header from '@/app/components/Header'
-import Intro from '@/app/components/HomepageIntro'
+import Intro from '@/app/components/PageIntro'
 import ContactBlock from '@/app/components/ContactBlock'
 import PageFlexibleContent from '@/app/components/PageFlexibleContent'
 import FormRequest from '@/app/components/FormRequest'
