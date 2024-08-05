@@ -10,17 +10,17 @@
         margin-bottom: 0;
         color: var(--colour-black-03);
         display: inline-block;
+        border-radius: 10px;
+        padding: 10px 20px;
         @media screen and (min-width: 768px) {
             font-size: 50px;
-        }
-        &.introHeading1 {
             border-radius: 20px;
             padding: 20px;
+        }
+        &.introHeading1 {
             background-color: var(--colour-blue-00);
         }
         &.introHeading2 {
-            border-radius: 20px;
-            padding: 20px;
             background-color: var(--colour-green-00);
         }
         // span {
@@ -86,7 +86,7 @@
         display: flex;
         white-space: nowrap;
         @media screen and (max-width: 767px) {
-            font-size: calc(50px + 5vw);
+            font-size: calc(40px + 5vw);
             letter-spacing: 0;
         }
         div {

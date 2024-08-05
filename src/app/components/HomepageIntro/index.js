@@ -62,7 +62,7 @@ const HomeIntro = ({
                         <div className='col-md-5 order-last order-md-first'>
                             {image && <img src={image.mediaItemUrl} alt={image.altText} />}
                         </div>
-                        <div className="col-md-6 mt-5">
+                        <div className="col-md-6 mt-md-5">
                             {title &&
                                 <div className='row justify-content-md-end mt-5'>
                                     <div className='col-auto'>

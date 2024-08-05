@@ -157,6 +157,7 @@ img {
 
 .cta__btn--border {
   border: 2px solid var(--colour-black-03);
+  background-color: var(--colour-blue-00);
 }
 
 .cta__btn:hover {
