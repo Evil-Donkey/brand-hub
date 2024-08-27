@@ -88,7 +88,7 @@ const HomeIntro = ({
                 <div className='row justify-content-center'>
                     <div className='col-auto text-center d-flex flex-column gap-3'>
                         <Image src='/images/logo-trustpilot.png' width={335} height={45} alt='Trustpilot score' />
-                        <a className='text-decoration-underline' href='https://it.trustpilot.com/review/brand-hub.co' target='_blank'>Read our Trustpilot reviews</a>
+                        <a className='text-decoration-underline' href='https://www.trustpilot.com/review/brand-hub.co' target='_blank'>Read our Trustpilot reviews</a>
                     </div>
                 </div>
             </div>
