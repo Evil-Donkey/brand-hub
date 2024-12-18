@@ -74,7 +74,7 @@ const Intro = ({
                         {title &&
                             <div className={`col-lg-${c1 ? c1 : '5'} mb-5 mb-lg-0`}>
                                 <h1 className={`m-0 ${isHome ? styles.heroGraphic : ``}`} dangerouslySetInnerHTML={{ __html: title }} />
-                                {isPricing && <img className="mt-3" src='/images/graphic-pricing.png' width="300" alt='Pricing Graphic' />}
+                                {/* {isPricing && <img className="mt-3" src='/images/graphic-pricing.png' width="300" alt='Pricing Graphic' />} */}
                                 {isComparising && 
                                     <div className="row mt-4">
                                         <div className='col-md-7'>

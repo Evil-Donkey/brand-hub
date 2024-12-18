@@ -3,6 +3,7 @@ import Header from '@/app/components/Header'
 import Intro from '@/app/components/PageIntro'
 import PageFlexibleContent from '@/app/components/PageFlexibleContent'
 import Faqs from '@/app/components/Faqs'
+import Socials from '../../components/Socials'
 import Footer from '@/app/components/Footer'
 import styles from '@/app/Homepage.module.scss'
 
@@ -119,13 +120,10 @@ export default async function Pricing() {
                 ctaLabel
                 ctaUrl
                 features
-                month
                 name
                 price
                 services
-                servicesRow
                 theme
-                type
               }
             }
             ... on Page_Flexiblecontent_FlexibleContent_SingleCentredColumn {
@@ -209,7 +207,7 @@ export default async function Pricing() {
         backgroundColor={backgroundColor} 
         color={color} 
         title={title} 
-        c1={8} 
+        c1={6} 
         c2={4}
         isPricing={true}
         featuredImage={featuredImage}
@@ -219,10 +217,11 @@ export default async function Pricing() {
         data={flexibleContent} 
         features={features} 
         services={services} 
-        servicesRow={servicesRow}
       />
 
       {faq && <Faqs data={faqs} bookDemoUrl={bookDemoUrl} />}
+
+      <Socials />
       
       <Footer 
         border={false} 

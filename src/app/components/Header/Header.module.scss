@@ -4,15 +4,15 @@
 
 .headerContainer {
     position: relative;
-    &:before {
-        content: "";
-        position: absolute;
-        bottom: 4px;
-        left: .75rem;
-        height: 1px;
-        width: calc(100% - 1.5rem);
-        background-color: var(--theme-nav-00);
-    }   
+    // &:before {
+    //     content: "";
+    //     position: absolute;
+    //     bottom: 4px;
+    //     left: .75rem;
+    //     height: 1px;
+    //     width: calc(100% - 1.5rem);
+    //     background-color: var(--theme-nav-00);
+    // }   
 }
 
 .fixedHeader {

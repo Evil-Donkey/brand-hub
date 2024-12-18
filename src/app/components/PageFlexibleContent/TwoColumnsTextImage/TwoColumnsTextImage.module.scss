@@ -1,7 +1,8 @@
 .twoColumnsTextImage {
-    padding-top: 3rem;
-    padding-bottom: 3rem;
+    padding-top: 4rem;
+    padding-bottom: 4rem;
     gap: 30px;
+    min-height: calc(100vh - 77px);
     @media screen and (min-width: 992px) {
         padding-top: 80px;
         padding-bottom: 80px;
@@ -9,6 +10,25 @@
     }
     img {
         height: auto;
+        @media screen and (min-width: 992px) {
+            transform: translateY(85px);
+        }
+    }
+
+    h2 {
+        letter-spacing: 0;
+        font-size: 50px;
+        line-height: 56px;
+        @media screen and (min-width: 992px) {
+            font-size: 100px;
+            line-height: 112px;
+        }
+    }
+    p {
+        font-size: 18px;
+        @media screen and (min-width: 992px) {
+            font-size: 20px;
+        }
     }
 
     h5 {

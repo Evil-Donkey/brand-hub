@@ -124,13 +124,10 @@ export default async function Pricing() {
                 ctaLabel
                 ctaUrl
                 features
-                month
                 name
                 price
                 services
-                servicesRow
                 theme
-                type
               }
             }
             ... on Page_Flexiblecontent_FlexibleContent_SingleCentredColumn {

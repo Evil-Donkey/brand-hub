@@ -1,10 +1,21 @@
 .introContainer {
     padding-top: 13rem;
     padding-bottom: 3rem;
+    position: relative;
     @media screen and (min-width: 992px) {
         padding-top: 10rem;
     }
     h1 {
+        font-size: calc(60px + 4vw);
+        position: relative;
+        display: flex;
+        color: var(--colour-white-00);
+        @media screen and (max-width: 767px) {
+            font-size: calc(40px + 5vw);
+            letter-spacing: 0;
+        }
+    }
+    h2 {
         font-size: 30px;
         line-height: 1.1;
         margin-bottom: 0;
@@ -13,7 +24,7 @@
         border-radius: 10px;
         padding: 10px 20px;
         @media screen and (min-width: 768px) {
-            font-size: 50px;
+            font-size: 45px;
             border-radius: 20px;
             padding: 20px;
         }
@@ -23,49 +34,9 @@
         &.introHeading2 {
             background-color: var(--colour-green-00);
         }
-        // span {
-        //     color: var(--colour-blue-00);
-        //     font-size: 30px;
-        //     @media screen and (min-width: 992px) {
-        //         font-size: 50px;
-        //     }
+        // @media screen and (min-width: 992px) {
+        //     font-size: 45px;
         // }
-        // &.heroGraphic {
-        //     position: relative;
-        //     &:before {
-        //         content: "";
-        //         position: absolute;
-        //         top: 54%;
-        //         transform: translateY(-50%);
-        //         display: none;
-        //         width: 220px;
-        //         height: 120px;
-        //         background-size: contain;
-        //         background-position: center;
-        //         background-repeat: no-repeat;
-        //         background-image: url('/images/graphic-homepage-hero.svg');
-        //         @media screen and (min-width: 992px) {
-        //             display: block;
-        //             right: -175px;
-        //         }
-        //         @media screen and (min-width: 1200px) {
-        //             right: -145px;
-        //         }
-        //         @media screen and (min-width: 1400px) {
-        //             right: -75px;
-        //         }
-        //     }
-
-        //     @media screen and (min-width: 768px) {
-        //         font-size: 80px;
-        //     }
-        //     @media screen and (min-width: 992px) {
-        //         font-size: 110px;
-        //     }
-        // }
-        @media screen and (min-width: 992px) {
-            font-size: 80px;
-        }
     }
     p {
         @media screen and (min-width: 992px) {
@@ -79,36 +50,6 @@
     }
 }
 
-.rotatingList {
-    h2 {
-        font-size: calc(70px + 5vw);
-        position: relative;
-        display: flex;
-        white-space: nowrap;
-        @media screen and (max-width: 767px) {
-            font-size: calc(40px + 5vw);
-            letter-spacing: 0;
-        }
-        div {
-            display: inline-block;
-            position: relative;
-            span {
-                color: var(--colour-white-00);
-                position: absolute;
-                left: 10px;
-                // right: 0;
-                white-space: nowrap;
-            }
-        }
-    }
-}
-
-// .introVideo {
-//     margin-top: -9rem;
-//     @media screen and (min-width: 992px) {
-//         margin-top: -15rem;
-//     }
-// }
 .videoWrapper {
     position: relative;
     padding-top: 56.25%; /* 16:9 Aspect Ratio */

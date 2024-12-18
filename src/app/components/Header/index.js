@@ -85,9 +85,9 @@ const Header = ({ backgroundColor, bookDemoUrl, color, discountBarCopy, fullMenu
                         </Link>
                     </div>
                     {fullMenu &&
-                        <div className='col-10 col-md-auto align-self-end d-flex flex-wrap align-items-center justify-content-end gap-3'>
+                        <div className='col-10 col-md-auto align-self-end d-flex flex-wrap align-items-center justify-content-end gap-2'>
                             <Navigation color={color} />
-                            <div className='d-flex align-items-center gap-3 order-first order-md-last'>
+                            <div className='d-flex align-items-center gap-2 order-first order-md-last'>
                                 <a href={bookDemoUrl} target="_blank" className="cta__btn">Book a demo</a>
                                 {!hideSignUp && <Link href="/pricing" className="cta__btn cta__btn--transparent">Sign up</Link>}
                             </div>

@@ -2,8 +2,8 @@ import fetchAPI from './lib/api'
 import Header from './components/Header'
 import HomeIntro from './components/HomepageIntro'
 import PageFlexibleContent from './components/PageFlexibleContent'
-import Faqs from './components/Faqs'
 import Footer from './components/Footer'
+import Socials from './components/Socials'
 import styles from './Homepage.module.scss'
 
 export async function generateMetadata() {
@@ -99,6 +99,10 @@ export default async function Why() {
                 video {
                   mediaItemUrl
                 }
+                dropColour
+                backgroundColour
+                buttonLabel
+                buttonUrl
               }
             }
             ... on Page_Flexiblecontent_FlexibleContent_ThreeColumnsGrid {
@@ -125,14 +129,15 @@ export default async function Why() {
                 ctaLabel
                 ctaUrl
                 features
-                month
                 name
                 price
                 services
-                servicesRow
                 theme
-                type
               }
+            }
+            ... on Page_Flexiblecontent_FlexibleContent_Faq {
+              fieldGroupName
+              faq
             }
             ... on Page_Flexiblecontent_FlexibleContent_SingleCentredColumn {
               fieldGroupName
@@ -212,14 +217,15 @@ export default async function Why() {
         content={content} 
         title={title} 
         featuredImage={featuredImage}
-        homepageRotatingList={homepageRotatingList}
       />
 
       <PageFlexibleContent 
         data={flexibleContent}
+        faq={faqs}
+        bookDemoUrl={bookDemoUrl}
       />
 
-      {faq && <Faqs data={faqs} bookDemoUrl={bookDemoUrl} />}
+      <Socials />
 
       <Footer 
         border={false} 

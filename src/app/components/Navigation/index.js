@@ -20,35 +20,40 @@ const Navigation = ({ color }) => {
 
   const navigationMenu = [
         {
-            label: ' Home',
+            label: 'Home',
             href: '/',
             activeSegment: ''
         },
         {
-            label: ' Why',
-            href: '/why',
-            activeSegment: 'about'
+            label: 'Our work',
+            href: '/our-work',
+            activeSegment: 'our-work'
         },
         {
-            label: ' Pricing',
+            label: 'Design Hub',
+            href: '/design-hub',
+            activeSegment: 'design-hub'
+        },
+        {
+            label: 'Code Hub',
+            href: '/code-hub',
+            activeSegment: 'code-hub'
+        },
+        {
+            label: 'Our plans',
             href: '/pricing',
             activeSegment: 'pricing'
-        },
-        {
-            label: ' Contact',
-            href: '/contact',
-            activeSegment: 'contact'
         },
     ];
  
     return (
-        <ul className={`${styles.navigationWrap} list-unstyled m-0 p-0 d-flex gap-3 gap-md-4`}>
+        <ul className={`${styles.navigationWrap} list-unstyled m-0 p-0 d-flex gap-2`}>
             {navigationMenu.map((link) => {
                 const isActive = pathname === link.href;
     
                 return (
                     <li key={link.label} className={isActive ? styles.navigationItemActive : ''} style={{ color: color }}>
-                        <Link href={link.href}>
+                        <Link href={link.href} className='cta__btn'>
                             {link.label}
                         </Link>
                     </li>

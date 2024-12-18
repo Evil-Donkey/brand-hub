@@ -125,13 +125,10 @@ export default async function Contact() {
                 ctaLabel
                 ctaUrl
                 features
-                month
                 name
                 price
                 services
-                servicesRow
                 theme
-                type
               }
             }
             ... on Page_Flexiblecontent_FlexibleContent_SingleCentredColumn {
