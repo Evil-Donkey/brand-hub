@@ -11,7 +11,7 @@ const Socials = () => {
           <div className='row justify-content-between'>
               <div className='col-md-4 mb-5'>
                   <h2>Our socials</h2>
-                  <p>We have fun while promoting our business. Our social feed has spoof ads that'll make you chuckle, but the message behind them is always spot on. Take a look and get a taste of what we're all about!</p>
+                  <p>We have fun while promoting our business. Our social feed has spoof ads that&apos;ll make you chuckle, but the message behind them is always spot on. Take a look and get a taste of what we&apos;re all about!</p>
                   <div className='d-flex align-items-center'>
                       <p className='m-0'>Find us on</p>
                       <div className='d-flex gap-2 align-items-center ms-4'>
