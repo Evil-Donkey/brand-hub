@@ -93,9 +93,7 @@ export default async function Pricing() {
                   }
                   mediaItemUrl
                 }
-                video {
-                  mediaItemUrl
-                }
+                seoTitle
                 dropColour
                 backgroundColour
                 textColour
@@ -141,16 +139,18 @@ export default async function Pricing() {
               }
             }
             ... on Page_Flexiblecontent_FlexibleContent_Pricing {
-              backgroundColor
               fieldGroupName
+              codeHubPrice
+              codeHubSignUpUrl
+              designCodeHubPrice
+              designCodeHubSignUpUrl
+              designHubPrice
+              designHubSignUpUrl
               options {
-                ctaLabel
-                ctaUrl
+                style
                 features
                 name
-                price
                 services
-                theme
               }
             }
             ... on Page_Flexiblecontent_FlexibleContent_SingleCentredColumn {
