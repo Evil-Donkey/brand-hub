@@ -211,7 +211,7 @@ const FormRequest = () => {
                                     </label>
                                 </div>
                                 <div className="col-md-auto mt-5 mt-md-0">
-                                    <button type="submit" id="requestSubmit" className={'cta__btn cta__btn--border'}>
+                                    <button type="submit" id="requestSubmit" className={'cta__btn cta__btn--green'}>
                                         Submit
                                     </button>
                                 </div>

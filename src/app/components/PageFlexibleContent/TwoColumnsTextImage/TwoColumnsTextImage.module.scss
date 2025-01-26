@@ -1,17 +1,14 @@
 .twoColumnsTextImage {
     padding-top: 4rem;
-    padding-bottom: 4rem;
-    gap: 30px;
-    min-height: calc(100vh - 77px);
+    padding-bottom: 0;
+    // min-height: calc(100vh - 77px);
     @media screen and (min-width: 992px) {
-        padding-top: 80px;
-        padding-bottom: 80px;
-        gap: 80px;
+        padding-top: 40px;
     }
     img {
         height: auto;
         @media screen and (min-width: 992px) {
-            transform: translateY(85px);
+            transform: translateY(2px);
         }
     }
 
@@ -25,7 +22,7 @@
         }
     }
     p {
-        font-size: 18px;
+        font-size: 16px;
         @media screen and (min-width: 992px) {
             font-size: 20px;
         }
@@ -37,6 +34,10 @@
         font-family: var(--open-sans);
         font-weight: 100;
         margin-bottom: 15px;
+    }
+
+    .mobileImageBottom {
+        transform: translateY(1px);
     }
 }
 

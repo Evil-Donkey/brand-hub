@@ -7,7 +7,7 @@ const Socials = () => {
 
   return (
     <div className={styles.socials}>
-      <div className='container py-5 mt-md-5'>
+      <div className='container py-5'>
           <div className='row justify-content-between'>
               <div className='col-md-4 mb-5'>
                   <h2>Our socials</h2>

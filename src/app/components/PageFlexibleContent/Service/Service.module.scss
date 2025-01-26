@@ -1,0 +1,120 @@
+.serviceWrapper {
+  padding: 2rem;
+  background-color: var(--colour-black-03);
+  color: var(--colour-white-00);
+  @media screen and (min-width: 992px) {
+    padding: 3rem;
+  } 
+}
+
+.pricingOption {
+  h2 {
+    font-size: 35px;
+    text-transform: uppercase;
+    letter-spacing: 0;
+    @media screen and (min-width: 992px) {
+      font-size: 40px;
+    }
+  }
+  h3 {
+    font-size: 60px;
+    letter-spacing: 1px;
+    @media screen and (min-width: 992px) {
+      font-size: 70px;
+      line-height: 65px;
+      min-height: 90px;
+      &.noMonth {
+        font-size: 50px;
+      }
+    }
+    span {
+      font-size: 15px;
+      @media screen and (min-width: 992px) {
+        font-size: 20px;
+      }
+    }
+  }
+  
+  &Dark {
+    background-color: var(--colour-grey-02);
+    h2,
+    h3 {
+      color: var(--colour-white-00);
+    }
+  }
+  &Light {
+    background-color: var(--colour-white-00);
+    h2,
+    h3 {
+      color: var(--colour-black-03);
+    }
+  }
+  &Outlined {
+    border: 3px solid var(--colour-white-00);
+    border-radius: 10px;
+    background-color: transparent;
+    p {
+      font-family: var(--anton);
+      font-size: 25px !important;
+    }
+  }
+}
+
+.pricingOptionIcon {
+  position: absolute;
+  top: -30px;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+.pricingTable {
+  border: 1px solid #4C4C4C;
+  --bs-table-color: var(--colour-white-00);
+  --bs-table-bg: var(--colour-black-03);
+  --bs-table-border-color: #4C4C4C;
+  thead {
+    text-transform: uppercase;
+  }
+  h3 {
+    margin-bottom: 0;
+  }
+  th {
+    svg {
+      max-width: 35px;
+      max-height: 35px;
+      margin-bottom: 5px;
+      margin-top: 5px;
+    }
+    &.pricingTableThLast {
+      svg {
+        max-width: 85px;
+        max-height: 35px;
+      }
+    }
+  }
+  th, td {
+    border-right: 1px solid #4C4C4C;
+  }
+  th:last-child, td:last-child {
+    border-right: none;
+  }
+  tr {
+    &.pricingTableTrLast {
+      td {
+        border-right: none;
+        padding: 20px;
+      }
+    }
+  }
+  tbody {
+    td {
+      padding-bottom: 12px;
+    }
+  }
+
+  @media screen and (max-width: 767px) {
+    th:last-child, td:last-child {
+      display: none;
+    }
+  }
+}

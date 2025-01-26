@@ -1,5 +1,11 @@
 .socials {
     background-color: var(--colour-white-02);
+    p {
+        font-size: 14px !important;
+        @media screen and (min-width: 992px) {
+            font-size: 18px !important;
+        }
+    }
     blockquote {
         margin: 0;
     }

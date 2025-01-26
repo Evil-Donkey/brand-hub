@@ -82,9 +82,7 @@ export default async function Pricing() {
         flexibleContent {
           flexibleContent {
             ... on Page_Flexiblecontent_FlexibleContent_TwoColumnsTextimage {
-              backgroundColor
               fieldGroupName
-              textColor
               rows {
                 copy
                 image {
@@ -96,6 +94,31 @@ export default async function Pricing() {
                   mediaItemUrl
                 }
                 video {
+                  mediaItemUrl
+                }
+                dropColour
+                backgroundColour
+                textColour
+                buttons {
+                  fieldGroupName
+                  label
+                  style
+                  url
+                }
+                mobileImageBottom {
+                  altText
+                  mediaDetails {
+                    height
+                    width
+                  }
+                  mediaItemUrl
+                }
+                mobileImageTop {
+                  altText
+                  mediaDetails {
+                    height
+                    width
+                  }
                   mediaItemUrl
                 }
               }

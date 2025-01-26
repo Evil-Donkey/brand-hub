@@ -72,9 +72,11 @@
 
 .imageWrap {
   width: 100%;
-  background-color: var(--colour-green-00);
+  background-color: var(--colour-black-03);
   border-radius: 10px;
+  color: var(--colour-white-00);
   h2 {
+    text-transform: uppercase;
     @media screen and (min-width: 1200px) {
       font-size: 100px;
       line-height: 112px;

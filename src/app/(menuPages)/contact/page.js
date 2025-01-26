@@ -1,6 +1,6 @@
 import fetchAPI from '@/app/lib/api'
 import Header from '@/app/components/Header'
-import Intro from '@/app/components/PageIntro'
+import HomeIntro from '@/app/components/HomepageIntro'
 import ContactBlock from '@/app/components/ContactBlock'
 import PageFlexibleContent from '@/app/components/PageFlexibleContent'
 import FormRequest from '@/app/components/FormRequest'
@@ -64,14 +64,24 @@ export default async function Contact() {
   const data = await fetchAPI(`
     query getContactPage {
       page(id: "231", idType: DATABASE_ID) {
+        content(format: RENDERED)
         title(format: RENDERED)
+        featuredImage {
+          node {
+            altText
+            mediaDetails {
+              height
+              width
+            }
+            mediaItemUrl
+          }
+        }
         pageOptions {
           backgroundColor
           textColor
           faq
-        }
-        featuredImage {
-          node {
+          themeColour
+          mobileFeaturedImage {
             altText
             mediaDetails {
               height
@@ -83,9 +93,7 @@ export default async function Contact() {
         flexibleContent {
           flexibleContent {
             ... on Page_Flexiblecontent_FlexibleContent_TwoColumnsTextimage {
-              backgroundColor
               fieldGroupName
-              textColor
               rows {
                 copy
                 image {
@@ -96,7 +104,30 @@ export default async function Contact() {
                   }
                   mediaItemUrl
                 }
-                video {
+                seoTitle
+                dropColour
+                backgroundColour
+                textColour
+                buttons {
+                  fieldGroupName
+                  label
+                  style
+                  url
+                }
+                mobileImageBottom {
+                  altText
+                  mediaDetails {
+                    height
+                    width
+                  }
+                  mediaItemUrl
+                }
+                mobileImageTop {
+                  altText
+                  mediaDetails {
+                    height
+                    width
+                  }
                   mediaItemUrl
                 }
               }
@@ -119,17 +150,23 @@ export default async function Contact() {
               }
             }
             ... on Page_Flexiblecontent_FlexibleContent_Pricing {
-              backgroundColor
               fieldGroupName
+              codeHubPrice
+              codeHubSignUpUrl
+              designCodeHubPrice
+              designCodeHubSignUpUrl
+              designHubPrice
+              designHubSignUpUrl
               options {
-                ctaLabel
-                ctaUrl
+                style
                 features
                 name
-                price
                 services
-                theme
               }
+            }
+            ... on Page_Flexiblecontent_FlexibleContent_Faq {
+              fieldGroupName
+              faq
             }
             ... on Page_Flexiblecontent_FlexibleContent_SingleCentredColumn {
               fieldGroupName
@@ -154,6 +191,14 @@ export default async function Contact() {
                   }
                   mediaItemUrl
                 }
+              }
+            }
+            ... on Page_Flexiblecontent_FlexibleContent_TextSlider {
+              fieldGroupName
+              style
+              slider {
+                author
+                copy
               }
             }
           }
@@ -181,10 +226,12 @@ export default async function Contact() {
     }
   `);
 
+  const themeColour = data?.page?.pageOptions?.themeColour;
   const backgroundColor = data?.page?.pageOptions?.backgroundColor;
   const color = data?.page?.pageOptions?.textColor;
   const title = data?.page?.title;
   const featuredImage = data?.page?.featuredImage;
+  const mobileFeaturedImage = data?.page?.pageOptions?.mobileFeaturedImage;
   const telephone = dataOptions?.acfOptionsThemeSettings?.themeSettings?.telephone;
   const email = dataOptions?.acfOptionsThemeSettings?.themeSettings?.email;
   const instagram = dataOptions?.acfOptionsThemeSettings?.themeSettings?.instagram;
@@ -205,13 +252,15 @@ export default async function Contact() {
         discountBarCopy={discountBarCopy}
       />
       
-      <Intro 
+      <HomeIntro 
         backgroundColor={backgroundColor} 
         color={color} 
         title={title} 
-        c1={6} 
-        c2={6}
         featuredImage={featuredImage}
+        mobileFeaturedImage={mobileFeaturedImage}
+        hasDrop={false}
+        themeColour={themeColour}
+        hasButtons={false}
       />
 
       <ContactBlock 

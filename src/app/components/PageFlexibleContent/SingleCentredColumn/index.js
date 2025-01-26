@@ -8,7 +8,7 @@ const SingleCentredColumn = ({ data }) => {
         <div style={{backgroundColor: backgroundColor, color: textColor}}>
             <div className={`${styles.singleCentredColumn} container`}>
                 <div className='row justify-content-center'>
-                    <div className='col-md-10 text-center'>
+                    <div className={`col text-center ${styles.copy}`}>
                         <div dangerouslySetInnerHTML={{ __html: copy }} />
                     </div>
                 </div>

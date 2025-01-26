@@ -3,13 +3,18 @@
 import { useState, useEffect } from 'react'
 import Link from 'next/link'
 import Logo from '../Logo'
+import LogoServices from '../LogoServices'
 import Navigation from '../Navigation'
 import styles from './Header.module.scss'
+import ThemeColor from '../../lib/ThemeColor'
 
-const Header = ({ backgroundColor, bookDemoUrl, color, discountBarCopy, fullMenu, hideSignUp }) => {
+const Header = ({ backgroundColor, bookDemoUrl, color, discountBarCopy, fullMenu, hideSignUp, themeColour, codeHub, designHub }) => {
 
     const [isScrollingUp, setIsScrollingUp] = useState(true);
     const [lastScrollTop, setLastScrollTop] = useState(0);
+    const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+
+    const thColour = ThemeColor({ themeColour });
 
     useEffect(() => {
         const handleScroll = () => {
@@ -26,38 +31,13 @@ const Header = ({ backgroundColor, bookDemoUrl, color, discountBarCopy, fullMenu
             setLastScrollTop(currentScrollTop <= 0 ? 0 : currentScrollTop);
         };
 
-        window.addEventListener('scroll', handleScroll);
+        if (!isMobileMenuOpen) {
+            window.addEventListener('scroll', handleScroll);
+        }
         return () => {
             window.removeEventListener('scroll', handleScroll);
         };
-    }, [lastScrollTop]);
-
-
-    // const [isScrollingUp, setIsScrollingUp] = useState(true);
-    // const [lastScrollTop, setLastScrollTop] = useState(0);
-    // const [hideDiscountBar, setHideDiscountBar] = useState(false);
-
-    // useEffect(() => {
-    //     const handleScroll = () => {
-    //         const currentScrollTop = window.pageYOffset || document.documentElement.scrollTop;
-
-    //         if (currentScrollTop > lastScrollTop && currentScrollTop > 100) {
-    //             setIsScrollingUp(false);
-    //             setHideDiscountBar(true);
-    //         } else if (currentScrollTop <= 100) {
-    //             setIsScrollingUp(true);
-    //             setHideDiscountBar(false);
-    //         } else {
-    //             setIsScrollingUp(true);
-    //         }
-    //         setLastScrollTop(currentScrollTop <= 0 ? 0 : currentScrollTop);
-    //     };
-
-    //     window.addEventListener('scroll', handleScroll);
-    //     return () => {
-    //         window.removeEventListener('scroll', handleScroll);
-    //     };
-    // }, [lastScrollTop]);
+    }, [lastScrollTop, isMobileMenuOpen]);
 
     return (
         <div
@@ -65,7 +45,7 @@ const Header = ({ backgroundColor, bookDemoUrl, color, discountBarCopy, fullMenu
             style={{ backgroundColor: backgroundColor, color: color }}
         >
             {discountBarCopy &&
-                <div className={styles.discountBar}>
+                <div className={styles.discountBar} style={{ backgroundColor: thColour }}>
                     <div className='container'>
                         <div className='row justify-content-center'>
                             <div className='col-auto'>
@@ -77,20 +57,23 @@ const Header = ({ backgroundColor, bookDemoUrl, color, discountBarCopy, fullMenu
                     </div>
                 </div>
             }
-            <div className={`${styles.headerContainer} container py-3`}>
+            <div className={`${styles.mobileMenuBackground} ${isMobileMenuOpen ? styles.mobileMenuBackgroundActive : ''}`} />
+            <div className={`${styles.headerContainer} container`}>
                 <div className="row align-items-md-center justify-content-between">
-                    <div className='col-2 col-md-auto'>
+                    <div className={`col-2 col-md-auto ${styles.logoContainer}`}>
                         <Link href="/">
-                            <Logo color={color} />
+                            {codeHub ? <LogoServices codeHub={codeHub} /> : designHub ? <LogoServices designHub={designHub} /> : <Logo color={color} />}
                         </Link>
                     </div>
                     {fullMenu &&
-                        <div className='col-10 col-md-auto align-self-end d-flex flex-wrap align-items-center justify-content-end gap-2'>
-                            <Navigation color={color} />
-                            <div className='d-flex align-items-center gap-2 order-first order-md-last'>
-                                <a href={bookDemoUrl} target="_blank" className="cta__btn">Book a demo</a>
-                                {!hideSignUp && <Link href="/pricing" className="cta__btn cta__btn--transparent">Sign up</Link>}
-                            </div>
+                        <div className='col-10 col-md-auto align-self-end d-flex flex-wrap align-items-center justify-content-end gap-2 position-relative'>
+                            <Navigation 
+                                color={color} 
+                                bookDemoUrl={bookDemoUrl} 
+                                isMobileMenuOpen={isMobileMenuOpen}
+                                setIsMobileMenuOpen={setIsMobileMenuOpen}
+                            />
+                            <a href={bookDemoUrl} target="_blank" className="cta__btn cta__btn--transparent">Book a call</a>
                         </div>
                     }
                 </div>

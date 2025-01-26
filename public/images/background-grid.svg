@@ -1,0 +1,29 @@
+<svg width="1194" height="710" viewBox="0 0 1194 710" fill="none" xmlns="http://www.w3.org/2000/svg">
+<mask id="mask0_2054_2362" style="mask-type:alpha" maskUnits="userSpaceOnUse" x="0" y="0" width="1194" height="710">
+<rect x="0.704436" y="0.370451" width="1192.37" height="709.259" fill="url(#paint0_radial_2054_2362)" stroke="#A3A3A3" stroke-width="0.740902"/>
+</mask>
+<g mask="url(#mask0_2054_2362)">
+<path d="M162.61 57.0781H913.1" stroke="#A3A3A3" stroke-width="0.740902" stroke-miterlimit="10"/>
+<path d="M162.61 138.342H913.1" stroke="#A3A3A3" stroke-width="0.740902" stroke-miterlimit="10"/>
+<path d="M162.61 219.605H913.1" stroke="#A3A3A3" stroke-width="0.740902" stroke-miterlimit="10"/>
+<path d="M162.61 300.869H913.1" stroke="#A3A3A3" stroke-width="0.740902" stroke-miterlimit="10"/>
+<path d="M162.61 382.148H913.1" stroke="#A3A3A3" stroke-width="0.740902" stroke-miterlimit="10"/>
+<path d="M162.61 463.412H913.1" stroke="#A3A3A3" stroke-width="0.740902" stroke-miterlimit="10"/>
+<path d="M162.61 544.676H913.1" stroke="#A3A3A3" stroke-width="0.740902" stroke-miterlimit="10"/>
+<path d="M162.61 625.939H913.1" stroke="#A3A3A3" stroke-width="0.740902" stroke-miterlimit="10"/>
+<path d="M822.286 -33.7358V716.753" stroke="#A3A3A3" stroke-width="0.740902" stroke-miterlimit="10"/>
+<path d="M741.022 -33.7358V716.753" stroke="#A3A3A3" stroke-width="0.740902" stroke-miterlimit="10"/>
+<path d="M659.758 -33.7358V716.753" stroke="#A3A3A3" stroke-width="0.740902" stroke-miterlimit="10"/>
+<path d="M578.495 -33.7358V716.753" stroke="#A3A3A3" stroke-width="0.740902" stroke-miterlimit="10"/>
+<path d="M497.215 -33.7358V716.753" stroke="#A3A3A3" stroke-width="0.740902" stroke-miterlimit="10"/>
+<path d="M415.952 -33.7358V716.753" stroke="#A3A3A3" stroke-width="0.740902" stroke-miterlimit="10"/>
+<path d="M334.688 -33.7358V716.753" stroke="#A3A3A3" stroke-width="0.740902" stroke-miterlimit="10"/>
+<path d="M253.424 -33.7358V716.753" stroke="#A3A3A3" stroke-width="0.740902" stroke-miterlimit="10"/>
+</g>
+<defs>
+<radialGradient id="paint0_radial_2054_2362" cx="0" cy="0" r="1" gradientUnits="userSpaceOnUse" gradientTransform="translate(596.887 355) rotate(90) scale(355 596.553)">
+<stop stop-color="#D9D9D9"/>
+<stop offset="1" stop-color="#737373" stop-opacity="0"/>
+</radialGradient>
+</defs>
+</svg>

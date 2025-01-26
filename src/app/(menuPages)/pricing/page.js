@@ -1,6 +1,6 @@
 import fetchAPI from '@/app/lib/api'
 import Header from '@/app/components/Header'
-import Intro from '@/app/components/PageIntro'
+import HomeIntro from '@/app/components/HomepageIntro'
 import PageFlexibleContent from '@/app/components/PageFlexibleContent'
 import Faqs from '@/app/components/Faqs'
 import Socials from '../../components/Socials'
@@ -59,14 +59,23 @@ export default async function Pricing() {
   const data = await fetchAPI(`
     query getPricingPage {
       page(id: "250", idType: DATABASE_ID) {
+        content(format: RENDERED)
         title(format: RENDERED)
+        featuredImage {
+          node {
+            altText
+            mediaDetails {
+              height
+              width
+            }
+            mediaItemUrl
+          }
+        }
         pageOptions {
           backgroundColor
           textColor
           faq
-        }
-        featuredImage {
-          node {
+          mobileFeaturedImage {
             altText
             mediaDetails {
               height
@@ -78,9 +87,7 @@ export default async function Pricing() {
         flexibleContent {
           flexibleContent {
             ... on Page_Flexiblecontent_FlexibleContent_TwoColumnsTextimage {
-              backgroundColor
               fieldGroupName
-              textColor
               rows {
                 copy
                 image {
@@ -91,7 +98,30 @@ export default async function Pricing() {
                   }
                   mediaItemUrl
                 }
-                video {
+                seoTitle
+                dropColour
+                backgroundColour
+                textColour
+                buttons {
+                  fieldGroupName
+                  label
+                  style
+                  url
+                }
+                mobileImageBottom {
+                  altText
+                  mediaDetails {
+                    height
+                    width
+                  }
+                  mediaItemUrl
+                }
+                mobileImageTop {
+                  altText
+                  mediaDetails {
+                    height
+                    width
+                  }
                   mediaItemUrl
                 }
               }
@@ -114,17 +144,23 @@ export default async function Pricing() {
               }
             }
             ... on Page_Flexiblecontent_FlexibleContent_Pricing {
-              backgroundColor
               fieldGroupName
+              codeHubPrice
+              codeHubSignUpUrl
+              designCodeHubPrice
+              designCodeHubSignUpUrl
+              designHubPrice
+              designHubSignUpUrl
               options {
-                ctaLabel
-                ctaUrl
+                style
                 features
                 name
-                price
                 services
-                theme
               }
+            }
+            ... on Page_Flexiblecontent_FlexibleContent_Faq {
+              fieldGroupName
+              faq
             }
             ... on Page_Flexiblecontent_FlexibleContent_SingleCentredColumn {
               fieldGroupName
@@ -149,6 +185,14 @@ export default async function Pricing() {
                   }
                   mediaItemUrl
                 }
+              }
+            }
+            ... on Page_Flexiblecontent_FlexibleContent_TextSlider {
+              fieldGroupName
+              style
+              slider {
+                author
+                copy
               }
             }
           }
@@ -180,14 +224,14 @@ export default async function Pricing() {
   const backgroundColor = data?.page?.pageOptions?.backgroundColor;
   const color = data?.page?.pageOptions?.textColor;
   const title = data?.page?.title;
+  const content = data?.page?.content;
   const featuredImage = data?.page?.featuredImage;
+  const mobileFeaturedImage = data?.page?.pageOptions?.mobileFeaturedImage;
   const telephone = dataOptions?.acfOptionsThemeSettings?.themeSettings?.telephone;
   const email = dataOptions?.acfOptionsThemeSettings?.themeSettings?.email;
   const flexibleContent = data?.page?.flexibleContent?.flexibleContent;
   const features = data?.acfFlexibleContentFeaturesOptions;
   const services = data?.acfFlexibleContentServicesOptions;
-  const servicesRow = data?.acfFlexibleContentServicesRowOptions;
-  const faq = data?.page?.pageOptions?.faq;
   const bookDemoUrl = dataOptions?.acfOptionsThemeSettings?.themeSettings?.bookDemoUrl;
   const discountBarCopy = dataOptions?.acfOptionsThemeSettings?.themeSettings?.discountBarCopy;
   const faqs = dataOptions?.acfOptionsThemeSettings?.themeSettings?.faqs;
@@ -203,23 +247,23 @@ export default async function Pricing() {
         discountBarCopy={discountBarCopy}
       />
 
-      <Intro 
+      <HomeIntro 
         backgroundColor={backgroundColor} 
         color={color} 
+        content={content} 
         title={title} 
-        c1={6} 
-        c2={4}
-        isPricing={true}
         featuredImage={featuredImage}
+        mobileFeaturedImage={mobileFeaturedImage}
+        hasDrop={false}
       />
       
       <PageFlexibleContent 
         data={flexibleContent} 
         features={features} 
         services={services} 
+        faq={faqs}
+        bookDemoUrl={bookDemoUrl}
       />
-
-      {faq && <Faqs data={faqs} bookDemoUrl={bookDemoUrl} />}
 
       <Socials />
       

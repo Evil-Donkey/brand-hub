@@ -74,18 +74,19 @@ export default async function Why() {
           backgroundColor
           textColor
           faq
-        }
-        homepageRotatingList {
-          rotatingList {
-            text
+          mobileFeaturedImage {
+            altText
+            mediaDetails {
+              height
+              width
+            }
+            mediaItemUrl
           }
         }
         flexibleContent {
           flexibleContent {
             ... on Page_Flexiblecontent_FlexibleContent_TwoColumnsTextimage {
-              backgroundColor
               fieldGroupName
-              textColor
               rows {
                 copy
                 image {
@@ -96,13 +97,32 @@ export default async function Why() {
                   }
                   mediaItemUrl
                 }
-                video {
-                  mediaItemUrl
-                }
+                seoTitle
                 dropColour
                 backgroundColour
-                buttonLabel
-                buttonUrl
+                textColour
+                buttons {
+                  fieldGroupName
+                  label
+                  style
+                  url
+                }
+                mobileImageBottom {
+                  altText
+                  mediaDetails {
+                    height
+                    width
+                  }
+                  mediaItemUrl
+                }
+                mobileImageTop {
+                  altText
+                  mediaDetails {
+                    height
+                    width
+                  }
+                  mediaItemUrl
+                }
               }
             }
             ... on Page_Flexiblecontent_FlexibleContent_ThreeColumnsGrid {
@@ -123,16 +143,18 @@ export default async function Why() {
               }
             }
             ... on Page_Flexiblecontent_FlexibleContent_Pricing {
-              backgroundColor
               fieldGroupName
+              codeHubPrice
+              codeHubSignUpUrl
+              designCodeHubPrice
+              designCodeHubSignUpUrl
+              designHubPrice
+              designHubSignUpUrl
               options {
-                ctaLabel
-                ctaUrl
+                style
                 features
                 name
-                price
                 services
-                theme
               }
             }
             ... on Page_Flexiblecontent_FlexibleContent_Faq {
@@ -144,6 +166,16 @@ export default async function Why() {
               backgroundColor
               copy
               textColor
+            }
+            ... on Page_Flexiblecontent_FlexibleContent_SingleColumn {
+              copy
+              darkMode
+              heading
+              buttons {
+                label
+                style
+                url
+              }
             }
             ... on Page_Flexiblecontent_FlexibleContent_TwoBoxes {
               backgroundColor
@@ -162,6 +194,14 @@ export default async function Why() {
                   }
                   mediaItemUrl
                 }
+              }
+            }
+            ... on Page_Flexiblecontent_FlexibleContent_TextSlider {
+              fieldGroupName
+              style
+              slider {
+                author
+                copy
               }
             }
           }
@@ -192,11 +232,10 @@ export default async function Why() {
   const title = data?.page?.title;
   const content = data?.page?.content;
   const featuredImage = data?.page?.featuredImage;
-  const homepageRotatingList = data?.page?.homepageRotatingList?.rotatingList;
+  const mobileFeaturedImage = data?.page?.pageOptions?.mobileFeaturedImage;
   const telephone = dataOptions?.acfOptionsThemeSettings?.themeSettings?.telephone;
   const email = dataOptions?.acfOptionsThemeSettings?.themeSettings?.email;
   const flexibleContent = data?.page?.flexibleContent?.flexibleContent;
-  const faq = data?.page?.pageOptions?.faq;
   const bookDemoUrl = dataOptions?.acfOptionsThemeSettings?.themeSettings?.bookDemoUrl;
   const discountBarCopy = dataOptions?.acfOptionsThemeSettings?.themeSettings?.discountBarCopy;
   const faqs = dataOptions?.acfOptionsThemeSettings?.themeSettings?.faqs;
@@ -217,6 +256,8 @@ export default async function Why() {
         content={content} 
         title={title} 
         featuredImage={featuredImage}
+        mobileFeaturedImage={mobileFeaturedImage}
+        hasDrop={true}
       />
 
       <PageFlexibleContent 

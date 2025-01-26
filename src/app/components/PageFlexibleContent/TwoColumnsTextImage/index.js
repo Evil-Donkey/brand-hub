@@ -12,19 +12,30 @@ const TwoColumnsTextImage = ({ data }) => {
     return (
         <>
             {rows.map((row, i) => {
-                const { backgroundColour, dropColour, copy, image, video, buttonLabel, buttonUrl } = row;
+                const { backgroundColour, textColour,dropColour, seoTitle, copy, image, video, buttons, mobileImageBottom, mobileImageTop } = row;
 
                 return (
                     <div key={i.toString()} style={{backgroundColor: backgroundColour, position: 'relative'}}>
                         <div className={`${styles.twoColumnsTextImage} container d-flex`}>
-                            <div className='row align-items-center justify-content-center justify-content-md-around gap-3 gap-md-5'>
-                                <div className={`${i % 2 == 0 ? `order-md-last` : `order-md-first`} col-10 col-md-5 position-relative align-self-end`}>
+                            <div className='row align-items-center justify-content-center justify-content-md-around'>
+                                <div className={`${i % 2 != 0 ? `order-md-last` : `order-md-first`} col-md-7 position-relative align-self-end`}>
+                                    {seoTitle && <h2 className="visually-hidden">{seoTitle}</h2>}
                                     {image &&
                                         <Image 
                                             src={image.mediaItemUrl} 
                                             width={image.mediaDetails.width} 
                                             height={image.mediaDetails.height}
                                             alt={image.altText}
+                                            className={`${mobileImageTop ? 'd-none d-md-block' : ''}`}
+                                        />
+                                    }
+                                    {mobileImageTop &&
+                                        <Image 
+                                            src={mobileImageTop.mediaItemUrl} 
+                                            width={mobileImageTop.mediaDetails.width} 
+                                            height={mobileImageTop.mediaDetails.height}
+                                            alt={mobileImageTop.altText}
+                                            className='d-md-none'
                                         />
                                     }
                                     {video &&
@@ -33,13 +44,30 @@ const TwoColumnsTextImage = ({ data }) => {
                                         </div>
                                     }
                                 </div>
-                                <div className='col-md-6 col-lg-5 text-center text-md-start'>
-                                    <div dangerouslySetInnerHTML={{ __html: copy }} />
-                                    {buttonUrl && <Link href={buttonUrl} className="cta__btn mt-3">{buttonLabel ? buttonLabel : 'Find out more'}</Link>}
+                                <div className='col-md-5 d-flex flex-column'>
+                                    <div dangerouslySetInnerHTML={{ __html: copy }} style={{color: textColour}} />
+                                    {buttons &&
+                                        <div className='d-flex flex-column flex-lg-row align-items-lg-center gap-lg-3'>
+                                            {buttons.map((button, i) => {
+                                                return (
+                                                    <Link key={i.toString()} href={button.url} className={`cta__btn cta__btn--${button.style} mb-3 mb-lg-0`}>{button.label ? button.label : 'Find out more'}</Link>
+                                                )
+                                            })}
+                                        </div>
+                                    }
+                                    {mobileImageBottom &&
+                                        <Image 
+                                            src={mobileImageBottom.mediaItemUrl} 
+                                            width={mobileImageBottom.mediaDetails.width} 
+                                            height={mobileImageBottom.mediaDetails.height}
+                                            alt={mobileImageBottom.altText}
+                                            className={`${styles.mobileImageBottom} mt-5 d-md-none ${i % 2 != 0 ? 'align-self-end' : 'align-self-start'}`}
+                                        />
+                                    }
                                 </div>
                             </div>
                         </div>
-                        {dropColour && <Drop colour={dropColour} />}
+                        {dropColour && <div className='d-none d-md-block'><Drop colour={dropColour} /></div>}
                     </div>
                 );
             })}

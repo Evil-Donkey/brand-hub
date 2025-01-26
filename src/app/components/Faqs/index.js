@@ -24,8 +24,8 @@ const Faqs = ({ data, bookDemoUrl }) => {
                             <h2 className='mb-4'>Can I talk to someone?</h2>
                             <div className='row'>
                                 <div className='col-lg-8'>
-                                    <p>Sure, book a quick 15-minute demo to see how we work and have a chat with one of our team.</p>
-                                    <a href={bookDemoUrl} className="cta__btn cta__btn--light" target="_blank">Book a demo</a>
+                                    <p>Sure, book a quick 15-minute call to see how we work and have a chat with one of our team.</p>
+                                    <a href={bookDemoUrl} className="cta__btn cta__btn--light mt-3" target="_blank">Book a call</a>
                                 </div>
                             </div>
                         </div>

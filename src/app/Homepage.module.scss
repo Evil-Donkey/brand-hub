@@ -1,6 +1,9 @@
 .homepageMainWrap {
     background-color: var(--colour-white-00);
     p {
-        font-size: 18px;
+        font-size: 16px;
+        @media screen and (min-width: 992px) {
+            font-size: 20px;
+        }
     }
 }

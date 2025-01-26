@@ -1,22 +1,21 @@
 'use client'
  
-import { useEffect } from 'react'
+import { useEffect, useState } from 'react'
 import { usePathname } from 'next/navigation'
 import {isMobile} from 'react-device-detect'
 import Link from 'next/link'
 import styles from './Navigation.module.scss'
- 
-const Navigation = ({ color }) => {
-  const pathname = usePathname();
+import IconDesign from '../Icons/IconDesign'
+import IconCode from '../Icons/IconCode'
+import IconHamburger from '../Icons/IconHamburger'
+import IconClose from '../Icons/IconClose'
 
-    useEffect(() => {
-        document.documentElement.style.setProperty("--theme-color-00", '#ffffff');
-        if (pathname == "/branders") {
-            document.documentElement.style.setProperty("--theme-nav-00", '#ffffff');
-        } else {
-            document.documentElement.style.setProperty("--theme-nav-00", color ? color : '#231F20');
-        }
-    }, []);
+const Navigation = ({ bookDemoUrl, isMobileMenuOpen, setIsMobileMenuOpen }) => {
+    const pathname = usePathname();
+
+    const toggleMobileMenu = () => {
+        setIsMobileMenuOpen(!isMobileMenuOpen);
+    }
 
   const navigationMenu = [
         {
@@ -30,14 +29,21 @@ const Navigation = ({ color }) => {
             activeSegment: 'our-work'
         },
         {
-            label: 'Design Hub',
-            href: '/design-hub',
-            activeSegment: 'design-hub'
-        },
-        {
-            label: 'Code Hub',
-            href: '/code-hub',
-            activeSegment: 'code-hub'
+            label: 'Our Services',
+            dropdown: [
+                {
+                    label: 'Design Hub',
+                    href: '/design-hub',
+                    activeSegment: 'design-hub',
+                    icon: <IconDesign />
+                },
+                {
+                    label: 'Code Hub',
+                    href: '/code-hub',
+                    activeSegment: 'code-hub',
+                    icon: <IconCode />
+                }
+            ]
         },
         {
             label: 'Our plans',
@@ -47,19 +53,51 @@ const Navigation = ({ color }) => {
     ];
  
     return (
-        <ul className={`${styles.navigationWrap} list-unstyled m-0 p-0 d-flex gap-2`}>
-            {navigationMenu.map((link) => {
-                const isActive = pathname === link.href;
-    
-                return (
-                    <li key={link.label} className={isActive ? styles.navigationItemActive : ''} style={{ color: color }}>
-                        <Link href={link.href} className='cta__btn'>
-                            {link.label}
-                        </Link>
-                    </li>
-                )
-            })}
-        </ul>
+        <>
+            <div className={`${styles.navigationMenu} ${isMobileMenuOpen ? 'd-flex' : 'd-none d-lg-flex'}`}>
+                <ul className="list-unstyled m-0 p-0 d-flex">
+                    {navigationMenu.map((link, i) => {
+                        if (link.dropdown) {
+                            return (
+                                <li key={link.label} className={`dropdown ${styles.dropdown}`} style={{ '--i': i }}>
+                                    <span className={`dropdown-toggle ${styles.dropdownToggle} cta__btn cta__btn-no-shadow d-none d-lg-block`}>{link.label}</span>
+                                    <ul className={`dropdown-menu ${styles.dropdownMenu}`}>
+                                        {link.dropdown.map((sublink, index) => {
+                                            const isActive = pathname === sublink.href;
+                                            return (
+                                                <li key={sublink.label} style={{ '--i': index }}>
+                                                    <Link href={sublink.href} className={`cta__btn d-flex align-items-center gap-1 ${isActive ? 'active' : ''}`}>
+                                                        {sublink.icon}
+                                                        {sublink.label}
+                                                    </Link>
+                                                </li>
+                                            );
+                                        })}
+                                    </ul>
+                                </li>
+                            );
+                        } else {
+                            const isActive = pathname === link.href;
+                            return (
+                                <li key={link.label} style={{ '--i': i }}>
+                                    <Link href={link.href} className={`cta__btn ${isActive ? 'active' : ''}`}>
+                                        {link.label}
+                                    </Link>
+                                </li>
+                            );
+                        }
+                    })}
+                </ul>
+                {bookDemoUrl && 
+                    <div className={styles.bookDemoButton}>
+                        <a href={bookDemoUrl} target="_blank" className="cta__btn cta__btn--transparent d-lg-none">Book a call</a>
+                    </div>
+                }
+            </div>
+            <div className={`${styles.mobileMenu} cta__btn d-lg-none order-last`} onClick={toggleMobileMenu}>
+                {!isMobileMenuOpen ? <IconHamburger /> : <IconClose />}
+            </div>
+        </>
     )
 };
 
