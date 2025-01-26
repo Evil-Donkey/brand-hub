@@ -49,7 +49,7 @@ const Service = ({ data }) => {
                     </div>
 
                     <div className='col-md-7 col-lg-6 mt-5 mt-md-0'>
-                        <h2 className='mb-3 text-uppercase'>What's included?</h2>
+                        <h2 className='mb-3 text-uppercase'>What&apos;s included?</h2>
 
                         <table className={`${styles.pricingTable} table`}>
                             <thead>

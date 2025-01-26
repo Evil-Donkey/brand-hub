@@ -114,7 +114,7 @@ const Pricing = ({ data, allFeatures, allServices }) => {
 
                 <div className='row justify-content-center'>
                     <div className='col-12'>
-                        <h2 className='mb-3 text-uppercase'>What's included?</h2>
+                        <h2 className='mb-3 text-uppercase'>What&apos;s included?</h2>
                     </div>
 
                     <div className='col-12'>
