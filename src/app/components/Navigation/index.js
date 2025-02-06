@@ -66,7 +66,7 @@ const Navigation = ({ bookDemoUrl, isMobileMenuOpen, setIsMobileMenuOpen }) => {
                                             const isActive = pathname === sublink.href;
                                             return (
                                                 <li key={sublink.label} style={{ '--i': index }}>
-                                                    <Link href={sublink.href} className={`cta__btn d-flex align-items-center gap-1 ${isActive ? 'active' : ''}`}>
+                                                    <Link href={sublink.href} className={`${styles.cta__btn} cta__btn d-flex align-items-center gap-1 ${isActive ? `${styles.active}` : ''}`}>
                                                         {sublink.icon}
                                                         {sublink.label}
                                                     </Link>

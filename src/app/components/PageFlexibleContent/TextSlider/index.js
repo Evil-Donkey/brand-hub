@@ -16,6 +16,7 @@ const TextSlider = ({ data }) => {
                 modules={[Pagination]}
                 spaceBetween={50}
                 slidesPerView={1}
+                watchOverflow={true}
                 pagination={{ clickable: true }}
                 style={{
                     '--swiper-pagination-color': `var(--colour-${style})`,

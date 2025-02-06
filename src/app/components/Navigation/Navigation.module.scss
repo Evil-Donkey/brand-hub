@@ -70,6 +70,12 @@
             animation: slideDown 0.3s ease-out forwards;
             animation-delay: calc(var(--i) * 0.1s);
         }
+        .cta__btn {
+            &.active {
+                background-color: var(--colour-grey-00) !important;
+                color: var(--colour-white-00) !important;
+            }
+        }
     }
 }
 
