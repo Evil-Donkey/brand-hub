@@ -31,7 +31,7 @@ const WeDoGrid = ({ data, themeColour }) => {
                 }
         
                 <div className='row justify-content-center'>
-                    <div className='col-auto'>
+                    <div className='col-9 col-lg-auto'>
                         {buttons &&
                             <div className='d-flex flex-column flex-lg-row align-items-lg-center gap-lg-3'>
                                 {buttons.map((button, i) => {

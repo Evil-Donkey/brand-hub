@@ -300,7 +300,6 @@ export default async function Pricing() {
         hideSignUp={true}
         discountBarCopy={discountBarCopy}
         themeColour={themeColour}
-        designHub={true}
       />
 
       <div className='py-5'></div>

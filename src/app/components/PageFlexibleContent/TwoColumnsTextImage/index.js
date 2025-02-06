@@ -47,12 +47,16 @@ const TwoColumnsTextImage = ({ data }) => {
                                 <div className='col-md-5 d-flex flex-column'>
                                     <div dangerouslySetInnerHTML={{ __html: copy }} style={{color: textColour}} />
                                     {buttons &&
-                                        <div className='d-flex flex-column flex-lg-row align-items-lg-center gap-lg-3'>
-                                            {buttons.map((button, i) => {
-                                                return (
-                                                    <Link key={i.toString()} href={button.url} className={`cta__btn cta__btn--${button.style} mb-3 mb-lg-0`}>{button.label ? button.label : 'Find out more'}</Link>
-                                                )
-                                            })}
+                                        <div className='row justify-content-center mt-4 mt-lg-0'>
+                                            <div className='col-9 col-lg-12'>
+                                                <div className='d-flex flex-column flex-lg-row align-items-lg-center gap-lg-3'>
+                                                    {buttons.map((button, i) => {
+                                                        return (
+                                                            <Link key={i.toString()} href={button.url} className={`cta__btn cta__btn--${button.style} mb-3 mb-lg-0`}>{button.label ? button.label : 'Find out more'}</Link>
+                                                        )
+                                                    })}
+                                                </div>
+                                            </div>
                                         </div>
                                     }
                                     {mobileImageBottom &&

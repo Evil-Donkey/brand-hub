@@ -68,9 +68,13 @@ const HomeIntro = ({
             </div>
             {hasButtons && (
                 <div className={styles.buttonsContainer}>
-                    <div className='d-flex align-items-center justify-content-center gap-3'>
-                        <Link href='/pricing' className={`cta__btn cta__btn--${themeColour} mb-3 mb-lg-0`}>See our plans</Link>
-                        <Link href='/our-work' className={`cta__btn cta__btn--light mb-3 mb-lg-0`}>View our showreel</Link>
+                    <div className='row justify-content-center'>
+                        <div className='col-9 col-lg-auto'>
+                            <div className='d-flex flex-column flex-lg-row align-items-lg-center gap-lg-3'>
+                                <Link href='/pricing' className={`cta__btn cta__btn--${themeColour} mb-3 mb-lg-0`}>See our plans</Link>
+                                <Link href='/our-work' className={`cta__btn cta__btn--light mb-3 mb-lg-0`}>View our showreel</Link>
+                            </div>
+                        </div>
                     </div>
                 </div>
             )}

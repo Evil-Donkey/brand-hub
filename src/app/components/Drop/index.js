@@ -15,11 +15,13 @@ const Drop = ({ colour }) => {
     const arrowRef = useRef(null);
 
     useEffect(() => {
+        const isMobile = window.matchMedia("(max-width: 768px)").matches;
+
         const animateDropsAndArrow = () => {
             const tl = gsap.timeline({ defaults: { duration: .75 } });
 
             // Morph the drops
-            tl.to(dropStep0Ref.current, { morphSVG: dropStep1Ref.current, ease: "power4.in" })
+            tl.to(dropStep0Ref.current, { morphSVG: dropStep1Ref.current, ease: "power4.in", delay: isMobile ? 2 : 0 })
               .to(arrowRef.current, { y: -40, ease: "back.inOut(1.7)" }, ">-=.6")
               .to(dropStep0Ref.current, { morphSVG: dropStep2Ref.current, ease: "back.out(2)" }, ">-=.5");
 

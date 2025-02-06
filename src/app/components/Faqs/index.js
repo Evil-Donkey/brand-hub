@@ -19,7 +19,7 @@ const Faqs = ({ data, bookDemoUrl }) => {
         <div className={`container ${styles.faqs}`}>
             <div className='row justify-content-between'>
                 <div className='col-md-6'>
-                    <div className={`${styles.imageWrap} p-3 p-md-4 d-flex flex-column`}>
+                    <div className={`${styles.imageWrap} p-3 pb-0 p-md-4 pb-md-0 d-flex flex-column`}>
                         <div>
                             <h2 className='mb-4'>Can I talk to someone?</h2>
                             <div className='row'>
