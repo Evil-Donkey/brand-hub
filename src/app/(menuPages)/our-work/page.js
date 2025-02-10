@@ -75,6 +75,9 @@ export default async function Pricing() {
           textColor
           faq
           themeColour
+          showreel {
+            mediaItemUrl
+          }
           mobileFeaturedImage {
             altText
             mediaDetails {
@@ -283,6 +286,7 @@ export default async function Pricing() {
   const color = data?.page?.pageOptions?.textColor;
   const telephone = dataOptions?.acfOptionsThemeSettings?.themeSettings?.telephone;
   const email = dataOptions?.acfOptionsThemeSettings?.themeSettings?.email;
+  const showreel = data?.page?.pageOptions?.showreel?.mediaItemUrl;
   const flexibleContent = data?.page?.flexibleContent?.flexibleContent;
   const features = data?.acfFlexibleContentFeaturesOptions;
   const services = data?.acfFlexibleContentServicesOptions;
@@ -311,6 +315,7 @@ export default async function Pricing() {
         faq={faqs}
         bookDemoUrl={bookDemoUrl}
         themeColour={themeColour}
+        showreel={showreel}
       />
 
       <Socials />

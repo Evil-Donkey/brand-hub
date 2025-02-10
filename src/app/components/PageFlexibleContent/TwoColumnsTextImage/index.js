@@ -5,7 +5,7 @@ import styles from './TwoColumnsTextImage.module.scss'
 import Image from 'next/image'
 import Link from 'next/link'
 
-const TwoColumnsTextImage = ({ data }) => {
+const TwoColumnsTextImage = ({ data, svgImage, showreel }) => {
 
     const { rows } = data;
 
@@ -27,6 +27,7 @@ const TwoColumnsTextImage = ({ data }) => {
                                             height={image.mediaDetails.height}
                                             alt={image.altText}
                                             className={`${mobileImageTop ? 'd-none d-md-block' : ''}`}
+                                            style={{transform: svgImage ?'translateY(9px)' : ''}}
                                         />
                                     }
                                     {mobileImageTop &&
@@ -41,6 +42,11 @@ const TwoColumnsTextImage = ({ data }) => {
                                     {video &&
                                         <div className={styles.iframeWrapper}>
                                             <video src={video.mediaItemUrl} loop muted autoPlay webkit-playsinline="true" playsInline />
+                                        </div>
+                                    }
+                                    {showreel &&
+                                        <div className={`${styles.iframeWrapper} d-md-none mt-4 mb-5`}>
+                                            <video src={showreel} loop muted autoPlay webkit-playsinline="true" playsInline />
                                         </div>
                                     }
                                 </div>

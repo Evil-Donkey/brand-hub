@@ -10,7 +10,7 @@ import Faqs from '../Faqs'
 import Service from './Service'
 import WeDoGrid from './WeDoGrid'
 
-const PageFlexibleContent = ({ data, features, services, faq, bookDemoUrl, themeColour }) => {
+const PageFlexibleContent = ({ data, features, services, faq, bookDemoUrl, themeColour, svgImage, showreel }) => {
 
     let flexibleContentArray = [];
 
@@ -18,13 +18,13 @@ const PageFlexibleContent = ({ data, features, services, faq, bookDemoUrl, theme
         const { fieldGroupName } = data;
 
         if (fieldGroupName === "Page_Flexiblecontent_FlexibleContent_SingleCentredColumn") {
-            flexibleContentArray.push(<SingleCentredColumn data={data} />);
+            flexibleContentArray.push(<SingleCentredColumn data={data} showreel={showreel} />);
         }
         if (fieldGroupName === "Page_Flexiblecontent_FlexibleContent_SingleColumn") {
             flexibleContentArray.push(<SingleColumn data={data} themeColour={themeColour} />);
         }
         if (fieldGroupName === "Page_Flexiblecontent_FlexibleContent_TwoColumnsTextimage") {
-            flexibleContentArray.push(<TwoColumnsTextImage data={data} />);
+            flexibleContentArray.push(<TwoColumnsTextImage data={data} svgImage={svgImage} showreel={showreel} />);
         }
         if (fieldGroupName === "Page_Flexiblecontent_FlexibleContent_ThreeColumnsGrid") {
             flexibleContentArray.push(<ThreeColumnsGrid data={data} />);

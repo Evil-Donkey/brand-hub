@@ -307,6 +307,7 @@ export default async function Pricing() {
         faq={faqs}
         bookDemoUrl={bookDemoUrl}
         themeColour={themeColour}
+        svgImage={true}
       />
 
       <Socials />

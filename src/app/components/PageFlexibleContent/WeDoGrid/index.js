@@ -10,15 +10,15 @@ const WeDoGrid = ({ data, themeColour }) => {
     const thColour = ThemeColor({ themeColour });
 
     return (
-        <div className={styles.weDoGrid}>
+        <div className={`${styles.weDoGrid}`}>
             <div className='container'>
 
                 {cards &&
-                    <div className='row'>
+                    <div className='row justify-content-center'>
                         {cards.map((card, i) => {
                             const { heading, copy, image } = card;
                             return (
-                                <div key={i.toString()} className='col-md-6 col-lg-4 mb-5'>
+                                <div key={i.toString()} className='col-10 col-md-6 col-lg-4 mb-5'>
                                     <div className={styles.card}>
                                         {image && <div className={styles.cardImage} style={{backgroundImage: `url(${image.mediaItemUrl})`}} />}
                                         {heading && <h3 style={{color: thColour}}>{heading}</h3>}
