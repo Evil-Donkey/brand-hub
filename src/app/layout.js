@@ -3,7 +3,7 @@ import GoogleAnalytics from './components/GoogleAnalytics'
 import GoogleConsentMode from './components/GoogleConsentMode'
 import GoogleTagManager from './components/GoogleTagManager'
 import Hotjar from './components/Hotjar'
-import { anton, openSans, robotoFlex, robotoSlab } from './utils/fonts'
+import { anton, openSans, robotoFlex, robotoSlab, permanentMarker } from './utils/fonts'
 import 'bootstrap/dist/css/bootstrap.css'
 import './globals.css'
 
@@ -21,7 +21,7 @@ export const metadata = {
 export default function RootLayout({ children, params }) {
   return (
     <html lang="en">
-      <body className={`${robotoSlab.variable} ${anton.variable} ${openSans.variable} ${robotoFlex.className}`}>
+      <body className={`${robotoSlab.variable} ${anton.variable} ${openSans.variable} ${robotoFlex.className} ${permanentMarker.variable}`}>
         <noscript
           dangerouslySetInnerHTML={{
             __html: `<iframe src="https://www.googletagmanager.com/ns.html?id=${GTM_ID}" height="0" width="0" style="display: none; visibility: hidden;"></iframe>`,

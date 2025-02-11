@@ -12,6 +12,7 @@
     }
 
     h2 {
+        text-transform: uppercase;
         @media screen and (min-width: 992px) {
             font-size: 50px;
         }
@@ -29,6 +30,7 @@
 .box {
     border-radius: 5px;
     h3 {
+        text-transform: uppercase;
         @media screen and (min-width: 992px) {
             font-size: 44px;
         }

@@ -82,9 +82,7 @@ export default async function Pricing() {
         flexibleContent {
           flexibleContent {
             ... on Page_Flexiblecontent_FlexibleContent_TwoColumnsTextimage {
-              backgroundColor
               fieldGroupName
-              textColor
               rows {
                 copy
                 image {
@@ -95,7 +93,30 @@ export default async function Pricing() {
                   }
                   mediaItemUrl
                 }
-                video {
+                seoTitle
+                dropColour
+                backgroundColour
+                textColour
+                buttons {
+                  fieldGroupName
+                  label
+                  style
+                  url
+                }
+                mobileImageBottom {
+                  altText
+                  mediaDetails {
+                    height
+                    width
+                  }
+                  mediaItemUrl
+                }
+                mobileImageTop {
+                  altText
+                  mediaDetails {
+                    height
+                    width
+                  }
                   mediaItemUrl
                 }
               }
@@ -118,19 +139,18 @@ export default async function Pricing() {
               }
             }
             ... on Page_Flexiblecontent_FlexibleContent_Pricing {
-              backgroundColor
               fieldGroupName
+              codeHubPrice
+              codeHubSignUpUrl
+              designCodeHubPrice
+              designCodeHubSignUpUrl
+              designHubPrice
+              designHubSignUpUrl
               options {
-                ctaLabel
-                ctaUrl
+                style
                 features
-                month
                 name
-                price
                 services
-                servicesRow
-                theme
-                type
               }
             }
             ... on Page_Flexiblecontent_FlexibleContent_SingleCentredColumn {

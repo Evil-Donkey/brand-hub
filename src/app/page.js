@@ -2,8 +2,8 @@ import fetchAPI from './lib/api'
 import Header from './components/Header'
 import HomeIntro from './components/HomepageIntro'
 import PageFlexibleContent from './components/PageFlexibleContent'
-import Faqs from './components/Faqs'
 import Footer from './components/Footer'
+import Socials from './components/Socials'
 import styles from './Homepage.module.scss'
 
 export async function generateMetadata() {
@@ -74,18 +74,19 @@ export default async function Why() {
           backgroundColor
           textColor
           faq
-        }
-        homepageRotatingList {
-          rotatingList {
-            text
+          mobileFeaturedImage {
+            altText
+            mediaDetails {
+              height
+              width
+            }
+            mediaItemUrl
           }
         }
         flexibleContent {
           flexibleContent {
             ... on Page_Flexiblecontent_FlexibleContent_TwoColumnsTextimage {
-              backgroundColor
               fieldGroupName
-              textColor
               rows {
                 copy
                 image {
@@ -96,7 +97,30 @@ export default async function Why() {
                   }
                   mediaItemUrl
                 }
-                video {
+                seoTitle
+                dropColour
+                backgroundColour
+                textColour
+                buttons {
+                  fieldGroupName
+                  label
+                  style
+                  url
+                }
+                mobileImageBottom {
+                  altText
+                  mediaDetails {
+                    height
+                    width
+                  }
+                  mediaItemUrl
+                }
+                mobileImageTop {
+                  altText
+                  mediaDetails {
+                    height
+                    width
+                  }
                   mediaItemUrl
                 }
               }
@@ -119,26 +143,39 @@ export default async function Why() {
               }
             }
             ... on Page_Flexiblecontent_FlexibleContent_Pricing {
-              backgroundColor
               fieldGroupName
+              codeHubPrice
+              codeHubSignUpUrl
+              designCodeHubPrice
+              designCodeHubSignUpUrl
+              designHubPrice
+              designHubSignUpUrl
               options {
-                ctaLabel
-                ctaUrl
+                style
                 features
-                month
                 name
-                price
                 services
-                servicesRow
-                theme
-                type
               }
+            }
+            ... on Page_Flexiblecontent_FlexibleContent_Faq {
+              fieldGroupName
+              faq
             }
             ... on Page_Flexiblecontent_FlexibleContent_SingleCentredColumn {
               fieldGroupName
               backgroundColor
               copy
               textColor
+            }
+            ... on Page_Flexiblecontent_FlexibleContent_SingleColumn {
+              copy
+              darkMode
+              heading
+              buttons {
+                label
+                style
+                url
+              }
             }
             ... on Page_Flexiblecontent_FlexibleContent_TwoBoxes {
               backgroundColor
@@ -157,6 +194,14 @@ export default async function Why() {
                   }
                   mediaItemUrl
                 }
+              }
+            }
+            ... on Page_Flexiblecontent_FlexibleContent_TextSlider {
+              fieldGroupName
+              style
+              slider {
+                author
+                copy
               }
             }
           }
@@ -187,11 +232,10 @@ export default async function Why() {
   const title = data?.page?.title;
   const content = data?.page?.content;
   const featuredImage = data?.page?.featuredImage;
-  const homepageRotatingList = data?.page?.homepageRotatingList?.rotatingList;
+  const mobileFeaturedImage = data?.page?.pageOptions?.mobileFeaturedImage;
   const telephone = dataOptions?.acfOptionsThemeSettings?.themeSettings?.telephone;
   const email = dataOptions?.acfOptionsThemeSettings?.themeSettings?.email;
   const flexibleContent = data?.page?.flexibleContent?.flexibleContent;
-  const faq = data?.page?.pageOptions?.faq;
   const bookDemoUrl = dataOptions?.acfOptionsThemeSettings?.themeSettings?.bookDemoUrl;
   const discountBarCopy = dataOptions?.acfOptionsThemeSettings?.themeSettings?.discountBarCopy;
   const faqs = dataOptions?.acfOptionsThemeSettings?.themeSettings?.faqs;
@@ -212,14 +256,17 @@ export default async function Why() {
         content={content} 
         title={title} 
         featuredImage={featuredImage}
-        homepageRotatingList={homepageRotatingList}
+        mobileFeaturedImage={mobileFeaturedImage}
+        hasDrop={true}
       />
 
       <PageFlexibleContent 
         data={flexibleContent}
+        faq={faqs}
+        bookDemoUrl={bookDemoUrl}
       />
 
-      {faq && <Faqs data={faqs} bookDemoUrl={bookDemoUrl} />}
+      <Socials />
 
       <Footer 
         border={false} 

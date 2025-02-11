@@ -4,15 +4,23 @@
 
 .headerContainer {
     position: relative;
-    &:before {
-        content: "";
-        position: absolute;
-        bottom: 4px;
-        left: .75rem;
-        height: 1px;
-        width: calc(100% - 1.5rem);
-        background-color: var(--theme-nav-00);
-    }   
+    padding-top: 1.5rem;
+    padding-bottom: 1.5rem;
+    transition: all 0.3s ease;
+    // &:before {
+    //     content: "";
+    //     position: absolute;
+    //     bottom: 4px;
+    //     left: .75rem;
+    //     height: 1px;
+    //     width: calc(100% - 1.5rem);
+    //     background-color: var(--theme-nav-00);
+    // }   
+}
+
+.logoContainer {
+    z-index: 1001;
+    position: relative;
 }
 
 .fixedHeader {
@@ -23,10 +31,14 @@
 }
 
 .headerHidden {
-    // transform: translateY(-58px);
-    // @media screen and (min-width: 768px) {
-    //     transform: translateY(-34px);
-    // }
+    transform: translateY(-44px);
+    @media screen and (min-width: 768px) {
+        transform: translateY(-40px);
+    }
+    .headerContainer {
+        padding-top: 1rem;
+        padding-bottom: 1rem;
+    }
 }
 
 .menuIcon {
@@ -128,36 +140,37 @@
 }
 
 .discountBar {
-    background-color: var(--colour-blue-00);
+    background-color: var(--colour-green-01);
     color: var(--colour-black-03);
-    padding: 5px;
+    padding: 10px;
+    @media screen and (min-width: 768px) {
+        padding: 5px;
+    }
     p {
         margin: 0;
-        font-weight: 300;
+        font-weight: 400;
         font-size: 16px !important;
         position: relative;
         text-align: center;
-        &:before,
-        &:after {
-            content: "";
-            position: absolute;
-            top: 5px;
-            width: 15px;
-            height: 15px;
-            display: none;
-            background-size: contain;
-            background-repeat: no-repeat;
-            background-position: center center;
-            background-image: url(/images/icon-gift.svg);
-            @media screen and (min-width: 768px) {
-                display: block;
-            }
+        font-family: var(--anton);
+        text-transform: uppercase;
+        @media screen and (min-width: 768px) {
+            font-size: 20px !important;
         }
-        &:before {
-            left: -20px;
-        }
-        &:after {
-            right: -20px;
-        }
+    }
+}
+
+.mobileMenuBackground {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 110vh;
+    background-color: var(--colour-black-03);
+    z-index: 999;
+    // transition: all .3s ease-in;
+    transform: translateX(100%);
+    &.mobileMenuBackgroundActive {
+        transform: translateX(0);
     }
 }

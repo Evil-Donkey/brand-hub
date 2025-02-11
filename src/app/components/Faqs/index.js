@@ -18,15 +18,24 @@ const Faqs = ({ data, bookDemoUrl }) => {
     return (
         <div className={`container ${styles.faqs}`}>
             <div className='row justify-content-between'>
-                <div className='col-md-5'>
-                    <div className={`${styles.imageWrap} p-3 p-md-4 d-flex flex-column align-items-center text-center`}>
-                        <img src='/images/graphic-faq.svg' alt='FAQ Image' />
-                        <h2 className='my-4'>Book a 15-minute demo</h2>
-                        <a href={bookDemoUrl} className="cta__btn cta__btn--dark" target="_blank">Book a demo</a>
+                <div className='col-md-6'>
+                    <div className={`${styles.imageWrap} p-3 pb-0 p-md-4 pb-md-0 d-flex flex-column`}>
+                        <div>
+                            <h2 className='mb-4'>Can I talk to someone?</h2>
+                            <div className='row'>
+                                <div className='col-lg-8'>
+                                    <p>Sure, book a quick 15-minute call to see how we work and have a chat with one of our team.</p>
+                                    <a href={bookDemoUrl} className="cta__btn cta__btn--light mt-3" target="_blank">Book a call</a>
+                                </div>
+                            </div>
+                        </div>
+                        <div className='align-self-end'>
+                            <img src='/images/graphic-faq-2.svg' alt='FAQ Image' />
+                        </div>
                     </div>
                 </div>
                 {data &&
-                    <div className='col-md-6 mt-5 mt-md-0'>
+                    <div className='col-md-5 mt-5 mt-md-0'>
                         <h2>FAQ:</h2>
                         <ul>
                             {data.map((faq, i) => {

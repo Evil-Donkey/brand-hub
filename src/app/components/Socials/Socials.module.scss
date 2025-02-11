@@ -1,0 +1,22 @@
+.socials {
+    background-color: var(--colour-white-02);
+    p {
+        font-size: 14px !important;
+        @media screen and (min-width: 992px) {
+            font-size: 18px !important;
+        }
+    }
+    blockquote {
+        margin: 0;
+    }
+
+    .icon {
+        transition: all .3s ease;
+        border-radius: 100%;
+        &:hover {
+            box-shadow: 
+                0 0.3em 0 0 var(--colour-grey-06),
+                inset 0 0.1em 0 0 var(--colour-grey-06);
+        }
+    }
+}

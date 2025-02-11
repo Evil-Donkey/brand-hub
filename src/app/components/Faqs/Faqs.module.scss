@@ -1,6 +1,8 @@
 .faqs {
+  background-color: var(--colour-white-00);
   padding-top: 3rem;
   padding-bottom: 3rem;
+  position: relative;
   @media screen and (min-width: 992px) {
     padding-top: 80px;
     padding-bottom: 80px;
@@ -70,6 +72,19 @@
 
 .imageWrap {
   width: 100%;
-  background-color: var(--colour-blue-00);
+  background-color: var(--colour-black-03);
   border-radius: 10px;
+  color: var(--colour-white-00);
+  h2 {
+    text-transform: uppercase;
+    @media screen and (min-width: 1200px) {
+      font-size: 100px;
+      line-height: 112px;
+    }
+  }
+  // img {
+  //   @media screen and (min-width: 1200px) {
+  //     transform: scale(1.2);
+  //   }
+  // }
 }
