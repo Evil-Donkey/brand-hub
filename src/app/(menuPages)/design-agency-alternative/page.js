@@ -4,7 +4,6 @@ import Intro from '@/app/components/PageIntro'
 import PageFlexibleContent from '@/app/components/PageFlexibleContent'
 import Faqs from '@/app/components/Faqs'
 import Disclaimer from '@/app/components/Disclaimer'
-import Footer from '@/app/components/Footer'
 import styles from '@/app/Homepage.module.scss'
 
 export async function generateMetadata() {
@@ -273,14 +272,6 @@ export default async function Pricing() {
       {faq && <Faqs data={faqs} bookDemoUrl={bookDemoUrl} />}
 
       {disclaimer && <Disclaimer disclaimer={disclaimer} />}
-      
-      <Footer 
-        border={false} 
-        telephone={telephone} 
-        email={email} 
-        color={color}
-        backgroundColor={backgroundColor} 
-      />
     </main>
   )
 }

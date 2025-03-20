@@ -3,7 +3,6 @@ import Header from '@/app/components/Header'
 import Intro from '@/app/components/PageIntro'
 import PageFlexibleContent from '@/app/components/PageFlexibleContent'
 import Faqs from '@/app/components/Faqs'
-import Footer from '@/app/components/Footer'
 import styles from '@/app/Homepage.module.scss'
 
 export async function generateMetadata() {
@@ -230,14 +229,6 @@ export default async function Why() {
       <PageFlexibleContent data={flexibleContent} />
       
       {faq && <Faqs data={faqs} bookDemoUrl={bookDemoUrl} />}
-
-      <Footer 
-        border={false} 
-        telephone={telephone} 
-        email={email} 
-        color={color}
-        backgroundColor={backgroundColor} 
-      />
     </main>
   )
 };

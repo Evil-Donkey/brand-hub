@@ -2,7 +2,6 @@ import fetchAPI from '@/app/lib/api'
 import Header from '@/app/components/Header'
 import BrandersHero from '@/app/components/BrandersHero'
 import BrandersGrid from '@/app/components/BrandersGrid'
-import Footer from '@/app/components/Footer'
 import styles from './Branders.module.scss'
 
 export async function generateMetadata() {
@@ -114,7 +113,6 @@ export default async function Branders() {
       />
       <BrandersHero content={content} title={title} join={join} />
       <BrandersGrid branders={branders} />
-      <Footer border={false} telephone={telephone} email={email} color="#ffffff" />
     </main>
   )
 };

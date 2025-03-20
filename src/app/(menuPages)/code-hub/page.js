@@ -2,9 +2,7 @@ import fetchAPI from '@/app/lib/api'
 import Header from '@/app/components/Header'
 import HomeIntro from '@/app/components/HomepageIntro'
 import PageFlexibleContent from '@/app/components/PageFlexibleContent'
-import Faqs from '@/app/components/Faqs'
 import Socials from '../../components/Socials'
-import Footer from '@/app/components/Footer'
 import styles from '@/app/Homepage.module.scss'
 
 export async function generateMetadata() {
@@ -311,14 +309,6 @@ export default async function Pricing() {
       />
 
       <Socials />
-      
-      <Footer 
-        border={false} 
-        telephone={telephone} 
-        email={email} 
-        color={color}
-        backgroundColor={backgroundColor} 
-      />
     </main>
   )
 }

@@ -2,7 +2,6 @@ import fetchAPI from '../../lib/api'
 import Header from '@/app/components/Header'
 import Intro from '@/app/components/PageIntro'
 import Faqs from '@/app/components/Faqs'
-import Footer from '../../components/Footer'
 import styles from './PrivacyPolicy.module.scss'
 
 export async function generateMetadata() {
@@ -122,14 +121,6 @@ export default async function PrivacyPolicy() {
       </div>
       
       {faq && <Faqs data={faqs} bookDemoUrl={bookDemoUrl} />}
-
-      <Footer 
-        border={false} 
-        telephone={telephone} 
-        email={email} 
-        color={color}
-        backgroundColor={backgroundColor} 
-      />
     </main>
   )
 }

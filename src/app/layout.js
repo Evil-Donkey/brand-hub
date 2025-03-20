@@ -1,9 +1,11 @@
 import Script from 'next/script'
+import fetchAPI from './lib/api'
 import GoogleAnalytics from './components/GoogleAnalytics'
 import GoogleConsentMode from './components/GoogleConsentMode'
 import GoogleTagManager from './components/GoogleTagManager'
 import Hotjar from './components/Hotjar'
 import { anton, openSans, robotoFlex, robotoSlab, permanentMarker } from './utils/fonts'
+import Footer from './components/Footer'
 import 'bootstrap/dist/css/bootstrap.css'
 import './globals.css'
 
@@ -18,6 +20,26 @@ export const metadata = {
   },
 }
 
+const dataOptions = await fetchAPI(`
+  query ThemeSettings {
+    acfOptionsThemeSettings {
+      themeSettings {
+        email
+        telephone
+        bookDemoUrl
+        discountBarCopy
+        faqs {
+          answer
+          question
+        }
+      }
+    }
+  }
+`);
+
+const telephone = dataOptions?.acfOptionsThemeSettings?.themeSettings?.telephone;
+const email = dataOptions?.acfOptionsThemeSettings?.themeSettings?.email;
+
 export default function RootLayout({ children, params }) {
   return (
     <html lang="en">
@@ -28,6 +50,13 @@ export default function RootLayout({ children, params }) {
           }}
         />
         {children}
+        <Footer 
+          border={false} 
+          telephone={telephone} 
+          email={email} 
+          color='#FFFFFF'
+          backgroundColor='#231F20' 
+        />
         <GoogleAnalytics GA_TRACKING_ID={GA_TRACKING_ID} />
         <GoogleConsentMode />
         <GoogleTagManager GTM_ID={GTM_ID} />

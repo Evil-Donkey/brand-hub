@@ -2,7 +2,6 @@ import fetchAPI from '@/app/lib/api'
 import Header from '@/app/components/Header'
 import BranderHero from "@/app/components/BranderHero"
 import BranderContent from "@/app/components/BranderContent"
-import Footer from '@/app/components/Footer'
 import styles from './Brander.module.scss'
 
 export const dynamicParams = true
@@ -136,8 +135,6 @@ export default async function Page({ params: { brander } }) {
 
   const backgroundColor = data?.brander?.pageOptions?.backgroundColor;
   const color = data?.brander?.pageOptions?.textColor;
-  const telephone = dataOptions?.acfOptionsThemeSettings?.themeSettings?.telephone;
-  const email = dataOptions?.acfOptionsThemeSettings?.themeSettings?.email;
 
   const branderData = data?.brander ?? null;
   const title = branderData?.title ?? null;
@@ -154,7 +151,6 @@ export default async function Page({ params: { brander } }) {
       />
       <BranderHero content={content} title={title} featuredImage={featuredImage} />
       <BranderContent content={branderContent} />
-      <Footer border={false} telephone={telephone} email={email} color="#ffffff" />
     </main>
   ) : null
 }

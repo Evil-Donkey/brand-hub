@@ -5,7 +5,6 @@ import ContactBlock from '@/app/components/ContactBlock'
 import PageFlexibleContent from '@/app/components/PageFlexibleContent'
 import FormRequest from '@/app/components/FormRequest'
 import Faqs from '@/app/components/Faqs'
-import Footer from '@/app/components/Footer'
 import styles from '@/app/Homepage.module.scss'
 
 export async function generateMetadata() {
@@ -275,14 +274,6 @@ export default async function Contact() {
       <FormRequest />
 
       {faq && <Faqs data={faqs} bookDemoUrl={bookDemoUrl} />}
-
-      <Footer 
-        border={false} 
-        telephone={telephone} 
-        email={email} 
-        color={color}
-        backgroundColor={backgroundColor} 
-      />
     </main>
   )
 }

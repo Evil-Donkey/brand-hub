@@ -1,9 +1,7 @@
 import fetchAPI from '@/app/lib/api'
 import Header from '@/app/components/Header'
 import PageFlexibleContent from '@/app/components/PageFlexibleContent'
-import Faqs from '@/app/components/Faqs'
 import Socials from '../../components/Socials'
-import Footer from '@/app/components/Footer'
 import styles from '@/app/Homepage.module.scss'
 
 export async function generateMetadata() {
@@ -284,8 +282,6 @@ export default async function Pricing() {
   const themeColour = data?.page?.pageOptions?.themeColour;
   const backgroundColor = data?.page?.pageOptions?.backgroundColor;
   const color = data?.page?.pageOptions?.textColor;
-  const telephone = dataOptions?.acfOptionsThemeSettings?.themeSettings?.telephone;
-  const email = dataOptions?.acfOptionsThemeSettings?.themeSettings?.email;
   const showreel = data?.page?.pageOptions?.showreel?.mediaItemUrl;
   const flexibleContent = data?.page?.flexibleContent?.flexibleContent;
   const features = data?.acfFlexibleContentFeaturesOptions;
@@ -319,14 +315,6 @@ export default async function Pricing() {
       />
 
       <Socials />
-      
-      <Footer 
-        border={false} 
-        telephone={telephone} 
-        email={email} 
-        color={color}
-        backgroundColor={backgroundColor} 
-      />
     </main>
   )
 }

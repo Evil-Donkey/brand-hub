@@ -2,7 +2,6 @@
 import { useEffect, useState } from "react";
 import styles from './Footer.module.scss'
 import Logo from '../Logo'
-import Image from 'next/image'
 
 const Footer = ({ border, color, backgroundColor, email, telephone }) => {
     const [scriptLoaded, setScriptLoaded] = useState(false);
@@ -16,9 +15,10 @@ const Footer = ({ border, color, backgroundColor, email, telephone }) => {
         script.onload = () => setScriptLoaded(true); // Ensure widget initializes after script loads
         document.body.appendChild(script);
         } else {
-        setScriptLoaded(true); // If script is already in DOM, mark it as loaded
+            setScriptLoaded(true); // If script is already in DOM, mark it as loaded
         }
-    }, [scriptLoaded]);
+    }, []);
+    
     return (
         <div className={styles.footerWrapper} style={{ backgroundColor: backgroundColor }}>
             <div className={`${styles.footerContainer} ${border ? styles.footerContainerBorder : ''} container`} style={{ borderColor: color }}>
@@ -40,16 +40,18 @@ const Footer = ({ border, color, backgroundColor, email, telephone }) => {
             <div className='container pb-4 pt-3'>
                 <div className='row justify-content-center'>
                     <div className='col-auto text-center d-flex flex-column gap-3'>
-                        <div
-                            className="trustpilot-widget"
-                            data-locale="en-GB"
-                            data-template-id="56278e9abfbbba0bdcd568bc"
-                            data-businessunit-id="667155aa1202bb5fdad9a4cb"
-                            data-style-height="52px"
-                            data-style-width="100%"
-                        >
-                            <a href="https://uk.trustpilot.com/review/brand-hub.co" target="_blank" rel="noopener">Trustpilot</a>
-                        </div>
+                        
+                            <div
+                                className="trustpilot-widget"
+                                data-locale="en-GB"
+                                data-template-id="56278e9abfbbba0bdcd568bc"
+                                data-businessunit-id="667155aa1202bb5fdad9a4cb"
+                                data-style-height="52px"
+                                data-style-width="100%"
+                            >
+                                <a href="https://uk.trustpilot.com/review/brand-hub.co" target="_blank" rel="noopener">Trustpilot</a>
+                            </div>
+                        
                     </div>
                 </div>
             </div>

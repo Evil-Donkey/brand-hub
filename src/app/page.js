@@ -2,7 +2,6 @@ import fetchAPI from './lib/api'
 import Header from './components/Header'
 import HomeIntro from './components/HomepageIntro'
 import PageFlexibleContent from './components/PageFlexibleContent'
-import Footer from './components/Footer'
 import Socials from './components/Socials'
 import styles from './Homepage.module.scss'
 
@@ -233,8 +232,6 @@ export default async function Why() {
   const content = data?.page?.content;
   const featuredImage = data?.page?.featuredImage;
   const mobileFeaturedImage = data?.page?.pageOptions?.mobileFeaturedImage;
-  const telephone = dataOptions?.acfOptionsThemeSettings?.themeSettings?.telephone;
-  const email = dataOptions?.acfOptionsThemeSettings?.themeSettings?.email;
   const flexibleContent = data?.page?.flexibleContent?.flexibleContent;
   const bookDemoUrl = dataOptions?.acfOptionsThemeSettings?.themeSettings?.bookDemoUrl;
   const discountBarCopy = dataOptions?.acfOptionsThemeSettings?.themeSettings?.discountBarCopy;
@@ -267,14 +264,6 @@ export default async function Why() {
       />
 
       <Socials />
-
-      <Footer 
-        border={false} 
-        telephone={telephone} 
-        email={email} 
-        color={color}
-        backgroundColor={backgroundColor} 
-      />
     </main>
   )
 };
