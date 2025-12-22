@@ -60,8 +60,8 @@ export async function generateMetadata() {
 }
 
 export default async function Pricing() {
-
-  const data = await fetchAPI(`
+  try {
+    const data = await fetchAPI(`
     query getPricingPage {
       page(id: "250", idType: DATABASE_ID) {
         content(format: RENDERED)
@@ -226,51 +226,55 @@ export default async function Pricing() {
     }
   `);
 
-  const backgroundColor = data?.page?.pageOptions?.backgroundColor;
-  const color = data?.page?.pageOptions?.textColor;
-  const title = data?.page?.title;
-  const content = data?.page?.content;
-  const featuredImage = data?.page?.featuredImage;
-  const mobileFeaturedImage = data?.page?.pageOptions?.mobileFeaturedImage;
-  const telephone = dataOptions?.acfOptionsThemeSettings?.themeSettings?.telephone;
-  const email = dataOptions?.acfOptionsThemeSettings?.themeSettings?.email;
-  const flexibleContent = data?.page?.flexibleContent?.flexibleContent;
-  const features = data?.acfFlexibleContentFeaturesOptions;
-  const services = data?.acfFlexibleContentServicesOptions;
-  const bookDemoUrl = dataOptions?.acfOptionsThemeSettings?.themeSettings?.bookDemoUrl;
-  const discountBarCopy = dataOptions?.acfOptionsThemeSettings?.themeSettings?.discountBarCopy;
-  const faqs = dataOptions?.acfOptionsThemeSettings?.themeSettings?.faqs;
+    const backgroundColor = data?.page?.pageOptions?.backgroundColor;
+    const color = data?.page?.pageOptions?.textColor;
+    const title = data?.page?.title;
+    const content = data?.page?.content;
+    const featuredImage = data?.page?.featuredImage;
+    const mobileFeaturedImage = data?.page?.pageOptions?.mobileFeaturedImage;
+    const telephone = dataOptions?.acfOptionsThemeSettings?.themeSettings?.telephone;
+    const email = dataOptions?.acfOptionsThemeSettings?.themeSettings?.email;
+    const flexibleContent = data?.page?.flexibleContent?.flexibleContent;
+    const features = data?.acfFlexibleContentFeaturesOptions;
+    const services = data?.acfFlexibleContentServicesOptions;
+    const bookDemoUrl = dataOptions?.acfOptionsThemeSettings?.themeSettings?.bookDemoUrl;
+    const discountBarCopy = dataOptions?.acfOptionsThemeSettings?.themeSettings?.discountBarCopy;
+    const faqs = dataOptions?.acfOptionsThemeSettings?.themeSettings?.faqs;
 
-  return (
-    <main className={styles.homepageMainWrap}>
-      <Header 
-        fullMenu={true} 
-        backgroundColor={backgroundColor} 
-        color={color} 
-        bookDemoUrl={bookDemoUrl}
-        hideSignUp={true}
-        discountBarCopy={discountBarCopy}
-      />
+    return (
+      <main className={styles.homepageMainWrap}>
+        <Header 
+          fullMenu={true} 
+          backgroundColor={backgroundColor} 
+          color={color} 
+          bookDemoUrl={bookDemoUrl}
+          hideSignUp={true}
+          discountBarCopy={discountBarCopy}
+        />
 
-      <HomeIntro 
-        backgroundColor={backgroundColor} 
-        color={color} 
-        content={content} 
-        title={title} 
-        featuredImage={featuredImage}
-        mobileFeaturedImage={mobileFeaturedImage}
-        hasDrop={false}
-      />
-      
-      <PageFlexibleContent 
-        data={flexibleContent} 
-        features={features} 
-        services={services} 
-        faq={faqs}
-        bookDemoUrl={bookDemoUrl}
-      />
+        <HomeIntro 
+          backgroundColor={backgroundColor} 
+          color={color} 
+          content={content} 
+          title={title} 
+          featuredImage={featuredImage}
+          mobileFeaturedImage={mobileFeaturedImage}
+          hasDrop={false}
+        />
+        
+        <PageFlexibleContent 
+          data={flexibleContent} 
+          features={features} 
+          services={services} 
+          faq={faqs}
+          bookDemoUrl={bookDemoUrl}
+        />
 
-      <Socials />
-    </main>
-  )
+        <Socials />
+      </main>
+    )
+  } catch (error) {
+    console.error('Failed to load pricing page:', error.message);
+    return null;
+  }
 }

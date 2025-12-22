@@ -60,8 +60,8 @@ export async function generateMetadata() {
 }
 
 export default async function Why() {
-
-  const data = await fetchAPI(`
+  try {
+    const data = await fetchAPI(`
     query getHomePage {
       page(id: "5", idType: DATABASE_ID) {
         content(format: RENDERED)
@@ -233,44 +233,48 @@ export default async function Why() {
     }
   `);
 
-  const backgroundColor = data?.page?.pageOptions?.backgroundColor;
-  const color = data?.page?.pageOptions?.textColor;
-  const title = data?.page?.title;
-  const content = data?.page?.content;
-  const featuredImage = data?.page?.featuredImage;
-  const mobileFeaturedImage = data?.page?.pageOptions?.mobileFeaturedImage;
-  const flexibleContent = data?.page?.flexibleContent?.flexibleContent;
-  const bookDemoUrl = dataOptions?.acfOptionsThemeSettings?.themeSettings?.bookDemoUrl;
-  const discountBarCopy = dataOptions?.acfOptionsThemeSettings?.themeSettings?.discountBarCopy;
-  const faqs = dataOptions?.acfOptionsThemeSettings?.themeSettings?.faqs;
+    const backgroundColor = data?.page?.pageOptions?.backgroundColor;
+    const color = data?.page?.pageOptions?.textColor;
+    const title = data?.page?.title;
+    const content = data?.page?.content;
+    const featuredImage = data?.page?.featuredImage;
+    const mobileFeaturedImage = data?.page?.pageOptions?.mobileFeaturedImage;
+    const flexibleContent = data?.page?.flexibleContent?.flexibleContent;
+    const bookDemoUrl = dataOptions?.acfOptionsThemeSettings?.themeSettings?.bookDemoUrl;
+    const discountBarCopy = dataOptions?.acfOptionsThemeSettings?.themeSettings?.discountBarCopy;
+    const faqs = dataOptions?.acfOptionsThemeSettings?.themeSettings?.faqs;
 
-  return (
-    <main className={styles.homepageMainWrap}>
-      <Header 
-        fullMenu={true} 
-        backgroundColor={backgroundColor} 
-        color={color}
-        bookDemoUrl={bookDemoUrl}
-        discountBarCopy={discountBarCopy}
-      />
-      
-      <HomeIntro 
-        backgroundColor={backgroundColor} 
-        color={color} 
-        content={content} 
-        title={title} 
-        featuredImage={featuredImage}
-        mobileFeaturedImage={mobileFeaturedImage}
-        hasDrop={true}
-      />
+    return (
+      <main className={styles.homepageMainWrap}>
+        <Header 
+          fullMenu={true} 
+          backgroundColor={backgroundColor} 
+          color={color}
+          bookDemoUrl={bookDemoUrl}
+          discountBarCopy={discountBarCopy}
+        />
+        
+        <HomeIntro 
+          backgroundColor={backgroundColor} 
+          color={color} 
+          content={content} 
+          title={title} 
+          featuredImage={featuredImage}
+          mobileFeaturedImage={mobileFeaturedImage}
+          hasDrop={true}
+        />
 
-      <PageFlexibleContent 
-        data={flexibleContent}
-        faq={faqs}
-        bookDemoUrl={bookDemoUrl}
-      />
+        <PageFlexibleContent 
+          data={flexibleContent}
+          faq={faqs}
+          bookDemoUrl={bookDemoUrl}
+        />
 
-      <Socials />
-    </main>
-  )
+        <Socials />
+      </main>
+    )
+  } catch (error) {
+    console.error('Failed to load homepage:', error.message);
+    return null;
+  }
 };

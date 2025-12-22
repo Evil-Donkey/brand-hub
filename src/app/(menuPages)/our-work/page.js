@@ -59,8 +59,8 @@ export async function generateMetadata() {
 }
 
 export default async function Pricing() {
-
-  const data = await fetchAPI(`
+  try {
+    const data = await fetchAPI(`
     query getPricingPage {
       page(id: "1344", idType: DATABASE_ID) {
         content(format: RENDERED)
@@ -286,42 +286,46 @@ export default async function Pricing() {
     }
   `);
   
-  const themeColour = data?.page?.pageOptions?.themeColour;
-  const backgroundColor = data?.page?.pageOptions?.backgroundColor;
-  const color = data?.page?.pageOptions?.textColor;
-  const showreel = data?.page?.pageOptions?.showreel?.mediaItemUrl;
-  const flexibleContent = data?.page?.flexibleContent?.flexibleContent;
-  const features = data?.acfFlexibleContentFeaturesOptions;
-  const services = data?.acfFlexibleContentServicesOptions;
-  const bookDemoUrl = dataOptions?.acfOptionsThemeSettings?.themeSettings?.bookDemoUrl;
-  const discountBarCopy = dataOptions?.acfOptionsThemeSettings?.themeSettings?.discountBarCopy;
-  const faqs = dataOptions?.acfOptionsThemeSettings?.themeSettings?.faqs;
+    const themeColour = data?.page?.pageOptions?.themeColour;
+    const backgroundColor = data?.page?.pageOptions?.backgroundColor;
+    const color = data?.page?.pageOptions?.textColor;
+    const showreel = data?.page?.pageOptions?.showreel?.mediaItemUrl;
+    const flexibleContent = data?.page?.flexibleContent?.flexibleContent;
+    const features = data?.acfFlexibleContentFeaturesOptions;
+    const services = data?.acfFlexibleContentServicesOptions;
+    const bookDemoUrl = dataOptions?.acfOptionsThemeSettings?.themeSettings?.bookDemoUrl;
+    const discountBarCopy = dataOptions?.acfOptionsThemeSettings?.themeSettings?.discountBarCopy;
+    const faqs = dataOptions?.acfOptionsThemeSettings?.themeSettings?.faqs;
 
-  return (
-    <main className={styles.homepageMainWrap}>
-      <Header 
-        fullMenu={true} 
-        backgroundColor={backgroundColor} 
-        color={color} 
-        bookDemoUrl={bookDemoUrl}
-        hideSignUp={true}
-        discountBarCopy={discountBarCopy}
-        themeColour={themeColour}
-      />
+    return (
+      <main className={styles.homepageMainWrap}>
+        <Header 
+          fullMenu={true} 
+          backgroundColor={backgroundColor} 
+          color={color} 
+          bookDemoUrl={bookDemoUrl}
+          hideSignUp={true}
+          discountBarCopy={discountBarCopy}
+          themeColour={themeColour}
+        />
 
-      <div className='py-5'></div>
-      
-      <PageFlexibleContent 
-        data={flexibleContent} 
-        features={features} 
-        services={services} 
-        faq={faqs}
-        bookDemoUrl={bookDemoUrl}
-        themeColour={themeColour}
-        showreel={showreel}
-      />
+        <div className='py-5'></div>
+        
+        <PageFlexibleContent 
+          data={flexibleContent} 
+          features={features} 
+          services={services} 
+          faq={faqs}
+          bookDemoUrl={bookDemoUrl}
+          themeColour={themeColour}
+          showreel={showreel}
+        />
 
-      <Socials />
-    </main>
-  )
+        <Socials />
+      </main>
+    )
+  } catch (error) {
+    console.error('Failed to load our-work page:', error.message);
+    return null;
+  }
 }

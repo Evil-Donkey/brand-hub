@@ -60,8 +60,8 @@ export async function generateMetadata() {
 }
 
 export default async function Pricing() {
-
-  const data = await fetchAPI(`
+  try {
+    const data = await fetchAPI(`
     query getPricingPage {
       page(id: "1403", idType: DATABASE_ID) {
         content(format: RENDERED)
@@ -298,43 +298,47 @@ export default async function Pricing() {
   const services = data?.acfFlexibleContentServicesOptions;
   const bookDemoUrl = dataOptions?.acfOptionsThemeSettings?.themeSettings?.bookDemoUrl;
   const discountBarCopy = dataOptions?.acfOptionsThemeSettings?.themeSettings?.discountBarCopy;
-  const faqs = dataOptions?.acfOptionsThemeSettings?.themeSettings?.faqs;
+    const faqs = dataOptions?.acfOptionsThemeSettings?.themeSettings?.faqs;
 
-  return (
-    <main className={styles.homepageMainWrap}>
-      <Header 
-        fullMenu={true} 
-        backgroundColor={backgroundColor} 
-        color={color} 
-        bookDemoUrl={bookDemoUrl}
-        hideSignUp={true}
-        discountBarCopy={discountBarCopy}
-        themeColour={themeColour}
-        designHub={true}
-      />
+    return (
+      <main className={styles.homepageMainWrap}>
+        <Header 
+          fullMenu={true} 
+          backgroundColor={backgroundColor} 
+          color={color} 
+          bookDemoUrl={bookDemoUrl}
+          hideSignUp={true}
+          discountBarCopy={discountBarCopy}
+          themeColour={themeColour}
+          designHub={true}
+        />
 
-      <HomeIntro 
-        backgroundColor={backgroundColor} 
-        color={color} 
-        content={content} 
-        title={title} 
-        featuredImage={featuredImage}
-        mobileFeaturedImage={mobileFeaturedImage}
-        hasDrop={false}
-        themeColour={themeColour}
-        hasButtons={true}
-      />
-      
-      <PageFlexibleContent 
-        data={flexibleContent} 
-        features={features} 
-        services={services} 
-        faq={faqs}
-        bookDemoUrl={bookDemoUrl}
-        themeColour={themeColour}
-      />
+        <HomeIntro 
+          backgroundColor={backgroundColor} 
+          color={color} 
+          content={content} 
+          title={title} 
+          featuredImage={featuredImage}
+          mobileFeaturedImage={mobileFeaturedImage}
+          hasDrop={false}
+          themeColour={themeColour}
+          hasButtons={true}
+        />
+        
+        <PageFlexibleContent 
+          data={flexibleContent} 
+          features={features} 
+          services={services} 
+          faq={faqs}
+          bookDemoUrl={bookDemoUrl}
+          themeColour={themeColour}
+        />
 
-      <Socials />
-    </main>
-  )
+        <Socials />
+      </main>
+    )
+  } catch (error) {
+    console.error('Failed to load design-hub page:', error.message);
+    return null;
+  }
 }
