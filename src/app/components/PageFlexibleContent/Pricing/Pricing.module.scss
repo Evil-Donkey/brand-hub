@@ -7,6 +7,138 @@
   } 
 }
 
+.hourSliderWrapper {
+  text-align: center;
+  padding: 2rem 0 3rem;
+}
+
+.hourSliderTitle {
+  font-size: 18px;
+  text-transform: uppercase;
+  margin-bottom: 2rem;
+  font-weight: 700;
+  letter-spacing: 0.5px;
+  color: var(--colour-white-00);
+  @media screen and (min-width: 768px) {
+    font-size: 22px;
+    margin-bottom: 2.5rem;
+  }
+}
+
+.hourSliderContainer {
+  position: relative;
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 0 1rem;
+}
+
+.hourLabels {
+  position: relative;
+  margin-bottom: 1.5rem;
+  width: 100%;
+  height: 50px;
+  z-index: 2;
+  
+  @media screen and (min-width: 768px) {
+    height: 60px;
+  }
+}
+
+.hourLabel {
+  background: none;
+  border: none;
+  color: var(--colour-white-00);
+  font-family: var(--anton);
+  font-size: 20px;
+  font-weight: 400;
+  cursor: pointer;
+  padding: 0.5rem 0.25rem;
+  transition: all 0.3s ease;
+  position: absolute;
+  top: 0;
+  transform: translateX(-50%);
+  text-align: center;
+  line-height: 1.2;
+  white-space: nowrap;
+  
+  @media screen and (min-width: 768px) {
+    font-size: 24px;
+    padding: 0.5rem;
+  }
+
+  &:hover {
+    color: var(--colour-green-00);
+  }
+
+  &.hourLabelActive {
+    color: var(--colour-green-00);
+    font-size: 28px;
+    font-weight: 700;
+    
+    @media screen and (min-width: 768px) {
+      font-size: 36px;
+    }
+  }
+}
+
+.sliderTrack {
+  position: relative;
+  width: 100%;
+  height: 10px;
+  background-color: var(--colour-grey-02);
+  border-radius: 5px;
+  cursor: pointer;
+  
+  @media screen and (min-width: 768px) {
+    height: 12px;
+  }
+}
+
+.sliderFill {
+  position: absolute;
+  left: 0;
+  top: 0;
+  height: 100%;
+  background-color: var(--colour-green-00);
+  border-radius: 5px;
+  transition: width 0.3s ease;
+  pointer-events: none;
+  
+  &.sliderFillDragging {
+    transition: none;
+  }
+}
+
+.sliderThumb {
+  position: absolute;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  width: 22px;
+  height: 22px;
+  background-color: var(--colour-green-00);
+  border-radius: 50%;
+  transition: left 0.3s ease;
+  cursor: grab;
+  pointer-events: auto;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+  user-select: none;
+  z-index: 3;
+  
+  &:active {
+    cursor: grabbing;
+  }
+  
+  &.sliderThumbDragging {
+    cursor: grabbing;
+    transition: none;
+  }
+  
+  @media screen and (min-width: 768px) {
+    width: 26px;
+    height: 26px;
+  }
+}
+
 .pricingOption {
   h2 {
     font-size: 35px;

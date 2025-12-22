@@ -1,6 +1,6 @@
 'use client'
 
-import { useEffect, useRef } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import gsap from 'gsap';
 
 import styles from './Pricing.module.scss';
@@ -13,6 +13,10 @@ import IconCheckmark from '@/app/components/Icons/IconCheckmark';
 const Pricing = ({ data, allFeatures, allServices }) => {
 
     const cardRefs = useRef([]);
+    const sliderTrackRef = useRef(null);
+    const isDraggingRef = useRef(false);
+    const [selectedHours, setSelectedHours] = useState(2);
+    const [isDragging, setIsDragging] = useState(false);
 
     useEffect(() => {
         const onMouseMove = (e) => {
@@ -47,9 +51,123 @@ const Pricing = ({ data, allFeatures, allServices }) => {
 
     const { options, codeHubPrice, codeHubSignUpUrl, designCodeHubPrice, designCodeHubSignUpUrl, designHubPrice, designHubSignUpUrl } = data;
 
+    // Calculate price adjustments based on hours (base is 2 hours, add £400 per additional hour)
+    const hoursDifference = selectedHours - 2;
+    const priceAdjustment = hoursDifference * 400;
+
+    const calculatePrice = (basePrice) => {
+        if (!basePrice) return basePrice;
+        const numericPrice = parseInt(basePrice.toString().replace(/[£,]/g, ''), 10);
+        if (isNaN(numericPrice)) return basePrice;
+        return numericPrice + priceAdjustment;
+    };
+
+    const formatPrice = (price) => {
+        if (typeof price === 'string') return price;
+        return price.toLocaleString('en-GB');
+    };
+
+    const hours = [2, 3, 4, 5, 6, 7, 8];
+
+    const calculateHourFromPosition = (clientX) => {
+        if (!sliderTrackRef.current) return selectedHours;
+        const rect = sliderTrackRef.current.getBoundingClientRect();
+        const clickX = clientX - rect.left;
+        const percentage = Math.max(0, Math.min(1, clickX / rect.width));
+        const index = Math.round(percentage * 6); // 6 steps (0-6)
+        return Math.max(2, Math.min(8, 2 + index));
+    };
+
+    const handleTrackClick = (e) => {
+        // Don't handle click if we're dragging or just finished dragging
+        if (isDraggingRef.current) return;
+        const newHour = calculateHourFromPosition(e.clientX);
+        setSelectedHours(newHour);
+    };
+
+    const handleThumbMouseDown = (e) => {
+        e.preventDefault();
+        e.stopPropagation();
+        isDraggingRef.current = true;
+        setIsDragging(true);
+    };
+
+    useEffect(() => {
+        const handleMouseMove = (e) => {
+            if (!isDraggingRef.current) return;
+            const newHour = calculateHourFromPosition(e.clientX);
+            setSelectedHours(newHour);
+        };
+
+        const handleMouseUp = () => {
+            if (isDraggingRef.current) {
+                // Small delay to prevent click event from firing after drag
+                setTimeout(() => {
+                    isDraggingRef.current = false;
+                }, 100);
+                setIsDragging(false);
+            }
+        };
+
+        if (isDragging) {
+            document.addEventListener('mousemove', handleMouseMove);
+            document.addEventListener('mouseup', handleMouseUp);
+        }
+
+        return () => {
+            document.removeEventListener('mousemove', handleMouseMove);
+            document.removeEventListener('mouseup', handleMouseUp);
+        };
+    }, [isDragging, selectedHours]);
+
     return (
         <div className={styles.pricingWrapper}>
             <div className='container pt-5 pt-md-0'>
+
+                {/* Hour Selection Slider */}
+                <div className='row mb-5'>
+                    <div className='col-12 text-center'>
+                        <h2 className='mb-3 text-uppercase'>Hours required:</h2>
+                        <p>Select total hours required each business day from our Brand Hub Design and Code teams.</p>
+                    </div>
+                    <div className='col-12'>
+                        <div className={styles.hourSliderWrapper}>
+                            <div className={styles.hourSliderContainer}>
+                                <div className={styles.hourLabels}>
+                                    {hours.map((hour) => {
+                                        const position = ((hour - 2) / 6) * 100;
+                                        return (
+                                            <button
+                                                key={hour}
+                                                type="button"
+                                                className={`${styles.hourLabel} ${selectedHours === hour ? styles.hourLabelActive : ''}`}
+                                                onClick={() => setSelectedHours(hour)}
+                                                style={{ left: `${position}%` }}
+                                            >
+                                                {hour}H
+                                            </button>
+                                        );
+                                    })}
+                                </div>
+                                <div 
+                                    ref={sliderTrackRef}
+                                    className={styles.sliderTrack}
+                                    onClick={handleTrackClick}
+                                >
+                                    <div 
+                                        className={`${styles.sliderFill} ${isDragging ? styles.sliderFillDragging : ''}`}
+                                        style={{ width: `${((selectedHours - 2) / 6) * 100}%` }}
+                                    />
+                                    <div 
+                                        className={`${styles.sliderThumb} ${isDragging ? styles.sliderThumbDragging : ''}`}
+                                        style={{ left: `${((selectedHours - 2) / 6) * 100}%` }}
+                                        onMouseDown={handleThumbMouseDown}
+                                    />
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
 
                 <div className='row justify-content-center'>
                     <div className='col-md-8 col-lg-7'>
@@ -61,7 +179,7 @@ const Pricing = ({ data, allFeatures, allServices }) => {
                                     </div>
                                     <h2 className='mb-md-4 text-center'>Design Hub</h2>
                                     {designHubPrice && <h3 className={`mb-4 text-center`}>
-                                        £{designHubPrice}<span>/month</span>
+                                        £{formatPrice(calculatePrice(designHubPrice))}<span>/month</span>
                                     </h3>}
                                     {designHubSignUpUrl && (
                                         <div className='align-self-center'>
@@ -77,7 +195,7 @@ const Pricing = ({ data, allFeatures, allServices }) => {
                                     </div>
                                     <h2 className='mb-md-4 text-center'>Code Hub</h2>
                                     {codeHubPrice && <h3 className={`mb-4 text-center`}>
-                                        £{codeHubPrice}<span>/month</span>
+                                        £{formatPrice(calculatePrice(codeHubPrice))}<span>/month</span>
                                     </h3>}
                                     {codeHubSignUpUrl && (
                                         <div className='align-self-center'>
@@ -95,7 +213,7 @@ const Pricing = ({ data, allFeatures, allServices }) => {
                             </div>
                             <h2 className='mb-md-4 text-center'>Design Hub + Code Hub</h2>
                             {designCodeHubPrice && <h3 className={`mb-4 text-center`}>
-                                £{designCodeHubPrice}<span>/month</span>
+                                £{formatPrice(calculatePrice(designCodeHubPrice))}<span>/month</span>
                             </h3>}
                             {designCodeHubSignUpUrl && (
                                 <div className='align-self-center'>
