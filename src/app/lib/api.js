@@ -2,6 +2,14 @@ const API_URL = process.env.WORDPRESS_GRAPHQL_ENDPOINT
 
 // Fetch API
 export default async function fetchAPI(query, { variables } = {}) {
+    // Validate API_URL is set
+    if (!API_URL) {
+        throw new Error(
+            'WORDPRESS_GRAPHQL_ENDPOINT environment variable is not set. ' +
+            'Please set it in your environment variables or .env file.'
+        )
+    }
+
     const headers = { 'Content-Type': 'application/json' }
 
     if (process.env.WORDPRESS_AUTH_REFRESH_TOKEN) {

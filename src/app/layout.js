@@ -20,25 +20,33 @@ export const metadata = {
   },
 }
 
-const dataOptions = await fetchAPI(`
-  query ThemeSettings {
-    acfOptionsThemeSettings {
-      themeSettings {
-        email
-        telephone
-        bookDemoUrl
-        discountBarCopy
-        faqs {
-          answer
-          question
+let telephone = null;
+let email = null;
+
+try {
+  const dataOptions = await fetchAPI(`
+    query ThemeSettings {
+      acfOptionsThemeSettings {
+        themeSettings {
+          email
+          telephone
+          bookDemoUrl
+          discountBarCopy
+          faqs {
+            answer
+            question
+          }
         }
       }
     }
-  }
-`);
+  `);
 
-const telephone = dataOptions?.acfOptionsThemeSettings?.themeSettings?.telephone;
-const email = dataOptions?.acfOptionsThemeSettings?.themeSettings?.email;
+  telephone = dataOptions?.acfOptionsThemeSettings?.themeSettings?.telephone;
+  email = dataOptions?.acfOptionsThemeSettings?.themeSettings?.email;
+} catch (error) {
+  console.error('Failed to fetch theme settings:', error.message);
+  // Continue with null values - the app will still work without these
+}
 
 export default function RootLayout({ children, params }) {
   return (
