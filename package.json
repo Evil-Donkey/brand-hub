@@ -2,6 +2,9 @@
   "name": "brand-hub",
   "version": "0.1.0",
   "private": true,
+  "engines": {
+    "node": ">=24.0.0"
+  },
   "scripts": {
     "dev": "next dev",
     "build": "next build",
@@ -17,7 +20,7 @@
     "eslint-config-next": "13.4.8",
     "file-saver": "^2.0.5",
     "firebase": "^10.2.0",
-    "gsap": "npm:@gsap/shockingly@^3.12.5",
+    "gsap": "^3.12.5",
     "hex-rgb": "^5.0.0",
     "html-react-parser": "^4.2.2",
     "html-to-image": "^1.11.11",
