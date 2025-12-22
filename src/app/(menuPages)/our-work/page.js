@@ -5,48 +5,55 @@ import Socials from '../../components/Socials'
 import styles from '@/app/Homepage.module.scss'
 
 export async function generateMetadata() {
-
-  const data = await fetchAPI(`
-    query getContactPage {
-      page(id: "1344", idType: DATABASE_ID) {
-        seo {
-          title
-          metaDesc
-          opengraphUrl
-          opengraphTitle
-          opengraphDescription
-          opengraphType
-          opengraphSiteName
-          opengraphImage {
-            mediaItemUrl
-            mediaDetails {
-              height
-              width
+  try {
+    const data = await fetchAPI(`
+      query getContactPage {
+        page(id: "1344", idType: DATABASE_ID) {
+          seo {
+            title
+            metaDesc
+            opengraphUrl
+            opengraphTitle
+            opengraphDescription
+            opengraphType
+            opengraphSiteName
+            opengraphImage {
+              mediaItemUrl
+              mediaDetails {
+                height
+                width
+              }
             }
           }
         }
       }
+    `);
+
+    const seo = data?.page?.seo;
+   
+    const opengraphType = seo?.opengraphType || 'website';
+
+    return {
+      title: seo?.title,
+      description: seo?.metaDesc,
+      openGraph: {
+        title: seo?.openGraphTitle,
+        description: seo?.openGraphTitle,
+        url: seo?.openGraphTitle,
+        siteName: seo?.openGraphTitle,
+        images: seo?.opengraphImage ? [{
+          url: seo?.opengraphImage?.mediaItemUrl,
+          width: seo?.opengraphImage?.mediaDetails.width,
+          height: seo?.opengraphImage?.mediaDetails.height,
+        }] : [],
+        type: opengraphType,
+      }
     }
-  `);
-
-  const seo = data?.page?.seo;
- 
-  const opengraphType = seo?.opengraphType || 'website';
-
-  return {
-    title: seo?.title,
-    description: seo?.metaDesc,
-    openGraph: {
-      title: seo?.openGraphTitle,
-      description: seo?.openGraphTitle,
-      url: seo?.openGraphTitle,
-      siteName: seo?.openGraphTitle,
-      images: seo?.opengraphImage ? [{
-        url: seo?.opengraphImage?.mediaItemUrl,
-        width: seo?.opengraphImage?.mediaDetails.width,
-        height: seo?.opengraphImage?.mediaDetails.height,
-      }] : [],
-      type: opengraphType,
+  } catch (error) {
+    console.error('Failed to generate metadata for our-work page:', error.message);
+    return {
+      title: 'Our Work | Brand Hub',
+      description: 'Brand Hub Our Work',
     }
   }
 }

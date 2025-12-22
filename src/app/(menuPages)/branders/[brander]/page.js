@@ -8,69 +8,87 @@ export const dynamicParams = true
 export const revalidate = 10
 
 export async function generateMetadata({ params: {brander} }) {
-  const data = await fetchAPI(`
-    query getBrandsByAuthor {
-      brander(id: "${brander}", idType: SLUG) {
-        title(format: RENDERED)
-        seo {
-          title
-          metaDesc
-          opengraphUrl
-          opengraphTitle
-          opengraphDescription
-          opengraphType
-          opengraphSiteName
-          opengraphImage {
-            mediaItemUrl
-            mediaDetails {
-              height
-              width
+  try {
+    const data = await fetchAPI(`
+      query getBrandsByAuthor {
+        brander(id: "${brander}", idType: SLUG) {
+          title(format: RENDERED)
+          seo {
+            title
+            metaDesc
+            opengraphUrl
+            opengraphTitle
+            opengraphDescription
+            opengraphType
+            opengraphSiteName
+            opengraphImage {
+              mediaItemUrl
+              mediaDetails {
+                height
+                width
+              }
             }
           }
         }
       }
+    `);
+
+    const seo = data?.page?.seo;
+   
+    const opengraphType = seo?.opengraphType || 'website';
+
+    return {
+      title: seo?.title,
+      description: seo?.metaDesc,
+      openGraph: {
+        title: seo?.openGraphTitle,
+        description: seo?.openGraphTitle,
+        url: seo?.openGraphTitle,
+        siteName: seo?.openGraphTitle,
+        images: seo?.opengraphImage ? [{
+          url: seo?.opengraphImage?.mediaItemUrl,
+          width: seo?.opengraphImage?.mediaDetails.width,
+          height: seo?.opengraphImage?.mediaDetails.height,
+        }] : [],
+        type: opengraphType,
+      }
     }
-  `);
-
-  const seo = data?.page?.seo;
- 
-  const opengraphType = seo?.opengraphType || 'website';
-
-  return {
-    title: seo?.title,
-    description: seo?.metaDesc,
-    openGraph: {
-      title: seo?.openGraphTitle,
-      description: seo?.openGraphTitle,
-      url: seo?.openGraphTitle,
-      siteName: seo?.openGraphTitle,
-      images: seo?.opengraphImage ? [{
-        url: seo?.opengraphImage?.mediaItemUrl,
-        width: seo?.opengraphImage?.mediaDetails.width,
-        height: seo?.opengraphImage?.mediaDetails.height,
-      }] : [],
-      type: opengraphType,
+  } catch (error) {
+    console.error(`Failed to generate metadata for brander ${brander}:`, error.message);
+    return {
+      title: `${brander} | Brand Hub`,
+      description: `Brand Hub - ${brander}`,
     }
   }
 }
 
 export async function generateStaticParams() {
-  const branders = await fetchAPI(`
-    query getBranders {
-      branders {
-        nodes {
-          id
-          slug
+  try {
+    const branders = await fetchAPI(`
+      query getBranders {
+        branders {
+          nodes {
+            id
+            slug
+          }
         }
       }
+    `);
+
+    const branderArray = branders?.branders?.nodes;
+
+    if (!branderArray || branderArray.length === 0) {
+      return [];
     }
-  `);
 
-  const branderArray = branders?.branders?.nodes;
-
-  return branderArray.map((brander) => ({
-    brander: brander.slug
-  }))
+    return branderArray.map((brander) => ({
+      brander: brander.slug
+    }))
+  } catch (error) {
+    console.error('Failed to generate static params for branders:', error.message);
+    // Return empty array - pages will be generated on-demand due to dynamicParams = true
+    return [];
+  }
 }
 
 

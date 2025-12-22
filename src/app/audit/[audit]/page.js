@@ -10,77 +10,95 @@ export const dynamicParams = true
 export const revalidate = 10
 
 export async function generateMetadata({ params: {audit} }) {
-  const data = await fetchAPI(`
-    query getAuditByAuthor {
-      audit(id: "${audit}", idType: SLUG) {
-        title(format: RENDERED)
-        seo {
-          metaDesc
-          opengraphUrl
-          opengraphTitle
-          opengraphDescription
-          opengraphType
-          opengraphSiteName
-          opengraphImage {
-            mediaItemUrl
-            mediaDetails {
-              height
-              width
-            }
-          }
-        }
-      }
-    }
-  `);
-
-  const seo = data?.audit?.seo;
- 
-  const opengraphType = seo?.opengraphType || 'website';
-
-  return {
-    title: data?.brand?.title,
-    description: seo?.metaDesc,
-    openGraph: {
-      title: seo?.openGraphTitle,
-      description: seo?.openGraphTitle,
-      url: seo?.openGraphTitle,
-      siteName: seo?.openGraphTitle,
-      images: seo?.opengraphImage ? [{
-        url: seo?.opengraphImage?.mediaItemUrl,
-        width: seo?.opengraphImage?.mediaDetails.width,
-        height: seo?.opengraphImage?.mediaDetails.height,
-      }] : [],
-      type: opengraphType,
-    }
-  }
-}
-
-export async function generateStaticParams() {
-  const audits = await fetchAPI(`
-    query getAudits {
-      audits {
-        nodes {
-          id
-          slug
-          author {
-            node {
-              id
-              authorCustomFields {
-                authorNiceName
-                urlSlug
+  try {
+    const data = await fetchAPI(`
+      query getAuditByAuthor {
+        audit(id: "${audit}", idType: SLUG) {
+          title(format: RENDERED)
+          seo {
+            metaDesc
+            opengraphUrl
+            opengraphTitle
+            opengraphDescription
+            opengraphType
+            opengraphSiteName
+            opengraphImage {
+              mediaItemUrl
+              mediaDetails {
+                height
+                width
               }
             }
           }
         }
       }
+    `);
+
+    const seo = data?.audit?.seo;
+   
+    const opengraphType = seo?.opengraphType || 'website';
+
+    return {
+      title: data?.audit?.title || `${audit} | Brand Hub`,
+      description: seo?.metaDesc,
+      openGraph: {
+        title: seo?.openGraphTitle,
+        description: seo?.openGraphTitle,
+        url: seo?.openGraphTitle,
+        siteName: seo?.openGraphTitle,
+        images: seo?.opengraphImage ? [{
+          url: seo?.opengraphImage?.mediaItemUrl,
+          width: seo?.opengraphImage?.mediaDetails.width,
+          height: seo?.opengraphImage?.mediaDetails.height,
+        }] : [],
+        type: opengraphType,
+      }
     }
-  `);
+  } catch (error) {
+    console.error(`Failed to generate metadata for audit ${audit}:`, error.message);
+    return {
+      title: `${audit} | Brand Hub`,
+      description: `Brand Hub - ${audit}`,
+    }
+  }
+}
 
-  const auditsArray = audits?.audits?.nodes;
+export async function generateStaticParams() {
+  try {
+    const audits = await fetchAPI(`
+      query getAudits {
+        audits {
+          nodes {
+            id
+            slug
+            author {
+              node {
+                id
+                authorCustomFields {
+                  authorNiceName
+                  urlSlug
+                }
+              }
+            }
+          }
+        }
+      }
+    `);
 
-  return auditsArray.map((audit) => ({
-    audit: audit.slug
-  }))
+    const auditsArray = audits?.audits?.nodes;
+
+    if (!auditsArray || auditsArray.length === 0) {
+      return [];
+    }
+
+    return auditsArray.map((audit) => ({
+      audit: audit.slug
+    }))
+  } catch (error) {
+    console.error('Failed to generate static params for audits:', error.message);
+    // Return empty array - pages will be generated on-demand due to dynamicParams = true
+    return [];
+  }
 }
 
 

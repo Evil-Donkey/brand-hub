@@ -10,79 +10,97 @@ export const dynamicParams = true
 export const revalidate = 10
 
 export async function generateMetadata({ params: {brand} }) {
-  const data = await fetchAPI(`
-    query getBrandsByAuthor {
-      brand(id: "${brand}", idType: SLUG) {
-        title(format: RENDERED)
-        seo {
-          title
-          metaDesc
-          opengraphUrl
-          opengraphTitle
-          opengraphDescription
-          opengraphType
-          opengraphSiteName
-          opengraphImage {
-            mediaItemUrl
-            mediaDetails {
-              height
-              width
-            }
-          }
-        }
-      }
-    }
-  `);
-
-  const seo = data?.brand?.seo;
- 
-  const opengraphType = seo?.opengraphType || 'website';
-
-  return {
-    title: seo?.title,
-    description: seo?.metaDesc,
-    openGraph: {
-      title: seo?.openGraphTitle,
-      description: seo?.openGraphTitle,
-      url: seo?.openGraphTitle,
-      siteName: seo?.openGraphTitle,
-      images: seo?.opengraphImage ? [{
-        url: seo?.opengraphImage?.mediaItemUrl,
-        width: seo?.opengraphImage?.mediaDetails.width,
-        height: seo?.opengraphImage?.mediaDetails.height,
-      }] : [],
-      type: opengraphType,
-    }
-  }
-}
-
-export async function generateStaticParams() {
-  const brands = await fetchAPI(`
-    query getBrands {
-      brands {
-        nodes {
-          id
-          slug
-          author {
-            node {
-              id
-              authorCustomFields {
-                authorNiceName
-                urlSlug
+  try {
+    const data = await fetchAPI(`
+      query getBrandsByAuthor {
+        brand(id: "${brand}", idType: SLUG) {
+          title(format: RENDERED)
+          seo {
+            title
+            metaDesc
+            opengraphUrl
+            opengraphTitle
+            opengraphDescription
+            opengraphType
+            opengraphSiteName
+            opengraphImage {
+              mediaItemUrl
+              mediaDetails {
+                height
+                width
               }
             }
           }
         }
       }
+    `);
+
+    const seo = data?.brand?.seo;
+   
+    const opengraphType = seo?.opengraphType || 'website';
+
+    return {
+      title: seo?.title,
+      description: seo?.metaDesc,
+      openGraph: {
+        title: seo?.openGraphTitle,
+        description: seo?.openGraphTitle,
+        url: seo?.openGraphTitle,
+        siteName: seo?.openGraphTitle,
+        images: seo?.opengraphImage ? [{
+          url: seo?.opengraphImage?.mediaItemUrl,
+          width: seo?.opengraphImage?.mediaDetails.width,
+          height: seo?.opengraphImage?.mediaDetails.height,
+        }] : [],
+        type: opengraphType,
+      }
     }
-  `);
+  } catch (error) {
+    console.error(`Failed to generate metadata for brand ${brand}:`, error.message);
+    return {
+      title: `${brand} | Brand Hub`,
+      description: `Brand Hub - ${brand}`,
+    }
+  }
+}
 
-  const brandsArray = brands?.brands?.nodes;
+export async function generateStaticParams() {
+  try {
+    const brands = await fetchAPI(`
+      query getBrands {
+        brands {
+          nodes {
+            id
+            slug
+            author {
+              node {
+                id
+                authorCustomFields {
+                  authorNiceName
+                  urlSlug
+                }
+              }
+            }
+          }
+        }
+      }
+    `);
 
-  return brandsArray.map((brand) => ({
-    author: brand.author.node.authorCustomFields.urlSlug,
-    brand: brand.slug
-  }))
+    const brandsArray = brands?.brands?.nodes;
+
+    if (!brandsArray || brandsArray.length === 0) {
+      return [];
+    }
+
+    return brandsArray.map((brand) => ({
+      author: brand.author.node.authorCustomFields.urlSlug,
+      brand: brand.slug
+    }))
+  } catch (error) {
+    console.error('Failed to generate static params for brands:', error.message);
+    // Return empty array - pages will be generated on-demand due to dynamicParams = true
+    return [];
+  }
 }
 
 

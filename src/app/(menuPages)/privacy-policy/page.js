@@ -5,48 +5,55 @@ import Faqs from '@/app/components/Faqs'
 import styles from './PrivacyPolicy.module.scss'
 
 export async function generateMetadata() {
-
-  const data = await fetchAPI(`
-    query getContactPage {
-      page(id: "3", idType: DATABASE_ID) {
-        seo {
-          title
-          metaDesc
-          opengraphUrl
-          opengraphTitle
-          opengraphDescription
-          opengraphType
-          opengraphSiteName
-          opengraphImage {
-            mediaItemUrl
-            mediaDetails {
-              height
-              width
+  try {
+    const data = await fetchAPI(`
+      query getContactPage {
+        page(id: "3", idType: DATABASE_ID) {
+          seo {
+            title
+            metaDesc
+            opengraphUrl
+            opengraphTitle
+            opengraphDescription
+            opengraphType
+            opengraphSiteName
+            opengraphImage {
+              mediaItemUrl
+              mediaDetails {
+                height
+                width
+              }
             }
           }
         }
       }
+    `);
+
+    const seo = data?.page?.seo;
+   
+    const opengraphType = seo?.opengraphType || 'website';
+
+    return {
+      title: seo?.title,
+      description: seo?.metaDesc,
+      openGraph: {
+        title: seo?.openGraphTitle,
+        description: seo?.openGraphTitle,
+        url: seo?.openGraphTitle,
+        siteName: seo?.openGraphTitle,
+        images: seo?.opengraphImage ? [{
+          url: seo?.opengraphImage?.mediaItemUrl,
+          width: seo?.opengraphImage?.mediaDetails.width,
+          height: seo?.opengraphImage?.mediaDetails.height,
+        }] : [],
+        type: opengraphType,
+      }
     }
-  `);
-
-  const seo = data?.page?.seo;
- 
-  const opengraphType = seo?.opengraphType || 'website';
-
-  return {
-    title: seo?.title,
-    description: seo?.metaDesc,
-    openGraph: {
-      title: seo?.openGraphTitle,
-      description: seo?.openGraphTitle,
-      url: seo?.openGraphTitle,
-      siteName: seo?.openGraphTitle,
-      images: seo?.opengraphImage ? [{
-        url: seo?.opengraphImage?.mediaItemUrl,
-        width: seo?.opengraphImage?.mediaDetails.width,
-        height: seo?.opengraphImage?.mediaDetails.height,
-      }] : [],
-      type: opengraphType,
+  } catch (error) {
+    console.error('Failed to generate metadata for privacy-policy page:', error.message);
+    return {
+      title: 'Privacy Policy | Brand Hub',
+      description: 'Brand Hub Privacy Policy',
     }
   }
 }
