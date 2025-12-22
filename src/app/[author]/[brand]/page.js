@@ -105,8 +105,8 @@ export async function generateStaticParams() {
 
 
 export default async function Page({ params: { brand, author } }) {
-
-  const data = await fetchAPI(`
+  try {
+    const data = await fetchAPI(`
     query getBrandsByAuthor {
       brand(id: "${brand}", idType: SLUG) {
         id
@@ -387,43 +387,47 @@ export default async function Page({ params: { brand, author } }) {
     }`
   );
 
-  const dataOptions = await fetchAPI(`
-    query ThemeSettings {
-      acfOptionsThemeSettings {
-        themeSettings {
-          email
-          telephone
+    const dataOptions = await fetchAPI(`
+      query ThemeSettings {
+        acfOptionsThemeSettings {
+          themeSettings {
+            email
+            telephone
+          }
         }
       }
+    `);
+
+    const telephone = dataOptions?.acfOptionsThemeSettings?.themeSettings?.telephone;
+    const email = dataOptions?.acfOptionsThemeSettings?.themeSettings?.email;
+
+    const brandData = data?.brand;
+    const flexibleContent = brandData?.brandOptions?.flexibleContent;
+    const brandOptions = brandData?.brandOptions;
+    const bgColour = brandData?.brandOptions?.backgroundColour;
+    const textColour = brandData?.brandOptions?.textColour;
+    const pwd = brandData?.passwordPassword?.password;
+    const authorNiceName = brandData?.author.node.authorCustomFields.authorNiceName;
+    const hideAuthor = brandData?.brandOptions?.hideAuthor;
+
+    let nav = [];
+    for (let i = 0; i < flexibleContent?.length; i++) {
+      const sectionTitle = flexibleContent[i].sectionTitle;
+      sectionTitle && nav.push(sectionTitle);
     }
-  `);
 
-  const telephone = dataOptions?.acfOptionsThemeSettings?.themeSettings?.telephone;
-  const email = dataOptions?.acfOptionsThemeSettings?.themeSettings?.email;
-
-  const brandData = data?.brand;
-  const flexibleContent = brandData?.brandOptions?.flexibleContent;
-  const brandOptions = brandData?.brandOptions;
-  const bgColour = brandData?.brandOptions?.backgroundColour;
-  const textColour = brandData?.brandOptions?.textColour;
-  const pwd = brandData?.passwordPassword?.password;
-  const authorNiceName = brandData?.author.node.authorCustomFields.authorNiceName;
-  const hideAuthor = brandData?.brandOptions?.hideAuthor;
-
-  let nav = [];
-  for (let i = 0; i < flexibleContent?.length; i++) {
-    const sectionTitle = flexibleContent[i].sectionTitle;
-    sectionTitle && nav.push(sectionTitle);
+    return brandData ? (
+      <div style={{ 'backgroundColor': bgColour, 'color': textColour }}>
+        <HeaderBrand nav={nav} bgColour={bgColour} color={textColour} pwd={pwd} />
+        {pwd && <BrandLogin pwd={pwd} bgColour={bgColour} color={textColour} />}
+        <BrandIntro data={brandData} author={authorNiceName} hideAuthor={hideAuthor} />
+        <BrandHero data={brandOptions} />
+        <FlexibleContent data={flexibleContent} pwd={pwd} bgColour={bgColour} colour={textColour} brand={brand} />
+        <Footer border={true} color={textColour} telephone={telephone} email={email} />
+      </div>
+    ) : null
+  } catch (error) {
+    console.error(`Failed to load brand ${brand}:`, error.message);
+    return null;
   }
-
-  return brandData ? (
-    <div style={{ 'backgroundColor': bgColour, 'color': textColour }}>
-      <HeaderBrand nav={nav} bgColour={bgColour} color={textColour} pwd={pwd} />
-      {pwd && <BrandLogin pwd={pwd} bgColour={bgColour} color={textColour} />}
-      <BrandIntro data={brandData} author={authorNiceName} hideAuthor={hideAuthor} />
-      <BrandHero data={brandOptions} />
-      <FlexibleContent data={flexibleContent} pwd={pwd} bgColour={bgColour} colour={textColour} brand={brand} />
-      <Footer border={true} color={textColour} telephone={telephone} email={email} />
-    </div>
-  ) : null
 }

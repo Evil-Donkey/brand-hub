@@ -66,8 +66,8 @@ export async function generateMetadata() {
 }
 
 export default async function Contact() {
-
-  const data = await fetchAPI(`
+  try {
+    const data = await fetchAPI(`
     query getContactPage {
       page(id: "231", idType: DATABASE_ID) {
         content(format: RENDERED)
@@ -232,55 +232,59 @@ export default async function Contact() {
     }
   `);
 
-  const themeColour = data?.page?.pageOptions?.themeColour;
-  const backgroundColor = data?.page?.pageOptions?.backgroundColor;
-  const color = data?.page?.pageOptions?.textColor;
-  const title = data?.page?.title;
-  const featuredImage = data?.page?.featuredImage;
-  const mobileFeaturedImage = data?.page?.pageOptions?.mobileFeaturedImage;
-  const telephone = dataOptions?.acfOptionsThemeSettings?.themeSettings?.telephone;
-  const email = dataOptions?.acfOptionsThemeSettings?.themeSettings?.email;
-  const instagram = dataOptions?.acfOptionsThemeSettings?.themeSettings?.instagram;
-  const linkedin = dataOptions?.acfOptionsThemeSettings?.themeSettings?.linkedin;
-  const flexibleContent = data?.page?.flexibleContent?.flexibleContent;
-  const faq = data?.page?.pageOptions?.faq;
-  const bookDemoUrl = dataOptions?.acfOptionsThemeSettings?.themeSettings?.bookDemoUrl;
-  const discountBarCopy = dataOptions?.acfOptionsThemeSettings?.themeSettings?.discountBarCopy;
-  const faqs = dataOptions?.acfOptionsThemeSettings?.themeSettings?.faqs;
+    const themeColour = data?.page?.pageOptions?.themeColour;
+    const backgroundColor = data?.page?.pageOptions?.backgroundColor;
+    const color = data?.page?.pageOptions?.textColor;
+    const title = data?.page?.title;
+    const featuredImage = data?.page?.featuredImage;
+    const mobileFeaturedImage = data?.page?.pageOptions?.mobileFeaturedImage;
+    const telephone = dataOptions?.acfOptionsThemeSettings?.themeSettings?.telephone;
+    const email = dataOptions?.acfOptionsThemeSettings?.themeSettings?.email;
+    const instagram = dataOptions?.acfOptionsThemeSettings?.themeSettings?.instagram;
+    const linkedin = dataOptions?.acfOptionsThemeSettings?.themeSettings?.linkedin;
+    const flexibleContent = data?.page?.flexibleContent?.flexibleContent;
+    const faq = data?.page?.pageOptions?.faq;
+    const bookDemoUrl = dataOptions?.acfOptionsThemeSettings?.themeSettings?.bookDemoUrl;
+    const discountBarCopy = dataOptions?.acfOptionsThemeSettings?.themeSettings?.discountBarCopy;
+    const faqs = dataOptions?.acfOptionsThemeSettings?.themeSettings?.faqs;
 
-  return (
-    <main className={styles.homepageMainWrap}>
-      <Header 
-        fullMenu={true} 
-        backgroundColor={backgroundColor} 
-        color={color} 
-        bookDemoUrl={bookDemoUrl}
-        discountBarCopy={discountBarCopy}
-      />
-      
-      <HomeIntro 
-        backgroundColor={backgroundColor} 
-        color={color} 
-        title={title} 
-        featuredImage={featuredImage}
-        mobileFeaturedImage={mobileFeaturedImage}
-        hasDrop={false}
-        themeColour={themeColour}
-        hasButtons={false}
-      />
+    return (
+      <main className={styles.homepageMainWrap}>
+        <Header 
+          fullMenu={true} 
+          backgroundColor={backgroundColor} 
+          color={color} 
+          bookDemoUrl={bookDemoUrl}
+          discountBarCopy={discountBarCopy}
+        />
+        
+        <HomeIntro 
+          backgroundColor={backgroundColor} 
+          color={color} 
+          title={title} 
+          featuredImage={featuredImage}
+          mobileFeaturedImage={mobileFeaturedImage}
+          hasDrop={false}
+          themeColour={themeColour}
+          hasButtons={false}
+        />
 
-      <ContactBlock 
-        email={email}
-        instagram={instagram}
-        linkedin={linkedin}
-        telephone={telephone}
-      />
-      
-      <PageFlexibleContent data={flexibleContent} />
-      
-      <FormRequest />
+        <ContactBlock 
+          email={email}
+          instagram={instagram}
+          linkedin={linkedin}
+          telephone={telephone}
+        />
+        
+        <PageFlexibleContent data={flexibleContent} />
+        
+        <FormRequest />
 
-      {faq && <Faqs data={faqs} bookDemoUrl={bookDemoUrl} />}
-    </main>
-  )
+        {faq && <Faqs data={faqs} bookDemoUrl={bookDemoUrl} />}
+      </main>
+    )
+  } catch (error) {
+    console.error('Failed to load contact page:', error.message);
+    return null;
+  }
 }

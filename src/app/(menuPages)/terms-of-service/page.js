@@ -59,8 +59,8 @@ export async function generateMetadata() {
 }
 
 export default async function PrivacyPolicy() {
-
-  const data = await fetchAPI(`
+  try {
+    const data = await fetchAPI(`
     query getPrivacyPolicy {
       page(id: "973", idType: DATABASE_ID) {
         title
@@ -91,44 +91,48 @@ export default async function PrivacyPolicy() {
     }
   `);
 
-  const backgroundColor = data?.page?.pageOptions?.backgroundColor;
-  const color = data?.page?.pageOptions?.textColor;
-  const title = data?.page?.title;
-  const content = data?.page?.content;
-  const telephone = dataOptions?.acfOptionsThemeSettings?.themeSettings?.telephone;
-  const email = dataOptions?.acfOptionsThemeSettings?.themeSettings?.email;
-  const faq = data?.page?.pageOptions?.faq;
-  const bookDemoUrl = dataOptions?.acfOptionsThemeSettings?.themeSettings?.bookDemoUrl;
-  const discountBarCopy = dataOptions?.acfOptionsThemeSettings?.themeSettings?.discountBarCopy;
-  const faqs = dataOptions?.acfOptionsThemeSettings?.themeSettings?.faqs;
-  
-  return (
-    <main className={styles.pageWrap}>
-      <Header 
-        fullMenu={true} 
-        backgroundColor={backgroundColor} 
-        color={color} 
-        bookDemoUrl={bookDemoUrl}
-        discountBarCopy={discountBarCopy}
-      />
-      
-      <Intro 
-        backgroundColor={backgroundColor} 
-        color={color} 
-        title={title} 
-        c1={12}
-      />
-      
-      <div className='container py-5'>
-        <div className='row'>
-          <div className='col-md-9'>
-            <div dangerouslySetInnerHTML={{ __html: content }} />
+    const backgroundColor = data?.page?.pageOptions?.backgroundColor;
+    const color = data?.page?.pageOptions?.textColor;
+    const title = data?.page?.title;
+    const content = data?.page?.content;
+    const telephone = dataOptions?.acfOptionsThemeSettings?.themeSettings?.telephone;
+    const email = dataOptions?.acfOptionsThemeSettings?.themeSettings?.email;
+    const faq = data?.page?.pageOptions?.faq;
+    const bookDemoUrl = dataOptions?.acfOptionsThemeSettings?.themeSettings?.bookDemoUrl;
+    const discountBarCopy = dataOptions?.acfOptionsThemeSettings?.themeSettings?.discountBarCopy;
+    const faqs = dataOptions?.acfOptionsThemeSettings?.themeSettings?.faqs;
+    
+    return (
+      <main className={styles.pageWrap}>
+        <Header 
+          fullMenu={true} 
+          backgroundColor={backgroundColor} 
+          color={color} 
+          bookDemoUrl={bookDemoUrl}
+          discountBarCopy={discountBarCopy}
+        />
+        
+        <Intro 
+          backgroundColor={backgroundColor} 
+          color={color} 
+          title={title} 
+          c1={12}
+        />
+        
+        <div className='container py-5'>
+          <div className='row'>
+            <div className='col-md-9'>
+              <div dangerouslySetInnerHTML={{ __html: content }} />
+            </div>
           </div>
         </div>
-      </div>
 
-      {faq && <Faqs data={faqs} bookDemoUrl={bookDemoUrl} />}
+        {faq && <Faqs data={faqs} bookDemoUrl={bookDemoUrl} />}
 
-    </main>
-  )
+      </main>
+    )
+  } catch (error) {
+    console.error('Failed to load terms-of-service page:', error.message);
+    return null;
+  }
 }

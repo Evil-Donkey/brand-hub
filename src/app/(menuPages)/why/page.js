@@ -202,40 +202,44 @@ export default async function Why() {
     }
   `);
 
-  const backgroundColor = data?.page?.pageOptions?.backgroundColor;
-  const color = data?.page?.pageOptions?.textColor;
-  const title = data?.page?.title;
-  const featuredImage = data?.page?.featuredImage;
-  const telephone = dataOptions?.acfOptionsThemeSettings?.themeSettings?.telephone;
-  const email = dataOptions?.acfOptionsThemeSettings?.themeSettings?.email;
-  const flexibleContent = data?.page?.flexibleContent?.flexibleContent;
-  const faq = data?.page?.pageOptions?.faq;
-  const bookDemoUrl = dataOptions?.acfOptionsThemeSettings?.themeSettings?.bookDemoUrl;
-  const discountBarCopy = dataOptions?.acfOptionsThemeSettings?.themeSettings?.discountBarCopy;
-  const faqs = dataOptions?.acfOptionsThemeSettings?.themeSettings?.faqs;
+    const backgroundColor = data?.page?.pageOptions?.backgroundColor;
+    const color = data?.page?.pageOptions?.textColor;
+    const title = data?.page?.title;
+    const featuredImage = data?.page?.featuredImage;
+    const telephone = dataOptions?.acfOptionsThemeSettings?.themeSettings?.telephone;
+    const email = dataOptions?.acfOptionsThemeSettings?.themeSettings?.email;
+    const flexibleContent = data?.page?.flexibleContent?.flexibleContent;
+    const faq = data?.page?.pageOptions?.faq;
+    const bookDemoUrl = dataOptions?.acfOptionsThemeSettings?.themeSettings?.bookDemoUrl;
+    const discountBarCopy = dataOptions?.acfOptionsThemeSettings?.themeSettings?.discountBarCopy;
+    const faqs = dataOptions?.acfOptionsThemeSettings?.themeSettings?.faqs;
 
-  return (
-    <main className={styles.homepageMainWrap}>
-      <Header 
-        fullMenu={true} 
-        backgroundColor={backgroundColor} 
-        color={color} 
-        bookDemoUrl={bookDemoUrl}
-        discountBarCopy={discountBarCopy}
-      />
+    return (
+      <main className={styles.homepageMainWrap}>
+        <Header 
+          fullMenu={true} 
+          backgroundColor={backgroundColor} 
+          color={color} 
+          bookDemoUrl={bookDemoUrl}
+          discountBarCopy={discountBarCopy}
+        />
 
-      <Intro 
-        backgroundColor={backgroundColor} 
-        color={color} 
-        title={title} 
-        c1={8} 
-        c2={4}
-        featuredImage={featuredImage}
-      />
-      
-      <PageFlexibleContent data={flexibleContent} />
-      
-      {faq && <Faqs data={faqs} bookDemoUrl={bookDemoUrl} />}
-    </main>
-  )
+        <Intro 
+          backgroundColor={backgroundColor} 
+          color={color} 
+          title={title} 
+          c1={8} 
+          c2={4}
+          featuredImage={featuredImage}
+        />
+        
+        <PageFlexibleContent data={flexibleContent} />
+        
+        {faq && <Faqs data={faqs} bookDemoUrl={bookDemoUrl} />}
+      </main>
+    )
+  } catch (error) {
+    console.error('Failed to load why page:', error.message);
+    return null;
+  }
 };

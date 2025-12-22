@@ -91,43 +91,47 @@ export default async function PrivacyPolicy() {
     }
   `);
 
-  const backgroundColor = data?.page?.pageOptions?.backgroundColor;
-  const color = data?.page?.pageOptions?.textColor;
-  const title = data?.page?.title;
-  const content = data?.page?.content;
-  const telephone = dataOptions?.acfOptionsThemeSettings?.themeSettings?.telephone;
-  const email = dataOptions?.acfOptionsThemeSettings?.themeSettings?.email;
-  const faq = data?.page?.pageOptions?.faq;
-  const bookDemoUrl = dataOptions?.acfOptionsThemeSettings?.themeSettings?.bookDemoUrl;
-  const discountBarCopy = dataOptions?.acfOptionsThemeSettings?.themeSettings?.discountBarCopy;
-  const faqs = dataOptions?.acfOptionsThemeSettings?.themeSettings?.faqs;
-  
-  return (
-    <main className={styles.pageWrap}>
-      <Header 
-        fullMenu={true} 
-        backgroundColor={backgroundColor} 
-        color={color} 
-        bookDemoUrl={bookDemoUrl}
-        discountBarCopy={discountBarCopy}
-      />
+    const backgroundColor = data?.page?.pageOptions?.backgroundColor;
+    const color = data?.page?.pageOptions?.textColor;
+    const title = data?.page?.title;
+    const content = data?.page?.content;
+    const telephone = dataOptions?.acfOptionsThemeSettings?.themeSettings?.telephone;
+    const email = dataOptions?.acfOptionsThemeSettings?.themeSettings?.email;
+    const faq = data?.page?.pageOptions?.faq;
+    const bookDemoUrl = dataOptions?.acfOptionsThemeSettings?.themeSettings?.bookDemoUrl;
+    const discountBarCopy = dataOptions?.acfOptionsThemeSettings?.themeSettings?.discountBarCopy;
+    const faqs = dataOptions?.acfOptionsThemeSettings?.themeSettings?.faqs;
+    
+    return (
+      <main className={styles.pageWrap}>
+        <Header 
+          fullMenu={true} 
+          backgroundColor={backgroundColor} 
+          color={color} 
+          bookDemoUrl={bookDemoUrl}
+          discountBarCopy={discountBarCopy}
+        />
 
-      <Intro 
-        backgroundColor={backgroundColor} 
-        color={color} 
-        title={title} 
-        c1={12}
-      />
-      
-      <div className='container py-5'>
-        <div className='row'>
-          <div className='col-md-9'>
-            <div dangerouslySetInnerHTML={{ __html: content }} />
+        <Intro 
+          backgroundColor={backgroundColor} 
+          color={color} 
+          title={title} 
+          c1={12}
+        />
+        
+        <div className='container py-5'>
+          <div className='row'>
+            <div className='col-md-9'>
+              <div dangerouslySetInnerHTML={{ __html: content }} />
+            </div>
           </div>
         </div>
-      </div>
-      
-      {faq && <Faqs data={faqs} bookDemoUrl={bookDemoUrl} />}
-    </main>
-  )
+        
+        {faq && <Faqs data={faqs} bookDemoUrl={bookDemoUrl} />}
+      </main>
+    )
+  } catch (error) {
+    console.error('Failed to load privacy-policy page:', error.message);
+    return null;
+  }
 }

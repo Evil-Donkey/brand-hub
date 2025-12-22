@@ -59,8 +59,8 @@ export async function generateMetadata() {
 }
 
 export default async function Branders() {
-
-  const data = await fetchAPI(`
+  try {
+    const data = await fetchAPI(`
     query getBrandersPage {
       page(id: "531", idType: DATABASE_ID) {
         title(format: RENDERED)
@@ -102,24 +102,28 @@ export default async function Branders() {
     }
   `);
 
-  const backgroundColor = data?.page?.pageOptions?.backgroundColor;
-  const color = data?.page?.pageOptions?.textColor;
-  const title = data?.page?.title;
-  const content = data?.page?.content;
-  const branders = data?.page?.branders?.branders;
-  const join = data?.page?.branders?.join;
-  const telephone = dataOptions?.acfOptionsThemeSettings?.themeSettings?.telephone;
-  const email = dataOptions?.acfOptionsThemeSettings?.themeSettings?.email;
+    const backgroundColor = data?.page?.pageOptions?.backgroundColor;
+    const color = data?.page?.pageOptions?.textColor;
+    const title = data?.page?.title;
+    const content = data?.page?.content;
+    const branders = data?.page?.branders?.branders;
+    const join = data?.page?.branders?.join;
+    const telephone = dataOptions?.acfOptionsThemeSettings?.themeSettings?.telephone;
+    const email = dataOptions?.acfOptionsThemeSettings?.themeSettings?.email;
 
-  return (
-    <main className={styles.pageWrap}>
-      <Header 
-        fullMenu={true} 
-        backgroundColor={backgroundColor} 
-        color={color}
-      />
-      <BrandersHero content={content} title={title} join={join} />
-      <BrandersGrid branders={branders} />
-    </main>
-  )
+    return (
+      <main className={styles.pageWrap}>
+        <Header 
+          fullMenu={true} 
+          backgroundColor={backgroundColor} 
+          color={color}
+        />
+        <BrandersHero content={content} title={title} join={join} />
+        <BrandersGrid branders={branders} />
+      </main>
+    )
+  } catch (error) {
+    console.error('Failed to load branders page:', error.message);
+    return null;
+  }
 };

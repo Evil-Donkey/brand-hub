@@ -93,8 +93,8 @@ export async function generateStaticParams() {
 
 
 export default async function Page({ params: { brander } }) {
-
-  const data = await fetchAPI(`
+  try {
+    const data = await fetchAPI(`
     query getBranderByAuthor {
       brander(id: "${brander}", idType: SLUG) {
         id
@@ -151,24 +151,28 @@ export default async function Page({ params: { brander } }) {
     }
   `);
 
-  const backgroundColor = data?.brander?.pageOptions?.backgroundColor;
-  const color = data?.brander?.pageOptions?.textColor;
+    const backgroundColor = data?.brander?.pageOptions?.backgroundColor;
+    const color = data?.brander?.pageOptions?.textColor;
 
-  const branderData = data?.brander ?? null;
-  const title = branderData?.title ?? null;
-  const content = branderData?.content ?? null;
-  const featuredImage = branderData?.featuredImage?.node ?? null;
-  const branderContent = branderData?.branderOptions ?? null;
+    const branderData = data?.brander ?? null;
+    const title = branderData?.title ?? null;
+    const content = branderData?.content ?? null;
+    const featuredImage = branderData?.featuredImage?.node ?? null;
+    const branderContent = branderData?.branderOptions ?? null;
 
-  return branderData ? (
-    <main className={styles.pageWrap}>
-      <Header 
-        fullMenu={true} 
-        backgroundColor={backgroundColor} 
-        color={color}
-      />
-      <BranderHero content={content} title={title} featuredImage={featuredImage} />
-      <BranderContent content={branderContent} />
-    </main>
-  ) : null
+    return branderData ? (
+      <main className={styles.pageWrap}>
+        <Header 
+          fullMenu={true} 
+          backgroundColor={backgroundColor} 
+          color={color}
+        />
+        <BranderHero content={content} title={title} featuredImage={featuredImage} />
+        <BranderContent content={branderContent} />
+      </main>
+    ) : null
+  } catch (error) {
+    console.error(`Failed to load brander ${brander}:`, error.message);
+    return null;
+  }
 }

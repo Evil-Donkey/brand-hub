@@ -61,8 +61,8 @@ export async function generateMetadata() {
 }
 
 export default async function Pricing() {
-
-  const data = await fetchAPI(`
+  try {
+    const data = await fetchAPI(`
     query getPricingPage {
       page(id: "1176", idType: DATABASE_ID) {
         title(format: RENDERED)
@@ -232,53 +232,57 @@ export default async function Pricing() {
     }
   `);
 
-  const backgroundColor = data?.page?.pageOptions?.backgroundColor;
-  const color = data?.page?.pageOptions?.textColor;
-  const title = data?.page?.title;
-  const content = data?.page?.content;
-  const disclaimer = data?.page?.disclaimer.disclaimer;
-  const featuredImage = data?.page?.featuredImage;
-  const telephone = dataOptions?.acfOptionsThemeSettings?.themeSettings?.telephone;
-  const email = dataOptions?.acfOptionsThemeSettings?.themeSettings?.email;
-  const flexibleContent = data?.page?.flexibleContent?.flexibleContent;
-  const features = data?.acfFlexibleContentComparisonFeaturesOptions;
-  const services = data?.acfFlexibleContentComparisonServicesOptions;
-  const faq = data?.page?.pageOptions?.faq;
-  const bookDemoUrl = dataOptions?.acfOptionsThemeSettings?.themeSettings?.bookDemoUrl;
-  const discountBarCopy = dataOptions?.acfOptionsThemeSettings?.themeSettings?.discountBarCopy;
-  const faqs = dataOptions?.acfOptionsThemeSettings?.themeSettings?.faqs;
+    const backgroundColor = data?.page?.pageOptions?.backgroundColor;
+    const color = data?.page?.pageOptions?.textColor;
+    const title = data?.page?.title;
+    const content = data?.page?.content;
+    const disclaimer = data?.page?.disclaimer.disclaimer;
+    const featuredImage = data?.page?.featuredImage;
+    const telephone = dataOptions?.acfOptionsThemeSettings?.themeSettings?.telephone;
+    const email = dataOptions?.acfOptionsThemeSettings?.themeSettings?.email;
+    const flexibleContent = data?.page?.flexibleContent?.flexibleContent;
+    const features = data?.acfFlexibleContentComparisonFeaturesOptions;
+    const services = data?.acfFlexibleContentComparisonServicesOptions;
+    const faq = data?.page?.pageOptions?.faq;
+    const bookDemoUrl = dataOptions?.acfOptionsThemeSettings?.themeSettings?.bookDemoUrl;
+    const discountBarCopy = dataOptions?.acfOptionsThemeSettings?.themeSettings?.discountBarCopy;
+    const faqs = dataOptions?.acfOptionsThemeSettings?.themeSettings?.faqs;
 
-  return (
-    <main className={styles.homepageMainWrap}>
-      <Header 
-        fullMenu={true} 
-        backgroundColor={backgroundColor} 
-        color={color} 
-        bookDemoUrl={bookDemoUrl}
-        hideSignUp={false}
-        discountBarCopy={discountBarCopy}
-      />
+    return (
+      <main className={styles.homepageMainWrap}>
+        <Header 
+          fullMenu={true} 
+          backgroundColor={backgroundColor} 
+          color={color} 
+          bookDemoUrl={bookDemoUrl}
+          hideSignUp={false}
+          discountBarCopy={discountBarCopy}
+        />
 
-      <Intro 
-        backgroundColor={backgroundColor} 
-        color={color} 
-        content={content}
-        title={title} 
-        c1={8} 
-        c2={4}
-        featuredImage={featuredImage}
-        isComparising={true}
-      />
-      
-      <PageFlexibleContent 
-        data={flexibleContent} 
-        features={features} 
-        services={services} 
-      />
+        <Intro 
+          backgroundColor={backgroundColor} 
+          color={color} 
+          content={content}
+          title={title} 
+          c1={8} 
+          c2={4}
+          featuredImage={featuredImage}
+          isComparising={true}
+        />
+        
+        <PageFlexibleContent 
+          data={flexibleContent} 
+          features={features} 
+          services={services} 
+        />
 
-      {faq && <Faqs data={faqs} bookDemoUrl={bookDemoUrl} />}
+        {faq && <Faqs data={faqs} bookDemoUrl={bookDemoUrl} />}
 
-      {disclaimer && <Disclaimer disclaimer={disclaimer} />}
-    </main>
-  )
+        {disclaimer && <Disclaimer disclaimer={disclaimer} />}
+      </main>
+    )
+  } catch (error) {
+    console.error('Failed to load design-subscription-alternative page:', error.message);
+    return null;
+  }
 }

@@ -60,8 +60,8 @@ export async function generateMetadata() {
 }
 
 export default async function Audits() {
-
-  const data = await fetchAPI(`
+  try {
+    const data = await fetchAPI(`
     query getAuditsPage {
       page(id: "770", idType: DATABASE_ID) {
         title(format: RENDERED)
@@ -96,19 +96,23 @@ export default async function Audits() {
   `);
 
 
-  const title = data?.page?.title;
-  const content = data?.page?.content;
-  const features = data?.page?.audits?.auditsFeatures;
-  const telephone = dataOptions?.acfOptionsThemeSettings?.themeSettings?.telephone;
-  const email = dataOptions?.acfOptionsThemeSettings?.themeSettings?.email;
+    const title = data?.page?.title;
+    const content = data?.page?.content;
+    const features = data?.page?.audits?.auditsFeatures;
+    const telephone = dataOptions?.acfOptionsThemeSettings?.themeSettings?.telephone;
+    const email = dataOptions?.acfOptionsThemeSettings?.themeSettings?.email;
 
-  return (
-    <main className={styles.homepageMainWrap}>
-      <Header fullMenu={true} />
-      <Intro title={title} content={content} cta="Request a quote" email={email} />
-      <AuditsBlocks features={features} />
+    return (
+      <main className={styles.homepageMainWrap}>
+        <Header fullMenu={true} />
+        <Intro title={title} content={content} cta="Request a quote" email={email} />
+        <AuditsBlocks features={features} />
 
-      <Footer border={false} telephone={telephone} email={email} />
-    </main>
-  )
+        <Footer border={false} telephone={telephone} email={email} />
+      </main>
+    )
+  } catch (error) {
+    console.error('Failed to load audits page:', error.message);
+    return null;
+  }
 };

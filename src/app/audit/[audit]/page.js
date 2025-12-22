@@ -103,8 +103,8 @@ export async function generateStaticParams() {
 
 
 export default async function Page({ params: { audit } }) {
-
-  const data = await fetchAPI(`
+  try {
+    const data = await fetchAPI(`
     query getAuditsByAuthor {
       audit(id: "${audit}", idType: SLUG) {
         id
@@ -370,43 +370,47 @@ export default async function Page({ params: { audit } }) {
     }`
   );
 
-  const dataOptions = await fetchAPI(`
-    query ThemeSettings {
-      acfOptionsThemeSettings {
-        themeSettings {
-          email
-          telephone
+    const dataOptions = await fetchAPI(`
+      query ThemeSettings {
+        acfOptionsThemeSettings {
+          themeSettings {
+            email
+            telephone
+          }
         }
       }
+    `);
+
+    const telephone = dataOptions?.acfOptionsThemeSettings?.themeSettings?.telephone;
+    const email = dataOptions?.acfOptionsThemeSettings?.themeSettings?.email;
+
+    const auditData = data?.audit;
+    const flexibleContent = auditData?.brandOptions?.flexibleContent;
+    const brandOptions = auditData?.brandOptions;
+    const bgColour = auditData?.brandOptions?.backgroundColour;
+    const textColour = auditData?.brandOptions?.textColour;
+    const pwd = auditData?.passwordPassword?.password;
+    const authorNiceName = auditData?.author.node.authorCustomFields.authorNiceName;
+    const hideAuthor = auditData?.brandOptions?.hideAuthor;
+
+    let nav = [];
+    for (let i = 0; i < flexibleContent.length; i++) {
+      const sectionTitle = flexibleContent[i].sectionTitle;
+      sectionTitle && nav.push(sectionTitle);
     }
-  `);
 
-  const telephone = dataOptions?.acfOptionsThemeSettings?.themeSettings?.telephone;
-  const email = dataOptions?.acfOptionsThemeSettings?.themeSettings?.email;
-
-  const auditData = data?.audit;
-  const flexibleContent = auditData?.brandOptions?.flexibleContent;
-  const brandOptions = auditData?.brandOptions;
-  const bgColour = auditData?.brandOptions?.backgroundColour;
-  const textColour = auditData?.brandOptions?.textColour;
-  const pwd = auditData?.passwordPassword?.password;
-  const authorNiceName = auditData?.author.node.authorCustomFields.authorNiceName;
-  const hideAuthor = auditData?.brandOptions?.hideAuthor;
-
-  let nav = [];
-  for (let i = 0; i < flexibleContent.length; i++) {
-    const sectionTitle = flexibleContent[i].sectionTitle;
-    sectionTitle && nav.push(sectionTitle);
+    return auditData ? (
+      <div style={{ 'backgroundColor': bgColour, 'color': textColour }}>
+        <HeaderBrand nav={nav} bgColour={bgColour} color={textColour} pwd={pwd} />
+        {pwd && <BrandLogin pwd={pwd} bgColour={bgColour} color={textColour} />}
+        <BrandIntro data={auditData} author={authorNiceName} hideAuthor={hideAuthor} />
+        <BrandHero data={brandOptions} />
+        <FlexibleContent data={flexibleContent} pwd={pwd} bgColour={bgColour} colour={textColour} brand={audit} />
+        <Footer border={true} color={textColour} telephone={telephone} email={email} />
+      </div>
+    ) : null;
+  } catch (error) {
+    console.error(`Failed to load audit ${audit}:`, error.message);
+    return null;
   }
-
-  return auditData ? (
-    <div style={{ 'backgroundColor': bgColour, 'color': textColour }}>
-      <HeaderBrand nav={nav} bgColour={bgColour} color={textColour} pwd={pwd} />
-      {pwd && <BrandLogin pwd={pwd} bgColour={bgColour} color={textColour} />}
-      <BrandIntro data={auditData} author={authorNiceName} hideAuthor={hideAuthor} />
-      <BrandHero data={brandOptions} />
-      <FlexibleContent data={flexibleContent} pwd={pwd} bgColour={bgColour} colour={textColour} brand={audit} />
-      <Footer border={true} color={textColour} telephone={telephone} email={email} />
-    </div>
-  ) : null;
 }
