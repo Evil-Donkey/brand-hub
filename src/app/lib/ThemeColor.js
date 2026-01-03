@@ -10,6 +10,8 @@ const ThemeColor = ({ themeColour }) => {
             return 'var(--colour-blue)';
         case 'green':
             return 'var(--colour-green)';
+        case 'yellow':
+            return 'var(--colour-yellow)';
         default:
             return 'var(--colour-green-01)';
     }

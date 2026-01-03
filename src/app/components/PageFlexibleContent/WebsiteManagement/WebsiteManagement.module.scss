@@ -1,0 +1,342 @@
+.pricingWrapper {
+  padding-bottom: 3rem;
+  background-color: var(--colour-black-03);
+  color: var(--colour-white-00);
+  @media screen and (min-width: 992px) {
+    padding-bottom: 80px;
+  } 
+}
+
+.hourSliderWrapper {
+  text-align: center;
+  padding: 2rem 0 3rem;
+}
+
+.hourSliderTitle {
+  font-size: 18px;
+  text-transform: uppercase;
+  margin-bottom: 2rem;
+  font-weight: 700;
+  letter-spacing: 0.5px;
+  color: var(--colour-white-00);
+  @media screen and (min-width: 768px) {
+    font-size: 22px;
+    margin-bottom: 2.5rem;
+  }
+}
+
+.hourSliderContainer {
+  position: relative;
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 0 1rem;
+}
+
+.hourLabels {
+  position: relative;
+  margin-bottom: 1.5rem;
+  width: 100%;
+  height: 50px;
+  z-index: 2;
+  
+  @media screen and (min-width: 768px) {
+    height: 60px;
+  }
+}
+
+.hourLabel {
+  background: none;
+  border: none;
+  color: var(--colour-white-00);
+  font-family: var(--anton);
+  font-size: 20px;
+  font-weight: 400;
+  cursor: pointer;
+  padding: 0.5rem 0.25rem;
+  transition: all 0.3s ease;
+  position: absolute;
+  top: 0;
+  transform: translateX(-50%);
+  text-align: center;
+  line-height: 1.2;
+  white-space: nowrap;
+  
+  @media screen and (min-width: 768px) {
+    font-size: 24px;
+    padding: 0.5rem;
+  }
+
+  &:hover {
+    color: var(--colour-yellow);
+  }
+
+  &.hourLabelActive {
+    color: var(--colour-yellow);
+    font-size: 28px;
+    font-weight: 700;
+    
+    @media screen and (min-width: 768px) {
+      font-size: 36px;
+    }
+  }
+}
+
+.sliderTrack {
+  position: relative;
+  width: 100%;
+  height: 10px;
+  background-color: var(--colour-grey-02);
+  border-radius: 5px;
+  cursor: pointer;
+  
+  @media screen and (min-width: 768px) {
+    height: 12px;
+  }
+}
+
+.sliderFill {
+  position: absolute;
+  left: 0;
+  top: 0;
+  height: 100%;
+  background-color: var(--colour-yellow);
+  border-radius: 5px;
+  transition: width 0.3s ease;
+  pointer-events: none;
+  
+  &.sliderFillDragging {
+    transition: none;
+  }
+}
+
+.sliderThumb {
+  position: absolute;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  width: 22px;
+  height: 22px;
+  background-color: var(--colour-yellow);
+  border-radius: 50%;
+  transition: left 0.3s ease;
+  cursor: grab;
+  pointer-events: auto;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+  user-select: none;
+  z-index: 3;
+  
+  &:active {
+    cursor: grabbing;
+  }
+  
+  &.sliderThumbDragging {
+    cursor: grabbing;
+    transition: none;
+  }
+  
+  @media screen and (min-width: 768px) {
+    width: 26px;
+    height: 26px;
+  }
+}
+
+.pricingOption {
+  h2 {
+    font-size: 35px;
+    text-transform: uppercase;
+    letter-spacing: 0;
+    @media screen and (min-width: 992px) {
+      font-size: 40px;
+    }
+  }
+  h3 {
+    font-size: 60px;
+    letter-spacing: 1px;
+    @media screen and (min-width: 992px) {
+      font-size: 70px;
+      line-height: 65px;
+      min-height: 90px;
+      &.noMonth {
+        font-size: 50px;
+      }
+    }
+    span {
+      font-size: 15px;
+      @media screen and (min-width: 992px) {
+        font-size: 20px;
+      }
+    }
+  }
+  
+  &Dark {
+    background-color: var(--colour-grey-02);
+    h2,
+    h3 {
+      color: var(--colour-white-00);
+    }
+  }
+  &Light {
+    background-color: var(--colour-white-00);
+    h2,
+    h3 {
+      color: var(--colour-black-03);
+    }
+  }
+}
+
+.pricingOptionIcon {
+  position: absolute;
+  top: -30px;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+.pricingSmallText {
+  font-size: 14px !important;
+}
+
+.pricingTable {
+  border: 1px solid #4C4C4C;
+  --bs-table-color: var(--colour-white-00);
+  --bs-table-bg: var(--colour-black-03);
+  --bs-table-border-color: #4C4C4C;
+  thead {
+    text-transform: uppercase;
+  }
+  h3 {
+    margin-bottom: 0;
+  }
+  th {
+    svg {
+      max-width: 35px;
+      max-height: 35px;
+      margin-bottom: 5px;
+      margin-top: 5px;
+    }
+    &.pricingTableThSecond {
+      svg {
+        max-width: 85px;
+        max-height: 35px;
+      }
+    }
+    &.pricingTableThLast {
+      svg {
+        max-width: 135px;
+        max-height: 35px;
+      }
+    }
+  }
+  th, td {
+    border-right: 1px solid #4C4C4C;
+  }
+  th:last-child, td:last-child {
+    border-right: none;
+  }
+  tr {
+    &.pricingTableTrLast {
+      td {
+        border-right: none;
+        padding: 20px;
+      }
+    }
+  }
+  tbody {
+    td {
+      padding-bottom: 12px;
+    }
+  }
+
+  @media screen and (max-width: 767px) {
+    th:last-child, td:last-child {
+      display: none;
+    }
+  }
+}
+
+.hourHighlight {
+  font-weight: 700;
+  color: var(--colour-yellow);
+}
+
+.serviceCell {
+  position: relative;
+}
+
+.serviceTextWrapper {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.tooltipWrapper {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  cursor: help;
+  
+  svg {
+    flex-shrink: 0;
+  }
+  
+  &:hover .tooltip {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
+  }
+}
+
+.tooltip {
+  position: absolute;
+  bottom: calc(100% + 10px);
+  left: -150px;
+  transform: translateY(-5px);
+  background-color: var(--colour-white-00);
+  color: var(--colour-black-03);
+  padding: 1rem 1.25rem;
+  border-radius: 8px;
+  font-size: 14px;
+  line-height: 1.5;
+  white-space: normal;
+  width: 280px;
+  max-width: calc(100vw - 2rem);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.2s ease, visibility 0.2s ease, transform 0.2s ease;
+  z-index: 1000;
+  pointer-events: none;
+  text-align: left;
+  
+  // Arrow pointing down, centered on icon
+  // Icon is 20px wide, so center is at 10px from left edge of wrapper
+  // Tooltip is centered at 10px (left: 10px, translateX(-50%))
+  // Arrow is at center of tooltip (50% from left), which aligns with icon center
+  &::after {
+    content: '';
+    position: absolute;
+    top: 100%;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 0;
+    height: 0;
+    border-left: 8px solid transparent;
+    border-right: 8px solid transparent;
+    border-top: 8px solid var(--colour-white-00);
+  }
+  
+  @media screen and (min-width: 768px) {
+    width: 320px;
+    font-size: 15px;
+    padding: 1.25rem 1.5rem;
+  }
+  
+  // Adjust positioning on smaller screens to prevent overflow
+  @media screen and (max-width: 575px) {
+    left: 0;
+    transform: translateX(0) translateY(-5px);
+    
+    &::after {
+      left: 20px;
+      transform: translateX(0);
+    }
+  }
+}
