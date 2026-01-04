@@ -31,6 +31,6 @@ const LogosGrid = ({ data }) => {
             </div>
         </div>
     );
-}
+} 
 
 export default LogosGrid;
