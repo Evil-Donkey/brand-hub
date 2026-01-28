@@ -3,19 +3,22 @@
 import { useEffect, useRef, useState } from 'react';
 import gsap from 'gsap';
 
-import styles from './Pricing.module.scss';
+import styles from './WebsiteManagement.module.scss';
 import Link from 'next/link';
 import ThemeColor from '../../../lib/ThemeColor';
-import IconDesignBorder from '@/app/components/Icons/IconDesignBorder';
-import IconCodeBorder from '@/app/components/Icons/IconCodeBorder';
-import IconDesignCodeBorder from '@/app/components/Icons/IconDesignCodeBorder';
+import IconCoreBorder from '@/app/components/Icons/IconCoreBorder';
+import IconCoreContentBorder from '@/app/components/Icons/IconCoreContentBorder';
+import IconCoreContentHostingBorder from '@/app/components/Icons/IconCoreContentHostingBorder';
 import IconCheckmark from '@/app/components/Icons/IconCheckmark';
-const Pricing = ({ data, allFeatures, allServices }) => {
+import IconQuestionMark from '@/app/components/Icons/IconQuestionMark';
+
+const WebsiteManagement = ({ data, websiteManagementServices }) => {
 
     const cardRefs = useRef([]);
     const sliderTrackRef = useRef(null);
     const isDraggingRef = useRef(false);
-    const [selectedHours, setSelectedHours] = useState(2);
+    const hours = [1, 4, 8, 10, 12, 14, 16];
+    const [selectedHours, setSelectedHours] = useState(hours[0]);
     const [isDragging, setIsDragging] = useState(false);
 
     useEffect(() => {
@@ -49,11 +52,17 @@ const Pricing = ({ data, allFeatures, allServices }) => {
         };
     }, []);
 
-    const { options, codeHubPrice, codeHubSignUpUrl, designCodeHubPrice, designCodeHubSignUpUrl, designHubPrice, designHubSignUpUrl } = data;
+    const { options, 
+        contentPrice,
+        contentSignUpUrl,
+        coreContentPrice,
+        coreContentSignUpUrl,
+        corePrice,
+        coreSignUpUrl } = data;
 
-    // Calculate price adjustments based on hours (base is 2 hours, add £400 per additional hour)
-    const hoursDifference = selectedHours - 2;
-    const priceAdjustment = hoursDifference * 400;
+    // Calculate price adjustments based on hours (base is first hour value, add £60 per step)
+    const hoursIndex = hours.indexOf(selectedHours);
+    const priceAdjustment = hoursIndex * 60;
 
     const calculatePrice = (basePrice) => {
         if (!basePrice) return basePrice;
@@ -67,15 +76,59 @@ const Pricing = ({ data, allFeatures, allServices }) => {
         return price.toLocaleString('en-GB');
     };
 
-    const hours = [2, 3, 4, 5, 6, 7, 8];
+    const hasHourPattern = (serviceText) => {
+        if (!serviceText) return false;
+        const hourPattern = /(\d+)\s+(hour|hours)?/gi;
+        return hourPattern.test(serviceText);
+    };
+
+    const formatServiceText = (serviceText) => {
+        if (!serviceText) return serviceText;
+        
+        // Match patterns like "1 hour", "4 hours", "1 hour of", etc.
+        const hourPattern = /(\d+)\s+(hour|hours)?/gi;
+        const parts = [];
+        let lastIndex = 0;
+        let match;
+        
+        // Reset regex lastIndex
+        hourPattern.lastIndex = 0;
+        
+        while ((match = hourPattern.exec(serviceText)) !== null) {
+            // Add text before the match
+            if (match.index > lastIndex) {
+                parts.push(serviceText.substring(lastIndex, match.index));
+            }
+            
+            // Add the highlighted hour text
+            const hourText = `${selectedHours} ${selectedHours === 1 ? 'hour' : 'hours'}${match[3] || ''}`;
+            parts.push(
+                <span key={`hour-${match.index}`} className={styles.hourHighlight}>
+                    {hourText}
+                </span>
+            );
+            
+            lastIndex = hourPattern.lastIndex;
+        }
+        
+        // Add remaining text after last match
+        if (lastIndex < serviceText.length) {
+            parts.push(serviceText.substring(lastIndex));
+        }
+        
+        // If no matches found, return original text
+        if (parts.length === 0) return serviceText;
+        
+        return <>{parts}</>;
+    };
 
     const calculateHourFromPosition = (clientX) => {
         if (!sliderTrackRef.current) return selectedHours;
         const rect = sliderTrackRef.current.getBoundingClientRect();
         const clickX = clientX - rect.left;
         const percentage = Math.max(0, Math.min(1, clickX / rect.width));
-        const index = Math.round(percentage * 6); // 6 steps (0-6)
-        return Math.max(2, Math.min(8, 2 + index));
+        const index = Math.round(percentage * (hours.length - 1)); // Map to 0-5 for 6 steps
+        return hours[Math.max(0, Math.min(hours.length - 1, index))];
     };
 
     const handleTrackClick = (e) => {
@@ -122,20 +175,20 @@ const Pricing = ({ data, allFeatures, allServices }) => {
 
     return (
         <div className={styles.pricingWrapper}>
-            <div className='container pt-5 pt-md-0'>
+            <div className='container pt-5'>
 
                 {/* Hour Selection Slider */}
                 <div className='row mb-5'>
                     <div className='col-12 text-center'>
-                        <h2 className='mb-3 text-uppercase'>Hours required:</h2>
-                        <p>Select total hours required each business day from our Brand Hub Design and Code teams.</p>
+                        <h2 className='mb-3 text-uppercase'>Monthly support:</h2>
+                        <p>Select how many hours of daily support you need. Use this time flexibly across content updates, design, development and fixes.</p>
                     </div>
                     <div className='col-12'>
                         <div className={styles.hourSliderWrapper}>
                             <div className={styles.hourSliderContainer}>
                                 <div className={styles.hourLabels}>
-                                    {hours.map((hour) => {
-                                        const position = ((hour - 2) / 6) * 100;
+                                    {hours.map((hour, index) => {
+                                        const position = (index / (hours.length - 1)) * 100;
                                         return (
                                             <button
                                                 key={hour}
@@ -156,11 +209,11 @@ const Pricing = ({ data, allFeatures, allServices }) => {
                                 >
                                     <div 
                                         className={`${styles.sliderFill} ${isDragging ? styles.sliderFillDragging : ''}`}
-                                        style={{ width: `${((selectedHours - 2) / 6) * 100}%` }}
+                                        style={{ width: `${(hours.indexOf(selectedHours) / (hours.length - 1)) * 100}%` }}
                                     />
                                     <div 
                                         className={`${styles.sliderThumb} ${isDragging ? styles.sliderThumbDragging : ''}`}
-                                        style={{ left: `${((selectedHours - 2) / 6) * 100}%` }}
+                                        style={{ left: `${(hours.indexOf(selectedHours) / (hours.length - 1)) * 100}%` }}
                                         onMouseDown={handleThumbMouseDown}
                                     />
                                 </div>
@@ -175,15 +228,15 @@ const Pricing = ({ data, allFeatures, allServices }) => {
                             <div className='col-md-6 mb-5'>
                                 <div ref={el => cardRefs.current[0] = el} className={`p-4 pt-5 py-md-5 rounded-2 d-flex flex-column h-100 position-relative ${styles.pricingOption} ${styles.pricingOptionDark}`}>
                                     <div className={styles.pricingOptionIcon}>
-                                        <IconDesignBorder />
+                                        <IconCoreBorder />
                                     </div>
-                                    <h2 className='mb-md-4 text-center'>Design Hub</h2>
-                                    {designHubPrice && <h3 className={`mb-4 text-center`}>
-                                        £{formatPrice(calculatePrice(designHubPrice))}<span>/month</span>
+                                    <h2 className='mb-md-4 text-center'>core care</h2>
+                                    {corePrice && <h3 className={`mb-4 text-center`}>
+                                        £{formatPrice(calculatePrice(corePrice))}<span>/month</span>
                                     </h3>}
-                                    {designHubSignUpUrl && (
+                                    {coreSignUpUrl && (
                                         <div className='align-self-center'>
-                                            <Link href={designHubSignUpUrl} target="_blank" className={`cta__btn cta__btn--purple`}>Sign Up now</Link>
+                                            <Link href={coreSignUpUrl} target="_blank" className={`cta__btn cta__btn--yellow`}>Sign Up now</Link>
                                         </div>
                                     )}
                                 </div>
@@ -191,42 +244,37 @@ const Pricing = ({ data, allFeatures, allServices }) => {
                             <div className='col-md-6 mb-5'>
                                 <div ref={el => cardRefs.current[1] = el} className={`p-4 pt-5 py-md-5 rounded-2 d-flex flex-column h-100 position-relative ${styles.pricingOption} ${styles.pricingOptionDark}`}>
                                     <div className={styles.pricingOptionIcon}>
-                                        <IconCodeBorder />
+                                        <IconCoreContentBorder />
                                     </div>
-                                    <h2 className='mb-md-4 text-center'>Code Hub</h2>
-                                    {codeHubPrice && <h3 className={`mb-4 text-center`}>
-                                        £{formatPrice(calculatePrice(codeHubPrice))}<span>/month</span>
+                                    <h2 className='mb-md-4 text-center'>core + content</h2>
+                                    {contentPrice && <h3 className={`mb-4 text-center`}>
+                                        £{formatPrice(calculatePrice(contentPrice))}<span>/month</span>
                                     </h3>}
-                                    {codeHubSignUpUrl && (
+                                    {contentSignUpUrl && (
                                         <div className='align-self-center'>
-                                            <Link href={codeHubSignUpUrl} target="_blank" className={`cta__btn cta__btn--blue`}>Sign Up now</Link>
+                                            <Link href={contentSignUpUrl} target="_blank" className={`cta__btn cta__btn--yellow`}>Sign Up now</Link>
                                         </div>
                                     )}
                                 </div>
                             </div>
                         </div>
                     </div>
-                    <div className='col-md-4 col-lg-5 mb-5'>
+                    <div className='col-md-4 col-lg-5 mb-5 d-flex flex-column gap-3'>
                         <div ref={el => cardRefs.current[2] = el} className={`p-4 pt-5 py-md-5 rounded-2 d-flex flex-column h-100 position-relative ${styles.pricingOption} ${styles.pricingOptionLight}`}>
                             <div className={styles.pricingOptionIcon}>
-                                <IconDesignCodeBorder />
+                                <IconCoreContentHostingBorder />
                             </div>
-                            <h2 className='mb-md-4 text-center'>Design Hub + Code Hub</h2>
-                            {designCodeHubPrice && <h3 className={`mb-4 text-center`}>
-                                £{formatPrice(calculatePrice(designCodeHubPrice))}<span>/month</span>
+                            <h2 className='mb-md-4 text-center'>Core + Content + Hosting</h2>
+                            {coreContentPrice && <h3 className={`mb-4 text-center`}>
+                                ~£{formatPrice(calculatePrice(coreContentPrice))}<span>/month*</span>
                             </h3>}
-                            {designCodeHubSignUpUrl && (
+                            {coreContentSignUpUrl && (
                                 <div className='align-self-center'>
-                                    <Link href={designCodeHubSignUpUrl} target="_blank" className={`cta__btn cta__btn--dark`}>Sign Up now</Link>
+                                    <Link href={coreContentSignUpUrl} target="_blank" className={`cta__btn cta__btn--dark`}>Sign Up now</Link>
                                 </div>
                             )}
                         </div>
-                    </div>
-                </div>
-
-                <div className='row mb-5'>
-                    <div className='col text-center'>
-                        <p>For individual projects, we also offer one-off hourly blocks. <Link href='/contact'><b><u>Get in contact for more details.</u></b></Link></p>
+                        <p className={`px-md-4 ${styles.pricingSmallText}`}>*Final pricing for hosting depends on your platform, traffic and the overall scale of your website. We complete a short assessment before confirming your final monthly fee.</p>
                     </div>
                 </div>
 
@@ -241,71 +289,52 @@ const Pricing = ({ data, allFeatures, allServices }) => {
                                 <tr>
                                     <th>Services</th>
                                     <th className='text-center'>
-                                        <IconDesignBorder />
-                                        <h3 className="text-uppercase">Design Hub</h3>
+                                        <IconCoreBorder />
+                                        <h3 className="text-uppercase">Core Care</h3>
                                     </th>
-                                    <th className='text-center'>
-                                        <IconCodeBorder />
-                                        <h3 className="text-uppercase">Code Hub</h3>
+                                    <th className={`${styles.pricingTableThSecond} text-center`}>
+                                        <IconCoreContentBorder />
+                                        <h3 className="text-uppercase">Core + Content</h3>
                                     </th>
                                     <th className={`${styles.pricingTableThLast} text-center`}>
-                                        <IconDesignCodeBorder />
-                                        <h3 className="text-uppercase">Design Hub + Code Hub</h3>
+                                        <IconCoreContentHostingBorder />
+                                        <h3 className="text-uppercase">Core + Content + Hosting</h3>
                                     </th>
                                 </tr>
                             </thead>
                             <tbody>
-                                {allServices.map((service, i) => (
-                                    <tr key={`service-${i}`}>
-                                        <td>{service}</td>
-                                        {options.map((option, j) => {
-                                            const { style } = option;
-                                            const themeColour = style;
-                                            const colour = ThemeColor({ themeColour });
-                                            return (
-                                                <td key={`service-${i}-option-${j}`} className='text-center'>
-                                                    {option.services.includes(service) &&
-                                                        <IconCheckmark style={colour} />
-                                                }
-                                                </td>
-                                            )
-                                        })}
-                                    </tr>
-                                ))}
-                                <tr className={styles.pricingTableTrLast}>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                </tr>
-                            </tbody>
-                        
-                            <thead>
-                                <tr>
-                                    <th>Features</th>
-                                    <th></th>
-                                    <th></th>
-                                    <th></th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                {allFeatures.map((feature, i) => (
-                                    <tr key={`feature-${i}`}>
-                                        <td>{feature}</td>
-                                        {options.map((option, j) => {
-                                            const { style } = option;
-                                            const themeColour = style;
-                                            const colour = ThemeColor({ themeColour });
-                                            return (
-                                                <td key={`feature-${i}-option-${j}`} className='text-center'>
-                                                    {option.features.includes(feature) &&
-                                                        <IconCheckmark style={colour} />
+                                {websiteManagementServices.map((service, i) => {
+                                    const isHourService = hasHourPattern(service);
+                                    return (
+                                        <tr key={`service-${i}`}>
+                                            <td className={styles.serviceCell}>
+                                                <span className={`${styles.serviceTextWrapper} d-flex justify-content-between`}>
+                                                    <span>{formatServiceText(service)}</span>
+                                                    {isHourService && (
+                                                        <span className={styles.tooltipWrapper}>
+                                                            <IconQuestionMark />
+                                                            <span className={styles.tooltip}>
+                                                                Your time can be used flexibly across content updates, design, development and fixes. Requests are acknowledged within 24 hours, with work typically starting within 24 hours, plus instant support for outages during office hours.
+                                                            </span>
+                                                        </span>
+                                                    )}
+                                                </span>
+                                            </td>
+                                            {options.map((option, j) => {
+                                                const { style } = option;
+                                                const themeColour = style;
+                                                const colour = ThemeColor({ themeColour });
+                                                return (
+                                                    <td key={`service-${i}-option-${j}`} className='text-center'>
+                                                        {option.services.includes(service) &&
+                                                            <IconCheckmark style={colour} />
                                                     }
-                                                </td>
-                                            )
-                                        })}
-                                    </tr>
-                                ))}
+                                                    </td>
+                                                )
+                                            })}
+                                        </tr>
+                                    );
+                                })}
                             </tbody>
                         </table>
                     </div>
@@ -315,4 +344,4 @@ const Pricing = ({ data, allFeatures, allServices }) => {
     );
 };
 
-export default Pricing;
+export default WebsiteManagement;

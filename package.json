@@ -2,6 +2,10 @@
   "name": "brand-hub",
   "version": "0.1.0",
   "private": true,
+  "packageManager": "npm@10.x",
+  "engines": {
+    "node": "24.x"
+  },
   "scripts": {
     "dev": "next dev",
     "build": "next build",
@@ -40,7 +44,7 @@
     "@types/istanbul-lib-coverage": "^2.0.6",
     "@types/istanbul-lib-report": "^3.0.3",
     "@types/istanbul-reports": "^3.0.4",
-    "@types/node": "^20.12.11",
+    "@types/node": "^24.0.0",
     "@types/stack-utils": "^2.0.3",
     "@types/stylis": "^4.2.6",
     "@types/yargs": "^17.0.32",

@@ -4,13 +4,15 @@ import TwoColumnsTextImage from './TwoColumnsTextImage'
 import ThreeColumnsGrid from './ThreeColumnsGrid'
 import TwoBoxes from './TwoBoxes'
 import Pricing from './Pricing'
+import WebsiteManagement from './WebsiteManagement'
 import Comparising from './Comparising'
 import TextSlider from './TextSlider'
 import Faqs from '../Faqs'
 import Service from './Service'
 import WeDoGrid from './WeDoGrid'
+import LogosGrid from './LogosGrid'
 
-const PageFlexibleContent = ({ data, features, services, faq, bookDemoUrl, themeColour, svgImage, showreel }) => {
+const PageFlexibleContent = ({ data, features, services, websiteManagementServices, faq, bookDemoUrl, themeColour, svgImage, showreel }) => {
 
     let flexibleContentArray = [];
 
@@ -49,6 +51,12 @@ const PageFlexibleContent = ({ data, features, services, faq, bookDemoUrl, theme
         }
         if (fieldGroupName === "Page_Flexiblecontent_FlexibleContent_WeDoGrid") {
             flexibleContentArray.push(<WeDoGrid data={data} themeColour={themeColour} />);
+        }
+        if (fieldGroupName === "Page_Flexiblecontent_FlexibleContent_WebsiteManagement") {
+            flexibleContentArray.push(<WebsiteManagement data={data} websiteManagementServices={websiteManagementServices} />);
+        }
+        if (fieldGroupName === "Page_Flexiblecontent_FlexibleContent_LogosGrid") {
+            flexibleContentArray.push(<LogosGrid data={data} />);
         }
     })}
 

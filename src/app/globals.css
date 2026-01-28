@@ -28,6 +28,7 @@
   --colour-green:   #07E494;
   --colour-purple:  #F43793;
   --colour-blue:    #4BBCC9;
+  --colour-yellow:    #E8C219;
 
   --border-colour:   var(--colour-dark);
 }
@@ -249,6 +250,16 @@ img {
   background-color: var(--colour-white-00);
   color: var(--colour-black-03);
   border-color: var(--colour-blue);
+}
+.cta__btn--yellow {
+  background-color: var(--colour-yellow);
+  border: 2px solid var(--colour-yellow);
+  color: var(--colour-black-03);
+}
+.cta__btn--yellow:hover {
+  background-color: var(--colour-white-00);
+  color: var(--colour-black-03);
+  border-color: var(--colour-yellow);
 }
 .cta__btn-no-shadow {
   box-shadow: none !important;
