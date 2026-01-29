@@ -43,6 +43,18 @@
             vertical-align: 0.155em;
         }
     }
+
+    .iconWrapper {
+        width: 27px;
+        height: 27px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        svg {
+            width: 100%;
+            height: 100%;
+        }
+    }
 }
 
 .dropdownMenu {

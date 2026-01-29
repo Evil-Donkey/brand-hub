@@ -274,6 +274,7 @@ export default async function Pricing() {
         data={flexibleContent} 
         features={features}
         services={services} 
+        websiteManagement={true}
         websiteManagementServices={websiteManagementServices}
         faq={faqs}
         bookDemoUrl={bookDemoUrl}

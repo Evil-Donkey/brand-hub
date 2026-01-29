@@ -9,6 +9,7 @@ import IconDesign from '../Icons/IconDesign'
 import IconCode from '../Icons/IconCode'
 import IconHamburger from '../Icons/IconHamburger'
 import IconClose from '../Icons/IconClose'
+import WebsiteManagement from '../Icons/IconWebsiteManagement'
 
 const Navigation = ({ bookDemoUrl, isMobileMenuOpen, setIsMobileMenuOpen }) => {
     const pathname = usePathname();
@@ -42,6 +43,12 @@ const Navigation = ({ bookDemoUrl, isMobileMenuOpen, setIsMobileMenuOpen }) => {
                     href: '/code-hub',
                     activeSegment: 'code-hub',
                     icon: <IconCode />
+                },
+                {
+                    label: 'Management',
+                    href: '/website-management',
+                    activeSegment: 'website-management',
+                    icon: <WebsiteManagement />
                 }
             ]
         },
@@ -67,7 +74,7 @@ const Navigation = ({ bookDemoUrl, isMobileMenuOpen, setIsMobileMenuOpen }) => {
                                             return (
                                                 <li key={sublink.label} style={{ '--i': index }}>
                                                     <Link href={sublink.href} className={`${styles.cta__btn} cta__btn d-flex align-items-center gap-1 ${isActive ? `${styles.active}` : ''}`}>
-                                                        {sublink.icon}
+                                                        <span className={styles.iconWrapper}>{sublink.icon}</span>
                                                         {sublink.label}
                                                     </Link>
                                                 </li>
