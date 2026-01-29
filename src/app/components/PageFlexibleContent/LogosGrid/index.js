@@ -1,5 +1,6 @@
 
 import Image from 'next/image'
+import styles from './LogosGrid.module.scss';
 
 const LogosGrid = ({ data }) => {
 
@@ -19,10 +20,9 @@ const LogosGrid = ({ data }) => {
                 {logos &&
                     <div className='row justify-content-center'>
                         {logos.map((logo, i) => {
-                            console.log(logo);
                             return (
                                 <div key={i.toString()} className='col-10 col-md-6 col-lg-4'>
-                                    <Image src={logo.logo.mediaItemUrl} alt={logo.logo.altText} width={logo.logo.mediaDetails.width} height={logo.logo.mediaDetails.height} />
+                                    <Image className={styles.logo} src={logo.logo.mediaItemUrl} alt={logo.logo.altText} width={logo.logo.mediaDetails.width} height={logo.logo.mediaDetails.height} />
                                 </div>
                             );
                         })}
@@ -34,3 +34,4 @@ const LogosGrid = ({ data }) => {
 } 
 
 export default LogosGrid;
+

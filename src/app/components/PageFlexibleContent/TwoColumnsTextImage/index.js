@@ -5,7 +5,7 @@ import styles from './TwoColumnsTextImage.module.scss'
 import Image from 'next/image'
 import Link from 'next/link'
 
-const TwoColumnsTextImage = ({ data, svgImage, showreel }) => {
+const TwoColumnsTextImage = ({ data, svgImage, showreel, websiteManagement }) => {
 
     const { rows } = data;
 
@@ -27,7 +27,7 @@ const TwoColumnsTextImage = ({ data, svgImage, showreel }) => {
                                             height={image.mediaDetails.height}
                                             alt={image.altText}
                                             className={`${mobileImageTop ? 'd-none d-md-block' : ''}`}
-                                            style={{transform: svgImage ?'translateY(9px)' : ''}}
+                                            style={{transform: svgImage ?'translateY(9px)' : websiteManagement ? 'translateY(11px)' : ''}}
                                         />
                                     }
                                     {mobileImageTop &&

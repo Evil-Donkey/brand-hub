@@ -232,7 +232,8 @@ const WebsiteManagement = ({ data, websiteManagementServices }) => {
                                     </div>
                                     <h2 className='mb-md-4 text-center'>core care</h2>
                                     {corePrice && <h3 className={`mb-4 text-center`}>
-                                        £{formatPrice(calculatePrice(corePrice))}<span>/month</span>
+                                        {/* £{formatPrice(calculatePrice(corePrice))}<span>/month</span> */}
+                                        £{corePrice}<span>/month</span>
                                     </h3>}
                                     {coreSignUpUrl && (
                                         <div className='align-self-center'>

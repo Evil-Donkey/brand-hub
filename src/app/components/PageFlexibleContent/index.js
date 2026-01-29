@@ -12,7 +12,7 @@ import Service from './Service'
 import WeDoGrid from './WeDoGrid'
 import LogosGrid from './LogosGrid'
 
-const PageFlexibleContent = ({ data, features, services, websiteManagementServices, faq, bookDemoUrl, themeColour, svgImage, showreel }) => {
+const PageFlexibleContent = ({ data, features, services, websiteManagement, websiteManagementServices, faq, bookDemoUrl, themeColour, svgImage, showreel }) => {
 
     let flexibleContentArray = [];
 
@@ -26,7 +26,7 @@ const PageFlexibleContent = ({ data, features, services, websiteManagementServic
             flexibleContentArray.push(<SingleColumn data={data} themeColour={themeColour} />);
         }
         if (fieldGroupName === "Page_Flexiblecontent_FlexibleContent_TwoColumnsTextimage") {
-            flexibleContentArray.push(<TwoColumnsTextImage data={data} svgImage={svgImage} showreel={showreel} />);
+            flexibleContentArray.push(<TwoColumnsTextImage data={data} svgImage={svgImage} showreel={showreel} websiteManagement />);
         }
         if (fieldGroupName === "Page_Flexiblecontent_FlexibleContent_ThreeColumnsGrid") {
             flexibleContentArray.push(<ThreeColumnsGrid data={data} />);
