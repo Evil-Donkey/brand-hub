@@ -17,7 +17,7 @@ const WebsiteManagement = ({ data, websiteManagementServices }) => {
     const cardRefs = useRef([]);
     const sliderTrackRef = useRef(null);
     const isDraggingRef = useRef(false);
-    const hours = [1, 4, 8, 10, 12, 14, 16];
+    const hours = [1, 2, 4, 6, 8, 10, 12];
     const [selectedHours, setSelectedHours] = useState(hours[0]);
     const [isDragging, setIsDragging] = useState(false);
 
@@ -60,9 +60,8 @@ const WebsiteManagement = ({ data, websiteManagementServices }) => {
         corePrice,
         coreSignUpUrl } = data;
 
-    // Calculate price adjustments based on hours (base is first hour value, add £60 per step)
-    const hoursIndex = hours.indexOf(selectedHours);
-    const priceAdjustment = hoursIndex * 60;
+    // Calculate price adjustments based on hours (base is 1 hour, add £80 per hour)
+    const priceAdjustment = (selectedHours - 1) * 80;
 
     const calculatePrice = (basePrice) => {
         if (!basePrice) return basePrice;

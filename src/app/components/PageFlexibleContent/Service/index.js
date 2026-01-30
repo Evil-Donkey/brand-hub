@@ -23,12 +23,13 @@ const Service = ({ data }) => {
                             <h2 className='mb-md-4 text-center'>
                                 {service === 'code-hub' ? `Code Hub` : `Design Hub`}
                             </h2>
+                            <div className={`${styles.startingFrom} align-self-center`}>starting from</div>
                             {price && <h3 className={`mb-4 text-center`}>
                                 £{price}<span>/month</span>
                             </h3>}
                             {signUpUrl && (
                                 <div className='align-self-center'>
-                                    <Link href={signUpUrl} target="_blank" className={`cta__btn cta__btn--${service === 'code-hub' ? `blue` : `purple`}`}>Sign Up now</Link>
+                                    <Link href="/pricing" className={`cta__btn cta__btn--${service === 'code-hub' ? `blue` : `purple`}`}>See our plans</Link>
                                 </div>
                             )}
                         </div>
