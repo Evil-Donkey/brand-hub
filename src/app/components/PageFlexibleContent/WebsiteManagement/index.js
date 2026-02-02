@@ -180,7 +180,7 @@ const WebsiteManagement = ({ data, websiteManagementServices }) => {
                 <div className='row mb-5'>
                     <div className='col-12 text-center'>
                         <h2 className='mb-3 text-uppercase'>Monthly support:</h2>
-                        <p>Select how many hours of daily support you need. Use this time flexibly across content updates, design, development and fixes.</p>
+                        <p>Select how many hours of monthly support you need. Use this time flexibly across content updates, design, development and fixes.</p>
                     </div>
                     <div className='col-12'>
                         <div className={styles.hourSliderWrapper}>
